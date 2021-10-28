@@ -45,7 +45,7 @@ class Identitas extends Migration
             $table->string('nik', 16)->unique();
             $table->uuid('pangkat_id');
             $table->uuid('jabatan_id');
-            $table->uuid('unit_id');
+            $table->uuid('unit_kerja_id');
             $table->timestamps();
         });
     }

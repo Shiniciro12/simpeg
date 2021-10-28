@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
                 'nik' => '123456789'.$i,
                 'pangkat_id' => '6c7ba355-ffae-4c03-bc22-1c99380b09ee',
                 'jabatan_id' => '6c7ba355-ffae-4c03-bc22-1c99380b09fe',
-                'unit_id' => '6c7ba355-ffae-4c03-bc22-1c99380b09ff',
+                'unit_kerja_id' => '6c7ba355-ffae-4c03-bc22-1c99380b09ff',
             ]);
         }
         
@@ -168,7 +168,7 @@ class DatabaseSeeder extends Seeder
             'nama_jabatan' => 'Kabid IV Bidang Layanan',
             'eselon' => 'IV/a',
             'kelas' => '',
-            'unit_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79fe',
+            'unit_kerja_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79fe',
             'jenis_jabatan' => 'Struktural',
         ]);
 
