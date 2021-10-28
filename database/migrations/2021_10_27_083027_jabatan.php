@@ -19,7 +19,7 @@ class Jabatan extends Migration
             $table->string('nama_jabatan');
             $table->string('eselon');
             $table->string('kelas');
-            $table->uuid('unit_id');
+            $table->uuid('unit_kerja_id');
             $table->string('jenis_jabatan');
             $table->timestamps();
         });
