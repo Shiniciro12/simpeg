@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IdentitasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,11 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/indexdua', [HomeController::class, 'index2']);
+
+Route::get('/identitas', [IdentitasController::class, 'index']);
+Route::get('/identitas/add', [IdentitasController::class, 'addForm']);
+Route::get('/identitas/update/{identitas_id}', [IdentitasController::class, 'updateForm']);
+
+Route::post('/identitas/add', [IdentitasController::class, 'add']);
+Route::post('/identitas/update', [IdentitasController::class, 'update']);
+Route::post('/identitas/delete', [IdentitasController::class, 'delete']);

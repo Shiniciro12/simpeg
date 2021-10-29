@@ -15,7 +15,6 @@ class Pangkat extends Migration
     {
         Schema::create('pangkat', function (Blueprint $table) {
             $table->uuid('pangkat_id')->primary();
-            $table->uuid('identitas_id');
             $table->string('pangkat');
             $table->string('golongan');
             $table->timestamps();

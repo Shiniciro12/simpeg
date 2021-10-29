@@ -15,8 +15,8 @@ class RiwayatJabatan extends Migration
     {
         Schema::create('riwayat_jabatan', function (Blueprint $table) {
             $table->uuid('riwayat_jabatan_id')->primary();
-            $table->uuid('identitas_id');
             $table->uuid('jabatan_id');
+            $table->uuid('identitas_id');
             $table->string('pejabat');
             $table->string('no_sk')->unique();
             $table->date('tgl_sk');

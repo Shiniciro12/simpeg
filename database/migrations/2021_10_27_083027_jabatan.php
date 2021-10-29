@@ -15,7 +15,6 @@ class Jabatan extends Migration
     {
         Schema::create('jabatan', function (Blueprint $table) {
             $table->uuid('jabatan_id')->primary();
-            $table->uuid('identitas_id');
             $table->string('nama_jabatan');
             $table->string('eselon');
             $table->string('kelas');

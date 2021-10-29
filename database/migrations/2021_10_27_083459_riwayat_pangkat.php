@@ -15,8 +15,8 @@ class RiwayatPangkat extends Migration
     {
         Schema::create('riwayat_pangkat', function (Blueprint $table) {
             $table->uuid('riwayat_pangkat_id')->primary();
-            $table->uuid('identitas_id');
             $table->uuid('pangkat_id');
+            $table->uuid('identitas_id');
             $table->string('pejabat');
             $table->string('no_sk')->unique();
             $table->date('tgl_sk');

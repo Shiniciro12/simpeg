@@ -70,7 +70,6 @@ class DatabaseSeeder extends Seeder
                 'rt_rw' => '008/009',
                 'hp' => '081246'.$i,
                 'telepon' => '081247569523',
-                'kode_pos' => '97668',
                 'kelurahan_id' => '6c7ba355-ffae-4c03-bc22-1c99380b09cc',
                 'kecamatan_id' => '6c7ba355-ffae-4c03-bc22-1c99380b09cd',
                 'golongan_darah' => 'A',
@@ -93,6 +92,7 @@ class DatabaseSeeder extends Seeder
 
         Kelurahan::create([
             'nama_kelurahan' => 'Oesapa',
+            'kode_pos' => '97668',
         ]);
                 
         
@@ -124,6 +124,7 @@ class DatabaseSeeder extends Seeder
             'hp' => '081111222333',
             'telepon' => '123456789',
             'kode_pos' => '77982',
+            'dokumen' => 'dokumen_keluarga.pdf',
         ]);
 
         Pendidikan::create([
@@ -164,7 +165,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Jabatan::create([
-            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
             'nama_jabatan' => 'Kabid IV Bidang Layanan',
             'eselon' => 'IV/a',
             'kelas' => '',
@@ -173,8 +173,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         RiwayatJabatan::create([
-            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
             'jabatan_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
+            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
             'pejabat' => 'Walikota Kupang',
             'no_sk' => 'KABID-93993',
             'tgl_sk' => '2019-10-11',
@@ -183,14 +183,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pangkat::create([
-            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
             'pangkat' => 'IV/a',
             'golongan' => 'I/a',
         ]);
 
         RiwayatPangkat::create([
-            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
             'pangkat_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
+            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
             'pejabat' => 'Gubernur NTT',
             'no_sk' => 'IV/a-93993',
             'tgl_sk' => '2019-01-11',

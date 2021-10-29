@@ -35,6 +35,7 @@ class Keluarga extends Migration
             $table->string('hp', 12);
             $table->string('telepon')->nullable();
             $table->string('kode_pos', 5);
+            $table->string('dokumen');
             $table->timestamps();
         });
     }

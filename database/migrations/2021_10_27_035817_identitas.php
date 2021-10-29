@@ -32,7 +32,6 @@ class Identitas extends Migration
             $table->string('rt_rw', 7);
             $table->string('hp', 12)->unique();
             $table->string('telepon')->nullable();
-            $table->string('kode_pos', 5);
             $table->uuid('kelurahan_id');
             $table->uuid('kecamatan_id');
             $table->string('golongan_darah', 2);
