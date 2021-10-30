@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-12 mt-2">
       <form action="" method="get">
-        <div class="input-group mb-3">
+        <div class="input-group mb-2">
           <input type="text" class="form-control" placeholder="Cari..." name="search">
           <button class="btn btn-outline-secondary" type="submit" id="search">Cari</button>
         </div>
@@ -87,10 +87,11 @@
               <td scope="row">{{ $row["jabatan_id"] }}</td>
               <td scope="row">{{ $row["unit_kerja_id"] }}</td>
               <td scope="row">
-                <a href="/identitas/update/{{ $row["identitas_id"] }}" class="btn btn-success">Ubah</a>
+                <a href="/identitas/update/{{ $row["identitas_id"] }}" class="btn btn-warning">Ubah</a>
                 <form action="/identitas/delete" method="post" class="d-inline">
                   @csrf
                   <input type="hidden" name="identitas_id" value="{{ $row["identitas_id"] }}">
+                  <input type="hidden" name="foto" value="{{ $row["foto"] }}">
                   <button type="submit" class="btn btn-danger"
                     onclick="return confirm('Data ini akan dihapus. Lanjutkan?')">Hapus</button>
                 </form>
