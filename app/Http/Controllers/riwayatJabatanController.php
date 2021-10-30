@@ -92,32 +92,38 @@ class riwayatJabatanController extends Controller
     public function updateForm($riwayat_id)
     {
         $riwayat = RiwayatJabatan::where('riwayat_jabatan_id', $riwayat_id)->first();
+        $identitas = Identitas::where('identitas_id', $riwayat['identitas_id'])->first();
+
         return view('riwayatJabatan.update-form', [
             'page' => 'Ubah Data Jabatan',
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'rowsIdentitas' => Identitas::latest()->get(),
+            'rowsNip' => $identitas,
             'rowsJabatan' => Jabatan::latest()->get(),
-            'rowRiwayatJabatan' => Jabatan::where('jabatan_id', $riwayat_id)->first()
+            'rowRiwayatJabatan' => RiwayatJabatan::where('riwayat_jabatan_id', $riwayat_id)->first()
         ]);
     }
 
     public function update(Request $request)
     {
+        $id = Identitas::where('nip', $request->input('identitas_id'))->first();
         $data = [
-            'nama_jabatan' => $request->input('nama'),
-            'eselon' => $request->input('eselon'),
-            'kelas' => $request->input('eselon'),
-            'unit_kerja_id' => $request->input('unit_kerja_id'),
-            'jenis_jabatan' => $request->input('jenis_jabatan')
+            'jabatan_id' => $request->input('jabatan_id'),
+            'identitas_id' => $id['identitas_id'],
+            'pejabat' => $request->input('pejabat'),
+            'no_sk' => $request->input('no_sk'),
+            'tgl_sk' => $request->input('tgl_sk'),
+            'tmt_jabatan' => $request->input('tmt')
         ];
-
-        jabatan::where('jabatan_id', $request->input('jabatan_id'))->update($data);
-        return redirect('/jabatan')->with('success', 'Data berhasil diubah');
+        RiwayatJabatan::where('riwayat_jabatan_id', $request->input('riwayat_jabatan_id'))->update($data);
+        return redirect('/riwayat-jabatan')->with('success', 'Data berhasil diubah');
     }
 
     public function delete(Request $request)
     {
-        Jabatan::destroy($request->input('jabatan_id'));
-        return redirect('/jabatan')->with('success', 'Data berhasil diubah');
+        $q = RiwayatJabatan::where('riwayat_jabatan_id', $request->input('riwayat_jabatan_id'))->first();
+        unlink('upload/sk-jabatan/' . $q['sk_jabatan'] . '.pdf');
+        RiwayatJabatan::destroy($request->input('riwayat_jabatan_id'));
+        return redirect('/riwayat-jabatan')->with('success', 'Data berhasil dihapus');
     }
 }

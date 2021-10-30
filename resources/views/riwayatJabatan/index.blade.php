@@ -38,7 +38,7 @@
               <td scope="row">{{ $row["pejabat"] }}{{ $row["kelas"]}}</td>
               <td scope="row" style="text-align: center">{{ $row["no_sk"] }}<br>{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tmt_jabatan"] }}</td>
-              <td scope="row">{{ $row["sk_jabatan"] }}</td>
+              <td scope="row"><a href="/upload/sk-jabatan/{{ $row["sk_jabatan"] }}.pdf">SK.pdf</a></td>
               <td scope="row" style="text-align: center;">
                 <a href="/riwayat-jabatan/update/{{ $row["riwayat_jabatan_id"] }}" class="btn btn-warning btn-sm" style="width: 60px;">Ubah</a>
                 <form action="/riwayat-jabatan/delete" method="POST">
