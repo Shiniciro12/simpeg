@@ -53,19 +53,18 @@ class IdentitasController extends Controller
             'tahun_bantuan_bepetarum_pns' => 'required',
             'status_kawin' => 'required',
             'rt_rw' => 'required',
-            'hp' => 'required|numeric|digits_between:11,12',
+            'hp' => 'required|numeric|unique:identitas|digits_between:11,12',
             'telepon' => 'required',
-            'kode_pos' => 'required|numeric',
             'kelurahan_id' => 'required',
             'kecamatan_id' => 'required',
             'golongan_darah' => 'required',
-            'foto' => 'file|mimes:png,jpg,jpeg',
-            'no_karpeg' => 'required',
-            'no_taspen' => 'required',
-            'npwp' => 'required',
-            'no_bpjs' => 'required|numeric',
-            'no_kariskarsu' => 'required',
-            'nik' => 'required|numeric',
+            'foto' => 'file|mimes:png,jpg,jpeg|max:500',
+            'no_karpeg' => 'required|unique:identitas',
+            'no_taspen' => 'required|unique:identitas',
+            'npwp' => 'required|unique:identitas',
+            'no_bpjs' => 'required|numeric|unique:identitas',
+            'no_kariskarsu' => 'required|unique:identitas',
+            'nik' => 'required|numeric|unique:identitas',
             'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'unit_kerja_id' => 'required',
@@ -89,11 +88,10 @@ class IdentitasController extends Controller
             'rt_rw' => $request->input('rt_rw'),
             'hp' => $request->input('hp'),
             'telepon' => $request->input('telepon'),
-            'kode_pos' => $request->input('kode_pos'),
             'kelurahan_id' => $request->input('kelurahan_id'),
             'kecamatan_id' => $request->input('kecamatan_id'),
             'golongan_darah' => $request->input('golongan_darah'),
-            'foto' => $request->input('foto'),
+            'foto' => $request->file('foto'),
             'no_karpeg' => $request->input('no_karpeg'),
             'no_taspen' => $request->input('no_taspen'),
             'npwp' => $request->input('npwp'),
@@ -120,11 +118,16 @@ class IdentitasController extends Controller
             return redirect('/identitas/add')->withErrors($validator)->withInput();
         }
 
+
+        $extension = $request->file('foto')->getClientOriginalExtension();
+
+        $newFile = $request->input('nip') . "" . $extension;
+
         $temp = $request->file('foto')->getPathName();
-        $folder = "upload/foto-identitas/" . $request->input('nip');
+        $folder = "upload/foto-identitas/" . $newFile;
         move_uploaded_file($temp, $folder);
 
-        $path = "/upload/foto-identitas/" . $request->input('nip');
+        $path = "/upload/foto-identitas/" . $newFile;
 
         $data = [
             'nip' => $request->input('nip'),
@@ -144,7 +147,6 @@ class IdentitasController extends Controller
             'rt_rw' => $request->input('rt_rw'),
             'hp' => $request->input('hp'),
             'telepon' => $request->input('telepon'),
-            'kode_pos' => $request->input('kode_pos'),
             'kelurahan_id' => $request->input('kelurahan_id'),
             'kecamatan_id' => $request->input('kecamatan_id'),
             'golongan_darah' => $request->input('golongan_darah'),
@@ -176,7 +178,9 @@ class IdentitasController extends Controller
     {
     }
 
-    public function delete()
+    public function delete(Request $request)
     {
+        Identitas::destroy($request->input('identitas_id'));
+        return redirect('/identitas')->with('success', 'Data berhasil ditambahkan');
     }
 }
