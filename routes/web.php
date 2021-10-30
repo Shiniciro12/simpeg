@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IdentitasController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\KelurahanController;
+use App\Http\Controllers\KecamatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,11 @@ Route::get('/kelurahan/update/{kelurahan_id}', [KelurahanController::class, 'upd
 Route::post('/kelurahan/add', [KelurahanController::class, 'add']);
 Route::post('/kelurahan/update', [KelurahanController::class, 'update']);
 Route::post('/kelurahan/delete', [KelurahanController::class, 'delete']);
+
+Route::get('/kecamatan', [KecamatanController::class, 'index']);
+Route::get('/kecamatan/add', [KecamatanController::class, 'addForm']);
+Route::get('/kecamatan/update/{kelurahan_id}', [KecamatanController::class, 'updateForm']);
+
+Route::post('/kecamatan/add', [KecamatanController::class, 'add']);
+Route::post('/kecamatan/update', [KecamatanController::class, 'update']);
+Route::post('/kecamatan/delete', [KecamatanController::class, 'delete']);

@@ -45,7 +45,7 @@ class UnitKerjaController extends Controller
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -84,7 +84,7 @@ class UnitKerjaController extends Controller
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
