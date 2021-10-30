@@ -22,5 +22,9 @@ class RiwayatPangkat extends Model
      * @var string[]
      */
     protected $guarded = [];
-
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('riwayat_pangkat_id', 'like', '%'.$search.'%')->orWhere('riwayat_pangkat_id', 'like', '%'.$search.'%');
+        });
+    }
 }

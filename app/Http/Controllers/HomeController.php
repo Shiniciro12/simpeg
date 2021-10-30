@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index(){
         return view('home.index', [
         'page' => 'Index1',
-        "rows" => Identitas::latest()->filter(request(['search']))->paginate(7)->withQueryString(),
+        "rows" => Identitas::latest()->filter(request(['search']))->paginate()->withQueryString(),
         ]);
     }
 
