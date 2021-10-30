@@ -2,6 +2,13 @@
 @include('home.layouts.navbar')
 @section('content')
 <div class="container">
+  @if(session()->has('success'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{session('success')}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
+
   <div class="row">
     <div class="col-md-4">
       <a href="/identitas/add" class="btn btn-success">Tambah</a>

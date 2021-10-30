@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IdentitasController;
 use App\Http\Controllers\UnitKerjaController;
+use App\Http\Controllers\KelurahanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,11 @@ Route::get('/unit-kerja/update/{unit_kerja_id}', [UnitKerjaController::class, 'u
 Route::post('/unit-kerja/add', [UnitKerjaController::class, 'add']);
 Route::post('/unit-kerja/update', [UnitKerjaController::class, 'update']);
 Route::post('/unit-kerja/delete', [UnitKerjaController::class, 'delete']);
+
+Route::get('/kelurahan', [KelurahanController::class, 'index']);
+Route::get('/kelurahan/add', [KelurahanController::class, 'addForm']);
+Route::get('/kelurahan/update/{kelurahan_id}', [KelurahanController::class, 'updateForm']);
+
+Route::post('/kelurahan/add', [KelurahanController::class, 'add']);
+Route::post('/kelurahan/update', [KelurahanController::class, 'update']);
+Route::post('/kelurahan/delete', [KelurahanController::class, 'delete']);

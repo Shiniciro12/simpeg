@@ -11,7 +11,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <a href="/unit-kerja/add" class="btn btn-success">Tambah</a>
+      <a href="/kelurahan/add" class="btn btn-success">Tambah</a>
     </div>
     <div class="col-md-12 mt-2">
       <form action="" method="get">
@@ -25,9 +25,8 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Alamat</th>
-              <th scope="col">Lokasi</th>
+              <th scope="col">Nama Kelurahan</th>
+              <th scope="col">Kode Pos</th>
             </tr>
           </thead>
           <tbody>
@@ -35,14 +34,13 @@
             @foreach ($rows as $row)
             <tr>
               <th scope="row">{{ $i++}}</th>
-              <td scope="row">{{ $row["nama_unit"] }}</td>
-              <td scope="row">{{ $row["alamat"] }}</td>
-              <td scope="row">Lokasi</td>
+              <td scope="row">{{ $row["nama_kelurahan"] }}</td>
+              <td scope="row">{{ $row["kode_pos"] }}</td>
               <td scope="row">
-                <a href="/unit-kerja/update/{{ $row["unit_kerja_id"] }}" class="btn btn-warning">Ubah</a>
-                <form action="/unit-kerja/delete" method="post" class="d-inline">
+                <a href="/kelurahan/update/{{ $row["kelurahan_id"] }}" class="btn btn-warning">Ubah</a>
+                <form action="/kelurahan/delete" method="post" class="d-inline">
                   @csrf
-                  <input type="hidden" name="unit_kerja_id" value="{{ $row["unit_kerja_id"] }}">
+                  <input type="hidden" name="kelurahan_id" value="{{ $row["kelurahan_id"] }}">
                   <button type="submit" class="btn btn-danger"
                     onclick="return confirm('Data ini akan dihapus. Lanjutkan?')">Hapus</button>
                 </form>
