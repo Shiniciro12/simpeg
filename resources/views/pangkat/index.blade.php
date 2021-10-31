@@ -10,7 +10,6 @@
   @endif
   <div class="row">
     <div class="col-md-4">
-      <a href="/pangkat/add" class="btn btn-success">Tambah</a>
     </div>
     <div class="col-md-12 mt-2">
       <form action="" method="get">
@@ -26,7 +25,8 @@
               <th scope="col">No</th>
               <th scope="col">Pangkat</th>
               <th scope="col">Golongan</th>
-              <th scope="col">Aksi</th>
+
+              <th><a href="/pangkat/add" class="btn btn-success btn-sm">Tambah+</a></th>
 
             </tr>
           </thead>
@@ -39,7 +39,9 @@
               <td scope="row">{{ $row["golongan"] }}</td>
 
               <td scope="row">
-                <a href="/pangkat/update/{{ $row[" pangkat_id"] }}" class="btn btn-warning">Ubah</a>
+              
+                <a href="/pangkat/update/{{ $row[" pangkat_id"] }}" class="btn btn-warning btn-sm">Ubah</a>
+
 
                 <form action="/pangkat/delete" method="post">
                   @csrf

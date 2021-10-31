@@ -83,8 +83,8 @@
                         @enderror
                     </div>
 
+                    <label for="sk_pangkat" class="form-label">File SK (Fotmat Pdf Maksimal 1MB) <span
 
-                    <label for="sk_pangkat" class="form-label">File SK (Fotmat PDF, Maksimal 1Mb) <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control @error('sk_pangkat') is-invalid @enderror"

@@ -12,6 +12,7 @@ use App\Models\Kecamatan;
 use App\Models\Pangkat;
 use App\Models\Jabatan;
 use App\Models\RiwayatPangkat;
+use File;
 
 
 class RiwayatPangkatController extends Controller
@@ -77,7 +78,7 @@ class RiwayatPangkatController extends Controller
 
         $extension = $request->file('sk_pangkat')->getClientOriginalExtension();
 
-        $newFile = $request->input('identitas_id') . "." . $extension;
+        $newFile =  $request->input('pangkat_id') . "-pangkat-" . date('s').  "." . $extension;
 
         $temp = $request->file('sk_pangkat')->getPathName();
         $folder = "uploadriwayatpangkat/" . $newFile;
@@ -154,6 +155,7 @@ class RiwayatPangkatController extends Controller
 
     public function delete(Request $request)
     {
+        File::delete(public_path($request->input('sk_pangkat')));
         RiwayatPangkat::destroy($request->input('riwayat_pangkat_id'));
         return redirect('/riwayatpangkat')->with('success', 'Data berhasil dihapus');
     }
