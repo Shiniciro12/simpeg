@@ -23,4 +23,9 @@ class Kelurahan extends Model
      */
     protected $guarded = [];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('nama_kelurahan', 'like', '%'.$search.'%')->orWhere('kode_pos', 'like', '%'.$search.'%');
+        });
+    }
 }
