@@ -45,18 +45,97 @@
                                                 </div>
                                                 @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="jenis_kelamin" class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
-                        <select class="form-select @error('jenis_kelamin') is-invalid @enderror" value="{{old('jenis_kelamin')}}" aria-label="jenis kelamin" id="jenis_kelamin">
-                            <option value="">Pilih Jenis Kelamin</option>
-                            <option value="L">Laki-laki</option>
-                            <option value="P">Perempuan</option>
-                          </select>
-                          @error('jenis_kelamin')
-                                                <div id="jenis_kelamin" class="invalid-feedback">
-                                                    {{$message}}
-                                                </div>
-                                                @enderror
+
+                    <button type="button" class="btn btn-primary" onclick="nextButtonIdentitas1()">Lanjut</button>
+                </div>
+
+                <div id="data-pns" style="display: none">
+                    <h3>Data PNS</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nip" class="form-label">Nomor Induk Pegawai <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" class="form-control @error('nip') is-invalid @enderror"
+                                    value="{{old('nip')}}" id="nip" aria-describedby="nip" name="nip">
+                                @error('nip')
+                                <div id="nip" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="no_taspen" class="form-label">Nomor Taspen <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control @error('no_taspen') is-invalid @enderror"
+                                    value="{{old('no_taspen')}}" id="no_taspen" aria-describedby="nomor taspen"
+                                    name="no_taspen">
+                                @error('no_taspen')
+                                <div id="no_taspen" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="bantuan_bepetarum_pns" class="form-label">Bantuan Bepetarum PNS <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select @error('bantuan_bepetarum_pns') is-invalid @enderror"
+                                    value="{{old('bantuan_bepetarum_pns')}}" aria-label="bantuan bepetarum pns"
+                                    id="bantuan_bepetarum_pns" name="bantuan_bepetarum_pns">
+                                    <option selected value="">Pilih Bantuan Bepetarum PNS</option>
+                                    <option value="BUM">BUM</option>
+                                    <option value="PUM">PUM</option>
+                                    <option value="BM">BM</option>
+                                    <option value="PT">PT</option>
+                                </select>
+                                @error('bantuan_bepetarum_pns')
+                                <div id="bantuan_bepetarum_pns" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="no_karpeg" class="form-label">Nomor Karpeg <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control @error('no_karpeg') is-invalid @enderror"
+                                    value="{{old('no_karpeg')}}" id="no_karpeg" aria-describedby="nomor kartu pegawai"
+                                    name="no_karpeg">
+                                @error('no_karpeg')
+                                <div id="no_karpeg" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="no_kariskarsu" class="form-label">Nomor Karis/Karsu <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control @error('no_kariskarsu') is-invalid @enderror"
+                                    value="{{old('no_kariskarsu')}}" id="no_kariskarsu"
+                                    aria-describedby="nomor karis atau karsu" name="no_kariskarsu">
+                                @error('no_kariskarsu')
+                                <div id="no_kariskarsu" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="tahun_bantuan_bepetarum_pns" class="form-label">Tahun Bantuan Bepetarum
+                                    <span class="text-danger">*</span></label>
+                                <input type="number"
+                                    class="form-control @error('tahun_bantuan_bepetarum_pns') is-invalid @enderror"
+                                    value="{{old('tahun_bantuan_bepetarum_pns')}}" id="tahun_bantuan_bepetarum_pns"
+                                    aria-describedby="tahun bantuan bepetarum PNS " name="tahun_bantuan_bepetarum_pns">
+                                @error('tahun_bantuan_bepetarum_pns')
+                                <div id="tahun_bantuan_bepetarum_pns" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+
                     </div>
                     <div class="mb-3">
                         <label for="agama" class="form-label">Agama <span class="text-danger">*</span></label>
@@ -333,27 +412,32 @@
                             {{$message}}
                         </div>
                         @enderror
-                  </div>
-                  <div class="mb-3">
-                      <label for="jabatan_id" class="form-label">Jabatan <span class="text-danger">*</span></label>
-                      <select class="form-select @error('jabatan_id') is-invalid @enderror" value="{{old('jabatan_id')}}" aria-label="jabatan" id="jabatan_id">
-                          <option selected value="">Pilih Jabatan</option>
-                          @foreach ($rowsJabatan as $rowJabatan)
-                          <option value="{{ $rowJabatan['jabatan_id'] }}">{{ $rowJabatan['nama_jabatan'] }}</option>
-                            @endforeach                        
-                      </select>
-                      @error('jabatan_id')
+                    </div>
+                    <div class="mb-3">
+                        <label for="jabatan_id" class="form-label">Jabatan <span class="text-danger">*</span></label>
+                        <select class="form-select @error('jabatan_id') is-invalid @enderror"
+                            value="{{old('jabatan_id')}}" aria-label="jabatan" id="jabatan_id" name="jabatan_id">
+                            <option selected value="">Pilih Jabatan</option>
+                            @foreach ($rowsJabatan as $rowJabatan)
+                            <option value="{{ $rowJabatan['jabatan_id'] }}">{{ $rowJabatan['nama_jabatan'] }}</option>
+                            @endforeach
+                        </select>
+                        @error('jabatan_id')
                         <div id="jabatan_id" class="invalid-feedback">
                             {{$message}}
                         </div>
                         @enderror
-                  </div>
-                  <div class="mb-3">
-                      <label for="unit_kerja_id" class="form-label">Unit Kerja <span class="text-danger">*</span></label>
-                      <select class="form-select @error('unit_kerja_id') is-invalid @enderror" value="{{old('unit_kerja_id')}}" aria-label="unit kerja" id="unit_kerja_id">
-                          <option selected value="">Pilih Unit Kerja</option>
-                          @foreach ($rowsUnitKerja as $rowUnitKerja)
-                          <option value="{{ $rowUnitKerja['unit_kerja_id'] }}">{{ $rowUnitKerja['nama_unit'] }}</option>
+                    </div>
+                    <div class="mb-3">
+                        <label for="unit_kerja_id" class="form-label">Unit Kerja <span
+                                class="text-danger">*</span></label>
+                        <select class="form-select @error('unit_kerja_id') is-invalid @enderror"
+                            value="{{old('unit_kerja_id')}}" aria-label="unit kerja" id="unit_kerja_id"
+                            name="unit_kerja_id">
+                            <option selected value="">Pilih Unit Kerja</option>
+                            @foreach ($rowsUnitKerja as $rowUnitKerja)
+                            <option value="{{ $rowUnitKerja['unit_kerja_id'] }}">{{ $rowUnitKerja['nama_unit'] }}
+                            </option>
                             @endforeach
                         </select>
                         @error('unit_kerja_id')
