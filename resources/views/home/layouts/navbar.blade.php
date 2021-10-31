@@ -37,6 +37,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/pendidikan">Pendidikan</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/keluarga">Keluarga</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tandajasa">Tanda Jas</a>
+        </li>
       </ul>
     </div>
   </div>
