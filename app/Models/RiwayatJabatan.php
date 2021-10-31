@@ -23,4 +23,10 @@ class RiwayatJabatan extends Model
      */
     protected $guarded = [];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('no_sk', 'like', '%'.$search.'%');
+        });
+    }
+
 }

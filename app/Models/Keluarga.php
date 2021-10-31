@@ -25,7 +25,7 @@ class Keluarga extends Model
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
-            return $query->where('nama', 'like', '%'.$search.'%')->orWhere('nik', 'like', '%'.$search.'%');
+            return $query->where('keluarga.nama', 'like', '%'.$search.'%')->orWhere('keluarga.nik', 'like', '%'.$search.'%');
         });
     }
 

@@ -39,8 +39,8 @@
               <td scope="row">{{ $row["golongan"] }}</td>
 
               <td scope="row">
-              
-                <a href="/pangkat/update/{{ $row[" pangkat_id"] }}" class="btn btn-warning btn-sm">Ubah</a>
+
+                <a href="/pangkat/update/{{ $row["pangkat_id"] }}" class="btn btn-warning btn-sm">Ubah</a>
 
 
                 <form action="/pangkat/delete" method="post">

@@ -41,7 +41,7 @@
           <a class="nav-link" href="/keluarga">Keluarga</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/tandajasa">Tanda Jas</a>
+          <a class="nav-link" href="/tandajasa">Tanda Jasa</a>
         </li>
       </ul>
     </div>

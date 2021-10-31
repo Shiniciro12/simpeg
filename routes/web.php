@@ -7,7 +7,7 @@ use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\JabatanController;
-use App\Http\Controllers\riwayatJabatanController;
+use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\PangkatController;
 use App\Http\Controllers\RiwayatPangkatController;
 use App\Http\Controllers\DiklatController;
@@ -72,13 +72,13 @@ Route::post('/jabatan/updt', [JabatanController::class, 'update']);
 Route::post('/jabatan/delete', [JabatanController::class, 'delete']);
 
 //Riwayat Jabatan
-Route::get('/riwayat-jabatan', [riwayatJabatanController::class, 'index']);
-Route::get('/riwayat-jabatan/add', [riwayatJabatanController::class, 'addForm']);
-Route::get('/riwayat-jabatan/update/{riwayat_jabatan_id}', [riwayatJabatanController::class, 'updateForm']);
+Route::get('/riwayat-jabatan', [RiwayatJabatanController::class, 'index']);
+Route::get('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'addForm']);
+Route::get('/riwayat-jabatan/update/{riwayat_jabatan_id}', [RiwayatJabatanController::class, 'updateForm']);
 
-Route::post('/riwayat-jabatan/add', [riwayatJabatanController::class, 'add']);
-Route::post('/riwayat-jabatan/updt', [riwayatJabatanController::class, 'update']);
-Route::post('/riwayat-jabatan/delete', [riwayatJabatanController::class, 'delete']);
+Route::post('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'add']);
+Route::post('/riwayat-jabatan/updt', [RiwayatJabatanController::class, 'update']);
+Route::post('/riwayat-jabatan/delete', [RiwayatJabatanController::class, 'delete']);
 
 //Pangkat
 Route::get('/pangkat', [PangkatController::class, 'index3']);

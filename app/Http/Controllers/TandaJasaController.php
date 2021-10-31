@@ -13,7 +13,7 @@ class TandaJasaController extends Controller
     {
         return view('tandajasa.index', [
             'page' => 'Data Tanda Jasa',
-            "rows" => TandaJasa::select('tanda_jasa.*', 'identitas.nama AS nama_identitas')->join('identitas', 'identitas.identitas_id', '=', 'tanda_jasa.identitas_id')->latest()->get(),
+            "rows" => TandaJasa::select('tanda_jasa.*', 'identitas.nama AS nama_identitas')->join('identitas', 'identitas.identitas_id', '=', 'tanda_jasa.identitas_id')->latest()->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
 
