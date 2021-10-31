@@ -28,6 +28,7 @@
               <th scope="col">Nama</th>
               <th scope="col">Alamat</th>
               <th scope="col">Lokasi</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>

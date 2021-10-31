@@ -14,7 +14,7 @@ class Jabatan extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $primaryKey = 'jabatan_id';
-    protected $table = 'jabatan';
+    protected $table = 'jabatan'; 
 
     /**
      * The attributes that are mass assignable.
@@ -23,10 +23,4 @@ class Jabatan extends Model
      */
     protected $guarded = [];
 
-    public function scopeFilter($query, array $filters)
-    {
-        $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('nama_jabatan', 'like', '%' . $search . '%')->orWhere('eselon', 'like', '%' . $search . '%')->orWhere('kelas', 'like', '%' . $search . '%');
-        });
-    }
 }

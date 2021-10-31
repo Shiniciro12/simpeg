@@ -26,6 +26,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nama Kecamatan</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>

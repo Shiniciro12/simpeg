@@ -42,3 +42,19 @@ const prevButtonIdentitas2 = () => {
     dataFoto2.style.display = "none";
 }
 
+const nextKeluarga = () => {
+    const datakeluarga = document.getElementById("data-keluarga");
+    datakeluarga.style.display = "none";
+
+    const dataalamat = document.getElementById("data-alamat");
+    dataalamat.style.display = "block";
+
+}
+const prevKeluarga = () => {
+    const datakeluarga = document.getElementById("data-keluarga");
+    datakeluarga.style.display = "none";
+
+    const dataalamat = document.getElementById("data-alamat");
+    dataalamat.style.display = "block";
+}
+
