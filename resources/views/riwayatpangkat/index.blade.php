@@ -2,9 +2,15 @@
 @include('home.layouts.navbar')
 @section('content')
 <div class="container">
+  @if(session()->has('success'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{session('success')}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
   <div class="row">
     <div class="col-md-4">
-      <a href="/riwayatpangkat/add" class="btn btn-success">Tambah</a>
+
     </div>
     <div class="col-md-12 mt-2">
       <form action="" method="get">
@@ -17,7 +23,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">No</th>
               <th scope="col">Pangkat</th>
               <th scope="col">Identitas</th>
               <th scope="col">Pejabat</th>
@@ -25,7 +31,7 @@
               <th scope="col">Tanggal SK</th>
               <th scope="col">TMT Pangkat</th>
               <th scope="col">SK Pangkat</th>
-              <th scope="col">Aksi</th>
+              <th scope="col"> <a href="/riwayatpangkat/add" class="btn btn-success btn-sm">Tambah+</a></th>
 
             </tr>
           </thead>
@@ -41,13 +47,17 @@
               <td scope="row">{{ $row["no_sk"] }}</td>
               <td scope="row">{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tmt_pangkat"] }}</td>
-              <td scope="row">{{ explode('/', $row['sk_pangkat'])[2] }}</td>
+              <td scope="row"><a download=".{{ $row[" tgl_sk"] }}.{{ $row["no_sk"] }}" href="{{ $row->sk_pangkat }}">{{
+                  explode('/',
+                  $row->sk_pangkat)[2]
+                  }}</a></td>
 
               <td scope="row">
-                <a href="/riwayatpangkat/update/{{ $row->riwayat_pangkat_id }}" class="btn btn-success">Ubah</a>
+                <a href="/riwayatpangkat/update/{{ $row->riwayat_pangkat_id }}" class="btn btn-warning btn-sm">Ubah</a>
                 <form action="/riwayatpangkat/delete" method="post">
                   @csrf
                   <input type="hidden" value="{{ $row->riwayat_pangkat_id }}" name="riwayat_pangkat_id">
+                  <input type="hidden" value="{{ $row->sk_pangkat }}" name="sk_pangkat">
                   <input type="submit" class="btn btn-danger btn-sm"
                     onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" value="Hapus">
                 </form>
