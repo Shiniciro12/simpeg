@@ -27,6 +27,7 @@
               <th scope="col">#</th>
               <th scope="col">Nama Kelurahan</th>
               <th scope="col">Kode Pos</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>
