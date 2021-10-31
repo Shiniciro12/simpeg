@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             'active' => '0',
         ]);
 
-        for ($i=0; $i <3000 ; $i++) { 
+        for ($i=0; $i <3 ; $i++) { 
             Identitas::create([
                 'nip' => '7477474'.$i,
                 'nama' => 'kenny perulu'.$i,
