@@ -8,6 +8,8 @@ use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\riwayatJabatanController;
+use App\Http\Controllers\PangkatController;
+use App\Http\Controllers\RiwayatPangkatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +74,22 @@ Route::get('/riwayat-jabatan/update/{riwayat_jabatan_id}', [riwayatJabatanContro
 Route::post('/riwayat-jabatan/add', [riwayatJabatanController::class, 'add']);
 Route::post('/riwayat-jabatan/updt', [riwayatJabatanController::class, 'update']);
 Route::post('/riwayat-jabatan/delete', [riwayatJabatanController::class, 'delete']);
+
+//Pangkat
+Route::get('/pangkat', [PangkatController::class, 'index3']);
+Route::get('/pangkat/add', [PangkatController::class, 'addForm3']);
+Route::get('/pangkat/update/{pangkat_id}', [PangkatController::class, 'updateForm3']);
+
+Route::post('/pangkat/delete', [PangkatController::class, 'delete']);
+Route::post('/pangkat/add', [PangkatController::class, 'add3']);
+Route::post('/pangkat/update', [PangkatController::class, 'update']);
+
+//Riwayat Pangkat
+Route::get('/riwayatpangkat', [RiwayatPangkatController::class, 'index4']);
+Route::get('/riwayatpangkat/add', [RiwayatPangkatController::class, 'addForm4']);
+Route::get('/riwayatpangkat/update/{riwayat_pangkat_id}', [RiwayatPangkatController::class, 'updateForm4']);
+
+Route::post('/riwayatpangkat/add', [RiwayatPangkatController::class, 'add4']);
+Route::post('/riwayatpangkat/update', [RiwayatPangkatController::class, 'update']);
+Route::post('/riwayatpangkat/delete', [RiwayatPangkatController::class, 'delete']);
+
