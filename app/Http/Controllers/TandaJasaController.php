@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\TandaJasa;
 use App\Models\Identitas;
 use File;
+
 class TandaJasaController extends Controller
 {
     public function index()
@@ -36,8 +37,8 @@ class TandaJasaController extends Controller
             'tgl_sk' => 'required|before:today',
             'tahun' => 'required',
             'asal_perolehan' => 'required',
-            
-        ]; 
+
+        ];
 
         $input = [
             'identitas_id' => $id_identitas['identitas_id'],
@@ -46,7 +47,7 @@ class TandaJasaController extends Controller
             'tgl_sk' => $request->input('tgl_sk'),
             'tahun' => $request->input('tahun'),
             'asal_perolehan' => $request->input('asal_perolehan'),
-            
+
         ];
 
         $messages = [
@@ -65,12 +66,10 @@ class TandaJasaController extends Controller
         // }
         $extension = $request->file('sertifikat')->getClientOriginalExtension();
 
-        $newFile =  $id_identitas['identitas_id'] . "-Tanda Jasa-" . date('s').  "." . $extension;
+        $newFile =  $id_identitas['identitas_id'] . "-Tanda Jasa-" . date('s') .  "." . $extension;
         $temp = $request->file('sertifikat')->getPathName();
-        $folder = "upload/sertifikat-tandajasa/" . $request->input('no_sk');
+        $folder = "upload/sertifikat-tandajasa/" . $request->input('no_sk') . '.pdf';
         move_uploaded_file($temp, $folder);
-
-        $path = "/upload/sertifikat-tandajasa/" . $request->input('no_sk');
 
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
@@ -79,7 +78,7 @@ class TandaJasaController extends Controller
             'tgl_sk' => $request->input('tgl_sk'),
             'tahun' => $request->input('tahun'),
             'asal_perolehan' => $request->input('asal_perolehan'),
-            'sertifikat' => $path,
+            'sertifikat' => $newFile,
 
         ];
 
