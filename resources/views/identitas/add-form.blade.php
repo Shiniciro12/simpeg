@@ -426,8 +426,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="jabatan_id" class="form-label">Jabatan <span class="text-danger">*</span></label>
-                        <select class="form-select @error('jabatan_id') is-invalid @enderror"
-                            value="{{old('jabatan_id')}}" aria-label="jabatan" id="jabatan_id" name="jabatan_id">
+                        <select class="form-select @error('jabatan_id') is-invalid @enderror" value="{{old('jabatan_id')}}" aria-label="jabatan" id="jabatan_id" name="jabatan_id">
                             <option selected value="">Pilih Jabatan</option>
                             @foreach ($rowsJabatan as $rowJabatan)
                             <option value="{{ $rowJabatan['jabatan_id'] }}">{{ $rowJabatan['nama_jabatan'] }}</option>
@@ -440,15 +439,11 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="unit_kerja_id" class="form-label">Unit Kerja <span
-                                class="text-danger">*</span></label>
-                        <select class="form-select @error('unit_kerja_id') is-invalid @enderror"
-                            value="{{old('unit_kerja_id')}}" aria-label="unit kerja" name="unit_kerja_id"
-                            id="unit_kerja_id">
+                        <label for="unit_kerja_id" class="form-label">Unit Kerja <span class="text-danger">*</span></label>
+                        <select class="form-select @error('unit_kerja_id') is-invalid @enderror" value="{{old('unit_kerja_id')}}" aria-label="unit kerja" id="unit_kerja_id">
                             <option selected value="">Pilih Unit Kerja</option>
                             @foreach ($rowsUnitKerja as $rowUnitKerja)
-                            <option value="{{ $rowUnitKerja['unit_kerja_id'] }}">{{ $rowUnitKerja['nama_unit'] }}
-                            </option>
+                            <option value="{{ $rowUnitKerja['unit_kerja_id'] }}">{{ $rowUnitKerja['nama_unit'] }}</option>
                             @endforeach
                         </select>
                         @error('unit_kerja_id')
