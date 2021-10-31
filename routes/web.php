@@ -10,6 +10,9 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\riwayatJabatanController;
 use App\Http\Controllers\PangkatController;
 use App\Http\Controllers\RiwayatPangkatController;
+use App\Http\Controllers\DiklatController;
+use App\Http\Controllers\PendidikanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -93,3 +96,20 @@ Route::post('/riwayatpangkat/add', [RiwayatPangkatController::class, 'add4']);
 Route::post('/riwayatpangkat/update', [RiwayatPangkatController::class, 'update']);
 Route::post('/riwayatpangkat/delete', [RiwayatPangkatController::class, 'delete']);
 
+//DIKLAT
+Route::get('/diklat', [DiklatController::class, 'index']);
+Route::get('/diklat/add', [DiklatController::class, 'addForm']);
+Route::get('/diklat/update/{diklat_id}', [DiklatController::class, 'updateForm']);
+
+Route::post('/diklat/add', [DiklatController::class, 'add']);
+Route::post('/diklat/updt', [DiklatController::class, 'update']);
+Route::post('/diklat/delete', [DiklatController::class, 'delete']);
+
+//PENDIDIKAN
+Route::get('/pendidikan', [PendidikanController::class, 'index']);
+Route::get('/pendidikan/add', [PendidikanController::class, 'addForm']);
+Route::get('/pendidikan/update/{pendidikan_id}', [PendidikanController::class, 'updateForm']);
+
+Route::post('/pendidikan/add', [PendidikanController::class, 'add']);
+Route::post('/pendidikan/updt', [PendidikanController::class, 'update']);
+Route::post('/pendidikan/delete', [PendidikanController::class, 'delete']);
