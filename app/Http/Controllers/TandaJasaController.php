@@ -116,8 +116,6 @@ class TandaJasaController extends Controller
         return redirect('/tandajasa')->with('success', 'Data berhasil diubah');
     }
 
-
-
     public function delete(Request $request)
     {
         File::delete(public_path($request->input('sertifikat')));

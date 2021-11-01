@@ -151,8 +151,6 @@ class RiwayatPangkatController extends Controller
         ]);
     }
 
-   
-
     public function delete(Request $request)
     {
         File::delete(public_path($request->input('sk_pangkat')));
