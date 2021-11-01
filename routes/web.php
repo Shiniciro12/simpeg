@@ -28,7 +28,6 @@ use App\Http\Controllers\KeluargaController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/indexdua', [HomeController::class, 'index2']);
 
 Route::get('/identitas', [IdentitasController::class, 'index']);
 Route::get('/identitas/add', [IdentitasController::class, 'addForm']);

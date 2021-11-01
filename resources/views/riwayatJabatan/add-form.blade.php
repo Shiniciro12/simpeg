@@ -1,6 +1,7 @@
 @extends('home.layouts.main')
 @include('home.layouts.navbar')
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-md-9 mx-auto">
@@ -10,11 +11,9 @@
                 <div class="mt-2 mb-4"><span class="text-danger">*</span> Wajib diisi</div>
                 <h3>Data Riwayat Jabatan</h3>
 
-
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-
                             <label for="identitas_id" class="form-label">Nama/NIP Pegawai <span class="text-danger">*</span></label>
                             <input type="text" list="identitas" name="identitas_id" id="identitas_id" class="form-control" required>
                             <datalist id="identitas">
@@ -68,7 +67,7 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="tgl_sk" class="form-label">Tanggal SK<span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="tgl_sk">
+                            <input type="date" class="form-control" name="tgl_sk" value="{{old('tgl_sk')}}">
                             @error('tgl_sk')
                             <div id="tgl_sk" class="invalid-feedback">
                                 {{$message}}
@@ -81,7 +80,7 @@
                     <div class="col-sm-12 mx-auto">
                         <div class="mb-3">
                             <label for="tmt" class="form-label">TMT<span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="tmt">
+                            <input type="date" class="form-control" name="tmt" value="{{old('tmt')}}">
                             @error('tmt')
                             <div id="tmt" class="invalid-feedback">
                                 {{$message}}

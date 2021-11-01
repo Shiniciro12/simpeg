@@ -7,17 +7,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('home.index', [
-        'page' => 'Index1',
-        "rows" => Identitas::latest()->filter(request(['search']))->paginate(7)->withQueryString(),
+            'page' => 'Dashboard',
+            'dataGenderMale' => Identitas::where('jenis_kelamin', 'L')->count(),
+            'dataGenderFemale' => Identitas::where('jenis_kelamin', 'P')->count(),
         ]);
-    }
-
-    public function index2(){
-        return view('home.index2', [
-            'page' => 'Index2',
-            "rows" => Identitas::latest()->get(),
-            ]);
     }
 }
