@@ -1,6 +1,7 @@
 @extends('home.layouts.main')
 @include('home.layouts.navbar')
 @section('content')
+html
 <div class="container">
   <div class="row">
     <div class="col-md-12 mt-2">
