@@ -9,57 +9,59 @@
   </div>
   @endif
   <div class="row">
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-12 mt-2">
-      <form action="" method="get">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cari..." name="search">
-          <button class="btn btn-outline-secondary" type="submit" id="search">Cari</button>
+    <div class="col-md-11 mt-2 mx-auto">
+      <div class="text-center my-4">
+        <h2>Data Pangkat</h2>
+        <a href="/pangkat/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+      </div>
+      <br>
+      <div class="col-md-12 mt-2">
+        <form action="" method="get">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Cari..." name="search">
+            <button class="btn btn-outline-secondary" type="submit" id="search">Cari</button>
+          </div>
+        </form>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover shadow">
+            <thead class="table-primary">
+              <tr>
+                <th></th>
+                <th scope="col">No</th>
+                <th scope="col">Pangkat</th>
+                <th scope="col">Golongan</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <?php $i = 1; ?>
+              @foreach ($rows as $row)
+              <tr>
+                <td scope="row">
+                  <a href="/pangkat/update/{{ $row["pangkat_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                  <form action="/pangkat/delete" method="post" class="d-inline">
+                    @csrf
+                    <input type="hidden" value="{{ $row->pangkat_id }}" name="pangkat_id">
+                    <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="bi bi-trash-fill"></i></button>
+                  </form>
+
+                </td>
+                <th scope="row">{{ $i++}}</th>
+                <td scope="row">{{ $row["pangkat"] }}</td>
+                <td scope="row">{{ $row["golongan"] }}</td>
+
+
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
-      </form>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Pangkat</th>
-              <th scope="col">Golongan</th>
-
-              <th><a href="/pangkat/add" class="btn btn-success btn-sm">Tambah+</a></th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <?php $i = 1; ?>
-            @foreach ($rows as $row)
-            <tr>
-              <th scope="row">{{ $i++}}</th>
-              <td scope="row">{{ $row["pangkat"] }}</td>
-              <td scope="row">{{ $row["golongan"] }}</td>
-
-              <td scope="row">
-
-                <a href="/pangkat/update/{{ $row["pangkat_id"] }}" class="btn btn-warning btn-sm">Ubah</a>
-
-
-                <form action="/pangkat/delete" method="post">
-                  @csrf
-                  <input type="hidden" value="{{ $row->pangkat_id }}" name="pangkat_id">
-                  <input type="submit" class="btn btn-danger btn-sm"
-                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" value="Hapus">
-                </form>
-
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
 </div>
-
+<br>
 <div class="d-flex justify-content-center">
   {{$rows->links()}}
 </div>

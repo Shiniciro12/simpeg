@@ -1,11 +1,20 @@
 @extends('home.layouts.main')
 @include('home.layouts.navbar')
 @section('content')
-html
 <div class="container">
+  @if(session()->has('success'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{session('success')}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
+
   <div class="row">
-    <div class="col-md-12 mt-2">
-      <h3>Data Riwayat Jabatan</h3>
+    <div class="col-md-11 mt-2 mx-auto">
+      <div class="text-center my-4">
+        <h2>Data Riwayat Jabatan</h2>
+        <a href="/riwayat-jabatan/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+      </div>
       <br>
       <form action="" method="get">
         <div class="input-group mb-3">
@@ -14,9 +23,10 @@ html
         </div>
       </form>
       <div class="table-responsive">
-        <table class="table table-hover table-bordered">
-          <thead>
+        <table class="table table-hover table-striped">
+          <thead class="table-primary">
             <tr>
+              <th scope="col"> </th>
               <th scope="col">#</th>
               <th scope="col">Nama Jabatan</th>
               <th scope="col">Pegawai</th>
@@ -24,16 +34,21 @@ html
               <th scope="col">No SK</th>
               <th scope="col">Tanggal SK</th>
               <th scope="col">TMT</th>
-              <th scope="col">SK Jabatan</th>
-              <th scope="col">
-                <center><a href="/riwayat-jabatan/add" class="btn btn-success btn-sm">Tambah+</a></center>
-              </th>
+              <th scope="col" class="text-center">SK Jabatan</th>
             </tr>
           </thead>
           <tbody>
             <?php $i = 1; ?>
             @foreach ($rows as $row)
             <tr>
+              <td scope="row" style="text-align: center;">
+                <a href="/riwayat-jabatan/update/{{ $row["riwayat_jabatan_id"] }}" class="btn btn-warning p-2 shadow""><i class=" bi bi-pencil-square"></i></a>
+                <form action=" /riwayat-jabatan/delete" method="POST" class="d-inline">
+                  @csrf
+                  <input type="hidden" value="{{$row['riwayat_jabatan_id']}}" name="riwayat_jabatan_id">
+                  <button class="btn btn-danger p-2 shadow" onclick="return confirm('Apakah anda ingin menghapus data ini?')"><i class="bi bi-trash-fill"></i></button>
+                </form>
+              </td>
               <th scope="row">{{ $i++}}</th>
               <td scope="row">{{ $row["nama_jabatan"] }}</td>
               <td scope="row">{{ $row["nama"] }}</td>
@@ -41,15 +56,8 @@ html
               <td scope="row" style="text-align: center">{{ $row["no_sk"] }}</td>
               <td scope="row" style="text-align: center">{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tmt_jabatan"] }}</td>
-              <td scope="row"><a href="/upload/sk-jabatan/{{ $row["sk_jabatan"] }}.pdf">SK.pdf</a></td>
-              <td scope="row" style="text-align: center;">
-                <a href="/riwayat-jabatan/update/{{ $row["riwayat_jabatan_id"] }}" class="btn btn-warning btn-sm" style="width: 60px;">Ubah</a>
-                <form action="/riwayat-jabatan/delete" method="POST">
-                  @csrf
-                  <input type="hidden" value="{{$row['riwayat_jabatan_id']}}" name="riwayat_jabatan_id">
-                  <button class="btn btn-danger btn-sm" style="width: 60px;" onclick="return confirm('Apakah anda ingin menghapus data ini?')">Hapus</button>
-                </form>
-              </td>
+              <td scope="row" class="text-center"><a href="/upload/sk-jabatan/{{ $row["sk_jabatan"] }}.pdf" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
+
             </tr>
             @endforeach
           </tbody>
@@ -58,7 +66,7 @@ html
     </div>
   </div>
 </div>
-
+<br>
 <div class="d-flex justify-content-center">
   {{$rows->links()}}
 </div>

@@ -59,7 +59,7 @@ class JabatanController extends Controller
         $data = [
             'nama_jabatan' => $request->input('nama'),
             'eselon' => $request->input('eselon'),
-            'kelas' => $request->input('eselon'),
+            'kelas' => $request->input('kelas'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),
             'jenis_jabatan' => $request->input('jenis_jabatan')
         ];
@@ -83,7 +83,7 @@ class JabatanController extends Controller
         $data = [
             'nama_jabatan' => $request->input('nama'),
             'eselon' => $request->input('eselon'),
-            'kelas' => $request->input('eselon'),
+            'kelas' => $request->input('kelas'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),
             'jenis_jabatan' => $request->input('jenis_jabatan')
         ];

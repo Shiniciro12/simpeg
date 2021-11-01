@@ -66,7 +66,7 @@ class RiwayatJabatanController extends Controller
         $temp = $request->file('sk')->getPathName();
         $file = $request->input('identitas_id') . "-jabatan-" . date('s');
 
-        $folder = "upload/sk-jabatan/" . $file;
+        $folder = "upload/sk-jabatan/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
 
         $name = $request->input('identitas_id') . "-jabatan-" . date('s');
