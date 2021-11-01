@@ -1,98 +1,177 @@
 @extends('home.layouts.main')
 @include('home.layouts.navbar')
 @section('content')
+<script src="/high-chart-lib/highcharts.js"></script>
+<script src="/high-chart-lib/highcharts-3d.js"></script>
+<script src="/high-chart-lib/modules/exporting.js"></script>
+<script src="/high-chart-lib/modules/export-data.js"></script>
+<script src="/high-chart-lib/modules/accessibility.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<div id="male" data-male="{{ $dataGenderMale }}"></div>
+<div id="female" data-female="{{ $dataGenderFemale }}"></div>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-12 mt-2">
-            <form action="" method="get">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Cari..." name="search">
-                    <button class="btn btn-outline-secondary" type="submit" id="search">Cari</button>
-                  </div>
-            </form>
-            <div class="table-responsive">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">NIP</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Gelar (Depan)</th>
-                    <th scope="col">Gelar (Belakang)</th>
-                    <th scope="col">Tempat Lahir</th>
-                    <th scope="col">Tanggal Lahir</th>
-                    <th scope="col">Agama</th>
-                    <th scope="col">Status Kepegawaian</th>
-                    <th scope="col">Jenis Kepegawaian</th>
-                    <th scope="col">Kedudukan Kepegawaian</th>
-                    <th scope="col">Bantuan Bepetarum pns</th>
-                    <th scope="col">Tahun Bepetarum pns</th>
-                    <th scope="col">Status Kawin</th>
-                    <th scope="col">RT/RW</th>
-                    <th scope="col">HP</th>
-                    <th scope="col">Telepon</th>
-                    <th scope="col">Kode Pos</th>
-                    <th scope="col">Kelurahan</th>
-                    <th scope="col">Kecamatan</th>
-                    <th scope="col">Gol.Darah</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">No Karpeg</th>
-                    <th scope="col">No Taspen</th>
-                    <th scope="col">NPWP</th>
-                    <th scope="col">BPJS</th>
-                    <th scope="col">No Kariskarsu</th>
-                    <th scope="col">NIK</th>
-                    <th scope="col">Pangkat</th>
-                    <th scope="col">Jabatan</th>
-                    <th scope="col">Unit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 0; ?>
-                    @foreach ($rows as $row)
-                  <tr>
-                    <th scope="row">{{ $i++}}</th>
-                    <td scope="row">{{ $row["nip"] }}</td>
-                    <td scope="row">{{ $row["nama"] }}</td>
-                    <td scope="row">{{ $row["gelar_depan"] }}</td>
-                    <td scope="row">{{ $row["gelar_belakang"] }}</td>
-                    <td scope="row">{{ $row["tempat_lahir"] }}</td>
-                    <td scope="row">{{ $row["tgl_lahir"] }}</td>
-                    <td scope="row">{{ $row["agama"] }}</td>
-                    <td scope="row">{{ $row["status_kepegawaian"] }}</td>
-                    <td scope="row">{{ $row["jenis_kepegawaian"] }}</td>
-                    <td scope="row">{{ $row["kedudukan_kepegawaian"] }}</td>
-                    <td scope="row">{{ $row["bantuan_bepetarum_pns"] }}</td>
-                    <td scope="row">{{ $row["tahun_bantuan_bepetarum_pns"] }}</td>
-                    <td scope="row">{{ $row["status_kawin"] }}</td>
-                    <td scope="row">{{ $row["rt_rw"] }}</td>
-                    <td scope="row">{{ $row["hp"] }}</td>
-                    <td scope="row">{{ $row["telepon"] }}</td>
-                    <td scope="row">{{ $row["kode_pos"] }}</td>
-                    <td scope="row">{{ $row["kelurahan_id"] }}</td>
-                    <td scope="row">{{ $row["kecamatan_id"] }}</td>
-                    <td scope="row">{{ $row["golongan_darah"] }}</td>
-                    <td scope="row"><img src="{{ $row["foto"] }}"></td>
-                    <td scope="row">{{ $row["no_karpeg"] }}</td>
-                    <td scope="row">{{ $row["no_taspen"] }}</td>
-                    <td scope="row">{{ $row["npwp"] }}</td>
-                    <td scope="row">{{ $row["no_bpjs"] }}</td>
-                    <td scope="row">{{ $row["no_kariskarsu"] }}</td>
-                    <td scope="row">{{ $row["nik"] }}</td>
-                    <td scope="row">{{ $row["pangkat_id"] }}</td>
-                    <td scope="row">{{ $row["jabatan_id"] }}</td>
-                    <td scope="row">{{ $row["unit_kerja_id"] }}</td>
-                </tr>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
+        <div class="col-md-6">
+            <figure class="highcharts-figure">
+                <div id="container1"></div>
+                <p class="highcharts-description text-center">
+                    Data umur
+                </p>
+            </figure>
+        </div>
+        <div class="col-md-6">
+            <figure class="highcharts-figure">
+                <div id="container2"></div>
+                <p class="highcharts-description text-center">
+                    Data Gender
+                </p>
+            </figure>
+        </div>
+        <div class="col-md">
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description">
+                    Chart designed to highlight 3D column chart rendering options.
+                    Move the sliders below to change the basic 3D settings for the chart.
+                    3D column charts are generally harder to read than 2D charts, but provide
+                    an interesting visual effect.
+                </p>
+                <div id="sliders">
+                    <table>
+                        <tr>
+                            <td><label for="alpha">Alpha Angle</label></td>
+                            <td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
+                        </tr>
+                        <tr>
+                            <td><label for="beta">Beta Angle</label></td>
+                            <td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
+                        </tr>
+                        <tr>
+                            <td><label for="depth">Depth</label></td>
+                            <td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </figure>
+            
         </div>
     </div>
 </div>
 
-<div class="d-flex justify-content-center">
-    {{$rows->links()}}
-</div>
+<script type="text/javascript">
+    Highcharts.chart('container1', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Grafik data umur'
+    },
+    subtitle: {
+        text: 'Data umur dalam grafik'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Delivered amount',
+        data: [
+            ['< 30', 8],
+            ['30-40', 3],
+            ['40-50', 1],
+            ['> 50', 6],
+        ]
+    }]
+});
+</script>
+
+<script type="text/javascript">
+    const male = document.getElementById('male').getAttribute('data-male');
+    const female = document.getElementById('female').getAttribute('data-female');
+    Highcharts.chart('container2', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Grafik data gender'
+    },
+    subtitle: {
+        text: 'Data gender dalam grafik'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Delivered amount',
+        data: [
+            ['Laki-laki', parseInt(male)],
+            ['Perempuan', parseInt(female)],
+        ]
+    }]
+});
+</script>
+
+<script type="text/javascript">
+    // Set up the chart
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'container',
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                depth: 50,
+                viewDistance: 25
+            }
+        },
+        title: {
+            text: 'Chart rotation demo'
+        },
+        subtitle: {
+            text: 'Test options by dragging the sliders below'
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+        series: [{
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        }]
+    });
+    
+    function showValues() {
+        $('#alpha-value').html(chart.options.chart.options3d.alpha);
+        $('#beta-value').html(chart.options.chart.options3d.beta);
+        $('#depth-value').html(chart.options.chart.options3d.depth);
+    }
+    
+    // Activate the sliders
+    $('#sliders input').on('input change', function () {
+        chart.options.chart.options3d[this.id] = parseFloat(this.value);
+        showValues();
+        chart.redraw(false);
+    });
+    
+    showValues();
+</script>
+
+
 
 @endsection

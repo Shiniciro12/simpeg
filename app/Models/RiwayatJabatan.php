@@ -14,7 +14,7 @@ class RiwayatJabatan extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $primaryKey = 'riwayat_jabatan_id';
-    protected $table = 'riwayat_jabatan';
+    protected $table = 'riwayat_jabatan'; 
 
     /**
      * The attributes that are mass assignable.
@@ -23,10 +23,10 @@ class RiwayatJabatan extends Model
      */
     protected $guarded = [];
 
-    public function scopeFilter($query, array $filters)
-    {
-        $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('nama', 'like', '%' . $search . '%')->orWhere('nama_jabatan', 'like', '%' . $search . '%')->orWhere('kelas', 'like', '%' . $search . '%');
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('no_sk', 'like', '%'.$search.'%');
         });
     }
+
 }

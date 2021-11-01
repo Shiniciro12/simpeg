@@ -11,8 +11,9 @@ use App\Models\Kecamatan;
 use App\Models\Pangkat;
 use App\Models\RiwayatJabatan;
 use App\Models\Jabatan;
+use File;
 
-class riwayatJabatanController extends Controller
+class RiwayatJabatanController extends Controller
 {
     public function index()
     {
@@ -122,7 +123,8 @@ class riwayatJabatanController extends Controller
     public function delete(Request $request)
     {
         $q = RiwayatJabatan::where('riwayat_jabatan_id', $request->input('riwayat_jabatan_id'))->first();
-        unlink('upload/sk-jabatan/' . $q['sk_jabatan'] . '.pdf');
+        File::delete(public_path('/upload/sk-jabatan/' . $q['sk_jabatan'] . '.pdf'));
+        // unlink('/upload/sk-jabatan/' . $q['sk_jabatan'] . '.pdf');
         RiwayatJabatan::destroy($request->input('riwayat_jabatan_id'));
         return redirect('/riwayat-jabatan')->with('success', 'Data berhasil dihapus');
     }

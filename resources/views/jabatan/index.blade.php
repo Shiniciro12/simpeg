@@ -32,7 +32,7 @@
             <tr>
               <th scope="row">{{ $i++}}</th>
               <td scope="row">{{ $row["nama_jabatan"] }}</td>
-              <td scope="row">{{ $row["eselon"] }}{{ $row["kelas"]}}</td>
+              <td scope="row">{{ $row["eselon"] }}/{{ $row["kelas"]}}</td>
               <td scope="row">{{ $row["nama_unit"] }}</td>
               <td scope="row">{{ $row["jenis_jabatan"] }}</td>
               <td scope="row" style="text-align: center;">

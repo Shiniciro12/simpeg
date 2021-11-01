@@ -14,7 +14,7 @@ class RiwayatPangkat extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $primaryKey = 'riwayat_pangkat_id';
-    protected $table = 'riwayat_pangkat'; 
+    protected $table = 'riwayat_pangkat';
 
     /**
      * The attributes that are mass assignable.
@@ -22,5 +22,10 @@ class RiwayatPangkat extends Model
      * @var string[]
      */
     protected $guarded = [];
-
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('pejabat', 'like', '%' . $search . '%')->orWhere('no_sk', 'like', '%' . $search . '%');
+        });
+    }
 }

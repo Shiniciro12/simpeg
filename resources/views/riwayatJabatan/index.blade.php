@@ -21,11 +21,12 @@ html
               <th scope="col">Nama Jabatan</th>
               <th scope="col">Pegawai</th>
               <th scope="col">Pejabat</th>
-              <th scope="col">No SK/Tanggal SK</th>
+              <th scope="col">No SK</th>
+              <th scope="col">Tanggal SK</th>
               <th scope="col">TMT</th>
               <th scope="col">SK Jabatan</th>
               <th scope="col">
-                <center><a href="/riwayat-jabatan/add" class="btn btn-success btn-sm">Tambah +</a></center>
+                <center><a href="/riwayat-jabatan/add" class="btn btn-success btn-sm">Tambah+</a></center>
               </th>
             </tr>
           </thead>
@@ -36,8 +37,9 @@ html
               <th scope="row">{{ $i++}}</th>
               <td scope="row">{{ $row["nama_jabatan"] }}</td>
               <td scope="row">{{ $row["nama"] }}</td>
-              <td scope="row">{{ $row["pejabat"] }}{{ $row["kelas"]}}</td>
-              <td scope="row" style="text-align: center">{{ $row["no_sk"] }}<br>{{ $row["tgl_sk"] }}</td>
+              <td scope="row">{{ $row["pejabat"] }}</td>
+              <td scope="row" style="text-align: center">{{ $row["no_sk"] }}</td>
+              <td scope="row" style="text-align: center">{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tmt_jabatan"] }}</td>
               <td scope="row"><a href="/upload/sk-jabatan/{{ $row["sk_jabatan"] }}.pdf">SK.pdf</a></td>
               <td scope="row" style="text-align: center;">
