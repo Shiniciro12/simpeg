@@ -167,7 +167,7 @@
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
                 <textarea class="form-control" name="alamat" value="{{$rowsKeluarga->alamat}}" id="alamat"
-                    rows="3"></textarea>
+                    rows="3">{{$rowsKeluarga->alamat}}</textarea>
             </div>
             <div class="mb-3">
                 <label for="desa_kelurahan" class="form-label">Desa/Kelurahan</label>

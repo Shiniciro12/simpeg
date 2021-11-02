@@ -98,7 +98,7 @@
                 <div class="mb-3">
                     <label for="status_kawin" class="form-label">Status Kawin</label>
                     <select class="form-select @error('status_kawin') is-invalid @enderror" name="status_kawin"
-                        value="{{old('status_kawin')}}" aria-label="status_kawin" id="status_kawin">
+                        value="{{old('status_kawin')}}" aria-label="status kawin" id="status_kawin">
                         <option selected value="">Pilih Status Perkawinan</option>
                         <option value="Belum Kawin">Belum Kawin</option>
                         <option value="Kawin">Kawin</option>
@@ -115,7 +115,6 @@
                     <label for="tgl_kawin" class="form-label">Tanggal Kawin</label>
                     <input type="date" name="tgl_kawin" class="form-control" value="{{old('tgl_kawin')}}" id="tgl_kawin"
                         aria-describedby="tgl_kawin">
-
                 </div>
                 <div class="mb-3">
                     <label for="status_tunjangan" class="form-label">Status Tunjangan</label>
@@ -151,7 +150,6 @@
                     </div>
                     @enderror
                 </div>
-
         </div>
         <div class="col-md-6">
 
@@ -168,7 +166,7 @@
 
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat"
+                <textarea class="form-control @error('alamat') is-invalid @enderror" value="{{old('alamat')}}" name="alamat" id="alamat"
                     rows="3">{{old('alamat')}}</textarea>
                 @error('alamat')
                 <div id="alamat" class="invalid-feedback">
@@ -251,9 +249,9 @@
                 @enderror
             </div>
 
-            <label for="file" class="form-label">File (Format PDF Maksimal 1Mb)</label>
+            <label for="dokumen" class="form-label">File (Format PDF Maksimal 1Mb)</label>
             <div class="input-group mb-3">
-                <input type="file" class="form-control" value="" id="file" name="dokumen">
+                <input type="file" class="form-control" id="dokumen" name="dokumen">
                 <label class="input-group-text" for="file">Upload</label>
                 <div id="foto" class="invalid-feedback">
                 </div>

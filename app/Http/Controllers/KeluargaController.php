@@ -74,7 +74,7 @@ class KeluargaController extends Controller
             'hp' => $request->input('hp'),
             'telepon' => $request->input('telepon'),
             'kode_pos' => $request->input('kode_pos'),
-            'dokumen' => $request->input('dokumen'),
+            'dokumen' => $request->file('dokumen'),
         ];
 
         $messages = [
