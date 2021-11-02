@@ -18,7 +18,8 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Jabatan</th>
-              <th scope="col">Eselon/Kelas</th>
+              <th scope="col">Eselon</th>
+              <th scope="col">Kelas</th>
               <th scope="col">Unit Kerja</th>
               <th scope="col">Jenis Jabatan</th>
               <th scope="col">
@@ -32,7 +33,8 @@
             <tr>
               <th scope="row">{{ $i++}}</th>
               <td scope="row">{{ $row["nama_jabatan"] }}</td>
-              <td scope="row">{{ $row["eselon"] }}/{{ $row["kelas"]}}</td>
+              <td scope="row">{{ $row["eselon"] }}</td>
+              <td scope="row">{{ $row["kelas"]}}</td>
               <td scope="row">{{ $row["nama_unit"] }}</td>
               <td scope="row">{{ $row["jenis_jabatan"] }}</td>
               <td scope="row" style="text-align: center;">

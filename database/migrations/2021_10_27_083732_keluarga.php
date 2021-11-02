@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class Keluarga extends Migration
 {
@@ -13,6 +14,7 @@ class Keluarga extends Migration
      */
     public function up()
     {
+        DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('keluarga', function (Blueprint $table) {
             $table->uuid('keluarga_id')->primary();
             $table->uuid('identitas_id');
@@ -38,6 +40,7 @@ class Keluarga extends Migration
             $table->string('dokumen');
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE keluarga ALTER COLUMN keluarga_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**

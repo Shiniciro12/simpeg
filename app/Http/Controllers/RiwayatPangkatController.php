@@ -21,7 +21,7 @@ class RiwayatPangkatController extends Controller
     {
         return view('riwayatpangkat.index', [
             'page' => 'Data Pangkat',
-           "rows" => RiwayatPangkat::select(['pangkat.*', 'riwayat_pangkat.*', 'identitas.*'])->join("pangkat", "pangkat.pangkat_id", "=", "riwayat_pangkat.pangkat_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_pangkat.identitas_id")->filter(request(['search']))->paginate(10)           
+            "rows" => RiwayatPangkat::select(['pangkat.*', 'riwayat_pangkat.*', 'identitas.*'])->join("pangkat", "pangkat.pangkat_id", "=", "riwayat_pangkat.pangkat_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_pangkat.identitas_id")->filter(request(['search']))->paginate(10)
         ]);
     }
 
@@ -43,7 +43,7 @@ class RiwayatPangkatController extends Controller
     {
 
         $rules = [
-         
+
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
@@ -51,7 +51,7 @@ class RiwayatPangkatController extends Controller
             'tgl_sk' => 'required',
             'tmt_pangkat' => 'required',
             'sk_pangkat' => 'file|mimes:pdf|max:1000',
-         
+
         ];
 
         $input = [
@@ -62,29 +62,29 @@ class RiwayatPangkatController extends Controller
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt_pangkat' => $request->input('tmt_pangkat'),
             'sk_pangkat' => $request->file('sk_pangkat'),
-            
+
         ];
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-           
+
         ];
 
         $validator = Validator::make($input, $rules, $messages);
-      
+
         if ($validator->fails()) {
             return redirect('/riwayatpangkat/add')->withErrors($validator)->withInput();
         }
 
         $extension = $request->file('sk_pangkat')->getClientOriginalExtension();
 
-        $newFile =  $request->input('pangkat_id') . "-pangkat-" . date('s').  "." . $extension;
+        $newFile =  $request->input('pangkat_id') . "-pangkat-" . date('s') .  "." . $extension;
 
         $temp = $request->file('sk_pangkat')->getPathName();
-        $folder = "uploadriwayatpangkat/" . $newFile;
+        $folder = "upload/riwayat-pangkat/" . $newFile;
         move_uploaded_file($temp, $folder);
 
-        $path = "/uploadriwayatpangkat/" . $newFile;
+        $path = "/upload/riwayat-pangkat/" . $newFile;
 
         $data = [
             'pangkat_id' => $request->input('pangkat_id'),
@@ -101,43 +101,44 @@ class RiwayatPangkatController extends Controller
         return redirect('/riwayatpangkat')->with('success', 'Data berhasil ditambahkan');
     }
 
-    public function update(Request $request){
-    $rules = [
-         
-        'pangkat_id' => 'required',
-        'identitas_id' => 'required',
-        'pejabat' => 'required',
-        'no_sk' => 'required',
-        'tgl_sk' => 'required',
-        'tmt_pangkat' => 'required',
-        'sk_pangkat' => 'required',
-     
-    ];
+    public function update(Request $request)
+    {
+        $rules = [
 
-    $input = [
-        'pangkat_id' => $request->input('pangkat_id'),
-        'identitas_id' => $request->input('identitas_id'),
-        'pejabat' => $request->input('pejabat'),
-        'no_sk' => $request->input('no_sk'),
-        'tgl_sk' => $request->input('tgl_sk'),
-        'tmt_pangkat' => $request->input('tmt_pangkat'),
-        'sk_pangkat' => $request->input('sk_pangkat'),
-        
-    ];
+            'pangkat_id' => 'required',
+            'identitas_id' => 'required',
+            'pejabat' => 'required',
+            'no_sk' => 'required',
+            'tgl_sk' => 'required',
+            'tmt_pangkat' => 'required',
+            'sk_pangkat' => 'required',
 
-    $messages = [
-        'required' => '*Kolom :attribute wajib diisi.',
-       
-    ];
-    $validator = Validator::make($input, $rules, $messages);
-    if ($validator->fails()) {
-        return redirect('/riwayatpangkat/update/'.$request->input('riwayat_pangkat_id'))->withErrors($validator)->withInput();
+        ];
+
+        $input = [
+            'pangkat_id' => $request->input('pangkat_id'),
+            'identitas_id' => $request->input('identitas_id'),
+            'pejabat' => $request->input('pejabat'),
+            'no_sk' => $request->input('no_sk'),
+            'tgl_sk' => $request->input('tgl_sk'),
+            'tmt_pangkat' => $request->input('tmt_pangkat'),
+            'sk_pangkat' => $request->input('sk_pangkat'),
+
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+
+        ];
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/riwayatpangkat/update/' . $request->input('riwayat_pangkat_id'))->withErrors($validator)->withInput();
+        }
+
+        RiwayatPangkat::where('riwayat_pangkat_id', $request->input('riwayat_pangkat_id'))->update($input);
+
+        return redirect('/riwayatpangkat')->with('success', 'Data berhasil diubah');
     }
-
-    RiwayatPangkat::where('riwayat_pangkat_id', $request->input('riwayat_pangkat_id'))->update($input);
-
-    return redirect('/riwayatpangkat')->with('success', 'Data berhasil diubah');
-}
 
     public function updateForm4($riwayat_pangkat_id)
     {

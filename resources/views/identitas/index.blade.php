@@ -53,6 +53,7 @@
               <th scope="col">No Karis/Karsu</th>
               <th scope="col">NIK</th>
               <th scope="col">Pangkat</th>
+              <th scope="col">Golongan</th>
               <th scope="col">Jabatan</th>
               <th scope="col">Unit</th>
               <th scope="col">Aksi</th>
@@ -80,8 +81,8 @@
               <td scope="row">{{ $row["hp"] }}</td>
               <td scope="row">{{ $row["telepon"] }}</td>
               <td scope="row">{{ $row["kode_pos"] }}</td>
-              <td scope="row">{{ $row["kelurahan_id"] }}</td>
-              <td scope="row">{{ $row["kecamatan_id"] }}</td>
+              <td scope="row">{{ $row["nama_kelurahan"] }}</td>
+              <td scope="row">{{ $row["nama_kecamatan"] }}</td>
               <td scope="row">{{ $row["golongan_darah"] }}</td>
               <td scope="row"><img src="{{ $row[" foto"] }}" width="50" height="50"></td>
               <td scope="row">{{ $row["no_karpeg"] }}</td>
@@ -90,9 +91,10 @@
               <td scope="row">{{ $row["no_bpjs"] }}</td>
               <td scope="row">{{ $row["no_kariskarsu"] }}</td>
               <td scope="row">{{ $row["nik"] }}</td>
-              <td scope="row">{{ $row["pangkat_id"] }}</td>
-              <td scope="row">{{ $row["jabatan_id"] }}</td>
-              <td scope="row">{{ $row["unit_kerja_id"] }}</td>
+              <td scope="row">{{ $row["pangkat"] }}</td>
+              <td scope="row">{{ $row["golongan"] }}</td>
+              <td scope="row">{{ $row["nama_jabatan"] }}</td>
+              <td scope="row">{{ $row["nama_unit"] }}</td>
               <td scope="row">
                 <a href="/identitas/update/{{ $row["identitas_id"] }}" class="btn btn-warning">Ubah</a>
                 <form action="/identitas/delete" method="post" class="d-inline">

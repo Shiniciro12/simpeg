@@ -42,8 +42,10 @@
                                     value="{{old('jenis_kelamin')}}" aria-label="jenis kelamin" name="jenis_kelamin"
                                     id="jenis_kelamin">
                                     <option value="">Pilih Jenis Kelamin</option>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
+                                    <option {{old('jenis_kelamin')=='L' ? 'selected' : '' }} value="L">Laki-laki
+                                    </option>
+                                    <option {{old('jenis_kelamin')=='P' ? 'selected' : '' }} value="P">Perempuan
+                                    </option>
                                 </select>
                                 @error('jenis_kelamin')
                                 <div id="jenis_kelamin" class="invalid-feedback">
@@ -57,11 +59,11 @@
                                 <select class="form-select @error('golongan_darah') is-invalid @enderror"
                                     value="{{old('golongan_darah')}}" aria-label="golongan darah" name="golongan_darah"
                                     id="golongan_darah">
-                                    <option selected value="">Pilih Golongan Darah</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="AB">AB</option>
-                                    <option value="O">O</option>
+                                    <option value="">Pilih Golongan Darah</option>
+                                    @foreach ($golongan_darah as $gd)
+                                    <option {{old('golongan_darah')==$gd ? 'selected' : '' }} value="{{ $gd }}">{{ $gd
+                                        }}</option>
+                                    @endforeach
                                 </select>
                                 @error('golongan_darah')
                                 <div id="golongan_darah" class="invalid-feedback">
@@ -97,11 +99,11 @@
                                 <select class="form-select @error('kelurahan_id') is-invalid @enderror"
                                     value="{{old('kelurahan_id')}}" aria-label="kelurahan" name="kelurahan_id"
                                     id="kelurahan_id">
-                                    <option selected value="">Pilih Kelurahan</option>
+                                    <option value="">Pilih Kelurahan</option>
                                     @foreach ($rowsKelurahan as $rowKelurahan)
-                                    <option value="{{ $rowKelurahan['kelurahan_id'] }}">{{
-                                        $rowKelurahan['nama_kelurahan'] }}
-                                    </option>
+                                    <option {{old('kelurahan_id')==$rowKelurahan['kelurahan_id'] ? 'selected' : '' }}
+                                        value="{{ $rowKelurahan['kelurahan_id'] }}">{{ $rowKelurahan['nama_kelurahan']
+                                        }}</option>
                                     @endforeach
                                 </select>
                                 @error('kelurahan_id')
@@ -149,13 +151,11 @@
                                 <label for="agama" class="form-label">Agama <span class="text-danger">*</span></label>
                                 <select class="form-select @error('agama') is-invalid @enderror"
                                     value="{{old('agama')}}" aria-label="agama" name="agama" id="agama">
-                                    <option selected value="">Pilih Agama</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Katolik">Katolik</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Budha">Budha</option>
-                                    <option value="Lain-lain">Lain-lain</option>
+                                    <option value="">Pilih Agama</option>
+                                    @foreach ($rowsAgama as $rowAgama)
+                                    <option {{old('agama')==$rowAgama ? 'selected' : '' }} value="{{ $rowAgama }}">{{
+                                        $rowAgama }}</option>
+                                    @endforeach
                                 </select>
                                 @error('agama')
                                 <div id="agama" class="invalid-feedback">
@@ -169,11 +169,11 @@
                                 <select class="form-select @error('status_kawin') is-invalid @enderror"
                                     value="{{old('status_kawin')}}" aria-label="status_kawin" name="status_kawin"
                                     id="status_kawin">
-                                    <option selected value="">Pilih Status Perkawinan</option>
-                                    <option value="Belum Kawin">Belum Kawin</option>
-                                    <option value="Kawin">Kawin</option>
-                                    <option value="Janda">Janda</option>
-                                    <option value="Duda">Duda</option>
+                                    <option value="">Pilih Status Perkawinan</option>
+                                    @foreach ($rowsStatusKawin as $rowStatusKawin)
+                                    <option {{old('status_kawin')==$rowStatusKawin ? 'selected' : '' }}
+                                        value="{{ $rowStatusKawin }}">{{ $rowStatusKawin }}</option>
+                                    @endforeach
                                 </select>
                                 @error('status_kawin')
                                 <div id="status_kawin" class="invalid-feedback">
@@ -208,11 +208,11 @@
                                 <select class="form-select @error('kecamatan_id') is-invalid @enderror"
                                     value="{{old('kecamatan_id')}}" aria-label="kecamatan" name="kecamatan_id"
                                     id="kecamatan_id">
-                                    <option selected value="">Pilih Kecamatan</option>
+                                    <option value="">Pilih Kecamatan</option>
                                     @foreach ($rowsKecamatan as $rowKecamatan)
-                                    <option value="{{ $rowKecamatan['kecamatan_id'] }}">{{
-                                        $rowKecamatan['nama_kecamatan'] }}
-                                    </option>
+                                    <option {{old('kecamatan_id')==$rowKecamatan['kecamatan_id'] ? 'selected' : '' }}
+                                        value="{{ $rowKecamatan['kecamatan_id'] }}">{{ $rowKecamatan['nama_kecamatan']
+                                        }}</option>
                                     @endforeach
                                 </select>
                                 @error('kecamatan_id')
@@ -287,11 +287,13 @@
                                 <select class="form-select @error('bantuan_bepetarum_pns') is-invalid @enderror"
                                     value="{{old('bantuan_bepetarum_pns')}}" aria-label="bantuan bepetarum pns"
                                     id="bantuan_bepetarum_pns" name="bantuan_bepetarum_pns">
-                                    <option selected value="">Pilih Bantuan Bepetarum PNS</option>
-                                    <option value="BUM">BUM</option>
-                                    <option value="PUM">PUM</option>
-                                    <option value="BM">BM</option>
-                                    <option value="PT">PT</option>
+                                    <option value="">Pilih Bantuan Bepetarum PNS</option>
+
+                                    @foreach ($rowsBBP as $rowBBP)
+                                    <option {{old('bantuan_bepetarum_pns')==$rowBBP ? 'selected' : '' }}
+                                        value="{{ $rowBBP }}">{{ $rowBBP }}</option>
+                                    @endforeach
+
                                 </select>
                                 @error('bantuan_bepetarum_pns')
                                 <div id="bantuan_bepetarum_pns" class="invalid-feedback">
@@ -347,11 +349,11 @@
                         <select class="form-select @error('status_kepegawaian') is-invalid @enderror"
                             value="{{old('status_kepegawaian')}}" aria-label="status kepegawaian"
                             id="status_kepegawaian" name="status_kepegawaian">
-                            <option selected value="">Pilih Status Kepegawaian</option>
-                            <option value="Calon PNS">CPNS</option>
-                            <option value="PNS">PNS</option>
-                            <option value="Pensiunan">Pensiunan</option>
-                            <option value="TNI">TNI</option>
+                            <option value="">Pilih Status Kepegawaian</option>
+                            @foreach ($rowsStatusPegawai as $rowStatusPegawai)
+                            <option {{old('status_kepegawaian')==$rowStatusPegawai ? 'selected' : '' }}
+                                value="{{ $rowStatusPegawai}}">{{ $rowStatusPegawai }}</option>
+                            @endforeach
                         </select>
                         @error('status_kepegawaian')
                         <div id="status_kepegawaian" class="invalid-feedback">
@@ -365,14 +367,11 @@
                         <select class="form-select @error('jenis_kepegawaian') is-invalid @enderror"
                             value="{{old('jenis_kepegawaian')}}" aria-label="jenis kepegawaian" id="jenis_kepegawaian"
                             name="jenis_kepegawaian">
-                            <option selected value="">Pilih Jenis Kepegawaian</option>
-                            <option value="PNS Pusat DEPDAGRI">PNS Pusat DEPDAGRI</option>
-                            <option value="PNS Pusat DEPDAGRI DPK">PNS Pusat DEPDAGRI DPK</option>
-                            <option value="PNS Pusat DEPDAGRI DPB">PNS Pusat DEPDAGRI DPB</option>
-                            <option value="PNS Daerah Otonom">PNS Daerah Otonom</option>
-                            <option value="PNS Pusat DEP lain DPK">PNS Pusat DEP lain DPK</option>
-                            <option value="PNS Pusat DEP lain DPB">PNS Pusat DEP lain DPB</option>
-                            <option value="TNI yang ditugas karyakan">TNI yang ditugas karyakan</option>
+                            <option value="">Pilih Jenis Kepegawaian</option>
+                            @foreach ($rowsJenisPegawai as $rowJenisPegawai)
+                            <option {{old('jenis_kepegawaian')==$rowJenisPegawai ? 'selected' : '' }}
+                                value="{{ $rowJenisPegawai }}">{{ $rowJenisPegawai }}</option>
+                            @endforeach
                         </select>
                         @error('jenis_kepegawaian')
                         <div id="jenis_kepegawaian" class="invalid-feedback">
@@ -387,20 +386,11 @@
                         <select class="form-select @error('kedudukan_kepegawaian') is-invalid @enderror"
                             value="{{old('kedudukan_kepegawaian')}}" aria-label="kedudukan kepegawaian"
                             id="kedudukan_kepegawaian" name="kedudukan_kepegawaian">
-                            <option selected value="">Pilih Kedudukan Kepegawaian</option>
-                            <option value="Aktif">Aktif</option>
-                            <option value="CLTN">CLTN</option>
-                            <option value="Perpanjangan CLTN">Perpanjangan CLTN</option>
-                            <option value="Tugas Belajar">Tugas Belajar</option>
-                            <option value="Pemberhentian Sementara">Pemberhentian Sementara</option>
-                            <option value="Penerima Uang Tunggu">Penerima Uang Tunggu</option>
-                            <option value="Wajib Militer">Wajib Militer</option>
-                            <option value="PNS yang dinyatakan hilang">PNS yang dinyatakan hilang</option>
-                            <option value="Pejabat Negara">Pejabat Negara</option>
-                            <option value="Kepala Desa">Kepala Desa</option>
-                            <option value="Keberatan Atas Hukuman Disiplin">Keberatan Atas Hukuman Disiplin</option>
-                            <option value="Tidak Aktif">Tidak Aktif</option>
-                            <option value="MPP">MPP</option>
+                            <option value="">Pilih Kedudukan Kepegawaian</option>
+                            @foreach ($rowsKedudukanPegawai as $rowKedudukanPegawai)
+                            <option {{old('kedudukan_kepegawaian')==$rowKedudukanPegawai ? 'selected' : '' }}
+                                value="{{ $rowKedudukanPegawai }}">{{ $rowKedudukanPegawai }}</option>
+                            @endforeach
                         </select>
                         @error('kedudukan_kepegawaian')
                         <div id="kedudukan_kepegawaian" class="invalid-feedback">
@@ -413,9 +403,10 @@
                         <label for="pangkat_id" class="form-label">Pangkat <span class="text-danger">*</span></label>
                         <select class="form-select @error('pangkat_id') is-invalid @enderror"
                             value="{{old('pangkat_id')}}" aria-label="pangkat" id="pangkat_id" name="pangkat_id">
-                            <option selected value="">Pilih Pangkat</option>
+                            <option value="">Pilih Pangkat</option>
                             @foreach ($rowsPangkat as $rowPangkat)
-                            <option value="{{ $rowPangkat['pangkat_id'] }}">{{ $rowPangkat['pangkat'] }}</option>
+                            <option {{old('pangkat_id')==$rowPangkat['pangkat_id'] ? 'selected' : '' }}
+                                value="{{ $rowPangkat['pangkat_id'] }}">{{ $rowPangkat['pangkat'] }}</option>
                             @endforeach
                         </select>
                         @error('pangkat_id')
@@ -428,9 +419,10 @@
                         <label for="jabatan_id" class="form-label">Jabatan <span class="text-danger">*</span></label>
                         <select class="form-select @error('jabatan_id') is-invalid @enderror"
                             value="{{old('jabatan_id')}}" aria-label="jabatan" id="jabatan_id" name="jabatan_id">
-                            <option selected value="">Pilih Jabatan</option>
+                            <option value="">Pilih Jabatan</option>
                             @foreach ($rowsJabatan as $rowJabatan)
-                            <option value="{{ $rowJabatan['jabatan_id'] }}">{{ $rowJabatan['nama_jabatan'] }}</option>
+                            <option {{old('jabatan_id')==$rowJabatan['jabatan_id'] ? 'selected' : '' }}
+                                value="{{ $rowJabatan['jabatan_id'] }}">{{ $rowJabatan['nama_jabatan'] }}</option>
                             @endforeach
                         </select>
                         @error('jabatan_id')
@@ -445,9 +437,10 @@
                         <select class="form-select @error('unit_kerja_id') is-invalid @enderror"
                             value="{{old('unit_kerja_id')}}" aria-label="unit kerja" id="unit_kerja_id"
                             name="unit_kerja_id">
-                            <option selected value="">Pilih Unit Kerja</option>
+                            <option value="">Pilih Unit Kerja</option>
                             @foreach ($rowsUnitKerja as $rowUnitKerja)
-                            <option value="{{ $rowUnitKerja['unit_kerja_id'] }}">{{ $rowUnitKerja['nama_unit'] }}
+                            <option {{old('unit_kerja_id')==$rowUnitKerja['unit_kerja_id'] ? 'selected' : '' }}
+                                value="{{ $rowUnitKerja['unit_kerja_id'] }}">{{ $rowUnitKerja['nama_unit'] }}
                             </option>
                             @endforeach
                         </select>

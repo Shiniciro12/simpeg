@@ -66,7 +66,7 @@
                             </div>
                             @enderror
                     </div>
-                    <!-- <label for="file" class="form-label">File (Format PDF Maksimal 550Kb)</label>
+                    <!-- <label for="file" class="form-label">File (Format PDF Maksimal 500Kb)</label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control" value="" id="file" name="file">
                         <label class="input-group-text" for="file">Upload</label>

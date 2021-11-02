@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
-
 class Diklat extends Model
 {
-    use HasFactory, Uuid;
+    use HasFactory;
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -21,11 +19,11 @@ class Diklat extends Model
      *
      * @var string[]
      */
-    protected $guarded = [];
+    protected $guarded = ['diklat_id'];
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
-            return $query->where('nama', 'like', '%'.$search.'%')->orWhere('nik', 'like', '%'.$search.'%');
+            return $query->where('nama', 'like', '%'.$search.'%')->orWhere('penyelenggara', 'like', '%'.$search.'%');
         });
     }
 

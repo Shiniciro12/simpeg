@@ -92,7 +92,7 @@
                 </div>
                 @enderror
             </div>
-            <label for="sttb" class="form-label">STTB (Format: PDF Maksimal 550Kb) <span class="text-danger">*</span></label>
+            <label for="sttb" class="form-label">STTB (Format: PDF Maksimal 500Kb) <span class="text-danger">*</span></label>
             <div class="input-group mb-3">
                 <input type="file" required name="sttb" class="form-control @error('sttb') is-invalid @enderror" value="{{old('sttb')}}" id="sttb" accept=".pdf" name="sttb">
                 <label class="input-group-text" for="sttb">Upload</label>

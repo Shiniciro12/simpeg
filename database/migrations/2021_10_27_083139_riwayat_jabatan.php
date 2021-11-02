@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class RiwayatJabatan extends Migration
 {
@@ -13,6 +14,7 @@ class RiwayatJabatan extends Migration
      */
     public function up()
     {
+        DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('riwayat_jabatan', function (Blueprint $table) {
             $table->uuid('riwayat_jabatan_id')->primary();
             $table->uuid('jabatan_id');
@@ -24,6 +26,7 @@ class RiwayatJabatan extends Migration
             $table->string('sk_jabatan');
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE riwayat_jabatan ALTER COLUMN riwayat_jabatan_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**

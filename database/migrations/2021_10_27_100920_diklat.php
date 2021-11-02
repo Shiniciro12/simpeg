@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class Diklat extends Migration
 {
@@ -13,6 +14,7 @@ class Diklat extends Migration
      */
     public function up()
     {
+        DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('diklat', function (Blueprint $table) {
             $table->uuid('diklat_id')->primary();
             $table->uuid('identitas_id');
@@ -29,6 +31,7 @@ class Diklat extends Migration
             $table->string('sertifikat');
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE diklat ALTER COLUMN diklat_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**

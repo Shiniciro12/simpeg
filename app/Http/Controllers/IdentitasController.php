@@ -18,7 +18,8 @@ class IdentitasController extends Controller
     {
         return view('identitas.index', [
             'page' => 'Data Identitas',
-            "rows" => Identitas::latest()->filter(request(['search']))->paginate(10)->withQueryString(),
+            // "rows" => Identitas::latest()->filter(request(['search']))->paginate(10)->withQueryString(),            
+            "rows" => Identitas::select(['identitas.*', 'kelurahan.*', 'kecamatan.*'])->join("kelurahan", "kelurahan.kelurahan_id", "=", "identitas.kelurahan_id")->join("kecamatan", "kecamatan.kecamatan_id", "=", "identitas.kecamatan_id")->join("jabatan", "jabatan.jabatan_id", "=", "identitas.jabatan_id")->join("pangkat", "pangkat.pangkat_id", "=", "identitas.pangkat_id")->join("unit_kerja", "unit_kerja.unit_kerja_id", "=", "identitas.unit_kerja_id")->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
 
@@ -31,6 +32,13 @@ class IdentitasController extends Controller
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'rowsKelurahan' => Kelurahan::latest()->get(),
             'rowsKecamatan' => Kecamatan::latest()->get(),
+            'golongan_darah' => ['A', 'B', 'AB', 'O'],
+            'rowsAgama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lain-lain'],
+            'rowsStatusKawin' => ['Belum Kawin', 'Kawin', 'Janda', 'Duda'],
+            'rowsBBP' => ['BUM', 'PUM', 'BM', 'PT'],
+            'rowsStatusPegawai' => ['Calon PNS', 'PNS', 'Pensiunan', 'TNI'],
+            'rowsJenisPegawai' => ['PNS Pusat DEPDAGRI', 'PNS Pusat DEPDAGRI DPK', 'PNS Pusat DEPDAGRI DPB', 'PNS Daerah Otonom', 'PNS Pusat DEP lain DPK', 'PNS Pusat DEP lain DPB', 'TNI yang ditugas karyakan'],
+            'rowsKedudukanPegawai' => ['Aktif', 'CLTN', 'Perpanjangan CLTN', 'Tugas Belajar', 'Pemberhentian Sementara', 'Penerima Uang Tunggu', 'Wajib Militer', 'PNS yang dinyatakan hilang', 'Pejabat Negara', 'Kepala Desa', 'Keberatan Atas Hukuman Disiplin', 'Tidak Aktif', 'MPP'],
             'page' => 'Tambah Identitas',
         ]);
     }
