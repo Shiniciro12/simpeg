@@ -124,7 +124,7 @@
                 </div>
                 @enderror
             </div>
-            <!-- <label for="sertifikat" class="form-label">Sertifikat (pdf, 550Kb) <span class="text-danger">*</span></label> -->
+            <!-- <label for="sertifikat" class="form-label">Sertifikat (pdf, 500Kb) <span class="text-danger">*</span></label> -->
             <!-- <div class="input-group mb-3"> -->
             <!-- <input type="file" name="sertifikat" class="form-control @error('sertifikat') is-invalid @enderror" value="{{old('sertifikat')}}" id="sertifikat" name="sertifikat"> -->
             <!-- <label class="input-group-text" for="sertifikat">Upload</label> -->

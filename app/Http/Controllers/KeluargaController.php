@@ -29,7 +29,6 @@ class KeluargaController extends Controller
 
     public function add(Request $request)
     {
-        $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
         $rules = [
             'nip' => 'required',
             'nik' => 'required|numeric|unique:identitas',
@@ -55,7 +54,7 @@ class KeluargaController extends Controller
         ]; 
 
         $input = [
-            'identitas_id' => $id_identitas['identitas_id'],
+            'nip' => $request->input('nip'),
             'nik' => $request->input('nik'),
             'nama' => $request->input('nama'),
             'tempat_lahir' => $request->input('tempat_lahir'),
@@ -88,10 +87,13 @@ class KeluargaController extends Controller
             'min' => '*Kolom :attribute minimal :min karakter.',
         ];
 
-        // $validator = Validator::make($input, $rules, $messages);
-        // if ($validator->fails()) {
-        //     return redirect('/keluarga/add')->withErrors($validator)->withInput();
-        // }
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/keluarga/add')->withErrors($validator)->withInput();
+        }
+
+        $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+
         $extension = $request->file('dokumen')->getClientOriginalExtension();
 
         $newFile =  $id_identitas['identitas_id'] . "-Keluarga-" . date('s').  "." . $extension;

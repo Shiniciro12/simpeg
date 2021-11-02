@@ -103,7 +103,7 @@ Route::get('/diklat/add', [DiklatController::class, 'addForm']);
 Route::get('/diklat/update/{diklat_id}', [DiklatController::class, 'updateForm']);
 
 Route::post('/diklat/add', [DiklatController::class, 'add']);
-Route::post('/diklat/updt', [DiklatController::class, 'update']);
+Route::post('/diklat/update', [DiklatController::class, 'update']);
 Route::post('/diklat/delete', [DiklatController::class, 'delete']);
 
 //PENDIDIKAN

@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-use GoldSpecDigital\LaravelEloquentUUID\Foundation\Auth\User as Authenticatable;
-use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, Uuid;
+    use HasFactory, Notifiable;
 
     protected $keyType = 'string';
     public $incrementing = false;

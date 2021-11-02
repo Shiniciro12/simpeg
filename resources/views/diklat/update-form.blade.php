@@ -5,7 +5,7 @@
     <div class="mt-2 mb-4"><span class="text-danger">*</span> Wajib diisi</div>
     <div class="row">
         <div class="col-md-6">
-            <form action="/diklat/updt" method="post" enctype="multipart/form-data">
+            <form action="/diklat/update" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" value="{{$rowsDiklat->diklat_id}}" name="diklat_id">
                 <div class="mb-3">
@@ -126,7 +126,8 @@
                 </div>
                 @enderror
             </div>
-            <!-- <label for="sertifikat" class="form-label">Sertifikat (pdf, 550Kb) <span class="text-danger">*</span></label> -->
+            <input type="hidden" name="sertifikat" value="{{$rowsDiklat->sertifikat}}" id="sertifikat" aria-describedby="sertifikat" name="sertifikat">
+            <!-- <label for="sertifikat" class="form-label">Sertifikat (pdf, 500Kb) <span class="text-danger">*</span></label> -->
             <!-- <div class="input-group mb-3"> -->
             <!-- <input type="file" name="sertifikat" class="form-control @error('sertifikat') is-invalid @enderror" value="{{old('sertifikat')}}" id="sertifikat" name="sertifikat"> -->
             <!-- <label class="input-group-text" for="sertifikat">Upload</label> -->

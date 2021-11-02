@@ -39,6 +39,12 @@
             <?php $i = 1; ?>
             @foreach ($rows as $row)
             <tr>
+              <th scope="row">{{ $i++}}</th>
+              <td scope="row">{{ $row["nama_jabatan"] }}</td>
+              <td scope="row">{{ $row["eselon"] }}</td>
+              <td scope="row">{{ $row["kelas"]}}</td>
+              <td scope="row">{{ $row["nama_unit"] }}</td>
+              <td scope="row">{{ $row["jenis_jabatan"] }}</td>
               <td scope="row" style="text-align: center;">
                 <a href="/jabatan/update/{{ $row['jabatan_id'] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
                 <form action="/jabatan/delete" class="d-inline" method="POST">
@@ -53,7 +59,6 @@
               <td scope="row" class="text-center">{{ $row["kelas"] }}</td>
               <td scope="row">{{ $row["nama_unit"] }}</td>
               <td scope="row" class="text-center">{{ $row["jenis_jabatan"] }}</td>
-
             </tr>
             @endforeach
           </tbody>

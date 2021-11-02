@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class Pendidikan extends Migration
 {
@@ -13,6 +14,7 @@ class Pendidikan extends Migration
      */
     public function up()
     {
+        DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('pendidikan', function (Blueprint $table) {
             $table->uuid('pendidikan_id')->primary();
             $table->uuid('identitas_id');
@@ -26,6 +28,7 @@ class Pendidikan extends Migration
             $table->string('sttb');
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE pendidikan ALTER COLUMN pendidikan_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**

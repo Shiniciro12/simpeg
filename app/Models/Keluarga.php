@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
-
 class Keluarga extends Model
 {
-    use HasFactory, Uuid;
+    use HasFactory;
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -21,7 +19,7 @@ class Keluarga extends Model
      *
      * @var string[]
      */
-    protected $guarded = [];
+    protected $guarded = ['keluarga_id'];
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){

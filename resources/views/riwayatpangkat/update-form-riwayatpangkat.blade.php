@@ -96,7 +96,7 @@
                             <div class="mb-3">
                                 <label for="tgl_sk" class="form-label">Tanggal SK <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('tgl_sk') is-invalid @enderror"
+                                <input type="date" class="form-control @error('tgl_sk') is-invalid @enderror"
                                     value="{{old('tgl_sk', $data['tgl_sk'])}}" id="tgl_sk" aria-describedby="tgl_sk"
                                     name="tgl_sk">
                                 @error('tgl_sk')
@@ -110,7 +110,7 @@
                             <div class="mb-3">
                                 <label for="tmt_pangkat" class="form-label">TMT Pangkat <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('tmt_pangkat') is-invalid @enderror"
+                                <input type="date" class="form-control @error('tmt_pangkat') is-invalid @enderror"
                                     value="{{old('tmt_pangkat', $data['tmt_pangkat'])}}" id="tmt_pangkat"
                                     aria-describedby="tmt_pangkat" name="tmt_pangkat">
                                 @error('tmt_pangkat')
@@ -119,18 +119,21 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
+                            <input type="hidden" class="form-control @error('sk_pangkat') is-invalid @enderror"
+                            value="{{old('sk_pangkat', $data['sk_pangkat'])}}" id="sk_pangkat"
+                            aria-describedby="sk_pangkat" name="sk_pangkat">
+                            {{-- <div class="mb-3">
                                 <label for="sk_pangkat" class="form-label">SK Pangkat <span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('sk_pangkat') is-invalid @enderror"
+                                        class="text-danger">*</span></label> --}}
+                                {{-- <input type="text" class="form-control @error('sk_pangkat') is-invalid @enderror"
                                     value="{{old('sk_pangkat', $data['sk_pangkat'])}}" id="sk_pangkat"
-                                    aria-describedby="sk_pangkat" name="sk_pangkat">
-                                @error('sk_pangkat')
+                                    aria-describedby="sk_pangkat" name="sk_pangkat"> --}}
+                                {{-- @error('sk_pangkat')
                                 <div id="sk_pangkat" class="invalid-feedback">
                                     {{$message}}
                                 </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
 
                         </div>

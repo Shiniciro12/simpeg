@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class TandaJasa extends Migration
 {
@@ -13,6 +14,7 @@ class TandaJasa extends Migration
      */
     public function up()
     {
+        DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('tanda_jasa', function (Blueprint $table) {
             $table->uuid('tanda_jasa_id')->primary();
             $table->uuid('identitas_id');
@@ -24,6 +26,7 @@ class TandaJasa extends Migration
             $table->string('sertifikat');
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE tanda_jasa ALTER COLUMN tanda_jasa_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**

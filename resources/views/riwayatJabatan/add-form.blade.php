@@ -32,7 +32,7 @@
                         <div class="mb-3">
                             <label for="identitas_id" class="form-label">Jabatan <span class="text-danger">*</span></label>
                             <select class="form-select" name="jabatan_id" id="jabatan_id" required>
-                                <option value="" disabled SELECTED>Pilih Jabatan</option>
+                                <option value="" disabled selected>Pilih Jabatan</option>
                                 @foreach ($rowsJabatan as $rowJabatan)
                                 <option value="{{ $rowJabatan->jabatan_id }}">{{$rowJabatan->nama_jabatan}}</option>
                                 @endforeach
@@ -92,7 +92,7 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
-                            <label for="sk" class="form-label">SK Jabatan (Format: PDF Maksimal 550Kb) <span class="text-danger">*</span></label>
+                            <label for="sk" class="form-label">SK Jabatan (Format: PDF Maksimal 500Kb) <span class="text-danger">*</span></label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control @error('sk') is-invalid @enderror" value="{{old('sk')}}" id="sk" name="sk" accept=".pdf" required>
                                 <label class="input-group-text" for="sk">Upload</label>

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class Identitas extends Migration
 {
@@ -13,6 +14,7 @@ class Identitas extends Migration
      */
     public function up()
     {
+        DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('identitas', function (Blueprint $table) {
             $table->uuid('identitas_id')->primary();
             $table->string('nip', 18)->unique();
@@ -47,6 +49,7 @@ class Identitas extends Migration
             $table->uuid('unit_kerja_id');
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE identitas ALTER COLUMN identitas_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**
