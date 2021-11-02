@@ -1,8 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">SIMPEG</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/"><img src="/images/logo.svg" style="width: 20px;" alt=""> SIMPEG </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -44,6 +43,16 @@
           <a class="nav-link" href="/tandajasa">Tanda Jasa</a>
         </li>
       </ul>
+      <div class="btn-group ms-auto">
+        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+          Admin
+        </button>
+        <ul class="dropdown-menu dropdown-menu-lg-end">
+          <li><a class="dropdown-item" href="#">Profil </a></li>
+          <hr>
+          <li><a class="dropdown-item" href="#" style="color: red;">Logout</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>

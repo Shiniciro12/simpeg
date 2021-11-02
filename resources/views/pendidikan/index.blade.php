@@ -8,7 +8,11 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   @endif
-  <div class="col-md-12 mt-2">
+  <div class="col-md-11 mt-2 mx-auto">
+    <div class="text-center my-4">
+      <h2>Data Pendidikan</h2>
+      <a href="/pendidikan/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+    </div>
     <form action="" method="get">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Cari..." name="search">
@@ -16,9 +20,10 @@
       </div>
     </form>
     <div class="table-responsive">
-      <table class="table">
-        <thead>
+      <table class="table table-hover table-striped shadow">
+        <thead class="table-primary">
           <tr>
+            <th></th>
             <th scope="col">#</th>
             <th scope="col">Nama Lengkap</th>
             <th scope="col">Tingkat Pendidikan</th>
@@ -29,18 +34,23 @@
             <th scope="col">No STTB</th>
             <th scope="col">Tanggal STTB</th>
             <th scope="col">STTB</th>
-            <th>
-              <div class="row">
-                <div class="col-md-4">
-                  <a href="/pendidikan/add" class="btn btn-sm btn-success">Tambah+</a>
-                </div>
-            </th>
           </tr>
         </thead>
         <tbody>
           <?php $i = 1; ?>
           @foreach ($rows as $row)
           <tr>
+            <td scope="row">
+              <div class="btn-group-vertical">
+                <a href="/pendidikan/update/{{ $row["pendidikan_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                <form action="/pendidikan/delete" method="post" class="d-inline">
+                  @csrf
+                  <input type="hidden" name="pendidikan_id" value="{{ $row["pendidikan_id"] }}">
+                  <input type="hidden" name="sttb" value="{{ $row["sttb"] }}">
+                  <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
+                </form>
+              </div>
+            </td>
             <th scope="row">{{ $i++}}</th>
             <td scope="row">{{ $row["nama_peg"] }}</td>
             <td scope="row">{{ $row["tingkat_pendidikan"] }}</td>
@@ -50,18 +60,8 @@
             <td scope="row">{{ $row["nama_kepsek_rektor"] }}</td>
             <td scope="row">{{ $row["no_sttb"] }}</td>
             <td scope="row">{{ $row["tgl_sttb"] }}</td>
-            <td scope="row"><a href="upload/sttb/{{ $row["sttb"] }}">pdf</a></td>
-            <td scope="row">
-              <div class="btn-group-vertical">
-                <a href="/pendidikan/update/{{ $row["pendidikan_id"] }}" class="btn btn-warning">Ubah</a>
-                <form action="/pendidikan/delete" method="post" class="d-inline">
-                  @csrf
-                  <input type="hidden" name="pendidikan_id" value="{{ $row["pendidikan_id"] }}">
-                  <input type="hidden" name="sttb" value="{{ $row["sttb"] }}">
-                  <button type="submit" class="btn btn-danger" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')">Hapus</button>
-                </form>
-              </div>
-            </td>
+            <td scope="row"><a href="upload/sttb/{{ $row["sttb"] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
+
           </tr>
           @endforeach
         </tbody>
@@ -70,7 +70,7 @@
   </div>
 </div>
 </div>
-
+<br>
 <div class="d-flex justify-content-center">
   {{$rows->links()}}
 </div>

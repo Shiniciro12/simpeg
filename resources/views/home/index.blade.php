@@ -7,9 +7,37 @@
 <script src="/high-chart-lib/modules/export-data.js"></script>
 <script src="/high-chart-lib/modules/accessibility.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
+<!-- Data Jenis Kelamin -->
 <div id="male" data-male="{{ $dataGenderMale }}"></div>
 <div id="female" data-female="{{ $dataGenderFemale }}"></div>
+<!-- Data Usia -->
+<div id="age1" data-lesser="{{ $dataLesserThan30 }}"></div>
+<div id="age2" data-more="{{ $dataMoreThan50 }}"></div>
+<div id="age3" data-three-four="{{ $dataAge3040 }}"></div>
+<div id="age4" data-four-five="{{ $dataAge4050 }}"></div>
+<!-- Data Eselon -->
+<div id="eselon1" data-eselona="{{ $eselon1 }}"></div>
+<div id="eselon2" data-eselonb="{{ $eselon2 }}"></div>
+<div id="eselon3" data-eselonc="{{ $eselon3 }}"></div>
+<div id="eselon4" data-eselond="{{ $eselon4 }}"></div>
+
+
+<section id="head-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 mx-auto my-4">
+                <center>
+                    <img src="/images/logo.svg" width="60px" alt="">
+                    <h2>Dashboard Root</h2>
+                    <h6>- SIMPEG Kota Kupang -</h6>
+                </center>
+            </div>
+            <div class="seperator">
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="container">
     <div class="row">
@@ -32,101 +60,90 @@
         <div class="col-md">
             <figure class="highcharts-figure">
                 <div id="container"></div>
-                <p class="highcharts-description">
-                    Chart designed to highlight 3D column chart rendering options.
-                    Move the sliders below to change the basic 3D settings for the chart.
-                    3D column charts are generally harder to read than 2D charts, but provide
-                    an interesting visual effect.
-                </p>
-                <div id="sliders">
-                    <table>
-                        <tr>
-                            <td><label for="alpha">Alpha Angle</label></td>
-                            <td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
-                        </tr>
-                        <tr>
-                            <td><label for="beta">Beta Angle</label></td>
-                            <td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
-                        </tr>
-                        <tr>
-                            <td><label for="depth">Depth</label></td>
-                            <td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
-                        </tr>
-                    </table>
-                </div>
             </figure>
-            
+
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+    const age1 = document.getElementById('age1').getAttribute('data-lesser');
+    const age2 = document.getElementById('age2').getAttribute('data-more');
+    const age3 = document.getElementById('age3').getAttribute('data-three-four');
+    const age4 = document.getElementById('age4').getAttribute('data-four-five');
+
     Highcharts.chart('container1', {
-    chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: 'Grafik data umur'
-    },
-    subtitle: {
-        text: 'Data umur dalam grafik'
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Delivered amount',
-        data: [
-            ['< 30', 8],
-            ['30-40', 3],
-            ['40-50', 1],
-            ['> 50', 6],
-        ]
-    }]
-});
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Grafik Data Umur'
+        },
+        subtitle: {
+            text: 'Data umur dalam grafik'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: 'Jumlah ',
+            data: [
+                ['Dibawah 30', parseInt(age1)],
+                ['30-40', parseInt(age3)],
+                ['40-50', parseInt(age4)],
+                ['Diatas 50', parseInt(age2)],
+            ]
+        }]
+    });
 </script>
 
 <script type="text/javascript">
     const male = document.getElementById('male').getAttribute('data-male');
     const female = document.getElementById('female').getAttribute('data-female');
     Highcharts.chart('container2', {
-    chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: 'Grafik data gender'
-    },
-    subtitle: {
-        text: 'Data gender dalam grafik'
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Delivered amount',
-        data: [
-            ['Laki-laki', parseInt(male)],
-            ['Perempuan', parseInt(female)],
-        ]
-    }]
-});
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Grafik Data Jenis Kelamin'
+        },
+        subtitle: {
+            text: 'Data gender dalam grafik'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        },
+        series: [{
+            name: 'Jumlah',
+            data: [
+                ['Laki-laki', parseInt(male)],
+                ['Perempuan', parseInt(female)],
+            ]
+        }]
+    });
 </script>
 
 <script type="text/javascript">
+    const eselon1 = document.getElementById('eselon1').getAttribute('data-eselona');
+    const eselon2 = document.getElementById('eselon2').getAttribute('data-eselonb');
+    const eselon3 = document.getElementById('eselon3').getAttribute('data-eselonc');
+    const eselon4 = document.getElementById('eselon4').getAttribute('data-eselond');
+
+    console.log(eselon3);
     // Set up the chart
     var chart = new Highcharts.Chart({
         chart: {
@@ -134,17 +151,14 @@
             type: 'column',
             options3d: {
                 enabled: true,
-                alpha: 15,
+                alpha: 0,
                 beta: 15,
                 depth: 50,
                 viewDistance: 25
             }
         },
         title: {
-            text: 'Chart rotation demo'
-        },
-        subtitle: {
-            text: 'Test options by dragging the sliders below'
+            text: 'Data Eselon'
         },
         plotOptions: {
             column: {
@@ -152,24 +166,31 @@
             }
         },
         series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-        }]
+                name: 'I',
+                data: [
+                    ['Eselon I', parseInt(eselon1)],
+                ]
+            },
+            {
+                name: 'II',
+                data: [
+                    ['Eselon II', parseInt(eselon2)],
+                ]
+            },
+            {
+                name: 'III',
+                data: [
+                    ['Eselon III', parseInt(eselon3)],
+                ]
+            },
+            {
+                name: 'Eselon IV',
+                data: [
+                    ['Eselon IV', parseInt(eselon4)],
+                ]
+            },
+        ]
     });
-    
-    function showValues() {
-        $('#alpha-value').html(chart.options.chart.options3d.alpha);
-        $('#beta-value').html(chart.options.chart.options3d.beta);
-        $('#depth-value').html(chart.options.chart.options3d.depth);
-    }
-    
-    // Activate the sliders
-    $('#sliders input').on('input change', function () {
-        chart.options.chart.options3d[this.id] = parseFloat(this.value);
-        showValues();
-        chart.redraw(false);
-    });
-    
-    showValues();
 </script>
 
 
