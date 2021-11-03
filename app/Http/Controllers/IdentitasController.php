@@ -206,10 +206,10 @@ class IdentitasController extends Controller
         $nik = $identitas['nik'] != $request->input('nik') ? '|unique:identitas' : '';
 
         $rules = [
-            'nip' => 'required|numeric|digits:18' .$nip ,
+            'nip' => 'required|numeric|digits:18' . $nip,
             'nama' => 'required',
             'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required|before:today',
+            'tgl_lahir' => 'required|date|before:'.today(),
             'jenis_kelamin' => 'required',
             'agama' => 'required',
             'status_kepegawaian' => 'required',
@@ -219,18 +219,18 @@ class IdentitasController extends Controller
             'tahun_bantuan_bepetarum_pns' => 'required|min:4|max:4',
             'status_kawin' => 'required',
             'rt_rw' => 'required',
-            'hp' => 'required|numeric|digits_between:11,12' .$hp ,
+            'hp' => 'required|numeric|digits_between:11,12' . $hp,
             'telepon' => 'required',
             'kelurahan_id' => 'required',
             'kecamatan_id' => 'required',
             'golongan_darah' => 'required',
             'foto' => 'file|mimes:png,jpg,jpeg|max:500',
-            'no_karpeg' => 'required'. $no_karpeg,
-            'no_taspen' => 'required'. $no_taspen,
-            'npwp' => 'required'. $npwp,
-            'no_bpjs' => 'required'.$no_bpjs,
-            'no_kariskarsu' => 'required'.$no_kariskarsu,
-            'nik' => 'required|numeric|digits:16'.$nik,
+            'no_karpeg' => 'required' . $no_karpeg,
+            'no_taspen' => 'required' . $no_taspen,
+            'npwp' => 'required' . $npwp,
+            'no_bpjs' => 'required' . $no_bpjs,
+            'no_kariskarsu' => 'required' . $no_kariskarsu,
+            'nik' => 'required|numeric|digits:16' . $nik,
             'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'unit_kerja_id' => 'required',
@@ -275,6 +275,7 @@ class IdentitasController extends Controller
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max karakter.',
             'min' => '*Kolom :attribute minimal :min karakter.',
+            'date' => '*Kolom :attribute tidak valid.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);

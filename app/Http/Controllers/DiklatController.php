@@ -48,7 +48,7 @@ class DiklatController extends Controller
             'tgl_selesai' => 'required',
             'jam' => 'required',
             'no_sttp' => 'required|unique:diklat',
-            'tgl_sttp' => 'required ',
+            'tgl_sttp' => 'required|date',
             'sertifikat' => 'file|mimes:pdf|max:1000',
         ];
 
