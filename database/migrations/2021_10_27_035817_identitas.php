@@ -23,7 +23,7 @@ class Identitas extends Migration
             $table->string('gelar_belakang')->nullable();
             $table->string('tempat_lahir');
             $table->date('tgl_lahir');
-            $table->char('jenis_kelamin');
+            $table->char('jenis_kelamin', 1);
             $table->string('agama');
             $table->string('status_kepegawaian');
             $table->string('jenis_kepegawaian');

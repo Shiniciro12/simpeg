@@ -46,7 +46,7 @@ class IdentitasController extends Controller
     {
 
         $rules = [
-            'nip' => 'required|numeric|min:18|max:18|unique:identitas',
+            'nip' => 'required|numeric|digits:18|unique:identitas',
             'nama' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required|before:today',
@@ -70,7 +70,7 @@ class IdentitasController extends Controller
             'npwp' => 'required|unique:identitas',
             'no_bpjs' => 'required|numeric|unique:identitas',
             'no_kariskarsu' => 'required|unique:identitas',
-            'nik' => 'required|numeric|unique:identitas|min:16|max:16',
+            'nik' => 'required|numeric|unique:identitas|digits:16',
             'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'unit_kerja_id' => 'required',
@@ -180,91 +180,107 @@ class IdentitasController extends Controller
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'rowsKelurahan' => Kelurahan::latest()->get(),
             'rowsKecamatan' => Kecamatan::latest()->get(),
+            'golongan_darah' => ['A', 'B', 'AB', 'O'],
+            'rowsAgama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lain-lain'],
+            'rowsStatusKawin' => ['Belum Kawin', 'Kawin', 'Janda', 'Duda'],
+            'rowsBBP' => ['BUM', 'PUM', 'BM', 'PT'],
+            'rowsStatusPegawai' => ['Calon PNS', 'PNS', 'Pensiunan', 'TNI'],
+            'rowsJenisPegawai' => ['PNS Pusat DEPDAGRI', 'PNS Pusat DEPDAGRI DPK', 'PNS Pusat DEPDAGRI DPB', 'PNS Daerah Otonom', 'PNS Pusat DEP lain DPK', 'PNS Pusat DEP lain DPB', 'TNI yang ditugas karyakan'],
+            'rowsKedudukanPegawai' => ['Aktif', 'CLTN', 'Perpanjangan CLTN', 'Tugas Belajar', 'Pemberhentian Sementara', 'Penerima Uang Tunggu', 'Wajib Militer', 'PNS yang dinyatakan hilang', 'Pejabat Negara', 'Kepala Desa', 'Keberatan Atas Hukuman Disiplin', 'Tidak Aktif', 'MPP'],
         ]);
     }
 
     public function update(Request $request)
     {
-        // $rules = [
-        //     'nip' => 'required|numeric|unique:identitas',
-        //     'nama' => 'required',
-        //     'gelar_depan' => 'required',
-        //     'gelar_belakang' => 'required',
-        //     'tempat_lahir' => 'required',
-        //     'tgl_lahir' => 'required|before:today',
-        //     'jenis_kelamin' => 'required',
-        //     'agama' => 'required',
-        //     'status_kepegawaian' => 'required',
-        //     'jenis_kepegawaian' => 'required',
-        //     'kedudukan_kepegawaian' => 'required',
-        //     'bantuan_bepetarum_pns' => 'required',
-        //     'tahun_bantuan_bepetarum_pns' => 'required',
-        //     'status_kawin' => 'required',
-        //     'rt_rw' => 'required',
-        //     'hp' => 'required|numeric|unique:identitas|digits_between:11,12',
-        //     'telepon' => 'required',
-        //     'kelurahan_id' => 'required',
-        //     'kecamatan_id' => 'required',
-        //     'golongan_darah' => 'required',
-        //     'foto' => 'file|mimes:png,jpg,jpeg|max:500',
-        //     'no_karpeg' => 'required|unique:identitas',
-        //     'no_taspen' => 'required|unique:identitas',
-        //     'npwp' => 'required|unique:identitas',
-        //     'no_bpjs' => 'required|numeric|unique:identitas',
-        //     'no_kariskarsu' => 'required|unique:identitas',
-        //     'nik' => 'required|numeric|unique:identitas',
-        //     'pangkat_id' => 'required',
-        //     'jabatan_id' => 'required',
-        //     'unit_kerja_id' => 'required',
-        // ];
+        $identitas = Identitas::find($request->input('identitas_id'));
 
-        // $input = [
-        //     'nip' => $request->input('nip'),
-        //     'nama' => $request->input('nama'),
-        //     'gelar_depan' => $request->input('gelar_depan'),
-        //     'gelar_belakang' => $request->input('gelar_belakang'),
-        //     'tempat_lahir' => $request->input('tempat_lahir'),
-        //     'tgl_lahir' => $request->input('tgl_lahir'),
-        //     'jenis_kelamin' => $request->input('jenis_kelamin'),
-        //     'agama' => $request->input('agama'),
-        //     'status_kepegawaian' => $request->input('status_kepegawaian'),
-        //     'jenis_kepegawaian' => $request->input('jenis_kepegawaian'),
-        //     'kedudukan_kepegawaian' => $request->input('kedudukan_kepegawaian'),
-        //     'bantuan_bepetarum_pns' => $request->input('bantuan_bepetarum_pns'),
-        //     'tahun_bantuan_bepetarum_pns' => $request->input('tahun_bantuan_bepetarum_pns'),
-        //     'status_kawin' => $request->input('status_kawin'),
-        //     'rt_rw' => $request->input('rt_rw'),
-        //     'hp' => $request->input('hp'),
-        //     'telepon' => $request->input('telepon'),
-        //     'kelurahan_id' => $request->input('kelurahan_id'),
-        //     'kecamatan_id' => $request->input('kecamatan_id'),
-        //     'golongan_darah' => $request->input('golongan_darah'),
-        //     'foto' => $request->file('foto'),
-        //     'no_karpeg' => $request->input('no_karpeg'),
-        //     'no_taspen' => $request->input('no_taspen'),
-        //     'npwp' => $request->input('npwp'),
-        //     'no_bpjs' => $request->input('no_bpjs'),
-        //     'no_kariskarsu' => $request->input('no_kariskarsu'),
-        //     'nik' => $request->input('nik'),
-        //     'pangkat_id' => $request->input('pangkat_id'),
-        //     'jabatan_id' => $request->input('jabatan_id'),
-        //     'unit_kerja_id' => $request->input('unit_kerja_id'),
-        // ];
+        $nip = $identitas['nip'] != $request->input('nip') ? '|unique:identitas' : '';
 
-        // $messages = [
-        //     'required' => '*Kolom :attribute wajib diisi.',
-        //     'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
-        //     'numeric' => '*Kolom :attribute harus berupa karakter angka.',
-        //     'unique' => '*Kolom :attribute sudah terdaftar.',
-        //     'file' => '*File :attribute wajib dipilih.',
-        //     'max' => '*Kolom :attribute maksimal :max karakter.',
-        //     'min' => '*Kolom :attribute minimal :min karakter.',
-        // ];
+        $hp = $identitas['hp'] != $request->input('hp') ? '|unique:identitas' : '';
 
-        // $validator = Validator::make($input, $rules, $messages);
-        // if ($validator->fails()) {
-        //     return redirect('/identitas/update/'.$request->input('identitas_id'))->withErrors($validator)->withInput();
-        // }
+        $no_karpeg = $identitas['no_karpeg'] != $request->input('no_karpeg') ? '|unique:identitas' : '';
+        $no_taspen = $identitas['no_taspen'] != $request->input('no_taspen') ? '|unique:identitas' : '';
+        $npwp = $identitas['npwp'] != $request->input('npwp') ? '|unique:identitas' : '';
+        $no_bpjs = $identitas['no_bpjs'] != $request->input('no_bpjs') ? '|unique:identitas' : '';
+        $no_kariskarsu = $identitas['no_kariskarsu'] != $request->input('no_kariskarsu') ? '|unique:identitas' : '';
+        $nik = $identitas['nik'] != $request->input('nik') ? '|unique:identitas' : '';
+
+        $rules = [
+            'nip' => 'required|numeric|digits:18' .$nip ,
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required|before:today',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'status_kepegawaian' => 'required',
+            'jenis_kepegawaian' => 'required',
+            'kedudukan_kepegawaian' => 'required',
+            'bantuan_bepetarum_pns' => 'required',
+            'tahun_bantuan_bepetarum_pns' => 'required|min:4|max:4',
+            'status_kawin' => 'required',
+            'rt_rw' => 'required',
+            'hp' => 'required|numeric|digits_between:11,12' .$hp ,
+            'telepon' => 'required',
+            'kelurahan_id' => 'required',
+            'kecamatan_id' => 'required',
+            'golongan_darah' => 'required',
+            'foto' => 'file|mimes:png,jpg,jpeg|max:500',
+            'no_karpeg' => 'required'. $no_karpeg,
+            'no_taspen' => 'required'. $no_taspen,
+            'npwp' => 'required'. $npwp,
+            'no_bpjs' => 'required'.$no_bpjs,
+            'no_kariskarsu' => 'required'.$no_kariskarsu,
+            'nik' => 'required|numeric|digits:16'.$nik,
+            'pangkat_id' => 'required',
+            'jabatan_id' => 'required',
+            'unit_kerja_id' => 'required',
+        ];
+
+        $input = [
+            'nip' => $request->input('nip'),
+            'nama' => $request->input('nama'),
+            'tempat_lahir' => $request->input('tempat_lahir'),
+            'tgl_lahir' => $request->input('tgl_lahir'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'agama' => $request->input('agama'),
+            'status_kepegawaian' => $request->input('status_kepegawaian'),
+            'jenis_kepegawaian' => $request->input('jenis_kepegawaian'),
+            'kedudukan_kepegawaian' => $request->input('kedudukan_kepegawaian'),
+            'bantuan_bepetarum_pns' => $request->input('bantuan_bepetarum_pns'),
+            'tahun_bantuan_bepetarum_pns' => $request->input('tahun_bantuan_bepetarum_pns'),
+            'status_kawin' => $request->input('status_kawin'),
+            'rt_rw' => $request->input('rt_rw'),
+            'hp' => $request->input('hp'),
+            'telepon' => $request->input('telepon'),
+            'kelurahan_id' => $request->input('kelurahan_id'),
+            'kecamatan_id' => $request->input('kecamatan_id'),
+            'golongan_darah' => $request->input('golongan_darah'),
+            'foto' => $request->file('foto'),
+            'no_karpeg' => $request->input('no_karpeg'),
+            'no_taspen' => $request->input('no_taspen'),
+            'npwp' => $request->input('npwp'),
+            'no_bpjs' => $request->input('no_bpjs'),
+            'no_kariskarsu' => $request->input('no_kariskarsu'),
+            'nik' => $request->input('nik'),
+            'pangkat_id' => $request->input('pangkat_id'),
+            'jabatan_id' => $request->input('jabatan_id'),
+            'unit_kerja_id' => $request->input('unit_kerja_id'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max karakter.',
+            'min' => '*Kolom :attribute minimal :min karakter.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/identitas/update/' . $request->input('identitas_id'))->withErrors($validator)->withInput();
+        }
 
         $extension = $request->file('foto')->getClientOriginalExtension();
 

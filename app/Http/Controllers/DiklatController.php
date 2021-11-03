@@ -64,7 +64,7 @@ class DiklatController extends Controller
             'jam' => $request->input('jam'),
             'no_sttp' => $request->input('no_sttp'),
             'tgl_sttp' => $request->input('tgl_sttp'),
-            'sertifikat' => $request->input('sertifikat'),
+            'sertifikat' => $request->file('sertifikat'),
         ];
 
         $messages = [
