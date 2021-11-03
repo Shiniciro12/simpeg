@@ -57,6 +57,7 @@
                 <th scope="col">No Karis/Karsu</th>
                 <th scope="col">NIK</th>
                 <th scope="col">Pangkat</th>
+                <th scope="col">Golongan</th>
                 <th scope="col">Jabatan</th>
                 <th scope="col">Unit</th>
               </tr>
@@ -102,9 +103,10 @@
                 <td scope="row">{{ $row["no_bpjs"] }}</td>
                 <td scope="row">{{ $row["no_kariskarsu"] }}</td>
                 <td scope="row">{{ $row["nik"] }}</td>
-                <td scope="row">{{ $row["pangkat_id"] }}</td>
-                <td scope="row">{{ $row["jabatan_id"] }}</td>
-                <td scope="row">{{ $row["unit_kerja_id"] }}</td>
+                <td scope="row">{{ $row["pangkat"] }}</td>
+                <td scope="row">{{ $row["golongan"] }}</td>
+                <td scope="row">{{ $row["nama_jabatan"] }}</td>
+                <td scope="row">{{ $row["nama_unit"] }}</td>
               </tr>
               @endforeach
             </tbody>

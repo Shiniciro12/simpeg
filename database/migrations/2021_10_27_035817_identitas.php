@@ -28,7 +28,7 @@ class Identitas extends Migration
             $table->string('status_kepegawaian');
             $table->string('jenis_kepegawaian');
             $table->string('kedudukan_kepegawaian');
-            $table->string('bantuan_bepetarum_pns', 4);
+            $table->string('bantuan_bepetarum_pns');
             $table->string('tahun_bantuan_bepetarum_pns', 4);
             $table->string('status_kawin');
             $table->string('rt_rw', 7);

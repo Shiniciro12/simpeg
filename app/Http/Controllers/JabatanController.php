@@ -28,7 +28,6 @@ class JabatanController extends Controller
 
     public function add(Request $request)
     {
-        //dd($request->input('unit_kerja_id'));
         $rules = [
             'nama' => 'required',
             'eselon' => 'required',
@@ -43,12 +42,6 @@ class JabatanController extends Controller
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
-            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
-            'unique' => '*Kontak :attribute sudah terdaftar.',
-            'file' => '*File :attribute wajib dipilih.',
-            'max' => '*Kolom :attribute maksimal :max karakter.',
-            'min' => '*Kolom :attribute minimal :min karakter.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -63,7 +56,8 @@ class JabatanController extends Controller
             'unit_kerja_id' => $request->input('unit_kerja_id'),
             'jenis_jabatan' => $request->input('jenis_jabatan')
         ];
-        jabatan::create($data);
+
+        Jabatan::create($data);
 
         return redirect('/jabatan')->with('success', 'Data berhasil ditambahkan');
     }
@@ -88,7 +82,7 @@ class JabatanController extends Controller
             'jenis_jabatan' => $request->input('jenis_jabatan')
         ];
 
-        jabatan::where('jabatan_id', $request->input('jabatan_id'))->update($data);
+        Jabatan::where('jabatan_id', $request->input('jabatan_id'))->update($data);
         return redirect('/jabatan')->with('success', 'Data berhasil diubah');
     }
 

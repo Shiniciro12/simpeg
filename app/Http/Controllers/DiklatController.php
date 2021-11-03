@@ -47,9 +47,9 @@ class DiklatController extends Controller
             'tgl_mulai' => 'required|before:today',
             'tgl_selesai' => 'required',
             'jam' => 'required',
-            'no_sttp' => 'required | unique:diklat',
+            'no_sttp' => 'required|unique:diklat',
             'tgl_sttp' => 'required ',
-            'sertifikat' => '',
+            'sertifikat' => 'file|mimes:pdf|max:1000',
         ];
 
         $input = [

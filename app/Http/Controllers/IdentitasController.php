@@ -18,8 +18,7 @@ class IdentitasController extends Controller
     {
         return view('identitas.index', [
             'page' => 'Data Identitas',
-            // "rows" => Identitas::latest()->filter(request(['search']))->paginate(10)->withQueryString(),            
-            "rows" => Identitas::select(['identitas.*', 'kelurahan.*', 'kecamatan.*'])->join("kelurahan", "kelurahan.kelurahan_id", "=", "identitas.kelurahan_id")->join("kecamatan", "kecamatan.kecamatan_id", "=", "identitas.kecamatan_id")->join("jabatan", "jabatan.jabatan_id", "=", "identitas.jabatan_id")->join("pangkat", "pangkat.pangkat_id", "=", "identitas.pangkat_id")->join("unit_kerja", "unit_kerja.unit_kerja_id", "=", "identitas.unit_kerja_id")->filter(request(['search']))->paginate(10)->withQueryString(),
+            "rows" => Identitas::select(['identitas.*', 'kelurahan.*', 'kecamatan.*', 'jabatan.*', 'pangkat.*', 'unit_kerja.*'])->join("kelurahan", "kelurahan.kelurahan_id", "=", "identitas.kelurahan_id")->join("kecamatan", "kecamatan.kecamatan_id", "=", "identitas.kecamatan_id")->join("jabatan", "jabatan.jabatan_id", "=", "identitas.jabatan_id")->join("pangkat", "pangkat.pangkat_id", "=", "identitas.pangkat_id")->join("unit_kerja", "unit_kerja.unit_kerja_id", "=", "identitas.unit_kerja_id")->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
 
@@ -47,10 +46,8 @@ class IdentitasController extends Controller
     {
 
         $rules = [
-            'nip' => 'required|numeric|unique:identitas',
+            'nip' => 'required|numeric|min:18|max:18|unique:identitas',
             'nama' => 'required',
-            'gelar_depan' => 'required',
-            'gelar_belakang' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required|before:today',
             'jenis_kelamin' => 'required',
@@ -59,7 +56,7 @@ class IdentitasController extends Controller
             'jenis_kepegawaian' => 'required',
             'kedudukan_kepegawaian' => 'required',
             'bantuan_bepetarum_pns' => 'required',
-            'tahun_bantuan_bepetarum_pns' => 'required',
+            'tahun_bantuan_bepetarum_pns' => 'required|min:4|max:4',
             'status_kawin' => 'required',
             'rt_rw' => 'required',
             'hp' => 'required|numeric|unique:identitas|digits_between:11,12',
@@ -73,7 +70,7 @@ class IdentitasController extends Controller
             'npwp' => 'required|unique:identitas',
             'no_bpjs' => 'required|numeric|unique:identitas',
             'no_kariskarsu' => 'required|unique:identitas',
-            'nik' => 'required|numeric|unique:identitas',
+            'nik' => 'required|numeric|unique:identitas|min:16|max:16',
             'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'unit_kerja_id' => 'required',
@@ -82,8 +79,6 @@ class IdentitasController extends Controller
         $input = [
             'nip' => $request->input('nip'),
             'nama' => $request->input('nama'),
-            'gelar_depan' => $request->input('gelar_depan'),
-            'gelar_belakang' => $request->input('gelar_belakang'),
             'tempat_lahir' => $request->input('tempat_lahir'),
             'tgl_lahir' => $request->input('tgl_lahir'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),
@@ -126,7 +121,6 @@ class IdentitasController extends Controller
         if ($validator->fails()) {
             return redirect('/identitas/add')->withErrors($validator)->withInput();
         }
-
 
         $extension = $request->file('foto')->getClientOriginalExtension();
 
