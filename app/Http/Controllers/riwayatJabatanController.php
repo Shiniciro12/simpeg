@@ -39,7 +39,7 @@ class RiwayatJabatanController extends Controller
             'jabatan_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
-            'no_sk' => 'required',
+            'no_sk' => 'required|unique:riwayat_jabatan',
             'tgl_sk' => 'required',
             'tmt' => 'required',
         ];
@@ -71,10 +71,10 @@ class RiwayatJabatanController extends Controller
 
         $name = $request->input('identitas_id') . "-jabatan-" . date('s');
 
-        // $validator = Validator::make($input, $rules, $messages);
-        // if ($validator->fails()) {
-        //     return redirect('/riwayat-jabatan/add')->withErrors($validator)->withInput();
-        // }
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/riwayat-jabatan/add')->withErrors($validator)->withInput();
+        }
 
         $data = [
             'jabatan_id' => $request->input('jabatan_id'),

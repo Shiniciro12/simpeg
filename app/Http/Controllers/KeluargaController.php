@@ -34,7 +34,7 @@ class KeluargaController extends Controller
             'nik' => 'required|numeric|unique:identitas',
             'nama' => 'required',
             'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required|before:today',
+            'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'status_keluarga' => 'required',
             'status_kawin' => 'required',
@@ -49,7 +49,7 @@ class KeluargaController extends Controller
             'provinsi' => 'required',
             'hp' => 'required|numeric|digits_between:11,12',
             'telepon' => 'required',
-            'kode_pos' => 'required|numeric',
+            'kode_pos' => 'required|digits:5',
             'dokumen' => 'file|mimes:pdf|max:1000',
         ]; 
 

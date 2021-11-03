@@ -14,11 +14,15 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="identitas_id" class="form-label">Nama/NIP Pegawai <span class="text-danger">*</span></label>
-                            <input type="text" list="identitas" name="identitas_id" id="identitas_id" class="form-control" required>
+                            <label for="identitas_id" class="form-label">Nama/NIP Pegawai <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" list="identitas" name="identitas_id" id="identitas_id"
+                                class="form-control" required value="{{old('identitas_id')}}">
                             <datalist id="identitas">
                                 @foreach ($rowsIdentitas as $rowIdentitas)
-                                <option value="{{$rowIdentitas->nip}}">{{$rowIdentitas->nama}}</option>
+                                <option {{old('identitas_id')==$rowIdentitas['identitas_id'] ? 'selected' : '' }}
+                                    value="{{ $rowIdentitas['nip'] }}">{{ $rowIdentitas['nama']
+                                    }}</option>
                                 @endforeach
                             </datalist>
                             @error('identitas_id')
@@ -30,12 +34,18 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="identitas_id" class="form-label">Jabatan <span class="text-danger">*</span></label>
-                            <select class="form-select" name="jabatan_id" id="jabatan_id" required>
+                            <label for="identitas_id" class="form-label">Jabatan <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" name="jabatan_id" id="jabatan_id" required
+                                value="{{old('jabatan_id')}}">
                                 <option value="" disabled selected>Pilih Jabatan</option>
+
                                 @foreach ($rowsJabatan as $rowJabatan)
-                                <option value="{{ $rowJabatan->jabatan_id }}">{{$rowJabatan->nama_jabatan}}</option>
+                                <option {{old('jabatan_id')==$rowJabatan['jabatan_id'] ? 'selected' : '' }}
+                                    value="{{ $rowJabatan['jabatan_id'] }}">{{ $rowJabatan['nama_jabatan']
+                                    }}</option>
                                 @endforeach
+
                             </select>
                         </div>
 
@@ -44,7 +54,8 @@
                 <div class="row">
                     <div class="mb-3">
                         <label for="pejabat" class="form-label">Pejabat<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('pejabat') is-invalid @enderror" value="{{old('pejabat')}}" id="pejabat" aria-describedby="pejabat" name="pejabat">
+                        <input type="text" class="form-control @error('pejabat') is-invalid @enderror"
+                            value="{{old('pejabat')}}" id="pejabat" aria-describedby="pejabat" name="pejabat">
                         @error('pejabat')
                         <div id="pejabat" class="invalid-feedback">
                             {{$message}}
@@ -56,7 +67,8 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="no_sk" class="form-label">No SK<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('no_sk') is-invalid @enderror" value="{{old('no_sk')}}" name="no_sk">
+                            <input type="text" class="form-control @error('no_sk') is-invalid @enderror"
+                                value="{{old('no_sk')}}" name="no_sk">
                             @error('no_sk')
                             <div id="no_sk" class="invalid-feedback">
                                 {{$message}}
@@ -92,9 +104,11 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
-                            <label for="sk" class="form-label">SK Jabatan (Format: PDF Maksimal 500Kb) <span class="text-danger">*</span></label>
+                            <label for="sk" class="form-label">SK Jabatan (Format: PDF Maksimal 1MB) <span
+                                    class="text-danger">*</span></label>
                             <div class="input-group mb-3">
-                                <input type="file" class="form-control @error('sk') is-invalid @enderror" value="{{old('sk')}}" id="sk" name="sk" accept=".pdf" required>
+                                <input type="file" class="form-control @error('sk') is-invalid @enderror"
+                                    value="{{old('sk')}}" id="sk" name="sk" accept=".pdf" required>
                                 <label class="input-group-text" for="sk">Upload</label>
                                 @error('sk')
                                 <div id="sk" class="invalid-feedback">
