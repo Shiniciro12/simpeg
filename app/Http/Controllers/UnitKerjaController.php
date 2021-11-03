@@ -68,11 +68,17 @@ class UnitKerjaController extends Controller
 
     public function update(Request $request)
     {
+        $unit_kerja = UnitKerja::find($request->input('unit_kerja_id'));
+        
+       
+        $nama_unit = $unit_kerja['nama_unit'] != $request->input('nama_unit') ? '|unique:unit_kerja' : '';
+        $latitude = $unit_kerja['latitude'] != $request->input('latitude') ? '|unique:unit_kerja' : '';
+        $longitude = $unit_kerja['longitude'] != $request->input('longitude') ? '|unique:unit_kerja' : '';
         $rules = [
-            'nama_unit' => 'required|unique:unit_kerja',
+            'nama_unit' => 'required'.$nama_unit,
             'alamat' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
+            'latitude' => 'required'.$latitude,
+            'longitude' => 'required'.$longitude,
         ];
 
         $input = [

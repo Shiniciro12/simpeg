@@ -29,6 +29,7 @@ class KeluargaController extends Controller
 
     public function add(Request $request)
     {
+        
         $rules = [
             'nip' => 'required',
             'nik' => 'required|numeric|unique:identitas',

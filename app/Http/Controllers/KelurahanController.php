@@ -29,6 +29,7 @@ class KelurahanController extends Controller
     public function add(Request $request)
     {
 
+    
         $rules = [
             'nama_kelurahan' => 'required|unique:kelurahan',
             'kode_pos' => 'required|unique:kelurahan',
@@ -64,8 +65,12 @@ class KelurahanController extends Controller
 
     public function update(Request $request)
     {
+        $kelurahan = Kelurahan::find($request->input('kelurahan_id'));
+        
+       
+        $nama_kelurahan = $kelurahan['nama_kelurahan'] != $request->input('nama_kelurahan') ? '|unique:kelurahan' : '';
         $rules = [
-            'nama_kelurahan' => 'required|unique:kelurahan',
+            'nama_kelurahan' => 'required'.$nama_kelurahan,
             'kode_pos' => 'required|numeric',
         ];
 

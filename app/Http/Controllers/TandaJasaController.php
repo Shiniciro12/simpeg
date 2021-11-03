@@ -102,6 +102,46 @@ class TandaJasaController extends Controller
     public function update(Request $request)
     {
         $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+        $tandajasa = TandaJasa::find($request->input('tanda_jasa_id'));
+        
+       
+        $no_sk = $tandajasa['no_sk'] != $request->input('no_sk') ? '|unique:tanda_jasa' : '';
+
+        $rules = [
+            'nip' => 'required',
+            'nama' => 'required',
+            'no_sk' => 'required'.$no_sk,
+            'tgl_sk' => 'required|before:today',
+            'tahun' => 'required',
+            'asal_perolehan' => 'required',
+
+        ];
+
+        $input = [
+            'identitas_id' => $id_identitas['identitas_id'],
+            'nip' => $request->input('nip'),
+            'nama' => $request->input('nama'),
+            'no_sk' => $request->input('no_sk'),
+            'tgl_sk' => $request->input('tgl_sk'),
+            'tahun' => $request->input('tahun'),
+            'asal_perolehan' => $request->input('asal_perolehan'),
+
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max karakter.',
+            'min' => '*Kolom :attribute minimal :min karakter.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/tandajasa/update/'.$request->input('tanda_jasa_id'))->withErrors($validator)->withInput();
+        }
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
             'nama' => $request->input('nama'),

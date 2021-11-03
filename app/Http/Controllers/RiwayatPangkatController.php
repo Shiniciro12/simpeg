@@ -103,12 +103,16 @@ class RiwayatPangkatController extends Controller
 
     public function update(Request $request)
     {
+        $riwayat_pangkat = RiwayatPangkat::find($request->input('riwayat_pangkat_id'));
+        
+       
+        $rules_pangkat_id = $riwayat_pangkat['no_sk'] != $request->input('no_sk') ? '|unique:riwayat_pangkat' : '';
         $rules = [
 
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
-            'no_sk' => 'required',
+            'no_sk' => 'required'.$rules_pangkat_id,
             'tgl_sk' => 'required',
             'tmt_pangkat' => 'required',
             'sk_pangkat' => 'required',

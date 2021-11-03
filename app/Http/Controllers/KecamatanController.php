@@ -62,8 +62,12 @@ class KecamatanController extends Controller
 
     public function update(Request $request)
     {
+        $kecamatan = Kecamatan::find($request->input('kecamatan_id'));
+        
+       
+        $nama_kecamatan = $kecamatan['nama_kecamatan'] != $request->input('nama_kecamatan') ? '|unique:kecamatan' : '';
         $rules = [
-            'nama_kecamatan' => 'required|unique:kecamatan',
+            'nama_kecamatan' => 'required'.$nama_kecamatan,
         ];
 
         $input = [

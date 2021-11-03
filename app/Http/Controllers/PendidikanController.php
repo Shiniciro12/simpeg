@@ -115,6 +115,49 @@ class PendidikanController extends Controller
     public function update(Request $request)
     {
         $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+        $pendidikan = Pendidikan::find($request->input('pendidikan_id'));
+        
+       
+        $no_sttb = $pendidikan['no_sttb'] != $request->input('no_sttb') ? '|unique:pendidikan' : '';
+
+        $rules = [
+            'identitas_id' => '',
+            'tingkat_pendidikan' => '',
+            'jurusan' => 'required',
+            'nama_lembaga_pendidikan' => 'required',
+            'tempat' => 'required',
+            'nama_kepsek_rektor' => 'required',
+            'no_sttb' => 'required|before:today'.$no_sttb,
+            'tgl_sttb' => 'required',
+            'sttb' => '',
+        ];
+
+        $input = [
+            'identitas_id' => $request->input('identitas_id'),
+            'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),
+            'jurusan' => $request->input('jurusan'),
+            'nama_lembaga_pendidikan' => $request->input('nama_lembaga_pendidikan'),
+            'tempat' => $request->input('tempat'),
+            'nama_kepsek_rektor' => $request->input('nama_kepsek_rektor'),
+            'no_sttb' => $request->input('no_sttb'),
+            'tgl_sttb' => $request->input('tgl_sttb'),
+            'sttb' => $request->input('sttb'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max karakter.',
+            'min' => '*Kolom :attribute minimal :min karakter.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/pendidikan/update/'.$request->input('pendidikan_id'))->withErrors($validator)->withInput();
+        }
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
             'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),
