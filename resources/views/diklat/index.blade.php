@@ -66,8 +66,7 @@
             <td scope="row">{{ $row["jam"] }}</td>
             <td scope="row">{{ $row["no_sttp"] }}</td>
             <td scope="row">{{ $row["tgl_sttp"] }}</td>
-            <td scope="row" class="text-center"><a href="upload/sertifikat-diklat/{{ $row['sertifikat'] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
-
+            <td scope="row" class="text-center"><a href="{{ $row['sertifikat'] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
           </tr>
           @endforeach
         </tbody>

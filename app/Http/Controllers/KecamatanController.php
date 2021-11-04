@@ -6,8 +6,6 @@ use App\Models\Kecamatan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-use File;
-
 class KecamatanController extends Controller
 {
     public function index()
@@ -20,7 +18,6 @@ class KecamatanController extends Controller
 
     public function addForm()
     {
-
         return view('kecamatan.add-form', [
             'page' => 'Tambah Kecamatan',
         ]);
@@ -28,7 +25,6 @@ class KecamatanController extends Controller
 
     public function add(Request $request)
     {
-
         $rules = [
             'nama_kecamatan' => 'required|unique:kecamatan',
         ];
@@ -63,7 +59,6 @@ class KecamatanController extends Controller
     public function update(Request $request)
     {
         $kecamatan = Kecamatan::find($request->input('kecamatan_id'));
-        
        
         $nama_kecamatan = $kecamatan['nama_kecamatan'] != $request->input('nama_kecamatan') ? '|unique:kecamatan' : '';
         $rules = [

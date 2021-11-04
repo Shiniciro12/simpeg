@@ -6,8 +6,6 @@ use App\Models\Kelurahan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-use File;
-
 class KelurahanController extends Controller
 {
     public function index()
@@ -20,7 +18,6 @@ class KelurahanController extends Controller
 
     public function addForm()
     {
-
         return view('kelurahan.add-form', [
             'page' => 'Tambah Kelurahan',
         ]);
@@ -28,11 +25,9 @@ class KelurahanController extends Controller
 
     public function add(Request $request)
     {
-
-    
         $rules = [
             'nama_kelurahan' => 'required|unique:kelurahan',
-            'kode_pos' => 'required|unique:kelurahan',
+            'kode_pos' => 'required|numeric|digits:5|unique:kelurahan',
         ];
 
         $input = [
@@ -43,6 +38,8 @@ class KelurahanController extends Controller
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
             'unique' => '*Kolom :attribute sudah terdaftar.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'digits' => '*Kolom :attribute tidak sesuai.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -66,12 +63,12 @@ class KelurahanController extends Controller
     public function update(Request $request)
     {
         $kelurahan = Kelurahan::find($request->input('kelurahan_id'));
-        
        
         $nama_kelurahan = $kelurahan['nama_kelurahan'] != $request->input('nama_kelurahan') ? '|unique:kelurahan' : '';
+        
         $rules = [
             'nama_kelurahan' => 'required'.$nama_kelurahan,
-            'kode_pos' => 'required|numeric',
+            'kode_pos' => 'required|numeric|digits:5',
         ];
 
         $input = [
@@ -83,6 +80,7 @@ class KelurahanController extends Controller
             'required' => '*Kolom :attribute wajib diisi.',
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'digits' => '*Kolom :attribute tidak sesuai.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);

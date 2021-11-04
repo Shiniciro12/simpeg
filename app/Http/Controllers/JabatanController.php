@@ -19,7 +19,6 @@ class JabatanController extends Controller
 
     public function addForm()
     {
-
         return view('jabatan.add-form', [
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'page' => 'Admin | Tambah Jabatan',

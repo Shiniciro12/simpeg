@@ -20,7 +20,6 @@ class UnitKerjaController extends Controller
 
     public function addForm()
     {
-
         return view('unit-kerja.add-form', [
             'page' => 'Tambah Unit Kerja',
         ]);
@@ -28,12 +27,11 @@ class UnitKerjaController extends Controller
 
     public function add(Request $request)
     {
-
         $rules = [
             'nama_unit' => 'required|unique:unit_kerja',
             'alamat' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
+            'latitude' => 'required|unique:unit_kerja',
+            'longitude' => 'required|unique:unit_kerja',
         ];
 
         $input = [
@@ -70,10 +68,10 @@ class UnitKerjaController extends Controller
     {
         $unit_kerja = UnitKerja::find($request->input('unit_kerja_id'));
         
-       
         $nama_unit = $unit_kerja['nama_unit'] != $request->input('nama_unit') ? '|unique:unit_kerja' : '';
         $latitude = $unit_kerja['latitude'] != $request->input('latitude') ? '|unique:unit_kerja' : '';
         $longitude = $unit_kerja['longitude'] != $request->input('longitude') ? '|unique:unit_kerja' : '';
+
         $rules = [
             'nama_unit' => 'required'.$nama_unit,
             'alamat' => 'required',

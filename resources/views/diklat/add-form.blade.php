@@ -2,12 +2,12 @@
 @include('home.layouts.navbar')
 @section('content')
 <div class="container">
+    <h3>Data Diklat</h3>
     <div class="mt-2 mb-4"><span class="text-danger">*</span> Wajib diisi</div>
     <div class="row">
         <div class="col-md-6">
             <form action="/diklat/add" method="post" enctype="multipart/form-data">
                 @csrf
-
                 <div class="mb-3">
                     <label for="browsers" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
                     <input list="browsers" required name="nip" id="browser" class="form-control">
@@ -136,7 +136,7 @@
                 </div>
                 @enderror
             </div>
-            <label for="sertifikat" class="form-label">Sertifikat (Format: PDF Maksimal 500Kb) <span
+            <label for="sertifikat" class="form-label">Sertifikat (Format: PDF Maksimal 1Mb) <span
                     class="text-danger">*</span></label>
             <div class="input-group mb-3">
                 <input type="file" name="sertifikat" required

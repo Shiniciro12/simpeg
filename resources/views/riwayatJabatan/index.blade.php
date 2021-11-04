@@ -56,8 +56,7 @@
               <td scope="row" style="text-align: center">{{ $row["no_sk"] }}</td>
               <td scope="row" style="text-align: center">{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tmt_jabatan"] }}</td>
-              <td scope="row" class="text-center"><a href="/upload/sk-jabatan/{{ $row["sk_jabatan"] }}.pdf" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
-
+              <td scope="row" class="text-center"><a href="/upload/sk-jabatan/{{ $row["sk_jabatan"] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
             </tr>
             @endforeach
           </tbody>
