@@ -96,7 +96,7 @@
                 <td scope="row">{{ $row["nama_kelurahan"] }}</td>
                 <td scope="row">{{ $row["nama_kecamatan"] }}</td>
                 <td scope="row">{{ $row["golongan_darah"] }}</td>
-                <td scope="row"><img src="{{ $row[" foto"] }}" width="50" height="50"></td>
+                <td scope="row"><img src="{{ $row["foto"]}}" width="50" height="50"></td>
                 <td scope="row">{{ $row["no_karpeg"] }}</td>
                 <td scope="row">{{ $row["no_taspen"] }}</td>
                 <td scope="row">{{ $row["npwp"] }}</td>

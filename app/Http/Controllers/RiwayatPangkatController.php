@@ -41,13 +41,13 @@ class RiwayatPangkatController extends Controller
 
     public function add4(Request $request)
     {
-
-        $rules = [
+            $id = Identitas::where('nip', $request->input('identitas_id'))->first();
+             $rules = [
 
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
-            'no_sk' => 'required',
+            'no_sk' => 'required|unique:riwayat_jabatan',
             'tgl_sk' => 'required',
             'tmt_pangkat' => 'required',
             'sk_pangkat' => 'file|mimes:pdf|max:1000',
@@ -67,6 +67,10 @@ class RiwayatPangkatController extends Controller
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
+            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max karakter.',
+            'min' => '*Kolom :attribute minimal :min karakter.',
 
         ];
 
@@ -91,6 +95,7 @@ class RiwayatPangkatController extends Controller
             'identitas_id' => $request->input('identitas_id'),
             'pejabat' => $request->input('pejabat'),
             'no_sk' => $request->input('no_sk'),
+            'identitas_id' => $id['identitas_id'],
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt_pangkat' => $request->input('tmt_pangkat'),
             'sk_pangkat' => $path,
@@ -103,12 +108,16 @@ class RiwayatPangkatController extends Controller
 
     public function update(Request $request)
     {
+        $riwayat_pangkat = RiwayatPangkat::find($request->input('riwayat_pangkat_id'));
+        
+       
+        $rules_pangkat_id = $riwayat_pangkat['no_sk'] != $request->input('no_sk') ? '|unique:riwayat_pangkat' : '';
         $rules = [
 
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
-            'no_sk' => 'required',
+            'no_sk' => 'required'.$rules_pangkat_id,
             'tgl_sk' => 'required',
             'tmt_pangkat' => 'required',
             'sk_pangkat' => 'required',

@@ -29,15 +29,19 @@ class JabatanController extends Controller
     public function add(Request $request)
     {
         $rules = [
-            'nama' => 'required',
+            'nama_jabatan' => 'required',
             'eselon' => 'required',
-            'kelas' => 'required'
+            'kelas' => 'required',
+            'unit_kerja_id' => 'required',
+            'jenis_jabatan' => 'required',
         ];
 
         $input = [
-            'nama' => $request->input('nama'),
+            'nama_jabatan' => $request->input('nama'),
             'eselon' => $request->input('eselon'),
-            'kelas' => $request->input('eselon'),
+            'kelas' => $request->input('kelas'),
+            'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'jenis_jabatan' => $request->input('jenis_jabatan'),
         ];
 
         $messages = [
@@ -74,8 +78,33 @@ class JabatanController extends Controller
 
     public function update(Request $request)
     {
+        $rules = [
+            'nama_jabatan' => 'required',
+            'eselon' => 'required',
+            'kelas' => 'required',
+            'unit_kerja_id' => 'required',
+            'jenis_jabatan' => 'required',
+        ];
+
+        $input = [
+            'nama_jabatan' => $request->input('nama_jabatan'),
+            'eselon' => $request->input('eselon'),
+            'kelas' => $request->input('kelas'),
+            'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'jenis_jabatan' => $request->input('jenis_jabatan'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/jabatan/update/'.$request->input('jabatan_id'))->withErrors($validator)->withInput();
+        }
+
         $data = [
-            'nama_jabatan' => $request->input('nama'),
+            'nama_jabatan' => $request->input('nama_jabatan'),
             'eselon' => $request->input('eselon'),
             'kelas' => $request->input('kelas'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),

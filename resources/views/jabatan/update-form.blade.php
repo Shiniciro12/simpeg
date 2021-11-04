@@ -2,6 +2,7 @@
 @include('home.layouts.navbar')
 @section('content')
 <div class="container">
+ 
     <div class="row">
         <div class="col-md-9 mx-auto">
             <form action="/jabatan/updt" method="post" enctype="multipart/form-data">
@@ -14,19 +15,35 @@
                     <div class="col-sm-6">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Jabatan <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" value="{{$rowJabatan['nama_jabatan']}}" id="nama" aria-describedby="nama" name="nama">
+                            <input type="text" class="form-control @error('nama_jabatan') is-invalid @enderror" value="{{old('nama_jabatan', $rowJabatan['nama_jabatan'])}}" id="nama_jabatan" aria-describedby="nama_jabatan" name="nama_jabatan">
+                        @error('nama_jabatan')
+                                <div id="nama_jabatan" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="mb-3">
                             <label for="eselon" class="form-label">Eselon <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" value="{{$rowJabatan['eselon']}}" id="eselon" aria-describedby="eselon" name="eselon">
-                        </div>
+                            <input type="text" class="form-control @error('eselon') is-invalid @enderror" value="{{old('eselon', $rowJabatan['eselon'])}}" id="eselon" aria-describedby="eselon" name="eselon">
+                          @error('eselon')
+                                <div id="eselon" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                      
                     </div>
                     <div class="col-sm-3">
                         <div class="mb-3">
                             <label for="kelas" class="form-label">Kelas <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" value="{{$rowJabatan['kelas']}}" id="kelas" aria-describedby="kelas" name="kelas">
+                            <input type="text" class="form-control @error('kelas') is-invalid @enderror" value="{{old('kelas', $rowJabatan['kelas'])}}" id="kelas" aria-describedby="kelas" name="kelas">
+                            @error('kelas')
+                                <div id="kelas" class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                         </div>
                     </div>
                 </div>
