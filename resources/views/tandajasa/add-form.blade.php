@@ -2,6 +2,7 @@
 @include('home.layouts.navbar')
 @section('content')
 <div class="container">
+    @dd($errors);
     <div class="mt-2 mb-4"><span class="text-danger">*</span> Wajib diisi</div>
     <h3>Data Tanda Jasa</h3><br>
     <div class="row">

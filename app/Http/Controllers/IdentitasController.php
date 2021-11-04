@@ -60,7 +60,6 @@ class IdentitasController extends Controller
             'status_kawin' => 'required',
             'rt_rw' => 'required',
             'hp' => 'required|numeric|unique:identitas|digits_between:11,12',
-            'telepon' => 'required',
             'kelurahan_id' => 'required',
             'kecamatan_id' => 'required',
             'golongan_darah' => 'required',
@@ -91,7 +90,6 @@ class IdentitasController extends Controller
             'status_kawin' => $request->input('status_kawin'),
             'rt_rw' => $request->input('rt_rw'),
             'hp' => $request->input('hp'),
-            'telepon' => $request->input('telepon'),
             'kelurahan_id' => $request->input('kelurahan_id'),
             'kecamatan_id' => $request->input('kecamatan_id'),
             'golongan_darah' => $request->input('golongan_darah'),
@@ -109,6 +107,7 @@ class IdentitasController extends Controller
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
+            'digits' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
             'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
             'numeric' => '*Kolom :attribute harus berupa karakter angka.',
             'unique' => '*Kolom :attribute sudah terdaftar.',
