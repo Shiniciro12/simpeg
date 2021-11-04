@@ -44,7 +44,7 @@ class PendidikanController extends Controller
             'tempat' => 'required',
             'nama_kepsek_rektor' => 'required',
             'no_sttb' => 'required|before:today',
-            'tgl_sttb' => 'required',
+            'tgl_sttb' => 'required|date',
             'sttb' => '',
         ];
 

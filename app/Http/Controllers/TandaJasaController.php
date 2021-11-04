@@ -34,13 +34,14 @@ class TandaJasaController extends Controller
             'nip' => 'required',
             'nama' => 'required',
             'no_sk' => 'required',
-            'tgl_sk' => 'required|before:today',
+            'tgl_sk' => 'required',
             'tahun' => 'required',
             'asal_perolehan' => 'required',
 
         ];
 
         $input = [
+            'nip' => $id_identitas['nip'],
             'identitas_id' => $id_identitas['identitas_id'],
             'nama' => $request->input('nama'),
             'no_sk' => $request->input('no_sk'),
@@ -60,10 +61,10 @@ class TandaJasaController extends Controller
             'min' => '*Kolom :attribute minimal :min karakter.',
         ];
 
-        // $validator = Validator::make($input, $rules, $messages);
-        // if ($validator->fails()) {
-        //     return redirect('/tandajasa/add')->withErrors($validator)->withInput();
-        // }
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/tandajasa/add')->withErrors($validator)->withInput();
+        }
         $extension = $request->file('sertifikat')->getClientOriginalExtension();
 
         $newFile =  $id_identitas['identitas_id'] . "-Tanda Jasa-" . date('s') .  "." . $extension;
