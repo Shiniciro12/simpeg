@@ -50,8 +50,8 @@
                 <div class="row">
                     <div class="mb-3">
                         <label for="pejabat" class="form-label">Pejabat<span class="text-danger">*</span></label>
-                        <input type="text" value="{{$rowRiwayatJabatan->pejabat}}"
-                            class="form-control @error('pejabat') is-invalid @enderror" value="{{old('pejabat')}}"
+                        <input type="text" 
+                            class="form-control @error('pejabat') is-invalid @enderror" value="{{old('pejabat',$rowRiwayatJabatan->pejabat)}}"
                             id="pejabat" aria-describedby="pejabat" name="pejabat">
                         @error('pejabat')
                         <div id="pejabat" class="invalid-feedback">
