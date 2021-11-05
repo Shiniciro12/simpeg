@@ -113,7 +113,7 @@ class IdentitasController extends Controller
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max.',
-            'mimes' => '*File :attribute tidak didukung.',
+            'mimes' => '*Format file :attribute tidak didukung.',
             'date' => '*Kolom :attribute tidak valid.',
         ];
 
@@ -273,7 +273,7 @@ class IdentitasController extends Controller
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max karakter.',
-            'mimes' => '*File :attribute tidak didukung.',
+            'mimes' => '*Format file :attribute tidak didukung.',
             'date' => '*Kolom :attribute tidak valid.',
         ];
 

@@ -81,7 +81,7 @@ class KeluargaController extends Controller
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'max' => '*Kolom :attribute maksimal :max.',
             'file' => '*File :attribute wajib dipilih.',
-            'mimes' => '*File tidak didukung.',
+            'mimes' => '*Format file :attribute tidak didukung.',
             'digits' => '*Kolom :attribute tidak sesuai.',
             'date' => '*Kolom :attribute tidak valid.',
         ];
@@ -210,7 +210,7 @@ class KeluargaController extends Controller
             'date' => '*Kolom :attribute tidak valid.',
             // 'max' => '*Kolom :attribute maksimal :max.',
             // 'file' => '*File :attribute wajib dipilih.',
-            // 'mimes' => '*File tidak didukung.',
+            // 'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);

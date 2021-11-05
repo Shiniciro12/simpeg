@@ -69,7 +69,7 @@ class DiklatController extends Controller
             'max' => '*Kolom :attribute maksimal :max karakter.',
             'date' => '*Kolom :attribute tidak valid.',
             'after' => '*Kolom :attribute tidak sesuai.',
-            'mimes' => '*File tidak didukung.',
+            'mimes' => '*File format tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -161,7 +161,7 @@ class DiklatController extends Controller
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max karakter.',
             'date' => '*Kolom :attribute tidak valid.',
-            'mimes' => '*File tidak didukung.',
+            'mimes' => '*File format tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);

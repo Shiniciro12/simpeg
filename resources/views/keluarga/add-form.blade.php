@@ -119,7 +119,6 @@
                         </option>
                         <option {{old('status_kawin')=='Duda' ? 'selected' : '' }} value="Duda">Duda
                         </option>
-
                     </select>
                     @error('status_kawin')
                     <div id="status_kawin" class="invalid-feedback">
@@ -128,9 +127,14 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="tgl_kawin" class="form-label">Tanggal Kawin</label>
-                    <input type="date" name="tgl_kawin" class="form-control" value="{{old('tgl_kawin')}}" id="tgl_kawin"
-                        aria-describedby="tgl_kawin">
+                    <label for="tgl_kawin" class="form-label">Tanggal Nikah <span class="text-danger">*</span></label>
+                    <input type="date" name="tgl_kawin" class="form-control @error('tgl_kawin') is-invalid @enderror"
+                        value="{{old('tgl_kawin')}}" id="tgl_kawin" aria-describedby="tgl_kawin">
+                    @error('tgl_kawin')
+                    <div id="tgl_kawin" class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="status_tunjangan" class="form-label">Status Tunjangan</label>
@@ -174,8 +178,6 @@
                         </option>
                         <option {{old('pendidikan')=='S3(Doctor)' ? 'selected' : '' }} value="S3(Doctor)">S3(Doctor)
                         </option>
-
-
                     </select>
                     @error('pendidikan')
                     <div id="pendidikan" class="invalid-feedback">
@@ -263,13 +265,8 @@
             </div>
             <div class="mb-3">
                 <label for="telepon" class="form-label">No. Telepon</label>
-                <input type="number" class="form-control @error('telepon') is-invalid @enderror" name="telepon"
+                <input type="number" name="telepon" class="form-control @error('telepon') is-invalid @enderror"
                     value="{{old('telepon')}}" id="telepon" aria-describedby="telepon">
-                @error('telepon')
-                <div id="telepon" class="invalid-feedback">
-                    {{$message}}
-                </div>
-                @enderror
             </div>
             <div class="mb-3">
                 <label for="kode_pos" class="form-label">Kode Pos</label>
@@ -284,10 +281,14 @@
 
             <label for="dokumen" class="form-label">File (Format PDF Maksimal 1Mb)</label>
             <div class="input-group mb-3">
-                <input type="file" class="form-control" id="dokumen" name="dokumen">
-                <label class="input-group-text" for="file">Upload</label>
-                <div id="foto" class="invalid-feedback">
+                <input type="file" class="form-control @error('dokumen') is-invalid @enderror"
+                    value="{{old('dokumen')}}" id="dokumen" name="dokumen">
+                <label class="input-group-text" for="dokumen">Upload</label>
+                @error('dokumen')
+                <div id="dokumen" class="invalid-feedback">
+                    {{$message}}
                 </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Kirim</button>
 

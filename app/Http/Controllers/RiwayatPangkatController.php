@@ -67,7 +67,7 @@ class RiwayatPangkatController extends Controller
             'date' => '*Kolom :attribute tidak valid.',
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max.',
-            'mimes' => '*File :attribute tidak didukung.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -134,7 +134,7 @@ class RiwayatPangkatController extends Controller
             'date' => '*Kolom :attribute tidak valid.',
             // 'file' => '*File :attribute wajib dipilih.',
             // 'max' => '*Kolom :attribute maksimal :max.',
-            // 'mimes' => '*File :attribute tidak didukung.',
+            // 'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);

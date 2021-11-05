@@ -28,10 +28,8 @@ class TandaJasaController extends Controller
 
     public function add(Request $request)
     {
-        $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
-
+        $data = Identitas::where('nip', $request->input('nip'))->first();
         $rules = [
-            'nip' => 'required',
             'identitas_id' => 'required',
             'nama' => 'required',
             'no_sk' => 'required|unique:tanda_jasa',
@@ -42,8 +40,7 @@ class TandaJasaController extends Controller
         ];
 
         $input = [
-            'nip' => $id_identitas['nip'],
-            'identitas_id' => $id_identitas['identitas_id'],
+            'identitas_id' =>$request->input('identitas_id'),
             'nama' => $request->input('nama'),
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
@@ -59,7 +56,7 @@ class TandaJasaController extends Controller
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max.',
             'date' => '*Kolom :attribute tidak valid.',
-            'mimes' => '*File tidak didukung.',
+            'mimes' => '*Format file :attribute tidak didukung.',
             'digits' => '*Kolom :attribute tidak sesuai.',
         ];
 
@@ -71,13 +68,13 @@ class TandaJasaController extends Controller
         $extension = $request->file('sertifikat')->getClientOriginalExtension();
 
         $temp = $request->file('sertifikat')->getPathName();
-        $folder = "upload/sertifikat-tandajasa/" . $id_identitas['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $folder = "upload/sertifikat-tandajasa/" . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
         move_uploaded_file($temp, $folder);
 
-        $newFile = '/upload/sertifikat-tandajasa/' . $id_identitas['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $newFile = '/upload/sertifikat-tandajasa/' . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
 
         $data = [
-            'identitas_id' => $id_identitas['identitas_id'],
+            'identitas_id' => $data['identitas_id'],
             'nama' => $request->input('nama'),
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
@@ -141,7 +138,7 @@ class TandaJasaController extends Controller
             'digits' => '*Kolom :attribute tidak sesuai.',
             // 'max' => '*Kolom :attribute maksimal :max.',
             // 'file' => '*File :attribute wajib dipilih.',
-            // 'mimes' => '*File tidak didukung.',
+            // 'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);

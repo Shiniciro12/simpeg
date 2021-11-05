@@ -60,7 +60,7 @@ class PendidikanController extends Controller
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max karakter.',
             'before' => '*Kolom :attribute tidak valid.',
-            'mimes' => '*File :attribute tidak didukung.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -141,10 +141,9 @@ class PendidikanController extends Controller
             'date' => '*Kolom :attribute tidak valid.',
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'before' => '*Kolom :attribute tidak valid.',
-            'mimes' => '*File :attribute tidak didukung.',
             // 'file' => '*File :attribute wajib dipilih.',
             // 'max' => '*Kolom :attribute maksimal :max karakter.',
-            // 'mimes' => '*File :attribute tidak didukung.',
+            // 'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
