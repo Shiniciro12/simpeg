@@ -14,6 +14,7 @@ use App\Http\Controllers\DiklatController;
 use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\TandaJasaController;
 use App\Http\Controllers\KeluargaController;
+use App\Http\Controllers\LoginController;
 
 
 /*
@@ -130,3 +131,5 @@ Route::get('/tandajasa/update/{tanda_jasa_id}', [TandaJasaController::class, 'up
 Route::post('/tandajasa/add', [TandaJasaController::class, 'add']);
 Route::post('/tandajasa/update', [TandaJasaController::class, 'update']);
 Route::post('/tandajasa/delete', [TandaJasaController::class, 'delete']);
+
+Route::get('/login', [LoginController::class, 'index']);
