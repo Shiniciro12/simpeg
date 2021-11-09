@@ -133,3 +133,29 @@ Route::post('/tandajasa/update', [TandaJasaController::class, 'update']);
 Route::post('/tandajasa/delete', [TandaJasaController::class, 'delete']);
 
 Route::get('/login', [LoginController::class, 'index']);
+Route::get('/logout', [LoginController::class, 'logout']);
+Route::post('/login', [LoginController::class, 'signIn']);
+
+Route::group(['middleware' => ['auth', 'root'], 'prefix' => 'root'], function () {
+    Route::get('/dashboard', function () {
+        return 'ok root';
+    });
+});
+
+Route::group(['middleware' => ['auth', 'bkppd'], 'prefix' => 'bkppd'], function () {
+    Route::get('/dashboard', function () {
+        return 'ok bkppd';
+    });
+});
+
+Route::group(['middleware' => ['auth', 'unit-kerja'], 'prefix' => 'unit-kerja'], function () {
+    Route::get('/dashboard', function () {
+        return 'ok unit-kerja';
+    });
+});
+
+Route::group(['middleware' => ['auth', 'client'], 'prefix' => 'client'], function () {
+    Route::get('/dashboard', function () {
+        return 'ok client';
+    });
+});
