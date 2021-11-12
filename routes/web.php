@@ -14,6 +14,7 @@ use App\Http\Controllers\DiklatController;
 use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\TandaJasaController;
 use App\Http\Controllers\KeluargaController;
+use App\Http\Controllers\UmumController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClientController;
 
@@ -28,7 +29,7 @@ use App\Http\Controllers\ClientController;
 |
 */
 
-Route::get('/', [RootController::class, 'index']);
+Route::get('/', [UmumController::class, 'index']);
 
 Route::resource('/identitas', IdentitasController::class);
 
