@@ -19,7 +19,6 @@ class JabatanController extends Controller
 
     public function addForm()
     {
-
         return view('jabatan.add-form', [
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'page' => 'Admin | Tambah Jabatan',
@@ -28,27 +27,24 @@ class JabatanController extends Controller
 
     public function add(Request $request)
     {
-        //dd($request->input('unit_kerja_id'));
         $rules = [
-            'nama' => 'required',
+            'nama_jabatan' => 'required',
             'eselon' => 'required',
-            'kelas' => 'required'
+            'kelas' => 'required',
+            'unit_kerja_id' => 'required',
+            'jenis_jabatan' => 'required',
         ];
 
         $input = [
-            'nama' => $request->input('nama'),
+            'nama_jabatan' => $request->input('nama'),
             'eselon' => $request->input('eselon'),
-            'kelas' => $request->input('eselon'),
+            'kelas' => $request->input('kelas'),
+            'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'jenis_jabatan' => $request->input('jenis_jabatan'),
         ];
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
-            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
-            'unique' => '*Kontak :attribute sudah terdaftar.',
-            'file' => '*File :attribute wajib dipilih.',
-            'max' => '*Kolom :attribute maksimal :max karakter.',
-            'min' => '*Kolom :attribute minimal :min karakter.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -63,7 +59,8 @@ class JabatanController extends Controller
             'unit_kerja_id' => $request->input('unit_kerja_id'),
             'jenis_jabatan' => $request->input('jenis_jabatan')
         ];
-        jabatan::create($data);
+
+        Jabatan::create($data);
 
         return redirect('/jabatan')->with('success', 'Data berhasil ditambahkan');
     }
@@ -80,15 +77,40 @@ class JabatanController extends Controller
 
     public function update(Request $request)
     {
+        $rules = [
+            'nama_jabatan' => 'required',
+            'eselon' => 'required',
+            'kelas' => 'required',
+            'unit_kerja_id' => 'required',
+            'jenis_jabatan' => 'required',
+        ];
+
+        $input = [
+            'nama_jabatan' => $request->input('nama_jabatan'),
+            'eselon' => $request->input('eselon'),
+            'kelas' => $request->input('kelas'),
+            'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'jenis_jabatan' => $request->input('jenis_jabatan'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/jabatan/update/'.$request->input('jabatan_id'))->withErrors($validator)->withInput();
+        }
+
         $data = [
-            'nama_jabatan' => $request->input('nama'),
+            'nama_jabatan' => $request->input('nama_jabatan'),
             'eselon' => $request->input('eselon'),
             'kelas' => $request->input('kelas'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),
             'jenis_jabatan' => $request->input('jenis_jabatan')
         ];
 
-        jabatan::where('jabatan_id', $request->input('jabatan_id'))->update($data);
+        Jabatan::where('jabatan_id', $request->input('jabatan_id'))->update($data);
         return redirect('/jabatan')->with('success', 'Data berhasil diubah');
     }
 

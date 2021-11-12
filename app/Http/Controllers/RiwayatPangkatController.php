@@ -14,7 +14,6 @@ use App\Models\Jabatan;
 use App\Models\RiwayatPangkat;
 use File;
 
-
 class RiwayatPangkatController extends Controller
 {
     public function index4()
@@ -27,7 +26,6 @@ class RiwayatPangkatController extends Controller
 
     public function addForm4()
     {
-
         return view('riwayatpangkat.add-form-Riwayatpangkat', [
             'rowsPangkat' => Pangkat::latest()->get(),
             'rowsJabatan' => jabatan::latest()->get(),
@@ -41,17 +39,16 @@ class RiwayatPangkatController extends Controller
 
     public function add4(Request $request)
     {
+        $id = Identitas::where('nip', $request->input('identitas_id'))->first();
 
         $rules = [
-
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
-            'no_sk' => 'required',
-            'tgl_sk' => 'required',
-            'tmt_pangkat' => 'required',
+            'no_sk' => 'required|unique:riwayat_pangkat',
+            'tgl_sk' => 'required|date',
+            'tmt_pangkat' => 'required|date',
             'sk_pangkat' => 'file|mimes:pdf|max:1000',
-
         ];
 
         $input = [
@@ -62,12 +59,15 @@ class RiwayatPangkatController extends Controller
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt_pangkat' => $request->input('tmt_pangkat'),
             'sk_pangkat' => $request->file('sk_pangkat'),
-
         ];
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'date' => '*Kolom :attribute tidak valid.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -91,6 +91,7 @@ class RiwayatPangkatController extends Controller
             'identitas_id' => $request->input('identitas_id'),
             'pejabat' => $request->input('pejabat'),
             'no_sk' => $request->input('no_sk'),
+            'identitas_id' => $id['identitas_id'],
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt_pangkat' => $request->input('tmt_pangkat'),
             'sk_pangkat' => $path,
@@ -103,16 +104,18 @@ class RiwayatPangkatController extends Controller
 
     public function update(Request $request)
     {
-        $rules = [
+        $riwayat_pangkat = RiwayatPangkat::find($request->input('riwayat_pangkat_id'));
 
+        $rules_pangkat_id = $riwayat_pangkat['no_sk'] != $request->input('no_sk') ? '|unique:riwayat_pangkat' : '';
+
+        $rules = [
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
-            'no_sk' => 'required',
-            'tgl_sk' => 'required',
-            'tmt_pangkat' => 'required',
-            'sk_pangkat' => 'required',
-
+            'no_sk' => 'required' . $rules_pangkat_id,
+            'tgl_sk' => 'required|date',
+            'tmt_pangkat' => 'required|date',
+            // 'sk_pangkat' => 'file|mimes:pdf|max:1000',
         ];
 
         $input = [
@@ -122,14 +125,18 @@ class RiwayatPangkatController extends Controller
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt_pangkat' => $request->input('tmt_pangkat'),
-            'sk_pangkat' => $request->input('sk_pangkat'),
-
+            // 'sk_pangkat' => $request->file('sk_pangkat'),
         ];
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'date' => '*Kolom :attribute tidak valid.',
+            // 'file' => '*File :attribute wajib dipilih.',
+            // 'max' => '*Kolom :attribute maksimal :max.',
+            // 'mimes' => '*Format file :attribute tidak didukung.',
         ];
+
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return redirect('/riwayatpangkat/update/' . $request->input('riwayat_pangkat_id'))->withErrors($validator)->withInput();

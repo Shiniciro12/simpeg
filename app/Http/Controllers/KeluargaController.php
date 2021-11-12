@@ -20,7 +20,6 @@ class KeluargaController extends Controller
 
     public function addForm()
     {
-
         return view('keluarga.add-form', [
             'rowsIdentitas' => Identitas::latest()->get(),
             'page' => 'Tambah Keluarga',
@@ -31,14 +30,14 @@ class KeluargaController extends Controller
     {
         $rules = [
             'nip' => 'required',
-            'nik' => 'required|numeric|unique:identitas',
+            'nik' => 'required|numeric|unique:keluarga|digits:16',
             'nama' => 'required',
             'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required|before:today',
+            'tgl_lahir' => 'required|date',
             'jenis_kelamin' => 'required',
             'status_keluarga' => 'required',
             'status_kawin' => 'required',
-            'tgl_kawin' => 'required',
+            'tgl_kawin' => 'required|date',
             'status_tunjangan' => 'required',
             'pendidikan' => 'required',
             'pekerjaan' => 'required',
@@ -48,10 +47,9 @@ class KeluargaController extends Controller
             'kabupaten_kota' => 'required',
             'provinsi' => 'required',
             'hp' => 'required|numeric|digits_between:11,12',
-            'telepon' => 'required',
-            'kode_pos' => 'required|numeric',
+            'kode_pos' => 'required|numeric|digits:5',
             'dokumen' => 'file|mimes:pdf|max:1000',
-        ]; 
+        ];
 
         $input = [
             'nip' => $request->input('nip'),
@@ -72,7 +70,6 @@ class KeluargaController extends Controller
             'kabupaten_kota' => $request->input('kabupaten_kota'),
             'provinsi' => $request->input('provinsi'),
             'hp' => $request->input('hp'),
-            'telepon' => $request->input('telepon'),
             'kode_pos' => $request->input('kode_pos'),
             'dokumen' => $request->file('dokumen'),
         ];
@@ -81,10 +78,12 @@ class KeluargaController extends Controller
             'required' => '*Kolom :attribute wajib diisi.',
             'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
             'numeric' => '*Kolom :attribute harus berupa karakter angka.',
-            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'max' => '*Kolom :attribute maksimal :max.',
             'file' => '*File :attribute wajib dipilih.',
-            'max' => '*Kolom :attribute maksimal :max karakter.',
-            'min' => '*Kolom :attribute minimal :min karakter.',
+            'mimes' => '*Format file :attribute tidak didukung.',
+            'digits' => '*Kolom :attribute tidak sesuai.',
+            'date' => '*Kolom :attribute tidak valid.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -96,8 +95,8 @@ class KeluargaController extends Controller
 
         $extension = $request->file('dokumen')->getClientOriginalExtension();
 
-        $newFile =  $id_identitas['identitas_id'] . "-Keluarga-" . date('s').  "." . $extension;
-        
+        $newFile =  $id_identitas['identitas_id'] . "-Keluarga-" . date('s') .  "." . $extension;
+
         $temp = $request->file('dokumen')->getPathName();
         $folder = "upload/dokumen-keluarga/" . $newFile;
         move_uploaded_file($temp, $folder);
@@ -140,6 +139,9 @@ class KeluargaController extends Controller
         return view('keluarga.update-form', [
             'rowsIdentitas' => Identitas::latest()->get(),
             'rowsKeluarga' => $ambil_data,
+            'rowsStatusKeluarga' => ['Kepala Keluarga', 'Istri', 'Anak', 'Famili Lain'],
+            'rowsStatusKawin' => ['Belum Kawin', 'Kawin', 'Janda', 'Duda'],
+            'rowsPendidikan' => ['Belum Sekolah', 'TK/Paud', 'SD Sederajat', 'SMP Sederajat', 'SMA Sederajat', 'Diploma III', 'Diploma IV', 'S1/Sarjana', 'S2/Master', 'S3/Doktor'],
             'page' => 'Ubah Keluarga',
             'nip' => $nip
         ]);
@@ -148,6 +150,74 @@ class KeluargaController extends Controller
     public function update(Request $request)
     {
         $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+
+        $keluarga = Keluarga::where('nik', $request->input('nik'))->first();
+
+        $nik = $keluarga['nik'] != $request->input('nik') ? '|unique:keluarga' : '';
+
+        $rules = [
+            'nip' => 'required',
+            'nik' => 'required|numeric|digits:16' . $nik,
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required',
+            'status_keluarga' => 'required',
+            'status_kawin' => 'required',
+            'tgl_kawin' => 'required|date',
+            'status_tunjangan' => 'required',
+            'pendidikan' => 'required',
+            'pekerjaan' => 'required',
+            'alamat' => 'required',
+            'desa_kelurahan' => 'required',
+            'kecamatan' => 'required',
+            'kabupaten_kota' => 'required',
+            'provinsi' => 'required',
+            'hp' => 'required|numeric|digits_between:11,12',
+            'kode_pos' => 'required|numeric|digits:5',
+            // 'dokumen' => 'file|mimes:pdf|max:1000',
+        ];
+
+        $input = [
+            'nip' => $request->input('nip'),
+            'nik' => $request->input('nik'),
+            'nama' => $request->input('nama'),
+            'tempat_lahir' => $request->input('tempat_lahir'),
+            'tgl_lahir' => $request->input('tgl_lahir'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'status_keluarga' => $request->input('status_keluarga'),
+            'status_kawin' => $request->input('status_kawin'),
+            'tgl_kawin' => $request->input('tgl_kawin'),
+            'status_tunjangan' => $request->input('status_tunjangan'),
+            'pendidikan' => $request->input('pendidikan'),
+            'pekerjaan' => $request->input('pekerjaan'),
+            'alamat' => $request->input('alamat'),
+            'desa_kelurahan' => $request->input('desa_kelurahan'),
+            'kecamatan' => $request->input('kecamatan'),
+            'kabupaten_kota' => $request->input('kabupaten_kota'),
+            'provinsi' => $request->input('provinsi'),
+            'hp' => $request->input('hp'),
+            'kode_pos' => $request->input('kode_pos'),
+            // 'dokumen' => $request->file('dokumen'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'digits' => '*Kolom :attribute tidak sesuai.',
+            'date' => '*Kolom :attribute tidak valid.',
+            // 'max' => '*Kolom :attribute maksimal :max.',
+            // 'file' => '*File :attribute wajib dipilih.',
+            // 'mimes' => '*Format file :attribute tidak didukung.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/keluarga/add')->withErrors($validator)->withInput();
+        }
+
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
             'nik' => $request->input('nik'),
@@ -182,6 +252,4 @@ class KeluargaController extends Controller
         Keluarga::destroy($request->input('keluarga_id'));
         return redirect('/keluarga')->with('success', 'Data berhasil dihapus');
     }
-
-    
 }

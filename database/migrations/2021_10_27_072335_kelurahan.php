@@ -18,7 +18,7 @@ class Kelurahan extends Migration
         Schema::create('kelurahan', function (Blueprint $table) {
             $table->uuid('kelurahan_id')->primary();
             $table->string('nama_kelurahan')->unique();
-            $table->string('kode_pos', 5);
+            $table->string('kode_pos', 5)->unique();
             $table->timestamps();
         });
         DB::statement('ALTER TABLE kelurahan ALTER COLUMN kelurahan_id SET DEFAULT uuid_generate_v4();');

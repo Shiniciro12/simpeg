@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Identitas;
-use App\Models\UnitKerja;
-use App\Models\Kelurahan;
-use App\Models\Kecamatan;
-use App\Models\Pangkat;
-use App\Models\Jabatan;
 use App\Models\diklat;
-use Diklat as GlobalDiklat;
 use File;
 
 
@@ -27,7 +21,6 @@ class DiklatController extends Controller
 
     public function addForm()
     {
-
         return view('diklat.add-form', [
             'rowsIdentitas' => Identitas::latest()->get(),
             'page' => 'Tambah Diklat',
@@ -36,24 +29,25 @@ class DiklatController extends Controller
 
     public function add(Request $request)
     {
-        $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+        $data = Identitas::where('nip', $request->input('nip'))->first();
+
         $rules = [
-            'identitas_id' => '',
-            'status' => '',
+            'identitas_id' => 'required',
+            'status' => 'required',
             'nama' => 'required',
             'tempat' => 'required',
             'penyelenggara' => 'required',
             'angka' => 'required',
-            'tgl_mulai' => 'required|before:today',
-            'tgl_selesai' => 'required',
-            'jam' => 'required',
-            'no_sttp' => 'required | unique:diklat',
-            'tgl_sttp' => 'required ',
-            'sertifikat' => '',
+            'tgl_mulai' => 'required|date',
+            'tgl_selesai' => 'required|date',
+            'jam' => 'required|numeric',
+            'no_sttp' => 'required|unique:diklat',
+            'tgl_sttp' => 'required|date',
+            'sertifikat' => 'file|mimes:pdf|max:1000',
         ];
 
         $input = [
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => $data['identitas_id'],
             'status' => $request->input('status'),
             'nama' => $request->input('nama'),
             'tempat' => $request->input('tempat'),
@@ -64,17 +58,18 @@ class DiklatController extends Controller
             'jam' => $request->input('jam'),
             'no_sttp' => $request->input('no_sttp'),
             'tgl_sttp' => $request->input('tgl_sttp'),
-            'sertifikat' => $request->input('sertifikat'),
+            'sertifikat' => $request->file('sertifikat'),
         ];
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
             'numeric' => '*Kolom :attribute harus berupa karakter angka.',
-            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max karakter.',
-            'min' => '*Kolom :attribute minimal :min karakter.',
+            'date' => '*Kolom :attribute tidak valid.',
+            'after' => '*Kolom :attribute tidak sesuai.',
+            'mimes' => '*File format tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -83,15 +78,15 @@ class DiklatController extends Controller
         }
 
         $temp = $request->file('sertifikat')->getPathName();
-        $file = $id_identitas['identitas_id'] . "-diklat-" . date('s');
+        $file = $data['identitas_id'] . "-diklat-" . date('s');
 
         $folder = "upload/sertifikat-diklat/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
 
-        $name = $id_identitas['identitas_id'] . "-diklat-"  . date('s');
+        $name = '/upload/sertifikat-diklat/' . $file . '.pdf';
 
         $data = [
-            'identitas_id' => $id_identitas['identitas_id'],
+            'identitas_id' => $data['identitas_id'],
             'status' => $request->input('status'),
             'nama' => $request->input('nama'),
             'tempat' => $request->input('tempat'),
@@ -102,7 +97,7 @@ class DiklatController extends Controller
             'jam' => $request->input('jam'),
             'no_sttp' => $request->input('no_sttp'),
             'tgl_sttp' => $request->input('tgl_sttp'),
-            'sertifikat' => $name . ".pdf",
+            'sertifikat' => $name,
         ];
 
         diklat::create($data);
@@ -124,9 +119,58 @@ class DiklatController extends Controller
 
     public function update(Request $request)
     {
-        $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+        $data = Identitas::where('nip', $request->input('nip'))->first();
+
+        $diklat = Diklat::find($request->input('diklat_id'));
+        $no_sttp = $diklat['no_sttp'] != $request->input('no_sttp') ? '|unique:diklat' : '';
+
+        $rules = [
+            'identitas_id' => 'required',
+            'status' => 'required',
+            'nama' => 'required',
+            'tempat' => 'required',
+            'penyelenggara' => 'required',
+            'angka' => 'required',
+            'tgl_mulai' => 'required|date',
+            'tgl_selesai' => 'required|date',
+            'jam' => 'required|numeric',
+            'no_sttp' => 'required' . $no_sttp,
+            'tgl_sttp' => 'required ',
+            // 'sertifikat' => 'file|mimes:pdf|max:1000',
+        ];
+
+        $input = [
+            'identitas_id' => $data['identitas_id'],
+            'status' => $request->input('status'),
+            'nama' => $request->input('nama'),
+            'tempat' => $request->input('tempat'),
+            'penyelenggara' => $request->input('penyelenggara'),
+            'angka' => $request->input('angka'),
+            'tgl_mulai' => $request->input('tgl_mulai'),
+            'tgl_selesai' => $request->input('tgl_selesai'),
+            'jam' => $request->input('jam'),
+            'no_sttp' => $request->input('no_sttp'),
+            'tgl_sttp' => $request->input('tgl_sttp'),
+            // 'sertifikat' => $request->file('sertifikat'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max karakter.',
+            'date' => '*Kolom :attribute tidak valid.',
+            'mimes' => '*File format tidak didukung.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/diklat/update/' . $request->input('diklat_id'))->withErrors($validator)->withInput();
+        }
+
         $data = [
-            'identitas_id' => $id_identitas['identitas_id'],
+            'identitas_id' => $data['identitas_id'],
             'status' => $request->input('status'),
             'nama' => $request->input('nama'),
             'tempat' => $request->input('tempat'),
@@ -148,7 +192,7 @@ class DiklatController extends Controller
     public function delete(Request $request)
     {
         $diklat = Diklat::where('diklat_id', $request->input('diklat_id'))->first();
-        File::delete(public_path('upload/sertifikat-diklat/' . $diklat['sertifikat']));
+        File::delete(public_path($diklat['sertifikat']));
         Diklat::destroy($request->input('diklat_id'));
         return redirect('/diklat')->with('success', 'Data berhasil dihapus');
     }

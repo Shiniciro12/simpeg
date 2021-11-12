@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -13,7 +14,7 @@
     <div class="col-md-12 mt-2 mx-auto">
       <div class="text-center my-4">
         <h2>Data Identitas</h2>
-        <a href="/identitas/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+        <a href="/identitas/create" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
       </div>
       <br>
       <div class="col-md-12 mt-2">
@@ -57,6 +58,7 @@
                 <th scope="col">No Karis/Karsu</th>
                 <th scope="col">NIK</th>
                 <th scope="col">Pangkat</th>
+                <th scope="col">Golongan</th>
                 <th scope="col">Jabatan</th>
                 <th scope="col">Unit</th>
               </tr>
@@ -66,10 +68,10 @@
               @foreach ($rows as $row)
               <tr>
                 <td scope="row" style="text-align: center;">
-                  <a href="/identitas/update/{{ $row["identitas_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
-                  <form action="/identitas/delete" method="post" class="d-inline">
+                  <a href="/identitas/{{ $row["identitas_id"] }}/edit" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                  <form action="/identitas/{{ $row["identitas_id"] }}" method="post" class="d-inline">
                     @csrf
-                    <input type="hidden" name="identitas_id" value="{{ $row["identitas_id"] }}">
+                    @method('delete')
                     <input type="hidden" name="foto" value="{{ $row["foto"] }}">
                     <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
                   </form>
@@ -95,16 +97,17 @@
                 <td scope="row">{{ $row["nama_kelurahan"] }}</td>
                 <td scope="row">{{ $row["nama_kecamatan"] }}</td>
                 <td scope="row">{{ $row["golongan_darah"] }}</td>
-                <td scope="row"><img src="{{ $row[" foto"] }}" width="50" height="50"></td>
+                <td scope="row"><img src="{{ $row["foto"]}}" width="50" height="50"></td>
                 <td scope="row">{{ $row["no_karpeg"] }}</td>
                 <td scope="row">{{ $row["no_taspen"] }}</td>
                 <td scope="row">{{ $row["npwp"] }}</td>
                 <td scope="row">{{ $row["no_bpjs"] }}</td>
                 <td scope="row">{{ $row["no_kariskarsu"] }}</td>
                 <td scope="row">{{ $row["nik"] }}</td>
-                <td scope="row">{{ $row["pangkat_id"] }}</td>
-                <td scope="row">{{ $row["jabatan_id"] }}</td>
-                <td scope="row">{{ $row["unit_kerja_id"] }}</td>
+                <td scope="row">{{ $row["pangkat"] }}</td>
+                <td scope="row">{{ $row["golongan"] }}</td>
+                <td scope="row">{{ $row["nama_jabatan"] }}</td>
+                <td scope="row">{{ $row["nama_unit"] }}</td>
               </tr>
               @endforeach
             </tbody>

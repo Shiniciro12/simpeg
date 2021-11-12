@@ -6,10 +6,13 @@ use App\Models\Kecamatan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-use File;
-
 class KecamatanController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('kecamatan.index', [
@@ -18,17 +21,26 @@ class KecamatanController extends Controller
         ]);
     }
 
-    public function addForm()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-
-        return view('kecamatan.add-form', [
+        return view('kecamatan.create-form', [
             'page' => 'Tambah Kecamatan',
         ]);
     }
 
-    public function add(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-
         $rules = [
             'nama_kecamatan' => 'required|unique:kecamatan',
         ];
@@ -44,7 +56,7 @@ class KecamatanController extends Controller
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/kecamatan/add')->withErrors($validator)->withInput();
+            return redirect('/kecamatan/create')->withErrors($validator)->withInput();
         }
 
         Kecamatan::create($input);
@@ -52,18 +64,45 @@ class KecamatanController extends Controller
         return redirect('/kecamatan')->with('success', 'Data berhasil ditambahkan');
     }
 
-    public function updateForm($kecamatan_id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($kecamatan_id)
     {
-        return view('kecamatan.update-form', [
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($kecamatan_id)
+    {
+        return view('kecamatan.edit-form', [
             'page' => 'Ubah Kecamatan',
             'data' => Kecamatan::find($kecamatan_id),
         ]);
     }
 
-    public function update(Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $kecamatan_id)
     {
+        $kecamatan = Kecamatan::find($kecamatan_id);
+
+        $nama_kecamatan = $kecamatan['nama_kecamatan'] != $request->input('nama_kecamatan') ? '|unique:kecamatan' : '';
         $rules = [
-            'nama_kecamatan' => 'required|unique:kecamatan',
+            'nama_kecamatan' => 'required' . $nama_kecamatan,
         ];
 
         $input = [
@@ -77,17 +116,23 @@ class KecamatanController extends Controller
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/kecamatan/update/' . $request->input('kecamatan_id'))->withErrors($validator)->withInput();
+            return redirect('/kecamatan/' . $kecamatan_id . '/edit')->withErrors($validator)->withInput();
         }
 
-        Kecamatan::where('kecamatan_id', $request->input('kecamatan_id'))->update($input);
+        Kecamatan::where('kecamatan_id', $kecamatan_id)->update($input);
 
         return redirect('/kecamatan')->with('success', 'Data berhasil diubah');
     }
 
-    public function delete(Request $request)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($kecamatan_id)
     {
-        Kecamatan::destroy($request->input('kecamatan_id'));
+        Kecamatan::destroy($kecamatan_id);
         return redirect('/kecamatan')->with('success', 'Data berhasil dihapus');
     }
 }
