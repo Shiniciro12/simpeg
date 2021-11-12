@@ -6,21 +6,20 @@ use App\Models\Identitas;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
     public function index()
     {
-        return view('login.index', [
+        return view('umum.login.index', [
             'page' => 'SIMPEG Login',
         ]);
     }
 
-    public function signIn(Request $request, Identitas $identitas)
+    public function signIn(Request $request)
     {
         $rules = [
-            'nip' => 'required|numeric',
+            'nip' => 'required|numeric|digits:18',
             'password' => 'required'
         ];
 
@@ -32,7 +31,7 @@ class LoginController extends Controller
         $messages = [
             'required' => 'Kolom :attribute wajib diisi.',
             'numeric' => '*Kolom :attribute harus berupa karakter angka.',
-            // 'digits' => '*Kolom :attribute tidak sesuai.',
+            'digits' => '*Kolom :attribute tidak sesuai.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);

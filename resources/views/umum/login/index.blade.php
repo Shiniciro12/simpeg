@@ -45,21 +45,9 @@
                                         <input type="password" id="password" name="password" class="form-control">
                                     </div>
                                     <br>
-                                    <center><button type="submit" class="btn btn-primary">Login</button></center>
+                                    <button type="submit" class="btn btn-primary">Login</button>
                                 </form>
-
                             </div>
-                        </div>
-                        <div class="dropdown d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-                            <button class="btn btn-outline-warning dropdown-toggle me-md-2" type="button"
-                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Template Surat
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>

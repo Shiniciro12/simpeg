@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class RootController extends Controller
 {
-    public function index(User $user, Identitas $identitas)
+    public function index()
     {
-        $this->authorize('root');
         $i = RiwayatJabatan::select("identitas.nama", "jabatan.eselon")->join("jabatan", "jabatan.jabatan_id", "=", "riwayat_jabatan.jabatan_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_jabatan.identitas_id")->where('jabatan.eselon', 'LIKE', 'I/%')->count();
         $ii = RiwayatJabatan::select("identitas.nama", "jabatan.eselon")->join("jabatan", "jabatan.jabatan_id", "=", "riwayat_jabatan.jabatan_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_jabatan.identitas_id")->where('jabatan.eselon', 'LIKE', 'II/%')->count();
         $iii = RiwayatJabatan::select("identitas.nama", "jabatan.eselon")->join("jabatan", "jabatan.jabatan_id", "=", "riwayat_jabatan.jabatan_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_jabatan.identitas_id")->where('jabatan.eselon', 'LIKE', 'III/%')->count();

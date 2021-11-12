@@ -15,7 +15,7 @@ use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\TandaJasaController;
 use App\Http\Controllers\KeluargaController;
 use App\Http\Controllers\UmumController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 
 /*
@@ -112,9 +112,9 @@ Route::post('/tandajasa/update', [TandaJasaController::class, 'update']);
 Route::post('/tandajasa/delete', [TandaJasaController::class, 'delete']);
 
 //Auth
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/logout', [LoginController::class, 'logout']);
-Route::post('/login', [LoginController::class, 'signIn']);
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/login', [AuthController::class, 'signIn']);
 
 //Access By Role
 //root, bkppd, unit-kerja
