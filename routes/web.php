@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RootController;
 use App\Http\Controllers\IdentitasController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\KelurahanController;
@@ -15,7 +15,7 @@ use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\TandaJasaController;
 use App\Http\Controllers\KeluargaController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,39 +28,15 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [RootController::class, 'index']);
 
-Route::get('/identitas', [IdentitasController::class, 'index']);
-Route::get('/identitas/add', [IdentitasController::class, 'addForm']);
-Route::get('/identitas/update/{identitas_id}', [IdentitasController::class, 'updateForm']);
+Route::resource('/identitas', IdentitasController::class);
 
-Route::post('/identitas/add', [IdentitasController::class, 'add']);
-Route::post('/identitas/update', [IdentitasController::class, 'update']);
-Route::post('/identitas/delete', [IdentitasController::class, 'delete']);
+Route::resource('/unit-kerja', UnitKerjaController::class);
 
-Route::get('/unit-kerja', [UnitKerjaController::class, 'index']);
-Route::get('/unit-kerja/add', [UnitKerjaController::class, 'addForm']);
-Route::get('/unit-kerja/update/{unit_kerja_id}', [UnitKerjaController::class, 'updateForm']);
+Route::resource('/kelurahan', KelurahanController::class);
 
-Route::post('/unit-kerja/add', [UnitKerjaController::class, 'add']);
-Route::post('/unit-kerja/update', [UnitKerjaController::class, 'update']);
-Route::post('/unit-kerja/delete', [UnitKerjaController::class, 'delete']);
-
-Route::get('/kelurahan', [KelurahanController::class, 'index']);
-Route::get('/kelurahan/add', [KelurahanController::class, 'addForm']);
-Route::get('/kelurahan/update/{kelurahan_id}', [KelurahanController::class, 'updateForm']);
-
-Route::post('/kelurahan/add', [KelurahanController::class, 'add']);
-Route::post('/kelurahan/update', [KelurahanController::class, 'update']);
-Route::post('/kelurahan/delete', [KelurahanController::class, 'delete']);
-
-Route::get('/kecamatan', [KecamatanController::class, 'index']);
-Route::get('/kecamatan/add', [KecamatanController::class, 'addForm']);
-Route::get('/kecamatan/update/{kelurahan_id}', [KecamatanController::class, 'updateForm']);
-
-Route::post('/kecamatan/add', [KecamatanController::class, 'add']);
-Route::post('/kecamatan/update', [KecamatanController::class, 'update']);
-Route::post('/kecamatan/delete', [KecamatanController::class, 'delete']);
+Route::resource('/kecamatan', KecamatanController::class);
 
 //Jabatan
 Route::get('/jabatan', [JabatanController::class, 'index']);
@@ -98,7 +74,7 @@ Route::post('/riwayatpangkat/add', [RiwayatPangkatController::class, 'add4']);
 Route::post('/riwayatpangkat/update', [RiwayatPangkatController::class, 'update']);
 Route::post('/riwayatpangkat/delete', [RiwayatPangkatController::class, 'delete']);
 
-//DIKLAT
+//Diklat
 Route::get('/diklat', [DiklatController::class, 'index']);
 Route::get('/diklat/add', [DiklatController::class, 'addForm']);
 Route::get('/diklat/update/{diklat_id}', [DiklatController::class, 'updateForm']);
@@ -107,7 +83,7 @@ Route::post('/diklat/add', [DiklatController::class, 'add']);
 Route::post('/diklat/update', [DiklatController::class, 'update']);
 Route::post('/diklat/delete', [DiklatController::class, 'delete']);
 
-//PENDIDIKAN
+//Pendidikan
 Route::get('/pendidikan', [PendidikanController::class, 'index']);
 Route::get('/pendidikan/add', [PendidikanController::class, 'addForm']);
 Route::get('/pendidikan/update/{pendidikan_id}', [PendidikanController::class, 'updateForm']);
@@ -116,6 +92,7 @@ Route::post('/pendidikan/add', [PendidikanController::class, 'add']);
 Route::post('/pendidikan/updt', [PendidikanController::class, 'update']);
 Route::post('/pendidikan/delete', [PendidikanController::class, 'delete']);
 
+//Keluarga
 Route::get('/keluarga', [KeluargaController::class, 'index']);
 Route::get('/keluarga/add', [KeluargaController::class, 'addForm']);
 Route::get('/keluarga/update/{keluarga_id}', [KeluargaController::class, 'updateForm']);
@@ -124,6 +101,7 @@ Route::post('/keluarga/add', [KeluargaController::class, 'add']);
 Route::post('/keluarga/update', [KeluargaController::class, 'update']);
 Route::post('/keluarga/delete', [KeluargaController::class, 'delete']);
 
+//Tanda Jasa
 Route::get('/tandajasa', [TandaJasaController::class, 'index']);
 Route::get('/tandajasa/add', [TandaJasaController::class, 'addForm']);
 Route::get('/tandajasa/update/{tanda_jasa_id}', [TandaJasaController::class, 'updateForm']);
@@ -132,30 +110,18 @@ Route::post('/tandajasa/add', [TandaJasaController::class, 'add']);
 Route::post('/tandajasa/update', [TandaJasaController::class, 'update']);
 Route::post('/tandajasa/delete', [TandaJasaController::class, 'delete']);
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/logout', [LoginController::class, 'logout']);
+//Auth
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/login', [LoginController::class, 'signIn']);
 
-Route::group(['middleware' => ['auth', 'root'], 'prefix' => 'root'], function () {
-    Route::get('/dashboard', function () {
-        return 'ok root';
-    });
+//Access By Role
+//root, bkppd, unit-kerja
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/dashboard', [RootController::class, 'index']);
 });
 
-Route::group(['middleware' => ['auth', 'bkppd'], 'prefix' => 'bkppd'], function () {
-    Route::get('/dashboard', function () {
-        return 'ok bkppd';
-    });
-});
-
-Route::group(['middleware' => ['auth', 'unit-kerja'], 'prefix' => 'unit-kerja'], function () {
-    Route::get('/dashboard', function () {
-        return 'ok unit-kerja';
-    });
-});
-
-Route::group(['middleware' => ['auth', 'client'], 'prefix' => 'client'], function () {
-    Route::get('/dashboard', function () {
-        return 'ok client';
-    });
+//client
+Route::group(['prefix' => 'client'], function () {
+    Route::get('/dashboard', [ClientController::class, 'index']);
 });

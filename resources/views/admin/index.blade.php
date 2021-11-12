@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <script src="/high-chart-lib/highcharts.js"></script>
 <script src="/high-chart-lib/highcharts-3d.js"></script>
@@ -20,24 +21,6 @@
 <div id="eselon2" data-eselonb="{{ $eselon2 }}"></div>
 <div id="eselon3" data-eselonc="{{ $eselon3 }}"></div>
 <div id="eselon4" data-eselond="{{ $eselon4 }}"></div>
-
-
-<section id="head-title">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-5 mx-auto my-4">
-                <center>
-                    <img src="/images/logo.svg" width="60px" alt="">
-                    <h2>Dashboard Root</h2>
-                    <h6>- SIMPEG Kota Kupang -</h6>
-                </center>
-            </div>
-            <div class="seperator">
-                <hr>
-            </div>
-        </div>
-    </div>
-</section>
 
 <div class="container">
     <div class="row">
@@ -143,7 +126,6 @@
     const eselon3 = document.getElementById('eselon3').getAttribute('data-eselonc');
     const eselon4 = document.getElementById('eselon4').getAttribute('data-eselond');
 
-    console.log(eselon3);
     // Set up the chart
     var chart = new Highcharts.Chart({
         chart: {
@@ -192,7 +174,4 @@
         ]
     });
 </script>
-
-
-
 @endsection

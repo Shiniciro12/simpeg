@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Identitas;
 use App\Models\UnitKerja;
 use App\Models\Kelurahan;
@@ -12,8 +12,14 @@ use App\Models\Pangkat;
 use App\Models\Jabatan;
 use File;
 
+
 class IdentitasController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('identitas.index', [
@@ -22,10 +28,14 @@ class IdentitasController extends Controller
         ]);
     }
 
-    public function addForm()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-
-        return view('identitas.add-form', [
+        return view('identitas.create-form', [
             'rowsPangkat' => Pangkat::latest()->get(),
             'rowsJabatan' => jabatan::latest()->get(),
             'rowsUnitKerja' => UnitKerja::latest()->get(),
@@ -42,14 +52,19 @@ class IdentitasController extends Controller
         ]);
     }
 
-    public function add(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-
         $rules = [
             'nip' => 'required|numeric|digits:18|unique:identitas',
             'nama' => 'required',
             'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required|date|before:'.today(),
+            'tgl_lahir' => 'required|date|before:' . today(),
             'jenis_kelamin' => 'required',
             'agama' => 'required',
             'status_kepegawaian' => 'required',
@@ -119,7 +134,7 @@ class IdentitasController extends Controller
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/identitas/add')->withErrors($validator)->withInput();
+            return redirect('/identitas/create')->withErrors($validator)->withInput();
         }
 
         $extension = $request->file('foto')->getClientOriginalExtension();
@@ -170,9 +185,26 @@ class IdentitasController extends Controller
         return redirect('/identitas')->with('success', 'Data berhasil ditambahkan');
     }
 
-    public function updateForm($identitas_id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($identitas_id)
     {
-        return view('identitas.update-form', [
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($identitas_id)
+    {
+        return view('identitas.edit-form', [
             'page' => 'Ubah Identitas',
             'data' => Identitas::find($identitas_id),
             'rowsPangkat' => Pangkat::latest()->get(),
@@ -190,9 +222,16 @@ class IdentitasController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $identitas_id)
     {
-        $identitas = Identitas::find($request->input('identitas_id'));
+        $identitas = Identitas::find($identitas_id);
 
         $nip = $identitas['nip'] != $request->input('nip') ? '|unique:identitas' : '';
 
@@ -209,7 +248,7 @@ class IdentitasController extends Controller
             'nip' => 'required|numeric|digits:18' . $nip,
             'nama' => 'required',
             'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required|date|before:'.today(),
+            'tgl_lahir' => 'required|date|before:' . today(),
             'jenis_kelamin' => 'required',
             'agama' => 'required',
             'status_kepegawaian' => 'required',
@@ -279,7 +318,7 @@ class IdentitasController extends Controller
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/identitas/update/' . $request->input('identitas_id'))->withErrors($validator)->withInput();
+            return redirect('/identitas/' . $identitas_id . '/edit')->withErrors($validator)->withInput();
         }
 
         $extension = $request->file('foto')->getClientOriginalExtension();
@@ -325,15 +364,21 @@ class IdentitasController extends Controller
             'unit_kerja_id' => $request->input('unit_kerja_id'),
         ];
 
-        Identitas::where('identitas_id', $request->input('identitas_id'))->update($data);
+        Identitas::where('identitas_id', $identitas_id)->update($data);
 
         return redirect('/identitas')->with('success', 'Data berhasil diubah');
     }
 
-    public function delete(Request $request)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $identitas_id)
     {
         File::delete(public_path($request->input('foto')));
-        Identitas::destroy($request->input('identitas_id'));
+        Identitas::destroy($identitas_id);
         return redirect('/identitas')->with('success', 'Data berhasil dihapus');
     }
 }

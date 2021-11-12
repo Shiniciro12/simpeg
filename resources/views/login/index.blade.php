@@ -1,4 +1,4 @@
-@extends('home.layouts.main')
+@extends('admin.layouts.main')
 @section('content')
 <div class="container">
     @if(session()->has('loginError'))
@@ -30,12 +30,12 @@
                                 <form action="/login" method="post">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" id="username" name="email" value="{{old('email')}}"
-                                            class="form-control @error('email') is-invalid @enderror"
-                                            value="{{old('email')}}">
-                                        @error('email')
-                                        <div id="email" class="invalid-feedback">
+                                        <label for="nip" class="form-label">NIP</label>
+                                        <input type="text" id="nip" name="nip" value="{{old('nip')}}"
+                                            class="form-control @error('nip') is-invalid @enderror"
+                                            value="{{old('nip')}}">
+                                        @error('nip')
+                                        <div id="nip" class="invalid-feedback">
                                             {{$message}}
                                         </div>
                                         @enderror

@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
   use HasFactory;
+  protected $table = 'roles';
 
   public function users()
   {
-    return $this->belongsToMany(User::class, 'role_users');
+    $relation = Identitas::select(['roles.*', 'identitas.*'])->join("identitas", "roles.id", "=", "identitas.role_id");
+    return $relation;
   }
 }

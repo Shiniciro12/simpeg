@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Identitas extends Migration
 {
-       /**
+    /**
      * Run the migrations.
      *
      * @return void
@@ -18,6 +18,8 @@ class Identitas extends Migration
         Schema::create('identitas', function (Blueprint $table) {
             $table->uuid('identitas_id')->primary();
             $table->string('nip', 18)->unique();
+            $table->string('password');
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->string('nama');
             $table->string('gelar_depan')->nullable();
             $table->string('gelar_belakang')->nullable();

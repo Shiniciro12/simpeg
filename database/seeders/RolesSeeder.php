@@ -16,19 +16,19 @@ class RolesSeeder extends Seeder
     {
 
         Role::create([
-            'name' => 'root',
+            'role_name' => 'root',
         ]);
 
         Role::create([
-            'name' => 'bkppd',
+            'role_name' => 'bkppd',
         ]);
 
         Role::create([
-            'name' => 'unit-kerja',
+            'role_name' => 'unit-kerja',
         ]);
 
         Role::create([
-            'name' => 'client',
+            'role_name' => 'client',
         ]);
     }
 }

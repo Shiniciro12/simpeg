@@ -63,9 +63,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'root' => \App\Http\Middleware\RootAuthenticated::class,
-        'bkppd'  => \App\Http\Middleware\BKPPDAuthenticated::class,
-        'unit-kerja'  => \App\Http\Middleware\UnitKerjaAuthenticated::class,
-        'client'  => \App\Http\Middleware\ClientAuthenticated::class,
+        'root' => \App\Http\Middleware\isRoot::class,
+        'bkppd'  => \App\Http\Middleware\isBKPPD::class,
+        'unit-kerja'  => \App\Http\Middleware\isUnitKerja::class,
+        'client'  => \App\Http\Middleware\isClient::class,
     ];
 }

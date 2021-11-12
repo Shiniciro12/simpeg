@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -13,7 +14,7 @@
     <div class="col-md-11 mt-2 mx-auto">
       <div class="text-center my-4">
         <h2>Data Kelurahan</h2>
-        <a href="/kelurahan/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+        <a href="/kelurahan/create" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
       </div>
       <br>
       <div class="col-md-12 mt-2">
@@ -38,10 +39,10 @@
               @foreach ($rows as $row)
               <tr>
                 <td scope="row">
-                  <a href="/kelurahan/update/{{ $row["kelurahan_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
-                  <form action="/kelurahan/delete" method="post" class="d-inline">
+                  <a href="/kelurahan/{{ $row["kelurahan_id"] }}/edit" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                  <form action="/kelurahan/{{ $row["kelurahan_id"] }}" method="post" class="d-inline">
+                    @method('delete')
                     @csrf
-                    <input type="hidden" name="kelurahan_id" value="{{ $row["kelurahan_id"] }}">
                     <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
                   </form>
                 </td>
