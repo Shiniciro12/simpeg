@@ -41,6 +41,8 @@ class Identitas extends Migration
             $table->string('golongan_darah', 2);
             $table->string('foto');
             $table->string('no_karpeg')->unique();
+            $table->string('karpeg');
+            $table->string('berkala_terakhir');
             $table->string('no_taspen')->unique();
             $table->string('npwp')->unique();
             $table->string('no_bpjs')->unique();

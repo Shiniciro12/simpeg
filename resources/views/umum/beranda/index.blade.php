@@ -7,8 +7,8 @@
       <div class="card text-center">
         <div class="card-header">
           <div class="d-flex justify-content-center bd-highlight dropdown">
-            <a class="navbar-brand">
-              <img src="/images/logo.svg" alt="logo pemkot kupang" width="42" height="47">
+            <a class="navbar-brand text-black">
+              <img src="/images/logo.svg" alt="logo pemkot kupang" width="42" height="47"> SIMPEG
             </a>
           </div>
         </div>

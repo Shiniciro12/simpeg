@@ -26,6 +26,7 @@ class Pendidikan extends Migration
             $table->string('no_sttb')->unique();
             $table->date('tgl_sttb');
             $table->string('sttb');
+            $table->string('transkrip');
             $table->timestamps();
         });
         DB::statement('ALTER TABLE pendidikan ALTER COLUMN pendidikan_id SET DEFAULT uuid_generate_v4();');

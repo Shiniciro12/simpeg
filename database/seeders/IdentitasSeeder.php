@@ -42,6 +42,8 @@ class IdentitasSeeder extends Seeder
                 'golongan_darah' => 'A',
                 'foto' => $i."image.jpg",
                 'no_karpeg' => '123456789' . $i,
+                'karpeg' => '123456789' . $i. '.pdf',
+                'berkala_terakhir' => '123456789' . $i. '.pdf',
                 'no_taspen' => '123456789' . $i,
                 'npwp' => '123456789' . $i,
                 'no_bpjs' => '123456789' . $i,

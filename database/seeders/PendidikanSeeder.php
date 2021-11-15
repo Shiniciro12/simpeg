@@ -25,6 +25,7 @@ class PendidikanSeeder extends Seeder
             'no_sttb' => 'KL-99992',
             'tgl_sttb' => '2010-09-17',
             'sttb' => 'ijazah.pdf',
+            'transkrip' => 'transkrip.pdf',
         ]);
     }
 }
