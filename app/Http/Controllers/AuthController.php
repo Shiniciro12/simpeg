@@ -39,7 +39,7 @@ class AuthController extends Controller
         if (Auth::attempt($input)) {
             $request->session()->regenerate();
             if (auth()->user()->role_id == 4) {
-                return redirect('/client/dashboard');
+                return redirect('/klien/dashboard');
             } else {
                 return redirect('/admin/dashboard');
             }

@@ -14,7 +14,7 @@
       <!-- <div class="card shadow p-3 mb-5 bg-body rounded"> -->
         <div class="card-body">
             <div class="alert alert-success" role="alert">
-               Silahkan pilih menu template surat untuk mengunduh format surat dan menu layanan untuk mengupload dokumen 
+               Silahkan pilih menu template surat untuk mengunduh format surat atau menu layanan untuk mengupload dokumen 
             </div>
         <!-- Row Pertama -->
           <div class="row">
@@ -42,11 +42,8 @@
             
           </div>
           <!-- End Row Pertama -->
-          
-
         </div>
       <!-- </div> -->
-     
     </main>
   </div>
 </div>

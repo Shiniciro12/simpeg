@@ -25,32 +25,38 @@ class KlienController extends Controller
         ]);
     }
 
-    public function indexLayanan ()
+    public function indexLayanan1()
     {
         return view('klien.layanan.index', [
             'page' => 'Klien | Layanan'
         ]);
     }
 
-    public function indexLayananDua ()
+    public function indexLayanan2()
     {
         return view('klien.layanan.index2', [
             'page' => 'Klien | Layanan2'
         ]);
     }
 
-    public function indexLayananForm1 ()
+    public function indexLayananForm1()
     {
         return view('klien.layanan.form1', [
             'page' => 'Layanan | Form1'
         ]);
     }
 
-    public function indexListSurat ()
+    public function indexLayananForm2()
+    {
+        return view('klien.layanan.form2', [
+            'page' => 'Layanan | Form1'
+        ]);
+    }
+
+    public function indexListSurat()
     {
         return view('klien.layanan.list-surat', [
             'page' => 'Layanan | Template Surat'
         ]);
     }
-
 }

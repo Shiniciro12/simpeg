@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('umum.layouts.main')
 @section('content')
 <div class="container">
     @if(session()->has('loginError'))
