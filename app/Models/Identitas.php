@@ -20,7 +20,7 @@ class Identitas extends Authenticatable
      *
      * @var string[]
      */
-    protected $guarded = ['identitas_id'];
+    protected $guarded = ['identitas_id', 'password'];
 
     /**
      * The attributes that should be hidden for serialization.
