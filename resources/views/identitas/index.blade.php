@@ -73,6 +73,8 @@
                     @csrf
                     @method('delete')
                     <input type="hidden" name="foto" value="{{ $row["foto"] }}">
+                    <input type="hidden" name="karpeg" value="{{ $row["karpeg"] }}">
+                    <input type="hidden" name="berkala_terakhir" value="{{ $row["berkala_terakhir"] }}">
                     <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
                   </form>
                 </td>

@@ -451,6 +451,25 @@
                         </div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label for="role_id" class="form-label">Roles <span
+                                class="text-danger">*</span></label>
+                        <select class="form-select @error('role_id') is-invalid @enderror"
+                            value="{{old('role_id')}}" aria-label="roles" id="role_id"
+                            name="role_id">
+                            <option value="">Pilih Roles</option>
+                            @foreach ($rowsRole as $rowRole)
+                            <option {{old('role_id')==$rowRole['role_id'] ? 'selected' : '' }}
+                                value="{{ $rowRole['id'] }}">{{ $rowRole['role_name'] }}
+                            </option>
+                            @endforeach
+                        </select>
+                        @error('role_id')
+                        <div id="role_id" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
                     <button type="button" class="btn btn-primary" onclick="prevButtonIdentitas1()">Sebelumnnya</button>
 
                     <button type="button" class="btn btn-primary" onclick="nextButtonIdentitas2()">Selanjutnya</button>
@@ -465,6 +484,30 @@
                         <label class="input-group-text" for="foto">Upload</label>
                         @error('foto')
                         <div id="foto" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+                    <label for="karpeg" class="form-label">Kartu Pegawai (Fotmat PDF, Maksimal 500Kb) <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control @error('karpeg') is-invalid @enderror"
+                            value="{{old('karpeg')}}" id="karpeg" name="karpeg">
+                        <label class="input-group-text" for="karpeg">Upload</label>
+                        @error('karpeg')
+                        <div id="karpeg" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+                    <label for="berkala_terakhir" class="form-label">Berkala Terakhir (Fotmat PDF, Maksimal 500Kb) <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control @error('berkala_terakhir') is-invalid @enderror"
+                            value="{{old('berkala_terakhir')}}" id="berkala_terakhir" name="berkala_terakhir">
+                        <label class="input-group-text" for="berkala_terakhir">Upload</label>
+                        @error('berkala_terakhir')
+                        <div id="berkala_terakhir" class="invalid-feedback">
                             {{$message}}
                         </div>
                         @enderror

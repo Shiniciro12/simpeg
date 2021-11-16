@@ -10,6 +10,7 @@ use App\Models\Kelurahan;
 use App\Models\Kecamatan;
 use App\Models\Pangkat;
 use App\Models\Jabatan;
+use App\Models\Role;
 use File;
 
 
@@ -41,6 +42,7 @@ class IdentitasController extends Controller
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'rowsKelurahan' => Kelurahan::latest()->get(),
             'rowsKecamatan' => Kecamatan::latest()->get(),
+            'rowsRole' => Role::latest()->get(),
             'golongan_darah' => ['A', 'B', 'AB', 'O'],
             'rowsAgama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lain-lain'],
             'rowsStatusKawin' => ['Belum Kawin', 'Kawin', 'Janda', 'Duda'],
@@ -79,6 +81,8 @@ class IdentitasController extends Controller
             'kecamatan_id' => 'required',
             'golongan_darah' => 'required',
             'foto' => 'file|mimes:png,jpg,jpeg|max:500',
+            'karpeg' => 'file|mimes:pdf|max:500',
+            'berkala_terakhir' => 'file|mimes:pdf|max:500',
             'no_karpeg' => 'required|unique:identitas',
             'no_taspen' => 'required|unique:identitas',
             'npwp' => 'required|unique:identitas',
@@ -88,6 +92,7 @@ class IdentitasController extends Controller
             'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'unit_kerja_id' => 'required',
+            'role_id' => 'required',
         ];
 
         $input = [
@@ -109,6 +114,8 @@ class IdentitasController extends Controller
             'kecamatan_id' => $request->input('kecamatan_id'),
             'golongan_darah' => $request->input('golongan_darah'),
             'foto' => $request->file('foto'),
+            'karpeg' => $request->file('karpeg'),
+            'berkala_terakhir' => $request->file('berkala_terakhir'),
             'no_karpeg' => $request->input('no_karpeg'),
             'no_taspen' => $request->input('no_taspen'),
             'npwp' => $request->input('npwp'),
@@ -118,6 +125,7 @@ class IdentitasController extends Controller
             'pangkat_id' => $request->input('pangkat_id'),
             'jabatan_id' => $request->input('jabatan_id'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'role_id' => $request->input('role_id'),
         ];
 
         $messages = [
@@ -137,15 +145,26 @@ class IdentitasController extends Controller
             return redirect('/identitas/create')->withErrors($validator)->withInput();
         }
 
-        $extension = $request->file('foto')->getClientOriginalExtension();
+        $extFoto = $request->file('foto')->getClientOriginalExtension();
+        $newFileFoto = $request->input('nip') . "." . $extFoto;
+        $tempFoto = $request->file('foto')->getPathName();
+        $folderFoto = "upload/identitas/foto/" . $newFileFoto;
+        move_uploaded_file($tempFoto, $folderFoto);
+        $pathFoto = "/upload/identitas/foto/" . $newFileFoto;
 
-        $newFile = $request->input('nip') . "." . $extension;
+        $extKarpeg = $request->file('karpeg')->getClientOriginalExtension();
+        $newFileKarpeg = $request->input('nip') . "." . $extKarpeg;
+        $tempKarpeg = $request->file('karpeg')->getPathName();
+        $folderKarpeg = "upload/identitas/karpeg/" . $newFileKarpeg;
+        move_uploaded_file($tempKarpeg, $folderKarpeg);
+        $pathKarpeg = "/upload/identitas/karpeg/" . $newFileKarpeg;
 
-        $temp = $request->file('foto')->getPathName();
-        $folder = "upload/foto-identitas/" . $newFile;
-        move_uploaded_file($temp, $folder);
-
-        $path = "/upload/foto-identitas/" . $newFile;
+        $extBerkala = $request->file('berkala_terakhir')->getClientOriginalExtension();
+        $newFileBerkala = $request->input('nip') . "." . $extBerkala;
+        $tempBerkala = $request->file('berkala_terakhir')->getPathName();
+        $folderBerkala = "upload/identitas/berkala-terakhir/" . $newFileBerkala;
+        move_uploaded_file($tempBerkala, $folderBerkala);
+        $pathBerkala = "/upload/identitas/berkala-terakhir/" . $newFileBerkala;
 
         $data = [
             'nip' => $request->input('nip'),
@@ -168,7 +187,9 @@ class IdentitasController extends Controller
             'kelurahan_id' => $request->input('kelurahan_id'),
             'kecamatan_id' => $request->input('kecamatan_id'),
             'golongan_darah' => $request->input('golongan_darah'),
-            'foto' => $path,
+            'foto' => $pathFoto,
+            'karpeg' => $pathKarpeg,
+            'berkala_terakhir' => $pathBerkala,
             'no_karpeg' => $request->input('no_karpeg'),
             'no_taspen' => $request->input('no_taspen'),
             'npwp' => $request->input('npwp'),
@@ -178,6 +199,7 @@ class IdentitasController extends Controller
             'pangkat_id' => $request->input('pangkat_id'),
             'jabatan_id' => $request->input('jabatan_id'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'role_id' => $request->input('role_id'),
         ];
 
         Identitas::create($data);
@@ -212,6 +234,7 @@ class IdentitasController extends Controller
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'rowsKelurahan' => Kelurahan::latest()->get(),
             'rowsKecamatan' => Kecamatan::latest()->get(),
+            'rowsRole' => Role::latest()->get(),
             'golongan_darah' => ['A', 'B', 'AB', 'O'],
             'rowsAgama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lain-lain'],
             'rowsStatusKawin' => ['Belum Kawin', 'Kawin', 'Janda', 'Duda'],
@@ -244,6 +267,10 @@ class IdentitasController extends Controller
         $no_kariskarsu = $identitas['no_kariskarsu'] != $request->input('no_kariskarsu') ? '|unique:identitas' : '';
         $nik = $identitas['nik'] != $request->input('nik') ? '|unique:identitas' : '';
 
+        $foto = $request->file('foto') ? 'file|mimes:png,jpg,jpeg|max:500' : '';
+        $karpeg = $request->file('karpeg') ? 'file|mimes:pdf|max:500' : '';
+        $berkala_terakhir = $request->file('berkala_terakhir') ? 'file|mimes:pdf|max:500' : '';
+
         $rules = [
             'nip' => 'required|numeric|digits:18' . $nip,
             'nama' => 'required',
@@ -262,7 +289,9 @@ class IdentitasController extends Controller
             'kelurahan_id' => 'required',
             'kecamatan_id' => 'required',
             'golongan_darah' => 'required',
-            'foto' => 'file|mimes:png,jpg,jpeg|max:500',
+            'foto' => '' . $foto,
+            'karpeg' => '' . $karpeg,
+            'berkala_terakhir' => '' . $berkala_terakhir,
             'no_karpeg' => 'required' . $no_karpeg,
             'no_taspen' => 'required' . $no_taspen,
             'npwp' => 'required' . $npwp,
@@ -272,6 +301,7 @@ class IdentitasController extends Controller
             'pangkat_id' => 'required',
             'jabatan_id' => 'required',
             'unit_kerja_id' => 'required',
+            'role_id' => 'required',
         ];
 
         $input = [
@@ -293,6 +323,8 @@ class IdentitasController extends Controller
             'kecamatan_id' => $request->input('kecamatan_id'),
             'golongan_darah' => $request->input('golongan_darah'),
             'foto' => $request->file('foto'),
+            'karpeg' => $request->file('karpeg'),
+            'berkala_terakhir' => $request->file('berkala_terakhir'),
             'no_karpeg' => $request->input('no_karpeg'),
             'no_taspen' => $request->input('no_taspen'),
             'npwp' => $request->input('npwp'),
@@ -302,6 +334,7 @@ class IdentitasController extends Controller
             'pangkat_id' => $request->input('pangkat_id'),
             'jabatan_id' => $request->input('jabatan_id'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'role_id' => $request->input('role_id'),
         ];
 
         $messages = [
@@ -321,15 +354,38 @@ class IdentitasController extends Controller
             return redirect('/identitas/' . $identitas_id . '/edit')->withErrors($validator)->withInput();
         }
 
-        $extension = $request->file('foto')->getClientOriginalExtension();
+        $pathFoto = $identitas['foto'];
+        if ($request->file('foto')) {
+            File::delete(public_path($pathFoto));
+            $extFoto = $request->file('foto')->getClientOriginalExtension();
+            $newFileFoto = $request->input('nip') . "." . $extFoto;
+            $tempFoto = $request->file('foto')->getPathName();
+            $folderFoto = "upload/identitas/foto/" . $newFileFoto;
+            move_uploaded_file($tempFoto, $folderFoto);
+            $pathFoto = "/upload/identitas/foto/" . $newFileFoto;
+        }
 
-        $newFile = $request->input('nip') . "." . $extension;
+        $pathKarpeg = $identitas['karpeg'];
+        if ($request->file('karpeg')) {
+            File::delete(public_path($pathKarpeg));
+            $extKarpeg = $request->file('karpeg')->getClientOriginalExtension();
+            $newFileKarpeg = $request->input('nip') . "." . $extKarpeg;
+            $tempKarpeg = $request->file('karpeg')->getPathName();
+            $folderKarpeg = "upload/identitas/karpeg/" . $newFileKarpeg;
+            move_uploaded_file($tempKarpeg, $folderKarpeg);
+            $pathKarpeg = "/upload/identitas/karpeg/" . $newFileKarpeg;
+        }
 
-        $temp = $request->file('foto')->getPathName();
-        $folder = "upload/foto-identitas/" . $newFile;
-        move_uploaded_file($temp, $folder);
-
-        $path = "/upload/foto-identitas/" . $newFile;
+        $pathBerkala = $identitas['berkala_terakhir'];
+        if ($request->file('berkala_terakhir')) {
+            File::delete(public_path($pathBerkala));
+            $extBerkala = $request->file('berkala_terakhir')->getClientOriginalExtension();
+            $newFileBerkala = $request->input('nip') . "." . $extBerkala;
+            $tempBerkala = $request->file('berkala_terakhir')->getPathName();
+            $folderBerkala = "upload/identitas/berkala-terakhir/" . $newFileBerkala;
+            move_uploaded_file($tempBerkala, $folderBerkala);
+            $pathBerkala = "/upload/identitas/berkala-terakhir/" . $newFileBerkala;
+        }
 
         $data = [
             'nip' => $request->input('nip'),
@@ -352,7 +408,9 @@ class IdentitasController extends Controller
             'kelurahan_id' => $request->input('kelurahan_id'),
             'kecamatan_id' => $request->input('kecamatan_id'),
             'golongan_darah' => $request->input('golongan_darah'),
-            'foto' => $path,
+            'foto' => $pathFoto,
+            'karpeg' => $pathKarpeg,
+            'berkala_terakhir' => $pathBerkala,
             'no_karpeg' => $request->input('no_karpeg'),
             'no_taspen' => $request->input('no_taspen'),
             'npwp' => $request->input('npwp'),
@@ -362,6 +420,7 @@ class IdentitasController extends Controller
             'pangkat_id' => $request->input('pangkat_id'),
             'jabatan_id' => $request->input('jabatan_id'),
             'unit_kerja_id' => $request->input('unit_kerja_id'),
+            'role_id' => $request->input('role_id'),
         ];
 
         Identitas::where('identitas_id', $identitas_id)->update($data);
@@ -378,6 +437,8 @@ class IdentitasController extends Controller
     public function destroy(Request $request, $identitas_id)
     {
         File::delete(public_path($request->input('foto')));
+        File::delete(public_path($request->input('karpeg')));
+        File::delete(public_path($request->input('berkala_terakhir')));
         Identitas::destroy($identitas_id);
         return redirect('/identitas')->with('success', 'Data berhasil dihapus');
     }
