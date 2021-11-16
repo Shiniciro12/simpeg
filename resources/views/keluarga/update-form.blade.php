@@ -6,7 +6,6 @@
     <h3>Data Keluarga</h3><br>
     <div class="row">
         <div class="col-md-6">
-
             <form action="/keluarga/update" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" value="{{$rowsKeluarga->keluarga_id}}" name="keluarga_id">
