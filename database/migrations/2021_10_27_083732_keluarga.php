@@ -22,7 +22,7 @@ class Keluarga extends Migration
             $table->string('nama');
             $table->string('tempat_lahir');
             $table->date('tgl_lahir');
-            $table->char('jenis_kelamin');
+            $table->char('jenis_kelamin', 1);
             $table->string('status_keluarga');
             $table->string('status_kawin');
             $table->date('tgl_kawin');

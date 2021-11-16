@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -42,11 +43,14 @@
             @foreach ($rows as $row)
             <tr>
               <td scope="row" style="text-align: center;">
-                <a href="/riwayat-jabatan/update/{{ $row["riwayat_jabatan_id"] }}" class="btn btn-warning p-2 shadow""><i class=" bi bi-pencil-square"></i></a>
+                <a href="/riwayat-jabatan/update/{{ $row[" riwayat_jabatan_id"] }}"
+                  class="btn btn-warning p-2 shadow""><i class=" bi bi-pencil-square"></i></a>
                 <form action=" /riwayat-jabatan/delete" method="POST" class="d-inline">
                   @csrf
                   <input type="hidden" value="{{$row['riwayat_jabatan_id']}}" name="riwayat_jabatan_id">
-                  <button class="btn btn-danger p-2 shadow" onclick="return confirm('Apakah anda ingin menghapus data ini?')"><i class="bi bi-trash-fill"></i></button>
+                  <button class="btn btn-danger p-2 shadow"
+                    onclick="return confirm('Apakah anda ingin menghapus data ini?')"><i
+                      class="bi bi-trash-fill"></i></button>
                 </form>
               </td>
               <th scope="row">{{ $i++}}</th>
@@ -56,8 +60,8 @@
               <td scope="row" style="text-align: center">{{ $row["no_sk"] }}</td>
               <td scope="row" style="text-align: center">{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tmt_jabatan"] }}</td>
-              <td scope="row" class="text-center"><a href="/upload/sk-jabatan/{{ $row["sk_jabatan"] }}.pdf" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
-
+              <td scope="row" class="text-center"><a href="/upload/sk-jabatan/{{ $row[" sk_jabatan"] }}"
+                  class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
             </tr>
             @endforeach
           </tbody>

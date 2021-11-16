@@ -1,7 +1,9 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
+    {{-- {{dd($errors)}} --}}
     <div class="mt-2 mb-4"><span class="text-danger">*</span> Wajib diisi</div>
     <h3>Data Tanda Jasa</h3><br>
     <div class="row">
@@ -9,7 +11,6 @@
 
             <form action="/tandajasa/add" method="post" enctype="multipart/form-data">
                 @csrf
-
                 <div class="mb-3">
                     <label for="browsers" class="form-label">NIP Pegawai <span class="text-danger">*</span></label>
                     <input list="browsers" name="nip" id="browser" class="form-control" value="{{old('nip')}}">
@@ -83,10 +84,14 @@
             </div>
             <label for="file" class="form-label">File (Format PDF Maksimal 1MB)</label>
             <div class="input-group mb-3">
-                <input type="file" class="form-control" value="" id="file" name="sertifikat">
-                <label class="input-group-text" for="file">Upload</label>
-                <div id="foto" class="invalid-feedback">
+                <input type="file" class="form-control @error('sertifikat') is-invalid @enderror"
+                    value="{{old('sertifikat')}}" id="sertifikat" name="sertifikat">
+                <label class="input-group-text" for="sertifikat">Upload</label>
+                @error('sertifikat')
+                <div id="sertifikat" class="invalid-feedback">
+                    {{$message}}
                 </div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Kirim</button>
         </div>

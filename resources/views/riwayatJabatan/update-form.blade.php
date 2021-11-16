@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
     <div class="row">
@@ -50,9 +51,9 @@
                 <div class="row">
                     <div class="mb-3">
                         <label for="pejabat" class="form-label">Pejabat<span class="text-danger">*</span></label>
-                        <input type="text" value="{{$rowRiwayatJabatan->pejabat}}"
-                            class="form-control @error('pejabat') is-invalid @enderror" value="{{old('pejabat')}}"
-                            id="pejabat" aria-describedby="pejabat" name="pejabat">
+                        <input type="text" class="form-control @error('pejabat') is-invalid @enderror"
+                            value="{{old('pejabat',$rowRiwayatJabatan->pejabat)}}" id="pejabat"
+                            aria-describedby="pejabat" name="pejabat">
                         @error('pejabat')
                         <div id="pejabat" class="invalid-feedback">
                             {{$message}}

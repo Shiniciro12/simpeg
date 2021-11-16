@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 {{-- @dd($errors) --}}
 
@@ -41,16 +42,16 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="identitas_id" class="form-label">Identitas <span
+                                <label for="identitas_id" class="form-label">Nama Lengkap <span
                                         class="text-danger">*</span></label>
                                 <select class="form-select @error('identitas_id') is-invalid @enderror"
                                     value="{{old('identitas_id', $data['identitas_id'])}}" aria-label="Pangkat"
                                     name="identitas_id" id="identitas_id">
-                                    <option selected value="">Pilih Pangkat</option>
+                                    <option selected value="">Pilih Nama</option>
                                     @foreach ($rowsIdentitas as $rowIdentitas)
                                     @if ($rowIdentitas['identitas_id'] === $rowsRiwayatPangkat['identitas_id'] )
                                     <option selected value="{{ $rowIdentitas['identitas_id'] }}">{{
-                                        $rowIdentitas['nip'] }}
+                                        $rowIdentitas['nama'] }}
                                     </option>
                                     @else
                                     <option value="{{ $rowIdentitas['identitas_id'] }}">{{
@@ -120,8 +121,8 @@
                                 @enderror
                             </div>
                             <input type="hidden" class="form-control @error('sk_pangkat') is-invalid @enderror"
-                            value="{{old('sk_pangkat', $data['sk_pangkat'])}}" id="sk_pangkat"
-                            aria-describedby="sk_pangkat" name="sk_pangkat">
+                                value="{{old('sk_pangkat', $data['sk_pangkat'])}}" id="sk_pangkat"
+                                aria-describedby="sk_pangkat" name="sk_pangkat">
                             {{-- <div class="mb-3">
                                 <label for="sk_pangkat" class="form-label">SK Pangkat <span
                                         class="text-danger">*</span></label> --}}

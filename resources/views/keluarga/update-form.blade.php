@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
     <div class="mt-2 mb-4"><span class="text-danger">*</span> Wajib diisi</div>
@@ -21,7 +22,7 @@
                 <div class="mb-3">
                     <label for="nik" class="form-label">NIK <span class="text-danger">*</span> </label>
                     <input type="number" name="nik" class="form-control @error('nik') is-invalid @enderror"
-                        value="{{$rowsKeluarga->nik}}" id="nik" aria-describedby="nik">
+                        value="{{old('nik', $rowsKeluarga->nik)}}" id="nik" aria-describedby="nik">
                     @error('nik')
                     <div id="nik" class="invalid-feedback">
                         {{$message}}
@@ -31,7 +32,7 @@
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama <span class="text-danger">*</span></label>
                     <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
-                        value="{{$rowsKeluarga->nama}}" id="nama" aria-describedby="nama">
+                        value="{{old('nama', $rowsKeluarga->nama)}}" id="nama" aria-describedby="nama">
                     @error('nama')
                     <div id="nama" class="invalid-feedback">
                         {{$message}}
@@ -42,7 +43,8 @@
                     <label for="tempat_lahir" class="form-label">Tempat Lahir <span class="text-danger">*</span></label>
                     <input type="text" name="tempat_lahir"
                         class="form-control @error('tempat_lahir') is-invalid @enderror"
-                        value="{{$rowsKeluarga->tempat_lahir}}" id="tempat_lahir" aria-describedby="tempat_lahir">
+                        value="{{old('tempat_lahir', $rowsKeluarga->tempat_lahir)}}" id="tempat_lahir"
+                        aria-describedby="tempat_lahir">
                     @error('tempat_lahir')
                     <div id="tempat_lahir" class="invalid-feedback">
                         {{$message}}
@@ -52,7 +54,8 @@
                 <div class="mb-3">
                     <label for="tgl_lahir" class="form-label">Tanggal Lahir <span class="text-danger">*</span></label>
                     <input type="date" name="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror"
-                        value="{{$rowsKeluarga->tgl_lahir}}" id="tgl_lahir" aria-describedby="tgl_lahir">
+                        value="{{old('tgl_lahir', $rowsKeluarga->tgl_lahir)}}" id="tgl_lahir"
+                        aria-describedby="tgl_lahir">
                     @error('tgl_lahir')
                     <div id="tgl_lahir" class="invalid-feedback">
                         {{$message}}
@@ -65,8 +68,11 @@
                     <select class="form-select @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin"
                         value="{{$rowsKeluarga->jenis_kelamin}}" aria-label="jenis kelamin" id="jenis_kelamin">
                         <option value="">Pilih Jenis Kelamin</option>
-                        <option value="L">Laki-laki</option>
-                        <option value="P">Perempuan</option>
+                        <option {{old('jenis_kelamin', $rowsKeluarga->jenis_kelamin)=='L' ? 'selected' : '' }}
+                            value="L">Laki-laki
+                        </option>
+                        <option {{old('jenis_kelamin')=='P' ? 'selected' : '' }} value="P">Perempuan
+                        </option>
                     </select>
                     @error('jenis_kelamin')
                     <div id="jenis_kelamin" class="invalid-feedback">
@@ -79,10 +85,11 @@
                     <select class="form-select @error('status_keluarga') is-invalid @enderror" name="status_keluarga"
                         value="{{$rowsKeluarga->status_keluarga}}" aria-label="status_keluarga" id="status_keluarga">
                         <option selected value="">Pilih Status Keluarga</option>
-                        <option value="Kepala Keluarga">Kepala Keluarga</option>
-                        <option value="Istri">Istri</option>
-                        <option value="Anak">Anak</option>
-                        <option value="Famili Lain">Famili Lain</option>
+                        @foreach ($rowsStatusKeluarga as $rowStatusKeluarga)
+                        <option {{old('status_keluarga', $rowsKeluarga->status_keluarga)==$rowStatusKeluarga ?
+                            'selected' : '' }} value="{{ $rowStatusKeluarga }}">{{ $rowStatusKeluarga
+                            }}</option>
+                        @endforeach
                     </select>
                     @error('status_keluarga')
                     <div id="status_keluarga" class="invalid-feedback">
@@ -95,10 +102,11 @@
                     <select class="form-select @error('status_kawin') is-invalid @enderror" name="status_kawin"
                         value="{{$rowsKeluarga->status_kawin}}" aria-label="status_kawin" id="status_kawin">
                         <option selected value="">Pilih Status Perkawinan</option>
-                        <option value="Belum Kawin">Belum Kawin</option>
-                        <option value="Kawin">Kawin</option>
-                        <option value="Janda">Janda</option>
-                        <option value="Duda">Duda</option>
+                        @foreach ($rowsStatusKawin as $rowStatusKawin)
+                        <option {{old('status_kawin', $rowsKeluarga->status_kawin)==$rowStatusKawin ?
+                            'selected' : '' }} value="{{ $rowStatusKawin }}">{{ $rowStatusKawin
+                            }}</option>
+                        @endforeach
                     </select>
                     @error('status_kawin')
                     <div id="status_kawin" class="invalid-feedback">
@@ -108,8 +116,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="tgl_kawin" class="form-label">Tanggal Kawin</label>
-                    <input type="date" name="tgl_kawin" class="form-control" value="{{$rowsKeluarga->tgl_kawin}}"
-                        id="tgl_kawin" aria-describedby="tgl_kawin">
+                    <input type="date" name="tgl_kawin" class="form-control"
+                        value="{{old('tgl_kawin', $rowsKeluarga->tgl_kawin)}}" id="tgl_kawin"
+                        aria-describedby="tgl_kawin">
 
                 </div>
                 <div class="mb-3">
@@ -117,8 +126,12 @@
                     <select class="form-select @error('status_tunjangan') is-invalid @enderror" name="status_tunjangan"
                         value="{{$rowsKeluarga->status_tunjangan}}" aria-label="status_tunjangan" id="status_tunjangan">
                         <option selected value="">Pilih Status Tunjangan</option>
-                        <option value="Ya">Ya</option>
-                        <option value="Tidak">Tidak</option>
+                        <option {{old('status_tunjangan', $rowsKeluarga->status_tunjangan)=='Ya' ? 'selected' : '' }}
+                            value="Ya">Ya
+                        </option>
+                        <option {{old('status_tunjangan', $rowsKeluarga->status_tunjangan)=='Tidak' ? 'selected' : '' }}
+                            value="Tidak">Tidak
+                        </option>
                     </select>
                     @error('status_tunjangan')
                     <div id="status_tunjangan" class="invalid-feedback">
@@ -131,16 +144,11 @@
                     <select class="form-select @error('pendidikan') is-invalid @enderror" name="pendidikan"
                         value="{{$rowsKeluarga->pendidikan}}" aria-label="pendidikan" id="pendidikan">
                         <option selected value="">Pilih Status Pendidikan</option>
-                        <option value="Belum Sekolah">Belum Sekolah</option>
-                        <option value="TK/Paud">TK/Paud</option>
-                        <option value="SD Sederajat">SD Sederajat</option>
-                        <option value="SMP Sederajat">SMP Sederajat</option>
-                        <option value="SMA Sederajat">SMA Sederajat</option>
-                        <option value="Diploma III">Diploma III</option>
-                        <option value="Diploma IV">Diploma IV</option>
-                        <option value="S1(Sarjana)">S1</option>
-                        <option value="S2(Master)">S2</option>
-                        <option value="S3(Doctor)">S3</option>
+                        @foreach ($rowsPendidikan as $rowPendidikan)
+                        <option {{old('pendidikan', $rowsKeluarga->pendidikan)==$rowPendidikan ?
+                            'selected' : '' }} value="{{ $rowPendidikan }}">{{ $rowPendidikan
+                            }}</option>
+                        @endforeach
                     </select>
                     @error('pendidikan')
                     <div id="pendidikan" class="invalid-feedback">
@@ -148,14 +156,13 @@
                     </div>
                     @enderror
                 </div>
-
         </div>
         <div class="col-md-6">
 
             <div class="mb-3">
                 <label for="pekerjaan" class="form-label">Pekerjaan</label>
                 <input type="text" class="form-control @error('pekerjaan') is-invalid @enderror" name="pekerjaan"
-                    value="{{$rowsKeluarga->pekerjaan}}" id="pekerjaan" aria-describedby="pekerjaan">
+                    value="{{old('pekerjaan', $rowsKeluarga->pekerjaan)}}" id="pekerjaan" aria-describedby="pekerjaan">
                 @error('pekerjaan')
                 <div id="pekerjaan" class="invalid-feedback">
                     {{$message}}
@@ -165,25 +172,24 @@
 
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea class="form-control" name="alamat" value="{{$rowsKeluarga->alamat}}" id="alamat"
-                    rows="3">{{$rowsKeluarga->alamat}}</textarea>
+                <textarea class="form-control" name="alamat" value="{{old('alamat', $rowsKeluarga->alamat)}}"
+                    id="alamat" rows="3">{{old('alamat', $rowsKeluarga->alamat)}}</textarea>
             </div>
             <div class="mb-3">
                 <label for="desa_kelurahan" class="form-label">Desa/Kelurahan</label>
                 <input type="text" class="form-control @error('desa_kelurahan') is-invalid @enderror"
-                    name="desa_kelurahan" value="{{$rowsKeluarga->desa_kelurahan}}" id="desa_kelurahan"
-                    aria-describedby="desa_kelurahan">
+                    name="desa_kelurahan" value="{{old('desa_kelurahan', $rowsKeluarga->desa_kelurahan)}}"
+                    id="desa_kelurahan" aria-describedby="desa_kelurahan">
                 @error('desa_kelurahan')
                 <div id="desa_kelurahan" class="invalid-feedback">
                     {{$message}}
                 </div>
                 @enderror
             </div>
-
             <div class="mb-3">
                 <label for="kecamatan" class="form-label">Kecamatan</label>
                 <input type="text" class="form-control @error('kecamatan') is-invalid @enderror" name="kecamatan"
-                    value="{{$rowsKeluarga->kecamatan}}" id="kecamatan" aria-describedby="kecamatan">
+                    value="{{old('kecamatan', $rowsKeluarga->kecamatan)}}" id="kecamatan" aria-describedby="kecamatan">
                 @error('kecamatan')
                 <div id="kecamatan" class="invalid-feedback">
                     {{$message}}
@@ -191,11 +197,12 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="kabupaten" class="form-label">Kabupaten</label>
-                <input type="text" class="form-control @error('kabupaten') is-invalid @enderror" name="kabupaten_kota"
-                    value="{{$rowsKeluarga->kabupaten_kota}}" id="kabupaten" aria-describedby="kabupaten">
-                @error('kabupaten')
-                <div id="kabupaten" class="invalid-feedback">
+                <label for="kabupaten_kota" class="form-label">Kabupaten</label>
+                <input type="text" class="form-control @error('kabupaten_kota') is-invalid @enderror"
+                    name="kabupaten_kota" value="{{old('kabupaten_kota', $rowsKeluarga->kabupaten_kota)}}"
+                    id="kabupaten_kota" aria-describedby="kabupaten atau kota">
+                @error('kabupaten_kota')
+                <div id="kabupaten_kota" class="invalid-feedback">
                     {{$message}}
                 </div>
                 @enderror
@@ -203,7 +210,7 @@
             <div class="mb-3">
                 <label for="provinsi" class="form-label">Provinsi</label>
                 <input type="text" class="form-control @error('provinsi') is-invalid @enderror" name="provinsi"
-                    value="{{$rowsKeluarga->provinsi}}" id="provinsi" aria-describedby="provinsi">
+                    value="{{old('provinsi', $rowsKeluarga->provinsi)}}" id="provinsi" aria-describedby="provinsi">
                 @error('provinsi')
                 <div id="" class="invalid-feedback">
                     {{$message}}
@@ -213,7 +220,7 @@
             <div class="mb-3">
                 <label for="hp" class="form-label">No. Handphone</label>
                 <input type="number" class="form-control @error('hp') is-invalid @enderror" name="hp"
-                    value="{{$rowsKeluarga->hp}}" id="hp" aria-describedby="hp">
+                    value="{{old('hp', $rowsKeluarga->hp)}}" id="hp" aria-describedby="hp">
                 @error('hp')
                 <div id="hp" class="invalid-feedback">
                     {{$message}}
@@ -223,7 +230,7 @@
             <div class="mb-3">
                 <label for="telepon" class="form-label">No. Telepon</label>
                 <input type="number" class="form-control @error('telepon') is-invalid @enderror" name="telepon"
-                    value="{{$rowsKeluarga->telepon}}" id="telepon" aria-describedby="telepon">
+                    value="{{old('telepon', $rowsKeluarga->telepon)}}" id="telepon" aria-describedby="telepon">
                 @error('telepon')
                 <div id="telepon" class="invalid-feedback">
                     {{$message}}
@@ -233,7 +240,7 @@
             <div class="mb-3">
                 <label for="kode_pos" class="form-label">Kode Pos</label>
                 <input type="number" class="form-control @error('kode_pos') is-invalid @enderror" name="kode_pos"
-                    value="{{$rowsKeluarga->kode_pos}}" id="kode_pos" aria-describedby="kode_pos">
+                    value="{{old('kode_pos', $rowsKeluarga->kode_pos)}}" id="kode_pos" aria-describedby="kode_pos">
                 @error('kode_pos')
                 <div id="kode_pos" class="invalid-feedback">
                     {{$message}}

@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -42,12 +43,15 @@
           <tr>
             <td scope="row">
               <div class="btn-group-vertical">
-                <a href="/pendidikan/update/{{ $row["pendidikan_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                <a href="/pendidikan/update/{{ $row[" pendidikan_id"] }}" class="btn btn-warning p-2 shadow"><i
+                    class="bi bi-pencil-square"></i></a>
                 <form action="/pendidikan/delete" method="post" class="d-inline">
                   @csrf
-                  <input type="hidden" name="pendidikan_id" value="{{ $row["pendidikan_id"] }}">
-                  <input type="hidden" name="sttb" value="{{ $row["sttb"] }}">
-                  <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
+                  <input type="hidden" name="pendidikan_id" value="{{ $row[" pendidikan_id"] }}">
+                  <input type="hidden" name="sttb" value="{{ $row[" sttb"] }}">
+                  <button type="submit" class="btn btn-danger p-2 shadow"
+                    onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i
+                      class="bi bi-trash-fill"></i></button>
                 </form>
               </div>
             </td>
@@ -60,7 +64,8 @@
             <td scope="row">{{ $row["nama_kepsek_rektor"] }}</td>
             <td scope="row">{{ $row["no_sttb"] }}</td>
             <td scope="row">{{ $row["tgl_sttb"] }}</td>
-            <td scope="row"><a href="upload/sttb/{{ $row["sttb"] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
+            <td scope="row"><a href="upload/sttb/{{ $row[" sttb"] }}" class="btn btn-primary"><i
+                  class="bi bi-file-earmark-pdf"></i></a></td>
 
           </tr>
           @endforeach

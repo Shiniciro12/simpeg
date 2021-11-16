@@ -5,12 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Identitas;
-use App\Models\UnitKerja;
-use App\Models\Kelurahan;
-use App\Models\Kecamatan;
-use App\Models\Pangkat;
-use App\Models\Jabatan;
-use App\Models\diklat;
 use App\Models\Pendidikan;
 use File;
 
@@ -26,7 +20,6 @@ class PendidikanController extends Controller
 
     public function addForm()
     {
-
         return view('pendidikan.add-form', [
             'rowsIdentitas' => Identitas::latest()->get(),
             'page' => 'Tambah Pendidikan',
@@ -36,16 +29,17 @@ class PendidikanController extends Controller
     public function add(Request $request)
     {
         $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+
         $rules = [
-            'identitas_id' => '',
-            'tingkat_pendidikan' => '',
+            'identitas_id' => 'required',
+            'tingkat_pendidikan' => 'required',
             'jurusan' => 'required',
             'nama_lembaga_pendidikan' => 'required',
             'tempat' => 'required',
             'nama_kepsek_rektor' => 'required',
-            'no_sttb' => 'required|before:today',
-            'tgl_sttb' => 'required|date',
-            'sttb' => '',
+            'no_sttb' => 'required|unique:pendidikan',
+            'tgl_sttb' => 'required|date|before:'.today(),
+            'sttb' => 'file|mimes:pdf|max:1000',
         ];
 
         $input = [
@@ -57,17 +51,16 @@ class PendidikanController extends Controller
             'nama_kepsek_rektor' => $request->input('nama_kepsek_rektor'),
             'no_sttb' => $request->input('no_sttb'),
             'tgl_sttb' => $request->input('tgl_sttb'),
-            'sttb' => $request->input('sttb'),
+            'sttb' => $request->file('sttb'),
         ];
 
         $messages = [
             'required' => '*Kolom :attribute wajib diisi.',
-            'digits_between' => '*Kolom :attribute minimal 11 dan maksimal 12 karekter.',
-            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
-            'unique' => '*Kontak :attribute sudah terdaftar.',
+            'date' => '*Kolom :attribute tidak valid.',
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max karakter.',
-            'min' => '*Kolom :attribute minimal :min karakter.',
+            'before' => '*Kolom :attribute tidak valid.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -115,6 +108,49 @@ class PendidikanController extends Controller
     public function update(Request $request)
     {
         $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
+        $pendidikan = Pendidikan::find($request->input('pendidikan_id'));
+        
+        $no_sttb = $pendidikan['no_sttb'] != $request->input('no_sttb') ? '|unique:pendidikan' : '';
+
+        $rules = [
+            'identitas_id' => 'required',
+            'tingkat_pendidikan' => 'required',
+            'jurusan' => 'required',
+            'nama_lembaga_pendidikan' => 'required',
+            'tempat' => 'required',
+            'nama_kepsek_rektor' => 'required',
+            'no_sttb' => 'required'.$no_sttb,
+            'tgl_sttb' => 'required|date|before:'.today(),
+            // 'sttb' => 'file|mimes:pdf|max:1000',
+        ];
+
+        $input = [
+            'identitas_id' => $request->input('identitas_id'),
+            'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),
+            'jurusan' => $request->input('jurusan'),
+            'nama_lembaga_pendidikan' => $request->input('nama_lembaga_pendidikan'),
+            'tempat' => $request->input('tempat'),
+            'nama_kepsek_rektor' => $request->input('nama_kepsek_rektor'),
+            'no_sttb' => $request->input('no_sttb'),
+            'tgl_sttb' => $request->input('tgl_sttb'),
+            // 'sttb' => $request->file('sttb'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+            'date' => '*Kolom :attribute tidak valid.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'before' => '*Kolom :attribute tidak valid.',
+            // 'file' => '*File :attribute wajib dipilih.',
+            // 'max' => '*Kolom :attribute maksimal :max karakter.',
+            // 'mimes' => '*Format file :attribute tidak didukung.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/pendidikan/update/'.$request->input('pendidikan_id'))->withErrors($validator)->withInput();
+        }
+        
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
             'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),

@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'identitas',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'identitas',
         ],
     ],
 
@@ -65,6 +65,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'identitas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Identitas::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -89,6 +94,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'identitas' => [
+            'provider' => 'identitas',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

@@ -6,10 +6,13 @@ use App\Models\Kelurahan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-use File;
-
 class KelurahanController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('kelurahan.index', [
@@ -18,55 +21,29 @@ class KelurahanController extends Controller
         ]);
     }
 
-    public function addForm()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-
-        return view('kelurahan.add-form', [
+        return view('kelurahan.create-form', [
             'page' => 'Tambah Kelurahan',
         ]);
     }
 
-    public function add(Request $request)
-    {
-
-        $rules = [
-            'nama_kelurahan' => 'required|unique:kelurahan',
-            'kode_pos' => 'required|unique:kelurahan',
-        ];
-
-        $input = [
-            'nama_kelurahan' => $request->input('nama_kelurahan'),
-            'kode_pos' => $request->input('kode_pos'),
-        ];
-
-        $messages = [
-            'required' => '*Kolom :attribute wajib diisi.',
-            'unique' => '*Kolom :attribute sudah terdaftar.',
-        ];
-
-        $validator = Validator::make($input, $rules, $messages);
-        if ($validator->fails()) {
-            return redirect('/kelurahan/add')->withErrors($validator)->withInput();
-        }
-
-        Kelurahan::create($input);
-
-        return redirect('/kelurahan')->with('success', 'Data berhasil ditambahkan');
-    }
-
-    public function updateForm($kelurahan_id)
-    {
-        return view('kelurahan.update-form', [
-            'page' => 'Ubah Kelurahan',
-            'data' => Kelurahan::find($kelurahan_id),
-        ]);
-    }
-
-    public function update(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $rules = [
             'nama_kelurahan' => 'required|unique:kelurahan',
-            'kode_pos' => 'required|numeric',
+            'kode_pos' => 'required|numeric|digits:5|unique:kelurahan',
         ];
 
         $input = [
@@ -78,21 +55,93 @@ class KelurahanController extends Controller
             'required' => '*Kolom :attribute wajib diisi.',
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'digits' => '*Kolom :attribute tidak sesuai.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/kelurahan/update/' . $request->input('kelurahan_id'))->withErrors($validator)->withInput();
+            return redirect('/kelurahan/create')->withErrors($validator)->withInput();
         }
 
-        Kelurahan::where('kelurahan_id', $request->input('kelurahan_id'))->update($input);
+        Kelurahan::create($input);
+
+        return redirect('/kelurahan')->with('success', 'Data berhasil ditambahkan');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($kelurahan_id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($kelurahan_id)
+    {
+        return view('kelurahan.edit-form', [
+            'page' => 'Ubah Kelurahan',
+            'data' => Kelurahan::find($kelurahan_id),
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $kelurahan_id)
+    {
+        $kelurahan = Kelurahan::find($kelurahan_id);
+
+        $nama_kelurahan = $kelurahan['nama_kelurahan'] != $request->input('nama_kelurahan') ? '|unique:kelurahan' : '';
+
+        $rules = [
+            'nama_kelurahan' => 'required' . $nama_kelurahan,
+            'kode_pos' => 'required|numeric|digits:5',
+        ];
+
+        $input = [
+            'nama_kelurahan' => $request->input('nama_kelurahan'),
+            'kode_pos' => $request->input('kode_pos'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+            'unique' => '*Kolom :attribute sudah terdaftar.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
+            'digits' => '*Kolom :attribute tidak sesuai.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/kelurahan/' . $kelurahan_id . '/edit')->withErrors($validator)->withInput();
+        }
+
+        Kelurahan::where('kelurahan_id', $kelurahan_id)->update($input);
 
         return redirect('/kelurahan')->with('success', 'Data berhasil diubah');
     }
 
-    public function delete(Request $request)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($kelurahan_id)
     {
-        Kelurahan::destroy($request->input('kelurahan_id'));
+        Kelurahan::destroy($kelurahan_id);
         return redirect('/kelurahan')->with('success', 'Data berhasil dihapus');
     }
 }

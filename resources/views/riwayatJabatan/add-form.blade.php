@@ -1,8 +1,9 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
-
 <div class="container">
+    {{-- @dd($errors) --}}
     <div class="row">
         <div class="col-md-9 mx-auto">
             <form action="/riwayat-jabatan/add" method="post" enctype="multipart/form-data">
@@ -104,14 +105,14 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
-                            <label for="sk" class="form-label">SK Jabatan (Format: PDF Maksimal 1MB) <span
+                            <label for="sk_jabatan" class="form-label">SK Jabatan (Format: PDF Maksimal 1MB) <span
                                     class="text-danger">*</span></label>
                             <div class="input-group mb-3">
-                                <input type="file" class="form-control @error('sk') is-invalid @enderror"
-                                    value="{{old('sk')}}" id="sk" name="sk" accept=".pdf" required>
-                                <label class="input-group-text" for="sk">Upload</label>
-                                @error('sk')
-                                <div id="sk" class="invalid-feedback">
+                                <input type="file" class="form-control @error('sk_jabatan') is-invalid @enderror"
+                                    id="sk_jabatan" name="sk_jabatan" accept=".pdf" required>
+                                <label class="input-group-text" for="sk_jabatan">Upload</label>
+                                @error('sk_jabatan')
+                                <div id="sk_jabatan" class="invalid-feedback">
                                     {{$message}}
                                 </div>
                                 @enderror
