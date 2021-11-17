@@ -131,10 +131,18 @@ Route::group(['prefix' => 'klien'], function () {
     Route::get('/dataumum', [KlienController::class, 'dataUmum']);
     Route::get('/datakhusus', [KlienController::class, 'dataKhusus']);
     Route::get('/layanan/layanankhusus', [KlienController::class, 'dataKhususLayanan']);
-    Route::get('/layanan/index2', [KlienController::class, 'indexLayanan2']);
-    Route::get('/layanan/satyalencana', [KlienController::class, 'satyaLencanaForm']);
-    Route::get('/layanan/form2', [KlienController::class, 'indexLayananForm2']);
     Route::get('/layanan/listsurat', [KlienController::class, 'indexListSurat']);
 
+    Route::get('/layanan/satyalencana', [KlienController::class, 'satyaLencanaForm']);
     Route::post('/layanan/satyaadd', [KlienController::class, 'satyaLencanaAdd']);
+    Route::get('/layanan/ibel', [KlienController::class, 'ibelForm']);
+    Route::post('/layanan/ibeladd', [KlienController::class, 'ibelAdd']);
+    Route::get('/layanan/mkppi', [KlienController::class, 'mkppiForm']);
+    Route::post('/layanan/mkppiadd', [KlienController::class, 'mkppiAdd']);
+    Route::get('/layanan/mpkpjft', [KlienController::class, 'mpkpjftForm']);
+    Route::post('/layanan/mpkpjftadd', [KlienController::class, 'mpkpjftAdd']);
+    Route::get('/layanan/pkpr', [KlienController::class, 'pkprForm']);
+    Route::post('/layanan/pkpradd', [KlienController::class, 'pkprAdd']);
+    Route::get('/layanan/kpjs', [KlienController::class, 'kpjsForm']);
+    Route::post('/layanan/kpjsadd', [KlienController::class, 'kpjsAdd']);
 });

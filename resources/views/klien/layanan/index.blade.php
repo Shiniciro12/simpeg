@@ -38,7 +38,7 @@
 
             <div class="col-3">
               <div class="card text-center">
-                <a href="/klien/layanan/form1" class="link-light">
+                <a href="/klien/layanan/ibel" class="link-light">
                   <div class="card-body">
                     <i class="bi bi-clipboard-check link-primary" style="font-size: 36px;"></i><br><br>
                     <small class="card-text" style="color: black;"><b>Ibel/Tubel</b></small>
@@ -48,7 +48,7 @@
             </div>
             <div class="col-3">
               <div class="card text-center">
-                <a href="/klien/layanan/form1" class="link-light">
+                <a href="/klien/layanan/mkppi" class="link-light">
                   <div class="card-body">
                     <i class="bi bi-clipboard-check link-primary" style="font-size: 36px;"></i><br><br>
                     <small class="card-text" style="color: black;"><b>Mutasi Kenaikan Pangkat Penyesuaian
@@ -59,7 +59,7 @@
             </div>
             <div class="col-3">
               <div class="card text-center">
-                <a href="/klien/layanan/form1" class="link-light">
+                <a href="/klien/layanan/mpkpjft" class="link-light">
                   <div class="card-body">
                     <i class="bi bi-clipboard-check link-primary" style="font-size: 36px;"></i><br><br>
                     <small class="card-text" style="color: black;"><b>Mutasi Pelayanan Kenaikan Pangkat Jabatan
@@ -76,7 +76,7 @@
           <div class="row">
             <div class="col-3">
               <div class="card text-center">
-                <a href="/klien/layanan/form1" class="link-light">
+                <a href="/klien/layanan/pkpr" class="link-light">
                   <div class="card-body">
                     <i class="bi bi-clipboard-check link-primary" style="font-size: 36px;"></i><br><br>
                     <small class="card-text" style="color: black;"><b>Kenaikan Pangkat Reguler</b></small>
@@ -87,7 +87,7 @@
 
             <div class="col-3">
               <div class="card text-center">
-                <a href="/klien/layanan/form1" class="link-light">
+                <a href="/klien/layanan/kpjs" class="link-light">
                   <div class="card-body">
                     <i class="bi bi-clipboard-check link-primary" style="font-size: 36px;"></i><br><br>
                     <small class="card-text" style="color: black;"><b>Kenaikan Pangkat Jabatan Struktural</b></small>
