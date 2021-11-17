@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //use Clockwork\Request\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Dokumen;
+use App\Models\JenisLayanan;
 
 class KlienController extends Controller
 {
@@ -47,7 +48,8 @@ class KlienController extends Controller
     public function satyaLencanaForm()
     {
         return view('klien.layanan.satyalencana-form', [
-            'page' => 'Layanan | Satya Lencana'
+            'page' => 'Layanan | Satya Lencana',
+            'jenis_layanan' => JenisLayanan::where('nama_layanan', 'Satya Lencana')->first(),
         ]);
     }
     public function satyaLencanaAdd(Request $request)
@@ -84,7 +86,6 @@ class KlienController extends Controller
         ];
 
 
-        //dd(auth()->user()->identitas_id);
         //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
         $num_file = 0;
         foreach ($data as $r => $val) {
@@ -98,7 +99,7 @@ class KlienController extends Controller
         $data = [
             'dokumen' => implode("", $file_stacked),
             'identitas_id' => auth()->user()->identitas_id,
-            'jenis_layanan' => $request->input('jenis'),
+            'jenis_layanan_id' => $request->input('jenis'),
             'status' => '4',
         ];
         Dokumen::create($data);

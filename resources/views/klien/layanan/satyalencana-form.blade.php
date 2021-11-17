@@ -20,7 +20,7 @@
             <form action="/klien/layanan/satyaadd" method="POST" enctype="multipart/form-data">
               @csrf
               {{-- Jenis Layanan --}}
-              <input type="hidden" value="Satya Lencana" name="jenis">
+              <input type="hidden" value="{{$jenis_layanan->jenis_layanan_id}}" name="jenis">
               
               <div class="mb-3">
                 <label for="nip" class="form-label">NIP</label>
