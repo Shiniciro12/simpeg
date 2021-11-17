@@ -148,23 +148,23 @@ class IdentitasController extends Controller
         $extFoto = $request->file('foto')->getClientOriginalExtension();
         $newFileFoto = $request->input('nip') . "." . $extFoto;
         $tempFoto = $request->file('foto')->getPathName();
-        $folderFoto = "upload/identitas/foto/" . $newFileFoto;
+        $folderFoto = "unggah/identitas/foto/" . $newFileFoto;
         move_uploaded_file($tempFoto, $folderFoto);
-        $pathFoto = "/upload/identitas/foto/" . $newFileFoto;
+        $pathFoto = "/unggah/identitas/foto/" . $newFileFoto;
 
         $extKarpeg = $request->file('karpeg')->getClientOriginalExtension();
         $newFileKarpeg = $request->input('nip') . "." . $extKarpeg;
         $tempKarpeg = $request->file('karpeg')->getPathName();
-        $folderKarpeg = "upload/identitas/karpeg/" . $newFileKarpeg;
+        $folderKarpeg = "unggah/identitas/karpeg/" . $newFileKarpeg;
         move_uploaded_file($tempKarpeg, $folderKarpeg);
-        $pathKarpeg = "/upload/identitas/karpeg/" . $newFileKarpeg;
+        $pathKarpeg = "/unggah/identitas/karpeg/" . $newFileKarpeg;
 
         $extBerkala = $request->file('berkala_terakhir')->getClientOriginalExtension();
         $newFileBerkala = $request->input('nip') . "." . $extBerkala;
         $tempBerkala = $request->file('berkala_terakhir')->getPathName();
-        $folderBerkala = "upload/identitas/berkala-terakhir/" . $newFileBerkala;
+        $folderBerkala = "unggah/identitas/berkala-terakhir/" . $newFileBerkala;
         move_uploaded_file($tempBerkala, $folderBerkala);
-        $pathBerkala = "/upload/identitas/berkala-terakhir/" . $newFileBerkala;
+        $pathBerkala = "/unggah/identitas/berkala-terakhir/" . $newFileBerkala;
 
         $data = [
             'nip' => $request->input('nip'),
@@ -360,9 +360,9 @@ class IdentitasController extends Controller
             $extFoto = $request->file('foto')->getClientOriginalExtension();
             $newFileFoto = $request->input('nip') . "." . $extFoto;
             $tempFoto = $request->file('foto')->getPathName();
-            $folderFoto = "upload/identitas/foto/" . $newFileFoto;
+            $folderFoto = "unggah/identitas/foto/" . $newFileFoto;
             move_uploaded_file($tempFoto, $folderFoto);
-            $pathFoto = "/upload/identitas/foto/" . $newFileFoto;
+            $pathFoto = "/unggah/identitas/foto/" . $newFileFoto;
         }
 
         $pathKarpeg = $identitas['karpeg'];
@@ -371,9 +371,9 @@ class IdentitasController extends Controller
             $extKarpeg = $request->file('karpeg')->getClientOriginalExtension();
             $newFileKarpeg = $request->input('nip') . "." . $extKarpeg;
             $tempKarpeg = $request->file('karpeg')->getPathName();
-            $folderKarpeg = "upload/identitas/karpeg/" . $newFileKarpeg;
+            $folderKarpeg = "unggah/identitas/karpeg/" . $newFileKarpeg;
             move_uploaded_file($tempKarpeg, $folderKarpeg);
-            $pathKarpeg = "/upload/identitas/karpeg/" . $newFileKarpeg;
+            $pathKarpeg = "/unggah/identitas/karpeg/" . $newFileKarpeg;
         }
 
         $pathBerkala = $identitas['berkala_terakhir'];
@@ -382,9 +382,9 @@ class IdentitasController extends Controller
             $extBerkala = $request->file('berkala_terakhir')->getClientOriginalExtension();
             $newFileBerkala = $request->input('nip') . "." . $extBerkala;
             $tempBerkala = $request->file('berkala_terakhir')->getPathName();
-            $folderBerkala = "upload/identitas/berkala-terakhir/" . $newFileBerkala;
+            $folderBerkala = "unggah/identitas/berkala-terakhir/" . $newFileBerkala;
             move_uploaded_file($tempBerkala, $folderBerkala);
-            $pathBerkala = "/upload/identitas/berkala-terakhir/" . $newFileBerkala;
+            $pathBerkala = "/unggah/identitas/berkala-terakhir/" . $newFileBerkala;
         }
 
         $data = [

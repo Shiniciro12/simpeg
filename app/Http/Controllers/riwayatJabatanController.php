@@ -70,10 +70,10 @@ class RiwayatJabatanController extends Controller
         $temp = $request->file('sk_jabatan')->getPathName();
         $file = $request->input('identitas_id') . "-jabatan-" . date('s');
 
-        $folder = "upload/sk-jabatan/" . $file . ".pdf";
+        $folder = "unggah/sk-jabatan/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
 
-        $name = '/upload/sk-jabatan/' . $request->input('identitas_id') . "-jabatan-" . date('s') . '.pdf';
+        $name = '/unggah/sk-jabatan/' . $request->input('identitas_id') . "-jabatan-" . date('s') . '.pdf';
 
         $data = [
             'jabatan_id' => $request->input('jabatan_id'),

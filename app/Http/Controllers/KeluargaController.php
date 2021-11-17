@@ -98,10 +98,10 @@ class KeluargaController extends Controller
         $newFile =  $id_identitas['identitas_id'] . "-Keluarga-" . date('s') .  "." . $extension;
 
         $temp = $request->file('dokumen')->getPathName();
-        $folder = "upload/dokumen-keluarga/" . $newFile;
+        $folder = "unggah/dokumen-keluarga/" . $newFile;
         move_uploaded_file($temp, $folder);
 
-        $path = "/upload/dokumen-keluarga/" . $newFile;
+        $path = "/unggah/dokumen-keluarga/" . $newFile;
 
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],

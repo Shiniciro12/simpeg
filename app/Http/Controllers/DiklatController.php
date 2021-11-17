@@ -80,10 +80,10 @@ class DiklatController extends Controller
         $temp = $request->file('sertifikat')->getPathName();
         $file = $data['identitas_id'] . "-diklat-" . date('s');
 
-        $folder = "upload/sertifikat-diklat/" . $file . ".pdf";
+        $folder = "unggah/sertifikat-diklat/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
 
-        $name = '/upload/sertifikat-diklat/' . $file . '.pdf';
+        $name = '/unggah/sertifikat-diklat/' . $file . '.pdf';
 
         $data = [
             'identitas_id' => $data['identitas_id'],
