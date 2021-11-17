@@ -24,7 +24,7 @@ class Dokumen extends Migration
             $table->string('bkppd_verif_at')->nullable();
             $table->uuid('unit_verif_by')->nullable();
             $table->uuid('bkppd_verif_by')->nullable();
-            $table->string('jenis_layanan')->nullable();
+            $table->uuid('jenis_layanan_id')->nullable();
             $table->timestamps();
         });
         DB::statement('ALTER TABLE dokumen ALTER COLUMN dokumen_id SET DEFAULT uuid_generate_v4();');

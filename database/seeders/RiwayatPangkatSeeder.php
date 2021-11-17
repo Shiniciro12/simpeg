@@ -16,8 +16,8 @@ class RiwayatPangkatSeeder extends Seeder
     {
         //
         RiwayatPangkat::create([
-            'pangkat_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
-            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
+            'pangkat_id' => '8bc252a6-9613-4da0-b4c6-ca90d83451b7',
+            'identitas_id' => 'fb8c36c1-af6a-4cb6-b91c-32f6f7530435',
             'pejabat' => 'Gubernur NTT',
             'no_sk' => 'IV/a-93993',
             'tgl_sk' => '2019-01-11',

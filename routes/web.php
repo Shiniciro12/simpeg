@@ -121,7 +121,7 @@ Route::post('/login', [AuthController::class, 'signIn']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [RootController::class, 'index']);
     Route::group(['prefix' => 'unit-kerja'], function () {
-        Route::get('/pengajuan', [LayananController::class, 'index']);
+        Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuan']);
     });
 });
 
