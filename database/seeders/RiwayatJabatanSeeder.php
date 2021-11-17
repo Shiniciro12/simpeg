@@ -17,8 +17,8 @@ class RiwayatJabatanSeeder extends Seeder
     {
         //
         RiwayatJabatan::create([
-            'jabatan_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
-            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
+            'jabatan_id' => 'f797f7c4-abb4-4be8-af6a-0e8570464f1e',
+            'identitas_id' => 'fb8c36c1-af6a-4cb6-b91c-32f6f7530435',
             'pejabat' => 'Walikota Kupang',
             'no_sk' => 'KABID-93993',
             'tgl_sk' => '2019-10-11',

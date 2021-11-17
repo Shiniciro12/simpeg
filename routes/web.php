@@ -121,7 +121,10 @@ Route::post('/login', [AuthController::class, 'signIn']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [RootController::class, 'index']);
     Route::group(['prefix' => 'unit-kerja'], function () {
-        Route::get('/pengajuan', [LayananController::class, 'index']);
+        Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuan']);
+        Route::post('/pengajuan', [UnitKerjaController::class, 'verifikasi']);
+        Route::post('/identitas', [UnitKerjaController::class, 'getIdentitas']);
+        Route::post('/buat/layanan', [UnitKerjaController::class, 'requestLayanan']);
     });
 });
 
@@ -130,9 +133,11 @@ Route::group(['prefix' => 'klien'], function () {
     Route::get('/dashboard', [KlienController::class, 'dashboard']);
     Route::get('/dataumum', [KlienController::class, 'dataUmum']);
     Route::get('/datakhusus', [KlienController::class, 'dataKhusus']);
-    Route::get('/layanan/index', [KlienController::class, 'indexLayanan1']);
+    Route::get('/layanan/layanankhusus', [KlienController::class, 'dataKhususLayanan']);
     Route::get('/layanan/index2', [KlienController::class, 'indexLayanan2']);
-    Route::get('/layanan/form1', [KlienController::class, 'indexLayananForm1']);
+    Route::get('/layanan/satyalencana', [KlienController::class, 'satyaLencanaForm']);
     Route::get('/layanan/form2', [KlienController::class, 'indexLayananForm2']);
     Route::get('/layanan/listsurat', [KlienController::class, 'indexListSurat']);
+
+    Route::post('/layanan/satyaadd', [KlienController::class, 'satyaLencanaAdd']);
 });

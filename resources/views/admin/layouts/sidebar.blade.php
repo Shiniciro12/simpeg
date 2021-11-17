@@ -84,6 +84,20 @@
                         </a>
                     </li>
                     @endcan
+                    @can('unit-kerja')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/unit-kerja/pengajuan">
+                            <span data-feather="file"></span>
+                            Pengajuan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/unit-kerja/dokumen">
+                            <span data-feather="file"></span>
+                            Dokumen
+                        </a>
+                    </li>
+                    @endcan
                 </ul>
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>Halo {{ explode(' ', trim(auth()->user()->nama))[0]; }}!</span>

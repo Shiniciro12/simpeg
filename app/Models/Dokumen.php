@@ -21,10 +21,10 @@ class Dokumen extends Model
      */
     protected $guarded = ['dokumen_id'];
 
-    public function scopeFilter($query, array $filters){
-        $query->when($filters['search'] ?? false, function($query, $search){
-            return $query->where('sk', 'like', '%'.$search.'%');
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('nip', 'like', '%' . $search . '%');
         });
     }
-
 }

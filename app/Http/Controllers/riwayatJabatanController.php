@@ -67,6 +67,8 @@ class RiwayatJabatanController extends Controller
             return redirect('/riwayat-jabatan/add')->withErrors($validator)->withInput();
         }
 
+
+
         $temp = $request->file('sk_jabatan')->getPathName();
         $file = $request->input('identitas_id') . "-jabatan-" . date('s');
 
