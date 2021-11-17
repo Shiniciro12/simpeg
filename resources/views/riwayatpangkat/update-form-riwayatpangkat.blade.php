@@ -136,7 +136,18 @@
                                 @enderror
                             </div> --}}
 
-
+                            <label for="sk_pangkat" class="form-label">SK Pangkat (Format PDF, Maksimal 500 KB) <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control @error('sk_pangkat') is-invalid @enderror"
+                            value="{{old('sk_pangkat')}}" id="sk_pangkat" name="sk_pangkat">
+                        <label class="input-group-text" for="sk_pangkat">Upload</label>
+                        @error('sk_pangkat')
+                        <div id="sk_pangkat" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
                         </div>
                     </div>
 

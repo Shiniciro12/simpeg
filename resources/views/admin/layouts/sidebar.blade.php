@@ -17,16 +17,12 @@
                             Identitas
                         </a>
                     </li>
-
-
                     <li class="nav-item">
                         <a class="nav-link" href="/unit-kerja">
                             <span data-feather="file"></span>
                             Unit Kerja
                         </a>
                     </li>
-
-
                     <li class="nav-item">
                         <a class="nav-link" href="/kelurahan">
                             <span data-feather="file"></span>

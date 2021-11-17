@@ -102,6 +102,18 @@
                         </div>
                     </div>
                 </div>
+                <label for="sk_jabatan" class="form-label">SK Jabatan (Format PDF, Maksimal 500 KB) <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control @error('sk_jabatan') is-invalid @enderror"
+                            value="{{old('sk_jabatan')}}" id="sk_jabatan" name="sk_jabatan">
+                        <label class="input-group-text" for="sk_jabatan">Upload</label>
+                        @error('sk_jabatan')
+                        <div id="sk_jabatan" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
                 <br>
                 <div class="row">
                     <div class="col-sm-12">

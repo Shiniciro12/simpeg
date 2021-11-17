@@ -56,12 +56,12 @@
             @foreach ($rows as $row)
             <tr>
               <td scope="row">
-                <a href="/keluarga/update/{{ $row[" keluarga_id"] }}" class="btn btn-warning p-2 shadow"><i
+                <a href="/keluarga/update/{{ $row["keluarga_id"] }}" class="btn btn-warning p-2 shadow"><i
                     class="bi bi-pencil-square"></i></a>
                 <form action="/keluarga/delete" method="post" class="d-inline">
                   @csrf
-                  <input type="hidden" name="keluarga_id" value="{{ $row[" keluarga_id"] }}">
-                  <input type="hidden" name="dokumen" value="{{ $row[" dokumen"] }}">
+                  <input type="hidden" name="keluarga_id" value="{{ $row["keluarga_id"] }}">
+                  <input type="hidden" name="dokumen" value="{{ $row["dokumen"] }}">
                   <button type="submit" class="btn btn-danger p-2 shadow"
                     onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i
                       class="bi bi-trash-fill"></i></button>

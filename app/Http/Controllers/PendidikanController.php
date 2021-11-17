@@ -71,7 +71,7 @@ class PendidikanController extends Controller
         $temp = $request->file('sttb')->getPathName();
         $file = $id_identitas['identitas_id'] . "-sttb-" . date('s');
 
-        $folder = "upload/sttb/" . $file . ".pdf";
+        $folder = "unggah/sttb/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
 
         $name = $id_identitas['identitas_id'] . "-sttb-"  . date('s');
@@ -141,9 +141,9 @@ class PendidikanController extends Controller
             'date' => '*Kolom :attribute tidak valid.',
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'before' => '*Kolom :attribute tidak valid.',
-            // 'file' => '*File :attribute wajib dipilih.',
-            // 'max' => '*Kolom :attribute maksimal :max karakter.',
-            // 'mimes' => '*Format file :attribute tidak didukung.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max karakter.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -171,7 +171,7 @@ class PendidikanController extends Controller
     public function delete(Request $request)
     {
         $pendidikan = Pendidikan::where('pendidikan_id', $request->input('pendidikan_id'))->first();
-        File::delete(public_path('upload/sttb/' . $pendidikan['sttb']));
+        File::delete(public_path('unggah/sttb/' . $pendidikan['sttb']));
         Pendidikan::destroy($request->input('pendidikan_id'));
         return redirect('/pendidikan')->with('success', 'Data berhasil dihapus');
     }

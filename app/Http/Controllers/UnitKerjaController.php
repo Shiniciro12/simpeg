@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Layanan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\UnitKerja;
@@ -149,5 +150,13 @@ class UnitKerjaController extends Controller
     {
         UnitKerja::destroy($unit_kerja_id);
         return redirect('/unit-kerja')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function pengajuan()
+    {
+        return view('admin.unit-kerja.pengajuan', [
+            'page' => 'Data Pengajuan',
+            "rows" => Layanan::latest()->get(),
+        ]);
     }
 }

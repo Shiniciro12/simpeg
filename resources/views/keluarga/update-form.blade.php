@@ -248,13 +248,19 @@
                 @enderror
             </div>
 
-            <!-- <label for="file" class="form-label">File (Format PDF Maksimal 500Kb)</label>
+            <label for="keluarga" class="form-label">Kartu Keluarga (Format PDF, Maksimal 500 KB) <span
+                            class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control" value="" id="file" name="file">
-                        <label class="input-group-text" for="file">Upload</label>
-                        <div id="foto" class="invalid-feedback">
+                        <input type="file" class="form-control @error('keluarga') is-invalid @enderror"
+                            value="{{old('keluarga')}}" id="keluarga" name="keluarga">
+                        <label class="input-group-text" for="keluarga">Upload</label>
+                        @error('keluarga')
+                        <div id="keluarga" class="invalid-feedback">
+                            {{$message}}
                         </div>
-                      </div>    -->
+                        @enderror
+                    </div>
+                    
             <button type="submit" class="btn btn-primary">Kirim</button>
 
         </div>

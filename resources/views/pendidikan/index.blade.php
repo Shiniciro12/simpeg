@@ -64,7 +64,7 @@
             <td scope="row">{{ $row["nama_kepsek_rektor"] }}</td>
             <td scope="row">{{ $row["no_sttb"] }}</td>
             <td scope="row">{{ $row["tgl_sttb"] }}</td>
-            <td scope="row"><a href="upload/sttb/{{ $row[" sttb"] }}" class="btn btn-primary"><i
+            <td scope="row"><a href="unggah/sttb/{{ $row[" sttb"] }}" class="btn btn-primary"><i
                   class="bi bi-file-earmark-pdf"></i></a></td>
 
           </tr>

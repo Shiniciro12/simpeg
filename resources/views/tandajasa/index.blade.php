@@ -36,11 +36,11 @@
             @foreach ($rows as $row)
             <tr>
               <td scope="row">
-                <a href="/tandajasa/update/{{ $row[" tanda_jasa_id"] }}" class="btn btn-warning p-2 shadow"><i
+                <a href="/tandajasa/update/{{ $row["tanda_jasa_id"] }}" class="btn btn-warning p-2 shadow"><i
                     class="bi bi-pencil-square"></i></a>
                 <form action="/tandajasa/delete" method="post" class="d-inline">
                   @csrf
-                  <input type="hidden" name="tanda_jasa_id" value="{{ $row[" tanda_jasa_id"] }}">
+                  <input type="hidden" name="tanda_jasa_id" value="{{ $row["tanda_jasa_id"] }}">
                   <input type="hidden" name="sertifikat" value="{{ $row[" sertifikat"] }}">
                   <button type="submit" class="btn btn-danger p-2 shadow"
                     onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i

@@ -130,16 +130,16 @@
                 </div>
                 @enderror
             </div>
-            <!-- <label for="sertifikat" class="form-label">Sertifikat (pdf, 500Kb) <span class="text-danger">*</span></label> -->
-            <!-- <div class="input-group mb-3"> -->
-            <!-- <input type="file" name="sertifikat" class="form-control @error('sertifikat') is-invalid @enderror" value="{{old('sertifikat')}}" id="sertifikat" name="sertifikat"> -->
-            <!-- <label class="input-group-text" for="sertifikat">Upload</label> -->
-            <!-- @error('sertifikat') -->
-            <!-- <div id="sertifikat" class="invalid-feedback"> -->
-            <!-- {{$message}} -->
-            <!-- </div> -->
-            <!-- @enderror -->
-            <!-- </div> -->
+             <label for="sertifikat" class="form-label">Sertifikat (Format: PDF Maksimal 500 KB) <span class="text-danger">*</span></label> -->
+             <div class="input-group mb-3"> -->
+             <input type="file" name="sertifikat" class="form-control @error('sertifikat') is-invalid @enderror" value="{{old('sertifikat')}}" id="sertifikat" name="sertifikat"> -->
+             <label class="input-group-text" for="sertifikat">Upload</label> -->
+             @error('sertifikat') -->
+             <div id="sertifikat" class="invalid-feedback"> -->
+             {{$message}} -->
+             </div> -->
+             @enderror -->
+             </div> -->
             <button type="submit" class="btn btn-primary btn-block">Kirim</button>
             </form>
         </div>

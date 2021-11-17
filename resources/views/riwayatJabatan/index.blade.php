@@ -43,7 +43,7 @@
             @foreach ($rows as $row)
             <tr>
               <td scope="row" style="text-align: center;">
-                <a href="/riwayat-jabatan/update/{{ $row[" riwayat_jabatan_id"] }}"
+                <a href="/riwayat-jabatan/update/{{ $row["riwayat_jabatan_id"] }}"
                   class="btn btn-warning p-2 shadow""><i class=" bi bi-pencil-square"></i></a>
                 <form action=" /riwayat-jabatan/delete" method="POST" class="d-inline">
                   @csrf
@@ -60,7 +60,7 @@
               <td scope="row" style="text-align: center">{{ $row["no_sk"] }}</td>
               <td scope="row" style="text-align: center">{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tmt_jabatan"] }}</td>
-              <td scope="row" class="text-center"><a href="/upload/sk-jabatan/{{ $row[" sk_jabatan"] }}"
+              <td scope="row" class="text-center"><a href="{{ $row["sk_jabatan"] }}"
                   class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
             </tr>
             @endforeach
