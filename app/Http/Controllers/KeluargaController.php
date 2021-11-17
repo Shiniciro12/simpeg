@@ -18,6 +18,14 @@ class KeluargaController extends Controller
         ]);
     }
 
+    public function UmumView()
+    {
+        return view('klien.form-umum.riwayat-keluarga.index', [
+            'page' => 'Data Keluarga',
+            "rows" => Keluarga::select('keluarga.*', 'identitas.nama AS nama_identitas')->join('identitas', 'identitas.identitas_id', '=', 'keluarga.identitas_id')->latest()->where('keluarga.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+        ]);
+    }
+
     public function addForm()
     {
         return view('keluarga.add-form', [

@@ -37,6 +37,15 @@ class RiwayatPangkatController extends Controller
         ]);
     }
 
+    //Umum View Controller
+    public function UmumView()
+    {
+        return view('klien.form-umum.riwayat-pangkat.index', [
+            'page' => 'Data Pangkat',
+            "rows" => RiwayatPangkat::select(['pangkat.*', 'riwayat_pangkat.*', 'identitas.*'])->join("pangkat", "pangkat.pangkat_id", "=", "riwayat_pangkat.pangkat_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_pangkat.identitas_id")->where('riwayat_pangkat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)
+        ]);
+    }
+
     public function add4(Request $request)
     {
         $id = Identitas::where('nip', $request->input('identitas_id'))->first();

@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -42,15 +43,12 @@
               @foreach ($rows as $row)
               <tr>
                 <td scope="row">
-                  <a href="/riwayatpangkat/update/{{ $row->riwayat_pangkat_id }}" class="btn btn-warning p-2 shadow"><i
-                      class="bi bi-pencil-square"></i></a>
+                  <a href="/riwayatpangkat/update/{{ $row->riwayat_pangkat_id }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
                   <form action="/riwayatpangkat/delete" method="post" class="d-inline">
                     @csrf
                     <input type="hidden" value="{{ $row->riwayat_pangkat_id }}" name="riwayat_pangkat_id">
                     <input type="hidden" value="{{ $row->sk_pangkat }}" name="sk_pangkat">
-                    <button type="submit" class="btn btn-danger p-2 shadow"
-                      onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i
-                        class="bi bi-trash-fill"></i></button>
+                    <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="bi bi-trash-fill"></i></button>
                   </form>
                 </td>
                 <th scope="row">{{ $i++}}</th>
@@ -61,9 +59,7 @@
                 <td scope="row">{{ $row["no_sk"] }}</td>
                 <td scope="row">{{ $row["tgl_sk"] }}</td>
                 <td scope="row">{{ $row["tmt_pangkat"] }}</td>
-                <td class="text-center" scope="row"><a download=".{{ $row[" tgl_sk"] }}.{{ $row["no_sk"] }}"
-                    href="{{ $row->sk_pangkat }}" class="btn btn-primary shadow"><i
-                      class="bi bi-file-earmark-pdf"></i></a></td>
+                <td class="text-center" scope="row"><a download=".{{ $row[" tgl_sk"] }}.{{ $row["no_sk"] }}" href="{{ $row->sk_pangkat }}" class="btn btn-primary shadow"><i class="bi bi-file-earmark-pdf"></i></a></td>
 
               </tr>
               @endforeach

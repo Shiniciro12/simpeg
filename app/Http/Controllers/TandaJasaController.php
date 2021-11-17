@@ -18,6 +18,14 @@ class TandaJasaController extends Controller
         ]);
     }
 
+    public function UmumView()
+    {
+        return view('klien.form-umum.tanda-jasa.index', [
+            'page' => 'Data Tanda Jasa',
+            "rows" => TandaJasa::select('tanda_jasa.*', 'identitas.nama AS nama_identitas')->join('identitas', 'identitas.identitas_id', '=', 'tanda_jasa.identitas_id')->latest()->where('tanda_jasa.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+        ]);
+    }
+
     public function addForm()
     {
         return view('tandajasa.add-form', [
@@ -40,7 +48,7 @@ class TandaJasaController extends Controller
         ];
 
         $input = [
-            'identitas_id' =>$request->input('identitas_id'),
+            'identitas_id' => $request->input('identitas_id'),
             'nama' => $request->input('nama'),
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),

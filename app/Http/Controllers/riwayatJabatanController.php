@@ -20,6 +20,14 @@ class RiwayatJabatanController extends Controller
         ]);
     }
 
+    public function UmumView()
+    {
+        return view('klien.form-umum.riwayat-jabatan.index', [
+            'page' => 'Data Jabatan',
+            "rows" => RiwayatJabatan::select(['identitas.nama', 'riwayat_jabatan.*', 'jabatan.nama_jabatan', 'jabatan.jabatan_id', 'identitas.identitas_id'])->join("identitas", "identitas.identitas_id", "=", "riwayat_jabatan.identitas_id")->join("jabatan", "jabatan.jabatan_id", "=", "riwayat_jabatan.jabatan_id")->latest()->where('riwayat_jabatan.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)
+        ]);
+    }
+
     public function addForm()
     {
         return view('riwayatJabatan.add-form', [

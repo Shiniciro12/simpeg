@@ -19,6 +19,14 @@ class DiklatController extends Controller
         ]);
     }
 
+    public function UmumView()
+    {
+        return view('klien.form-umum.riwayat-diklat.index', [
+            'page' => 'Data Diklat',
+            "rows" => diklat::select('diklat.*', 'identitas.nama as nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'diklat.identitas_id')->latest()->where('diklat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(7)->withQueryString(),
+        ]);
+    }
+
     public function addForm()
     {
         return view('diklat.add-form', [

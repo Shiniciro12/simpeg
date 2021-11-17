@@ -132,4 +132,56 @@ Route::group(['prefix' => 'klien'], function () {
     Route::get('/layanan/form1', [KlienController::class, 'indexLayananForm1']);
     Route::get('/layanan/form2', [KlienController::class, 'indexLayananForm2']);
     Route::get('/layanan/listsurat', [KlienController::class, 'indexListSurat']);
+
+    Route::group(['prefix' => 'dataumum'], function () {
+        //data umum riwayat jabatan
+        // Route::get('/add-riwayat-pangkat', [RiwayaPangkatController::class, 'UaddFormRPangkat']);
+        Route::get('/riwayat-pangkat', [RiwayatPangkatController::class, 'UmumView']);
+
+        //data umum riwayat pendidikan
+        Route::get('/pendidikan', [PendidikanController::class, 'UmumView']);
+        // Route::get('/pendidikan/add', [PendidikanController::class, 'addForm']);
+        // Route::get('/pendidikan/update/{pendidikan_id}', [PendidikanController::class, 'updateForm']);
+
+        // Route::post('/pendidikan/add', [PendidikanController::class, 'add']);
+        // Route::post('/pendidikan/updt', [PendidikanController::class, 'update']);
+        // Route::post('/pendidikan/delete', [PendidikanController::class, 'delete']);
+
+        //data umum riwayat jabatan
+        Route::get('/riwayat-jabatan', [RiwayatJabatanController::class, 'UmumView']);
+        // Route::get('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'addForm']);
+        // Route::get('/riwayat-jabatan/update/{riwayat_jabatan_id}', [RiwayatJabatanController::class, 'updateForm']);
+
+        // Route::post('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'add']);
+        // Route::post('/riwayat-jabatan/updt', [RiwayatJabatanController::class, 'update']);
+        // Route::post('/riwayat-jabatan/delete', [RiwayatJabatanController::class, 'delete']);
+
+        //data umum riwayat diklat
+        Route::get('/diklat', [DiklatController::class, 'UmumView']);
+        // Route::get('/diklat/add', [DiklatController::class, 'addForm']);
+        // Route::get('/diklat/update/{diklat_id}', [DiklatController::class, 'updateForm']);
+
+        // Route::post('/diklat/add', [DiklatController::class, 'add']);
+        // Route::post('/diklat/update', [DiklatController::class, 'update']);
+        // Route::post('/diklat/delete', [DiklatController::class, 'delete']);
+
+        //data umum riwayat keluarga
+        Route::get('/keluarga', [KeluargaController::class, 'UmumView']);
+        // Route::get('/keluarga/add', [KeluargaController::class, 'addForm']);
+        // Route::get('/keluarga/update/{keluarga_id}', [KeluargaController::class, 'updateForm']);
+
+        // Route::post('/keluarga/add', [KeluargaController::class, 'add']);
+        // Route::post('/keluarga/update', [KeluargaController::class, 'update']);
+        // Route::post('/keluarga/delete', [KeluargaController::class, 'delete']);
+
+        //data umum tanda jasa
+        Route::get('/tandajasa', [TandaJasaController::class, 'UmumView']);
+        // Route::get('/tandajasa/add', [TandaJasaController::class, 'addForm']);
+        // Route::get('/tandajasa/update/{tanda_jasa_id}', [TandaJasaController::class, 'updateForm']);
+
+        // Route::post('/tandajasa/add', [TandaJasaController::class, 'add']);
+        // Route::post('/tandajasa/update', [TandaJasaController::class, 'update']);
+        // Route::post('/tandajasa/delete', [TandaJasaController::class, 'delete']);
+
+    });
 });

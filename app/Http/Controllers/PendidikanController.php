@@ -18,6 +18,15 @@ class PendidikanController extends Controller
         ]);
     }
 
+    //umumView
+    public function UmumView()
+    {
+        return view('klien.form-umum.pendidikan.index', [
+            'page' => 'Data Pendidikan',
+            "rows" => Pendidikan::select('pendidikan.*', 'identitas.nama as nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'pendidikan.identitas_id')->latest()->where('pendidikan.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(7)->withQueryString(),
+        ]);
+    }
+
     public function addForm()
     {
         return view('pendidikan.add-form', [
@@ -38,7 +47,7 @@ class PendidikanController extends Controller
             'tempat' => 'required',
             'nama_kepsek_rektor' => 'required',
             'no_sttb' => 'required|unique:pendidikan',
-            'tgl_sttb' => 'required|date|before:'.today(),
+            'tgl_sttb' => 'required|date|before:' . today(),
             'sttb' => 'file|mimes:pdf|max:1000',
         ];
 
@@ -109,7 +118,7 @@ class PendidikanController extends Controller
     {
         $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
         $pendidikan = Pendidikan::find($request->input('pendidikan_id'));
-        
+
         $no_sttb = $pendidikan['no_sttb'] != $request->input('no_sttb') ? '|unique:pendidikan' : '';
 
         $rules = [
@@ -119,8 +128,8 @@ class PendidikanController extends Controller
             'nama_lembaga_pendidikan' => 'required',
             'tempat' => 'required',
             'nama_kepsek_rektor' => 'required',
-            'no_sttb' => 'required'.$no_sttb,
-            'tgl_sttb' => 'required|date|before:'.today(),
+            'no_sttb' => 'required' . $no_sttb,
+            'tgl_sttb' => 'required|date|before:' . today(),
             // 'sttb' => 'file|mimes:pdf|max:1000',
         ];
 
@@ -148,9 +157,9 @@ class PendidikanController extends Controller
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/pendidikan/update/'.$request->input('pendidikan_id'))->withErrors($validator)->withInput();
+            return redirect('/pendidikan/update/' . $request->input('pendidikan_id'))->withErrors($validator)->withInput();
         }
-        
+
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
             'tingkat_pendidikan' => $request->input('tingkat_pendidikan'),
