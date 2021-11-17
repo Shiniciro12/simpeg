@@ -8,21 +8,26 @@
       @include('admin.layouts.sidenav')
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Layanan</h1>
         </div>
 
         <!-- <div class="card shadow p-3 mb-5 bg-body rounded"> -->
         <div class="card-body">
-          <div class="alert alert-success" role="alert">
+          <div class="alert alert-info" role="alert">
             Silahkan pilih layanan dibawah ini untuk mengisi form.
           </div>
           <!-- Row Pertama -->
+          @if(session()->has('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
           <div class="row">
             <div class="col-3">
               <div class="card text-center">
-                <a href="/klien/layanan/form1" class="link-light">
+                <a href="/klien/layanan/satyalencana" class="link-light">
                   <div class="card-body">
                     <i class="bi bi-clipboard-check link-primary" style="font-size: 36px;"></i><br><br>
                     <small class="card-text" style="color: black;"><b>Satya Lencana</b></small>

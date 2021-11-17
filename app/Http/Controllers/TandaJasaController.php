@@ -76,10 +76,10 @@ class TandaJasaController extends Controller
         $extension = $request->file('sertifikat')->getClientOriginalExtension();
 
         $temp = $request->file('sertifikat')->getPathName();
-        $folder = "upload/sertifikat-tandajasa/" . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $folder = "unggah/sertifikat-tandajasa/" . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
         move_uploaded_file($temp, $folder);
 
-        $newFile = '/upload/sertifikat-tandajasa/' . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $newFile = '/unggah/sertifikat-tandajasa/' . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
 
         $data = [
             'identitas_id' => $data['identitas_id'],

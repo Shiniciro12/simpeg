@@ -90,10 +90,10 @@ class RiwayatPangkatController extends Controller
         $newFile =  $request->input('pangkat_id') . "-pangkat-" . date('s') .  "." . $extension;
 
         $temp = $request->file('sk_pangkat')->getPathName();
-        $folder = "upload/riwayat-pangkat/" . $newFile;
+        $folder = "unggah/riwayat-pangkat/" . $newFile;
         move_uploaded_file($temp, $folder);
 
-        $path = "/upload/riwayat-pangkat/" . $newFile;
+        $path = "/unggah/riwayat-pangkat/" . $newFile;
 
         $data = [
             'pangkat_id' => $request->input('pangkat_id'),

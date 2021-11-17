@@ -16,16 +16,12 @@
                             Identitas
                         </a>
                     </li>
-                    @endcan
-                    @can('unit-kerja')
                     <li class="nav-item">
                         <a class="nav-link" href="/unit-kerja">
                             <span data-feather="file"></span>
                             Unit Kerja
                         </a>
                     </li>
-                    @endcan
-                    @can('root')
                     <li class="nav-item">
                         <a class="nav-link" href="/kelurahan">
                             <span data-feather="file"></span>
@@ -84,6 +80,20 @@
                         <a class="nav-link" href="/keluarga">
                             <span data-feather="file"></span>
                             Keluarga
+                        </a>
+                    </li>
+                    @endcan
+                    @can('unit-kerja')
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/unit-kerja/pengajuan">
+                            <span data-feather="file"></span>
+                            Pengajuan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/unit-kerja/dokumen">
+                            <span data-feather="file"></span>
+                            Dokumen
                         </a>
                     </li>
                     @endcan

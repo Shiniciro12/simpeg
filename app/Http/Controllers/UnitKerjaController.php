@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokumen;
+use App\Models\Identitas;
+use App\Models\JenisLayanan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\UnitKerja;
@@ -149,5 +152,65 @@ class UnitKerjaController extends Controller
     {
         UnitKerja::destroy($unit_kerja_id);
         return redirect('/unit-kerja')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function pengajuan()
+    {
+        return view('admin.unit-kerja.pengajuan', [
+            'page' => 'Data Pengajuan',
+            'rowsIdentitas' => Identitas::latest()->get(),
+            'rowsJenisLayanan' => JenisLayanan::latest()->get(),
+            "rows" => Dokumen::join("identitas", "identitas.identitas_id", "=", "dokumen.identitas_id")->join("riwayat_pangkat", "riwayat_pangkat.identitas_id", "=", "dokumen.identitas_id")->join("riwayat_jabatan", "riwayat_jabatan.identitas_id", "=", "dokumen.identitas_id")->join("jenis_layanan", "jenis_layanan.jenis_layanan_id", "=", "dokumen.jenis_layanan_id")->where("identitas.unit_kerja_id", "=", auth()->user()->unit_kerja_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+        ]);
+    }
+
+    public function verifikasi(Request $request)
+    {
+        $data = [
+            'status' => '3',
+            'unit_verif_at' => time(),
+            'unit_verif_by' => auth()->user()->identitas_id,
+        ];
+        Dokumen::where('dokumen_id', $request->input('dokumen_id'))->update($data);
+        return redirect('/admin/unit-kerja/pengajuan')->with('success', 'Data berhasil diverifikasi');
+    }
+
+    public function requestLayanan(Request $request)
+    {
+        $data = Identitas::where('nip', $request->input('nip'))->first();
+
+        $rules = [
+            'nip' => 'required',
+            'jenis_layanan_id' => 'required',
+        ];
+
+        $input = [
+            'nip' => $request->input('nip'),
+            'jenis_layanan_id' => $request->input('jenis_layanan_id'),
+        ];
+
+        $messages = [
+            'required' => '*Kolom :attribute wajib diisi.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/admin/unit-kerja/pengajuan')->withErrors($validator)->withInput();
+        }
+
+        $data = [
+            'dokumen' => '',
+            'identitas_id' => $data['identitas_id'],
+            'status' => 0,
+            'unit_verif_at' => '',
+            'bkppd_verif_at' => '',
+            'unit_verif_by' => $request->input('identitas_id'),
+            'bkppd_verif_by' => $request->input('identitas_id'),
+            'jenis_layanan_id' => $request->input('jenis_layanan_id'),
+        ];
+
+        Dokumen::create($data);
+
+        return redirect('/admin/unit-kerja/pengajuan')->with('success', 'Pengajuan berhasil ditambahkan');
     }
 }
