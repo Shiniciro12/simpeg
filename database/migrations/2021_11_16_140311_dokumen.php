@@ -17,7 +17,7 @@ class Dokumen extends Migration
         DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('dokumen', function (Blueprint $table) {
             $table->uuid('dokumen_id')->primary();
-            $table->string('dokumen')->nullable();
+            $table->longText('dokumen')->nullable();
             $table->uuid('identitas_id')->nullable();
             $table->string('status')->nullable();
             $table->string('unit_verif_at')->nullable();
