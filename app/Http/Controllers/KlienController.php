@@ -86,12 +86,12 @@ class KlienController extends Controller
         ];
 
 
-        //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
+        //Looping buat unggah itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
             $file = time() . "_" . $r . ".pdf|";
-            $folder = "upload/dokumen-khusus/" . explode("|", $file)[0];
+            $folder = "unggah/dokumen-khusus/" . explode("|", $file)[0];
             move_uploaded_file($val, $folder);
             $file_stacked[$num_file++] = $file;
         }
