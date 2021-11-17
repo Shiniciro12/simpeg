@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokumen;
+use App\Models\Layanan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\UnitKerja;
@@ -149,5 +151,13 @@ class UnitKerjaController extends Controller
     {
         UnitKerja::destroy($unit_kerja_id);
         return redirect('/unit-kerja')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function pengajuan()
+    {
+        return view('admin.unit-kerja.pengajuan', [
+            'page' => 'Data Pengajuan',
+            "rows" => Dokumen::join("identitas", "identitas.identitas_id", "=", "dokumen.identitas_id")->join("riwayat_pangkat", "riwayat_pangkat.identitas_id", "=", "dokumen.identitas_id")->join("riwayat_jabatan", "riwayat_jabatan.identitas_id", "=", "dokumen.identitas_id")->join("jenis_layanan", "jenis_layanan.jenis_layanan_id", "=", "dokumen.jenis_layanan_id")->where("identitas.unit_kerja_id", "=", auth()->user()->unit_kerja_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+        ]);
     }
 }

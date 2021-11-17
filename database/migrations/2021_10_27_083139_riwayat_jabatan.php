@@ -24,6 +24,7 @@ class RiwayatJabatan extends Migration
             $table->date('tgl_sk');
             $table->date('tmt_jabatan');
             $table->string('sk_jabatan');
+            $table->string('pak')->nullable();
             $table->timestamps();
         });
         DB::statement('ALTER TABLE riwayat_jabatan ALTER COLUMN riwayat_jabatan_id SET DEFAULT uuid_generate_v4();');
