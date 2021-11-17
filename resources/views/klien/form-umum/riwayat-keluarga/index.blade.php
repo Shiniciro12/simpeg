@@ -19,7 +19,7 @@
                         <div class="col-md-12 mt-2">
                             <div class="text-center my-4">
                                 <h2>Data Keluarga</h2>
-                                <a href="/keluarga/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+                                <a href="/klien/dataumum/keluarga/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
                             </div>
                             <form action="" method="get">
                                 <div class="input-group mb-3">
@@ -31,7 +31,7 @@
                                 <table class="table table-hover table-striped shadow">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th scope="col"></th>
+
                                             <th scope="col">#</th>
                                             <th scope="col">Nama Pegawai</th>
                                             <th scope="col">NIK</th>
@@ -60,15 +60,7 @@
                                         <?php $k = 1; ?>
                                         @foreach ($rows as $row)
                                         <tr>
-                                            <td scope="row">
-                                                <a href="/keluarga/update/{{ $row["keluarga_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
-                                                <form action="/keluarga/delete" method="post" class="d-inline">
-                                                    @csrf
-                                                    <input type="hidden" name="keluarga_id" value="{{ $row["keluarga_id"] }}">
-                                                    <input type="hidden" name="dokumen" value="{{ $row["dokumen"] }}">
-                                                    <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
-                                                </form>
-                                            </td>
+
                                             <th scope="row">{{ $k++}}</th>
                                             <td scope="row">{{ $row["nama_identitas"] }}</td>
                                             <td scope="row">{{ $row["nik"] }}</td>
@@ -90,7 +82,7 @@
                                             <td scope="row">{{ $row["hp"] }}</td>
                                             <td scope="row">{{ $row["telepon"] }}</td>
                                             <td scope="row">{{ $row["kode_pos"] }}</td>
-                                            <td scope="row"><a href="{{ $row['dokumen'] }}">pdf</a></td>
+                                            <td scope="row"><a href="{{ $row['dokumen'] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

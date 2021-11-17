@@ -19,7 +19,7 @@
                         <div class="col-md-11 mt-2 mx-auto">
                             <div class="text-center my-4">
                                 <h2>Data Riwayat Jabatan</h2>
-                                <a href="/riwayat-jabatan/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+                                <a href="/klien/dataumum/riwayat-jabatan/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
                             </div>
                             <br>
                             <form action="" method="get">
@@ -32,7 +32,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th scope="col"> </th>
+
                                             <th scope="col">#</th>
                                             <th scope="col">Nama Jabatan</th>
                                             <th scope="col">Pegawai</th>
@@ -47,14 +47,7 @@
                                         <?php $i = 1; ?>
                                         @foreach ($rows as $row)
                                         <tr>
-                                            <td scope="row" style="text-align: center;">
-                                                <a href="/riwayat-jabatan/update/{{ $row["riwayat_jabatan_id"] }}" class="btn btn-warning p-2 shadow""><i class=" bi bi-pencil-square"></i></a>
-                                                <form action=" /riwayat-jabatan/delete" method="POST" class="d-inline">
-                                                    @csrf
-                                                    <input type="hidden" value="{{$row['riwayat_jabatan_id']}}" name="riwayat_jabatan_id">
-                                                    <button class="btn btn-danger p-2 shadow" onclick="return confirm('Apakah anda ingin menghapus data ini?')"><i class="bi bi-trash-fill"></i></button>
-                                                </form>
-                                            </td>
+
                                             <th scope="row">{{ $i++}}</th>
                                             <td scope="row">{{ $row["nama_jabatan"] }}</td>
                                             <td scope="row">{{ $row["nama"] }}</td>

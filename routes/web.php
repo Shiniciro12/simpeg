@@ -141,55 +141,42 @@ Route::group(['prefix' => 'klien'], function () {
 
 
     Route::group(['prefix' => 'dataumum'], function () {
+
         //data umum riwayat jabatan
-        // Route::get('/add-riwayat-pangkat', [RiwayaPangkatController::class, 'UaddFormRPangkat']);
+
         Route::get('/riwayat-pangkat', [RiwayatPangkatController::class, 'UmumView']);
+        Route::get('/riwayat-pangkat/add', [RiwayatPangkatController::class, 'UaddFormRPangkat']);
 
+
+        Route::post('/riwayat-pangkat/store', [RiwayatPangkatController::class, 'UAddStoreRPangkat']);
         //data umum riwayat pendidikan
-        Route::get('/pendidikan', [PendidikanController::class, 'UmumView']);
-        // Route::get('/pendidikan/add', [PendidikanController::class, 'addForm']);
-        // Route::get('/pendidikan/update/{pendidikan_id}', [PendidikanController::class, 'updateForm']);
+        Route::get('/riwayat-pendidikan', [PendidikanController::class, 'UmumView']);
+        Route::get('/riwayat-pendidikan/add', [PendidikanController::class, 'UAddForm']);
 
-        // Route::post('/pendidikan/add', [PendidikanController::class, 'add']);
-        // Route::post('/pendidikan/updt', [PendidikanController::class, 'update']);
-        // Route::post('/pendidikan/delete', [PendidikanController::class, 'delete']);
+        Route::post('/riwayat-pendidikan/store', [PendidikanController::class, 'UStore']);
 
         //data umum riwayat jabatan
         Route::get('/riwayat-jabatan', [RiwayatJabatanController::class, 'UmumView']);
-        // Route::get('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'addForm']);
-        // Route::get('/riwayat-jabatan/update/{riwayat_jabatan_id}', [RiwayatJabatanController::class, 'updateForm']);
+        Route::get('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'UaddForm']);
 
-        // Route::post('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'add']);
-        // Route::post('/riwayat-jabatan/updt', [RiwayatJabatanController::class, 'update']);
-        // Route::post('/riwayat-jabatan/delete', [RiwayatJabatanController::class, 'delete']);
-
+        Route::post('/riwayat-jabatan/store', [RiwayatJabatanController::class, 'UStrore']);
         //data umum riwayat diklat
         Route::get('/diklat', [DiklatController::class, 'UmumView']);
-        // Route::get('/diklat/add', [DiklatController::class, 'addForm']);
-        // Route::get('/diklat/update/{diklat_id}', [DiklatController::class, 'updateForm']);
+        Route::get('/diklat/add', [DiklatController::class, 'UaddForm']);
 
-        // Route::post('/diklat/add', [DiklatController::class, 'add']);
-        // Route::post('/diklat/update', [DiklatController::class, 'update']);
-        // Route::post('/diklat/delete', [DiklatController::class, 'delete']);
+        Route::post('/diklat/store', [DiklatController::class, 'UStore']);
 
         //data umum riwayat keluarga
         Route::get('/keluarga', [KeluargaController::class, 'UmumView']);
-        // Route::get('/keluarga/add', [KeluargaController::class, 'addForm']);
-        // Route::get('/keluarga/update/{keluarga_id}', [KeluargaController::class, 'updateForm']);
+        Route::get('/keluarga/add', [KeluargaController::class, 'UaddForm']);
 
-        // Route::post('/keluarga/add', [KeluargaController::class, 'add']);
-        // Route::post('/keluarga/update', [KeluargaController::class, 'update']);
-        // Route::post('/keluarga/delete', [KeluargaController::class, 'delete']);
+        Route::post('/keluarga/store', [KeluargaController::class, 'UStore']);
 
         //data umum tanda jasa
         Route::get('/tandajasa', [TandaJasaController::class, 'UmumView']);
-        // Route::get('/tandajasa/add', [TandaJasaController::class, 'addForm']);
-        // Route::get('/tandajasa/update/{tanda_jasa_id}', [TandaJasaController::class, 'updateForm']);
+        Route::get('/tandajasa/add', [TandaJasaController::class, 'UaddForm']);
 
-        // Route::post('/tandajasa/add', [TandaJasaController::class, 'add']);
-        // Route::post('/tandajasa/update', [TandaJasaController::class, 'update']);
-        // Route::post('/tandajasa/delete', [TandaJasaController::class, 'delete']);
-
+        Route::post('/tandajasa/store', [TandaJasaController::class, 'UStore']);
     });
 
     Route::post('/layanan/satyaadd', [KlienController::class, 'satyaLencanaAdd']);

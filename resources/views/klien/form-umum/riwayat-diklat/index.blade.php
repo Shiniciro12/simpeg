@@ -17,7 +17,7 @@
                     <div class="col-md-11 mt-2 mx-auto">
                         <div class="text-center my-4">
                             <h2>Data Diklat</h2>
-                            <a href="/diklat/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+                            <a href="/klien/dataumum/diklat/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
                         </div>
                         <form action="" method="get">
                             <div class="input-group mb-3">
@@ -29,7 +29,7 @@
                             <table class="table table-hover table-striped shadow">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th></th>
+
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Lengkap</th>
                                         <th scope="col">Jenis Diklat</th>
@@ -49,17 +49,7 @@
                                     <?php $i = 1; ?>
                                     @foreach ($rows as $row)
                                     <tr>
-                                        <td>
-                                            <div class="btn-group-vertical">
-                                                <a href="/diklat/update/{{ $row["diklat_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
-                                                <form action="/diklat/delete" method="post" class="d-inline">
-                                                    @csrf
-                                                    <input type="hidden" name="diklat_id" value="{{ $row["diklat_id"] }}">
-                                                    <input type="hidden" name="sertifikat" value="{{ $row["sertifikat"] }}">
-                                                    <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
-                                                </form>
-                                            </div>
-                                        </td>
+
                                         <th scope="row">{{ $i++}}</th>
                                         <th scope="row">{{ $row['nama_peg']}}</th>
                                         <td scope="row">{{ $row["status"] }}</td>

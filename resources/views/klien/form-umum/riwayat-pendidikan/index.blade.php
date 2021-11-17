@@ -17,7 +17,7 @@
                     <div class="col-md-11 mt-2 mx-auto">
                         <div class="text-center my-4">
                             <h2>Data Pendidikan</h2>
-                            <a href="/pendidikan/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+                            <a href="/klien/dataumum/riwayat-pendidikan/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
                         </div>
                         <form action="" method="get">
                             <div class="input-group mb-3">
@@ -29,7 +29,7 @@
                             <table class="table table-hover table-striped shadow">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th></th>
+
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Lengkap</th>
                                         <th scope="col">Tingkat Pendidikan</th>
@@ -46,17 +46,7 @@
                                     <?php $i = 1; ?>
                                     @foreach ($rows as $row)
                                     <tr>
-                                        <td scope="row">
-                                            <div class="btn-group-vertical">
-                                                <a href="/pendidikan/update/{{ $row["pendidikan_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
-                                                <form action="/pendidikan/delete" method="post" class="d-inline">
-                                                    @csrf
-                                                    <input type="hidden" name="pendidikan_id" value="{{ $row["pendidikan_id"] }}">
-                                                    <input type="hidden" name="sttb" value="{{ $row["sttb"] }}">
-                                                    <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
-                                                </form>
-                                            </div>
-                                        </td>
+
                                         <th scope="row">{{ $i++}}</th>
                                         <td scope="row">{{ $row["nama_peg"] }}</td>
                                         <td scope="row">{{ $row["tingkat_pendidikan"] }}</td>

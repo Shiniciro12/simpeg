@@ -2,6 +2,7 @@
 @include('admin.layouts.header-klien')
 @section('content')
 
+
 <body>
   <div class="container-fluid">
     <div class="row">
@@ -38,22 +39,47 @@
                     <small class="card-text" style="color: black;"><b>Riwayat Pangkat/Golongan</b></small>
                   </div>
                 </a>
+                @if($riwayatPangkat > 0)
+
                 <div class="card-footer bg-success text-light">
                   <small><b>Selesai</b></small>
                 </div>
+
+                @else
+                <div class="card-footer bg-danger text-light">
+                  <small><b>Belum Selesai</b></small>
+                </div>
+
+                @endif
+
+
+
+
+
+
               </div>
             </div>
             <div class="col-3">
               <div class="card text-center">
-                <a href="/klien/dataumum/pendidikan" class="link-light">
+                <a href="/klien/dataumum/riwayat-pendidikan" class="link-light">
                   <div class="card-body">
                     <i class="bi bi-files link-primary" style="font-size: 36px;"></i><br><br>
                     <small class="card-text" style="color: black;"><b>Riwayat Pendidikan</b></small>
                   </div>
                 </a>
+                @if($riwayatPendidikan > 0)
+
+                <div class="card-footer bg-success text-light">
+                  <small><b>Selesai</b></small>
+                </div>
+
+                @else
                 <div class="card-footer bg-danger text-light">
                   <small><b>Belum Selesai</b></small>
                 </div>
+
+                @endif
+
               </div>
             </div>
             <div class="col-3">
@@ -64,9 +90,19 @@
                     <small class="card-text" style="color: black;"><b>Riwayat Jabatan</b></small>
                   </div>
                 </a>
+                @if($jabatan > 0)
+
+                <div class="card-footer bg-success text-light">
+                  <small><b>Selesai</b></small>
+                </div>
+
+                @else
                 <div class="card-footer bg-danger text-light">
                   <small><b>Belum Selesai</b></small>
                 </div>
+
+                @endif
+
               </div>
             </div>
           </div>
@@ -82,9 +118,19 @@
                     <small class="card-text" style="color: black;"><b>Riwayat Diklat</b></small>
                   </div>
                 </a>
+                @if($diklat > 0)
+
+                <div class="card-footer bg-success text-light">
+                  <small><b>Selesai</b></small>
+                </div>
+
+                @else
                 <div class="card-footer bg-danger text-light">
                   <small><b>Belum Selesai</b></small>
                 </div>
+
+                @endif
+
               </div>
             </div>
             <div class="col-3">
@@ -95,9 +141,19 @@
                     <small class="card-text" style="color: black;"><b>Riwayat Keluarga</b></small>
                   </div>
                 </a>
+                @if($keluarga > 0)
+
+                <div class="card-footer bg-success text-light">
+                  <small><b>Selesai</b></small>
+                </div>
+
+                @else
                 <div class="card-footer bg-danger text-light">
                   <small><b>Belum Selesai</b></small>
                 </div>
+
+                @endif
+
               </div>
             </div>
             <div class="col-3">
@@ -108,9 +164,19 @@
                     <small class="card-text" style="color: black;"><b>Riwayat Tanda Jasa</b></small>
                   </div>
                 </a>
+                @if($tandaJasa > 0)
+
+                <div class="card-footer bg-success text-light">
+                  <small><b>Selesai</b></small>
+                </div>
+
+                @else
                 <div class="card-footer bg-danger text-light">
                   <small><b>Belum Selesai</b></small>
                 </div>
+
+                @endif
+
               </div>
             </div>
             <div class="col-3">
