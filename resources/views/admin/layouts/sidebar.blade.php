@@ -92,7 +92,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/unit-kerja/dokumen">
+                        <a class="nav-link" href="/admin/unit-kerja/dokumen-sk">
                             <span data-feather="file"></span>
                             Dokumen
                         </a>

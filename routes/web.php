@@ -121,9 +121,11 @@ Route::post('/login', [AuthController::class, 'signIn']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [RootController::class, 'index']);
     Route::group(['prefix' => 'unit-kerja'], function () {
+        
         Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuan']);
+        Route::get('/dokumen-sk', [UnitKerjaController::class, 'receiveDokumen']);
+
         Route::post('/pengajuan', [UnitKerjaController::class, 'verifikasi']);
-        Route::post('/identitas', [UnitKerjaController::class, 'getIdentitas']);
         Route::post('/buat/layanan', [UnitKerjaController::class, 'requestLayanan']);
     });
 });

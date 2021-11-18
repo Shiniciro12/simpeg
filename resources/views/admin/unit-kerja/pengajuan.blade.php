@@ -45,9 +45,9 @@
                                 <th scope="row">{{ $i++ }}</th>
                                 <td>{{ $row['nip'] }}</td>
                                 <td>{{ $row['nama'] }}</td>
-                                <td><button class="btn btn-sm btn-info text-dark data-bs-toggle=" modal"
+                                <td><button class="btn btn-sm btn-info text-dark" data-bs-toggle="modal"
                                         data-bs-target="#cekDokumen">Cek</button></td>
-                                <td><button class=" btn btn-sm btn-info text-dark data-bs-toggle="modal"
+                                <td><button class="btn btn-sm btn-info text-dark" data-bs-toggle="modal"
                                         data-bs-target="#cekDokumen">Cek</button></td>
                                 <td>{{ $row['unit_verif_at'] ? date('Y-m-d H:m:s', $row['unit_verif_at']) : '' }}</td>
                                 <td>{{ $row['nama_layanan'] }}</td>
@@ -87,14 +87,15 @@
         <!-- Modal Cek Dokumen -->
         <div class="modal fade" id="cekDokumen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="cekDokumenLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="cekDokumenLabel">Modal title</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <iframe src="/unggah/dokumen-khusus/1637134069_drh.pdf#toolbar=0" width="100%" height="500px">
+                        </iframe>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
