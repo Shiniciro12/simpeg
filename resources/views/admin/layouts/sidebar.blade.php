@@ -4,8 +4,7 @@
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{ $page == 'Dashboard' ? 'active' : ''}}" aria-current="page"
-                            href="/admin/dashboard">
+                        <a class="nav-link {{ $page == 'Dashboard' ? 'active' : ''}}" aria-current="page" href="/admin/dashboard">
                             <span data-feather="home"></span>
                             Dashboard
                         </a>
@@ -54,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/riwayat-pangkat">
+                        <a class="nav-link" href="/riwayatpangkat">
                             <span data-feather="file"></span>
                             Riwayat Pangkat
                         </a>
@@ -72,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/tanda-jasa">
+                        <a class="nav-link" href="/tandajasa">
                             <span data-feather="file"></span>
                             Tanda Jasa
                         </a>

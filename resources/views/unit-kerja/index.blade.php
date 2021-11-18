@@ -39,7 +39,7 @@
               @foreach ($rows as $row)
               <tr>
                 <td scope="row">
-                  <a href="/unit-kerja/{{ $row[" unit_kerja_id"] }}/edit" class="btn btn-warning p-2 shadow"><i
+                  <a href="/unit-kerja/{{ $row["unit_kerja_id"] }}/edit" class="btn btn-warning p-2 shadow"><i
                       class="bi bi-pencil-square"></i></a>
                   <form action="/unit-kerja/{{ $row['unit_kerja_id'] }}" method="post" class="d-inline">
                     @method('delete')

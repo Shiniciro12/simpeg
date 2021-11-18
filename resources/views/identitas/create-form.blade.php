@@ -476,7 +476,7 @@
                 </div>
 
                 <div id="data-foto" style="display: none">
-                    <label for="foto" class="form-label">Foto (Fotmat JPG, JPEG, PNG, Maksimal 500Kb) <span
+                    <label for="foto" class="form-label">Foto (Format JPG, JPEG, PNG, Maksimal 500Kb) <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control @error('foto') is-invalid @enderror"
@@ -488,7 +488,7 @@
                         </div>
                         @enderror
                     </div>
-                    <label for="karpeg" class="form-label">Kartu Pegawai (Fotmat PDF, Maksimal 500Kb) <span
+                    <label for="karpeg" class="form-label">Kartu Pegawai (Format PDF, Maksimal 500Kb) <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control @error('karpeg') is-invalid @enderror"
@@ -500,7 +500,7 @@
                         </div>
                         @enderror
                     </div>
-                    <label for="berkala_terakhir" class="form-label">Berkala Terakhir (Fotmat PDF, Maksimal 500Kb) <span
+                    <label for="berkala_terakhir" class="form-label">Berkala Terakhir (Format PDF, Maksimal 500Kb) <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control @error('berkala_terakhir') is-invalid @enderror"

@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -45,12 +46,15 @@
           <tr>
             <td>
               <div class="btn-group-vertical">
-                <a href="/diklat/update/{{ $row["diklat_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                <a href="/diklat/update/{{ $row["diklat_id"] }}" class="btn btn-warning p-2 shadow"><i
+                    class="bi bi-pencil-square"></i></a>
                 <form action="/diklat/delete" method="post" class="d-inline">
                   @csrf
                   <input type="hidden" name="diklat_id" value="{{ $row["diklat_id"] }}">
                   <input type="hidden" name="sertifikat" value="{{ $row["sertifikat"] }}">
-                  <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
+                  <button type="submit" class="btn btn-danger p-2 shadow"
+                    onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i
+                      class="bi bi-trash-fill"></i></button>
                 </form>
               </div>
             </td>
@@ -66,7 +70,8 @@
             <td scope="row">{{ $row["jam"] }}</td>
             <td scope="row">{{ $row["no_sttp"] }}</td>
             <td scope="row">{{ $row["tgl_sttp"] }}</td>
-            <td scope="row" class="text-center"><a href="{{ $row['sertifikat'] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
+            <td scope="row" class="text-center"><a href="{{ $row['sertifikat'] }}" class="btn btn-primary"><i
+                  class="bi bi-file-earmark-pdf"></i></a></td>
           </tr>
           @endforeach
         </tbody>

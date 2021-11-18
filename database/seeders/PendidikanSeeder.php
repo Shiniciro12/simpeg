@@ -16,7 +16,7 @@ class PendidikanSeeder extends Seeder
     {
         //
         Pendidikan::create([
-            'identitas_id' => '6c7ba355-ffae-4c03-bc22-1c99380b79ee',
+            'identitas_id' => '72b03b78-df19-446a-bdb5-b235380c01f8',
             'tingkat_pendidikan' => 'S1',
             'jurusan' => 'Teknik Mesin',
             'nama_lembaga_pendidikan' => 'Universitas Nusa Cendana',
