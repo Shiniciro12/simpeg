@@ -7,8 +7,7 @@
     <div class="row">
       @include('admin.layouts.sidenav')
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Dashboard</h1>
         </div>
 
@@ -34,47 +33,41 @@
                   <tbody>
                     <tr>
                       <th scope="row">Nama</th>
-                      <td>Mark Johansson</td>
+                      <td>{{auth()->user()->nama}}</td>
                     </tr>
                     <tr>
                       <th scope="row">NIP</th>
-                      <td>19870304050601003</td>
+                      <td>{{auth()->user()->nip}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Pangkat/Golongan</th>
-                      <td>Penata/III D</td>
+                      <td>
+                        <ul class="list-group">
+                          @foreach ($pangkat as $row)
+                          <li class="list-group-item">{{$row->pangkat}}</li>
+                          @endforeach
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Riwayat Jabatan</th>
+                      <td>
+                        <ul class="list-group">
+                          @foreach ($jabatan as $row)
+                          <li class="list-group-item">{{$row->nama_jabatan}}</li>
+                          @endforeach
+                        </ul>
+                      </td>
                     </tr>
                     <tr>
                       <th scope="row">Riwayat Pendidikan</th>
-                      <td>SD Negeri 1 Surabaya</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"></th>
-                      <td>SMP Swastiastu Denpasar</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"></th>
-                      <td>SMA Geovani Kota Kupang</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"></th>
-                      <td>S1-Teknik Informatika/Universitas Gunadarma Jakarta</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"></th>
-                      <td>S2-Manajemen Bisnis/Universitas Atmajaya Yogyakarta</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"></th>
-                      <td>S3/Institut Teknologi Bandung</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Jabatan</th>
-                      <td>Kepala Seksi Bidang Pengembangan e-Government</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Hukuman Displin</th>
-                      <td colspan="2">Pernah/Tidak Pernah</td>
+                      <td>
+                        <ul class="list-group">
+                          @foreach ($pendidikan as $row)
+                          <li class="list-group-item">{{$row->nama_lembaga_pendidikan}}</li>
+                          @endforeach
+                        </ul>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -83,7 +76,36 @@
           </div>
         </div>
         <!-- </div> -->
+        <hr>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h4 class="h4">Ajuan Layanan</h4>
+            </div>
+            <div class="row">
 
+              
+            @foreach ($layanan_khusus as $row)
+              <div class="col-3 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                      @if ($row->status == 4)
+                      <i class="bi bi-clipboard-check link-danger" style="font-size: 36px;"></i>
+                      @elseif  ($row->status == 3)
+                      <i class="bi bi-clipboard-check link-warning" style="font-size: 36px;"></i>
+                      @elseif ($row->status == 2)
+                      <i class="bi bi-clipboard-check link-success" style="font-size: 36px;"></i>
+                      @endif
+                      <br><br>
+                      <small class="card-text" style="color: black;"><b>{{$row->nama_layanan}}</b></small>
+                    </div>
+                </div>
+              </div>
+            @endforeach
+
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </div>

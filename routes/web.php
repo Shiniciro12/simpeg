@@ -116,8 +116,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login')->middlewar
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/login', [AuthController::class, 'signIn']);
 
-//Access By Role
-//root, bkppd, unit-kerja
+//Access by role root, bkppd, unit-kerja
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [RootController::class, 'index']);
     Route::group(['prefix' => 'unit-kerja'], function () {
@@ -128,27 +127,18 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
-//client
+//Access by role client
 Route::group(['prefix' => 'klien'], function () {
-    Route::get('/dashboard', [KlienController::class, 'dashboard']);
-    Route::get('/dataumum', [KlienController::class, 'dataUmum']);
-    Route::get('/datakhusus', [KlienController::class, 'dataKhusus']);
-    Route::get('/layanan/layanankhusus', [KlienController::class, 'dataKhususLayanan']);
-    Route::get('/layanan/index2', [KlienController::class, 'indexLayanan2']);
-    Route::get('/layanan/satyalencana', [KlienController::class, 'satyaLencanaForm']);
-    Route::get('/layanan/form2', [KlienController::class, 'indexLayananForm2']);
-    Route::get('/layanan/listsurat', [KlienController::class, 'indexListSurat']);
-
-
-    Route::group(['prefix' => 'dataumum'], function () {
+  Route::get('/dashboard', [KlienController::class, 'dashboard']);
+  
+  Route::get('/dataumum', [KlienController::class, 'dataUmum']);
+  Route::group(['prefix' => 'dataumum'], function () {
 
         //data umum riwayat jabatan
-
         Route::get('/riwayat-pangkat', [RiwayatPangkatController::class, 'UmumView']);
         Route::get('/riwayat-pangkat/add', [RiwayatPangkatController::class, 'UaddFormRPangkat']);
-
-
         Route::post('/riwayat-pangkat/store', [RiwayatPangkatController::class, 'UAddStoreRPangkat']);
+      
         //data umum riwayat pendidikan
         Route::get('/riwayat-pendidikan', [PendidikanController::class, 'UmumView']);
         Route::get('/riwayat-pendidikan/add', [PendidikanController::class, 'UAddForm']);
@@ -178,6 +168,23 @@ Route::group(['prefix' => 'klien'], function () {
 
         Route::post('/tandajasa/store', [TandaJasaController::class, 'UStore']);
     });
-
-    Route::post('/layanan/satyaadd', [KlienController::class, 'satyaLencanaAdd']);
+  
+    Route::get('/datakhusus', [KlienController::class, 'dataKhusus']);
+    Route::group(['prefix' => 'layanan'], function () {
+        Route::get('/layanankhusus', [KlienController::class, 'dataKhususLayanan']);
+        Route::get('/listsurat', [KlienController::class, 'indexListSurat']);
+        Route::get('/satyalencana', [KlienController::class, 'satyaLencanaForm']);
+        Route::post('/satyaadd', [KlienController::class, 'satyaLencanaAdd']);
+        Route::get('/ibel', [KlienController::class, 'ibelForm']);
+        Route::post('/ibeladd', [KlienController::class, 'ibelAdd']);
+        Route::get('/mkppi', [KlienController::class, 'mkppiForm']);
+        Route::post('/mkppiadd', [KlienController::class, 'mkppiAdd']);
+        Route::get('/mpkpjft', [KlienController::class, 'mpkpjftForm']);
+        Route::post('/mpkpjftadd', [KlienController::class, 'mpkpjftAdd']);
+        Route::get('/pkpr', [KlienController::class, 'pkprForm']);
+        Route::post('/pkpradd', [KlienController::class, 'pkprAdd']);
+        Route::get('/kpjs', [KlienController::class, 'kpjsForm']);
+        Route::post('/kpjsadd', [KlienController::class, 'kpjsAdd']);
+    });
+   
 });
