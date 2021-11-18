@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -39,11 +40,14 @@
               @foreach ($rows as $row)
               <tr>
                 <td scope="row">
-                  <a href="/pangkat/update/{{ $row["pangkat_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                  <a href="/pangkat/update/{{ $row[" pangkat_id"] }}" class="btn btn-warning p-2 shadow"><i
+                      class="bi bi-pencil-square"></i></a>
                   <form action="/pangkat/delete" method="post" class="d-inline">
                     @csrf
                     <input type="hidden" value="{{ $row->pangkat_id }}" name="pangkat_id">
-                    <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="bi bi-trash-fill"></i></button>
+                    <button type="submit" class="btn btn-danger p-2 shadow"
+                      onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i
+                        class="bi bi-trash-fill"></i></button>
                   </form>
 
                 </td>

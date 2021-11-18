@@ -193,6 +193,7 @@ class RiwayatJabatanController extends Controller
         $id = Identitas::where('nip', $request->input('identitas_id'))->first();
 
         $riwayat_jabatan = RiwayatJabatan::where('identitas_id', $id['identitas_id'])->first();
+        $sk_jabatan = $request->file('sk_jabatan') ? 'file|mimes:pdf|max:500' : '';
 
         $no_sk = $riwayat_jabatan['no_sk'] != $request->input('no_sk') ? '|unique:riwayat_jabatan' : '';
         $rules = [
@@ -201,6 +202,7 @@ class RiwayatJabatanController extends Controller
             'pejabat' => 'required',
             'no_sk' => 'required' . $no_sk,
             'tgl_sk' => 'required|date',
+            'sk_jabatan' => '' .$sk_jabatan,
             'tmt' => 'required|date',
             // 'sk' => 'file|mimes:pdf|max:500',
         ];
@@ -212,6 +214,7 @@ class RiwayatJabatanController extends Controller
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt' => $request->input('tmt'),
+            'sk_jabatan' => $request->file('sk_jabatan'),
             // 'sk' => $request->file('sk'),
         ];
 
@@ -219,9 +222,9 @@ class RiwayatJabatanController extends Controller
             'required' => '*Kolom :attribute wajib diisi.',
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'date' => '*Kolom :attribute tidak valid.',
-            // 'file' => '*File :attribute wajib dipilih.',
-            // 'max' => '*Kolom :attribute maksimal :max.',
-            // 'mimes' => '*Format file :attribute tidak didukung.',
+            'file' => '*File :attribute wajib dipilih.',
+            'max' => '*Kolom :attribute maksimal :max.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -229,12 +232,28 @@ class RiwayatJabatanController extends Controller
             return redirect('/riwayat-jabatan/update/' . $request->input('riwayat_jabatan_id'))->withErrors($validator)->withInput();
         }
 
+        $pathriwayat_jabatan = $riwayat_jabatan['sk_jabatan'];
+       
+        if ($request->file('sk_jabatan')) {
+            
+            File::delete(public_path($pathriwayat_jabatan));
+            $extriwayat_jabatan = $request->file('sk_jabatan')->getClientOriginalExtension();
+            $cum = explode("/",$pathriwayat_jabatan);
+            $newFileriwayat_jabatan = end($cum);
+            $tempriwayat_jabatan = $request->file('sk_jabatan')->getPathName();
+            $folderriwayat_jabatan = "unggah/sk-jabatan/" . $newFileriwayat_jabatan;
+            move_uploaded_file($tempriwayat_jabatan, $folderriwayat_jabatan);
+            $pathriwayat_jabatan = "/unggah/sk-jabatan/" . $newFileriwayat_jabatan;
+        }
+
+
         $data = [
             'jabatan_id' => $request->input('jabatan_id'),
             'identitas_id' => $id['identitas_id'],
             'pejabat' => $request->input('pejabat'),
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
+            'sk_jabatan' => $pathriwayat_jabatan,
             'tmt_jabatan' => $request->input('tmt')
         ];
 

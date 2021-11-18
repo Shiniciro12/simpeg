@@ -489,11 +489,12 @@
                 </div>
 
                 <div id="data-foto" style="display: none">
-                    <label for="foto" class="form-label">Foto (Fotmat JPG, JPEG, PNG, Maksimal 500Kb) <span
+                    <label for="foto" class="form-label">Foto (Format JPG, JPEG, PNG, Maksimal 500Kb) <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control @error('foto') is-invalid @enderror"
                             value="{{old('foto')}}" id="foto" name="foto">
+
                         <label class="input-group-text" for="foto">Upload</label>
                         @error('foto')
                         <div id="foto" class="invalid-feedback">
@@ -501,7 +502,7 @@
                         </div>
                         @enderror
                     </div>
-                    <label for="karpeg" class="form-label">Kartu Pegawai (Fotmat JPG, JPEG, PNG, Maksimal 500Kb) <span
+                    <label for="karpeg" class="form-label">Kartu Pegawai (Format PDF, Maksimal 500Kb) <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control @error('karpeg') is-invalid @enderror"
@@ -513,8 +514,7 @@
                         </div>
                         @enderror
                     </div>
-                    <label for="berkala_terakhir" class="form-label">Berkala Terakhir (Fotmat JPG, JPEG, PNG, Maksimal
-                        500Kb) <span class="text-danger">*</span></label>
+                    <label for="berkala_terakhir" class="form-label">Berkala Terakhir (Format PDF, Maksimal 500Kb) <span class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <input type="file" class="form-control @error('berkala_terakhir') is-invalid @enderror"
                             value="{{old('berkala_terakhir')}}" id="berkala_terakhir" name="berkala_terakhir">
@@ -525,7 +525,7 @@
                         </div>
                         @enderror
                     </div>
-
+ 
                     <button type="button" class="btn btn-primary" onclick="prevButtonIdentitas2()">Sebelumnnya</button>
                     <button type="submit" class="btn btn-primary">Kirim</button>
                 </div>

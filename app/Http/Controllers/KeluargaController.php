@@ -277,6 +277,7 @@ class KeluargaController extends Controller
         $id_identitas = Identitas::where('nip', $request->input('nip'))->first();
 
         $keluarga = Keluarga::where('nik', $request->input('nik'))->first();
+        $dokumen = $request->file('dokumen') ? 'required|file|mimes:pdf|max:500' : '';
 
         $nik = $keluarga['nik'] != $request->input('nik') ? '|unique:keluarga' : '';
 
@@ -300,7 +301,7 @@ class KeluargaController extends Controller
             'provinsi' => 'required',
             'hp' => 'required|numeric|digits_between:11,12',
             'kode_pos' => 'required|numeric|digits:5',
-            // 'dokumen' => 'file|mimes:pdf|max:500',
+            'dokumen' => ''. $dokumen,
         ];
 
         $input = [
@@ -323,7 +324,7 @@ class KeluargaController extends Controller
             'provinsi' => $request->input('provinsi'),
             'hp' => $request->input('hp'),
             'kode_pos' => $request->input('kode_pos'),
-            // 'dokumen' => $request->file('dokumen'),
+            'dokumen' => $request->file('dokumen'),
         ];
 
         $messages = [
@@ -333,16 +334,28 @@ class KeluargaController extends Controller
             'unique' => '*Kolom :attribute sudah terdaftar.',
             'digits' => '*Kolom :attribute tidak sesuai.',
             'date' => '*Kolom :attribute tidak valid.',
-            // 'max' => '*Kolom :attribute maksimal :max.',
-            // 'file' => '*File :attribute wajib dipilih.',
-            // 'mimes' => '*Format file :attribute tidak didukung.',
+            'max' => '*Kolom :attribute maksimal :max.',
+            'file' => '*File :attribute wajib dipilih.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return redirect('/keluarga/add')->withErrors($validator)->withInput();
         }
-
+        $pathkeluarga = $keluarga['dokumen'];
+       
+        if ($request->file('dokumen')) {
+            
+            File::delete(public_path($pathkeluarga));
+            $extkeluarga = $request->file('dokumen')->getClientOriginalExtension();
+            $cum = explode("/",$pathkeluarga);
+            $newFilekeluarga = end($cum);
+            $tempkeluarga = $request->file('dokumen')->getPathName();
+            $folderkeluarga = "unggah/riwayat-pangkat/" . $newFilekeluarga;
+            move_uploaded_file($tempkeluarga, $folderkeluarga);
+            $pathkeluarga = "/unggah/riwayat-pangkat/" . $newFilekeluarga;
+        }
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
             'nik' => $request->input('nik'),
@@ -364,6 +377,7 @@ class KeluargaController extends Controller
             'hp' => $request->input('hp'),
             'telepon' => $request->input('telepon'),
             'kode_pos' => $request->input('kode_pos'),
+            'dokumen' => $pathkeluarga,
         ];
 
         Keluarga::where('keluarga_id', $request->input('keluarga_id'))->update($data);

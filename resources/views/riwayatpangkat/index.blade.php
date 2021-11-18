@@ -59,8 +59,7 @@
                 <td scope="row">{{ $row["no_sk"] }}</td>
                 <td scope="row">{{ $row["tgl_sk"] }}</td>
                 <td scope="row">{{ $row["tmt_pangkat"] }}</td>
-                <td class="text-center" scope="row"><a download=".{{ $row[" tgl_sk"] }}.{{ $row["no_sk"] }}" href="{{ $row->sk_pangkat }}" class="btn btn-primary shadow"><i class="bi bi-file-earmark-pdf"></i></a></td>
-
+                <td class="text-center" scope="row"><a href="{{ $row->sk_pangkat }}" class="btn btn-primary shadow"><i class="bi bi-file-earmark-pdf"></i></a></td>
               </tr>
               @endforeach
             </tbody>

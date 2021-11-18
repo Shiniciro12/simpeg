@@ -110,7 +110,7 @@ class TandaJasaController extends Controller
     {
         $data = Identitas::where('nip', $request->input('nip'))->first();
         $rules = [
-            'identitas_id' => 'required',
+            'nip' => 'required',
             'nama' => 'required',
             'no_sk' => 'required|unique:tanda_jasa',
             'tgl_sk' => 'required|date',
@@ -120,7 +120,7 @@ class TandaJasaController extends Controller
         ];
 
         $input = [
-            'identitas_id' => $request->input('identitas_id'),
+            'nip' =>$request->input('nip'),
             'nama' => $request->input('nama'),
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
@@ -187,7 +187,7 @@ class TandaJasaController extends Controller
         $tanda_jasa = TandaJasa::find($request->input('tanda_jasa_id'));
 
         $no_sk = $tanda_jasa['no_sk'] != $request->input('no_sk') ? '|unique:tanda_jasa' : '';
-
+        $sertifikat = $request->file('sertifikat') ? 'file|mimes:pdf|max:500' : '';
         $rules = [
             'nip' => 'required',
             'identitas_id' => 'required',
@@ -196,7 +196,7 @@ class TandaJasaController extends Controller
             'tgl_sk' => 'required|date',
             'tahun' => 'required|numeric|digits:4',
             'asal_perolehan' => 'required',
-            // 'sertifikat' => 'file|mimes:pdf|max:500',
+            'sertifikat' => ''.$sertifikat,
         ];
 
         $input = [
@@ -207,7 +207,7 @@ class TandaJasaController extends Controller
             'tgl_sk' => $request->input('tgl_sk'),
             'tahun' => $request->input('tahun'),
             'asal_perolehan' => $request->input('asal_perolehan'),
-            // 'sertifikat' => $request->file('sertifikat'),
+            'sertifikat' => $request->file('sertifikat'),
         ];
 
         $messages = [
@@ -216,16 +216,28 @@ class TandaJasaController extends Controller
             'date' => '*Kolom :attribute tidak valid.',
             'numeric' => '*Kolom :attribute harus berupa karakter angka.',
             'digits' => '*Kolom :attribute tidak sesuai.',
-            // 'max' => '*Kolom :attribute maksimal :max.',
-            // 'file' => '*File :attribute wajib dipilih.',
-            // 'mimes' => '*Format file :attribute tidak didukung.',
+            'max' => '*Kolom :attribute maksimal :max.',
+            'file' => '*File :attribute wajib dipilih.',
+            'mimes' => '*Format file :attribute tidak didukung.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return redirect('/tandajasa/update/' . $request->input('tanda_jasa_id'))->withErrors($validator)->withInput();
         }
-
+        $pathtandajasa = $tanda_jasa['sertifikat'];
+       
+        if ($request->file('sertifikat')) {
+            
+            File::delete(public_path($pathtandajasa));
+            $exttandajasa = $request->file('sertifikat')->getClientOriginalExtension();
+            $cum = explode("/",$pathtandajasa);
+            $newFiletandajasa = end($cum);
+            $temptandajasa = $request->file('sertifikat')->getPathName();
+            $foldertandajasa = "unggah/sertifikat-tandajasa/" . $newFiletandajasa;
+            move_uploaded_file($temptandajasa, $foldertandajasa);
+            $pathtandajasa = "/unggah/sertifikat-tandajasa/" . $newFiletandajasa;
+        }
         $data = [
             'identitas_id' => $id_identitas['identitas_id'],
             'nama' => $request->input('nama'),
@@ -233,6 +245,7 @@ class TandaJasaController extends Controller
             'tgl_sk' => $request->input('tgl_sk'),
             'tahun' => $request->input('tahun'),
             'asal_perolehan' => $request->input('asal_perolehan'),
+            'sertifikat' => $pathtandajasa,
         ];
 
         TandaJasa::where('tanda_jasa_id', $request->input('tanda_jasa_id'))->update($data);

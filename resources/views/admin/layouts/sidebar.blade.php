@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/tanda-jasa">
+                        <a class="nav-link" href="/tandajasa">
                             <span data-feather="file"></span>
                             Tanda Jasa
                         </a>
