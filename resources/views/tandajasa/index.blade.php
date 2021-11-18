@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   <div class="row">
@@ -35,12 +36,15 @@
             @foreach ($rows as $row)
             <tr>
               <td scope="row">
-                <a href="/tandajasa/update/{{ $row["tanda_jasa_id"] }}" class="btn btn-warning p-2 shadow"><i class="bi bi-pencil-square"></i></a>
+                <a href="/tandajasa/update/{{ $row["tanda_jasa_id"] }}" class="btn btn-warning p-2 shadow"><i
+                    class="bi bi-pencil-square"></i></a>
                 <form action="/tandajasa/delete" method="post" class="d-inline">
                   @csrf
                   <input type="hidden" name="tanda_jasa_id" value="{{ $row["tanda_jasa_id"] }}">
-                  <input type="hidden" name="sertifikat" value="{{ $row["sertifikat"] }}">
-                  <button type="submit" class="btn btn-danger p-2 shadow" onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i class="bi bi-trash-fill"></i></button>
+                  <input type="hidden" name="sertifikat" value="{{ $row[" sertifikat"] }}">
+                  <button type="submit" class="btn btn-danger p-2 shadow"
+                    onclick="return confirm('Data ini akan dihapus. Lanjutkan?')"><i
+                      class="bi bi-trash-fill"></i></button>
                 </form>
               </td>
               <th scope="row">{{ $m++}}</th>
@@ -50,7 +54,8 @@
               <td scope="row">{{ $row["tgl_sk"] }}</td>
               <td scope="row">{{ $row["tahun"] }}</td>
               <td scope="row">{{ $row["asal_perolehan"] }}</td>
-              <td scope="row" class="text-center"><a href="{{ $row['sertifikat'] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
+              <td scope="row" class="text-center"><a href="{{ $row['sertifikat'] }}" class="btn btn-primary"><i
+                    class="bi bi-file-earmark-pdf"></i></a></td>
 
             </tr>
             @endforeach

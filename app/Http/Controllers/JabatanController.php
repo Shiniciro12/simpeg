@@ -99,7 +99,7 @@ class JabatanController extends Controller
 
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/jabatan/update/'.$request->input('jabatan_id'))->withErrors($validator)->withInput();
+            return redirect('/jabatan/update/' . $request->input('jabatan_id'))->withErrors($validator)->withInput();
         }
 
         $data = [

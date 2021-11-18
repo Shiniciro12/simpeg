@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 {{-- @dd($errors) --}}
 <div class="container">
@@ -13,7 +14,8 @@
                 <div class="mb-3">
                     <label for="pangkat" class="form-label">Pangkat <span class="text-danger">*</span></label>
                     <input type="text" class="form-control @error('pangkat') is-invalid @enderror"
-                        value="{{old('pangkat', $data['pangkat'])}}" id="pangkat" aria-describedby="pangkat" name="pangkat">
+                        value="{{old('pangkat', $data['pangkat'])}}" id="pangkat" aria-describedby="pangkat"
+                        name="pangkat">
                     @error('pangkat')
                     <div id="pangkat" class="invalid-feedback">
                         {{$message}}
@@ -23,14 +25,15 @@
                 <div class="mb-3">
                     <label for="golongan" class="form-label">Golongan <span class="text-danger">*</span></label>
                     <input type="text" class="form-control @error('golongan') is-invalid @enderror"
-                        value="{{old('golongan', $data['golongan'])}}" id="golongan" aria-describedby="golongan" name="golongan">
+                        value="{{old('golongan', $data['golongan'])}}" id="golongan" aria-describedby="golongan"
+                        name="golongan">
                     @error('golongan')
                     <div id="golongan" class="invalid-feedback">
                         {{$message}}
                     </div>
                     @enderror
                 </div>
-   
+
                 <button class="btn btn-success" type="submit">Simpan</button>
             </form>
         </div>

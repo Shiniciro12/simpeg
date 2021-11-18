@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
     <div class="row">
@@ -50,9 +51,9 @@
                 <div class="row">
                     <div class="mb-3">
                         <label for="pejabat" class="form-label">Pejabat<span class="text-danger">*</span></label>
-                        <input type="text" 
-                            class="form-control @error('pejabat') is-invalid @enderror" value="{{old('pejabat',$rowRiwayatJabatan->pejabat)}}"
-                            id="pejabat" aria-describedby="pejabat" name="pejabat">
+                        <input type="text" class="form-control @error('pejabat') is-invalid @enderror"
+                            value="{{old('pejabat',$rowRiwayatJabatan->pejabat)}}" id="pejabat"
+                            aria-describedby="pejabat" name="pejabat">
                         @error('pejabat')
                         <div id="pejabat" class="invalid-feedback">
                             {{$message}}
@@ -101,6 +102,18 @@
                         </div>
                     </div>
                 </div>
+                <label for="sk_jabatan" class="form-label">SK Jabatan (Format PDF, Maksimal 500 KB) <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control @error('sk_jabatan') is-invalid @enderror"
+                            value="{{old('sk_jabatan')}}" id="sk_jabatan" name="sk_jabatan">
+                        <label class="input-group-text" for="sk_jabatan">Upload</label>
+                        @error('sk_jabatan')
+                        <div id="sk_jabatan" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
                 <br>
                 <div class="row">
                     <div class="col-sm-12">

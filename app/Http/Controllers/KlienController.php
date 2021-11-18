@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Diklat;
 use Illuminate\Http\Request;
 //use Clockwork\Request\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Dokumen;
+use App\Models\Jabatan;
 use App\Models\JenisLayanan;
 use App\Models\Pendidikan;
 use App\Models\RiwayatJabatan;
 use App\Models\Jabatan;
 use App\Models\Pangkat;
 use App\Models\RiwayatPangkat;
+use App\Models\Keluarga;
+use App\Models\TandaJasa;
 
 class KlienController extends Controller
 {
@@ -31,6 +35,13 @@ class KlienController extends Controller
     {
         return view('klien.data-umum', [
             'page' => 'Klien | Data Umum',
+            'riwayatPangkat' => RiwayatPangkat::where('identitas_id', auth()->user()->identitas_id)->count(),
+            'riwayatPendidikan' => Pendidikan::where('identitas_id', auth()->user()->identitas_id)->count(),
+            'jabatan' => RiwayatJabatan::where('identitas_id', auth()->user()->identitas_id)->count(),
+            'diklat' => Diklat::where('identitas_id', auth()->user()->identitas_id)->count(),
+            'keluarga' => Keluarga::where('identitas_id', auth()->user()->identitas_id)->count(),
+            'tandaJasa' => TandaJasa::where('identitas_id', auth()->user()->identitas_id)->count(),
+
         ]);
     }
 
@@ -161,12 +172,14 @@ class KlienController extends Controller
             'spspkt' => $request->file('spspkt')->getPathname(),
             'pr' => $request->file('pr')->getPathname(),
         ];
-        //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
+    
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
             $file = time() . "_" . $r . ".pdf|";
+
             $folder = "unggah/dokumen-khusus/ibel/" . explode("|", $file)[0];
+
             move_uploaded_file($val, $folder);
             $file_stacked[$num_file++] = $file;
         }

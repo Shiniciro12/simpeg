@@ -57,4 +57,3 @@ const prevKeluarga = () => {
     const dataalamat = document.getElementById("data-alamat");
     dataalamat.style.display = "block";
 }
-
