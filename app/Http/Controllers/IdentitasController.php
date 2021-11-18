@@ -53,7 +53,27 @@ class IdentitasController extends Controller
             'page' => 'Tambah Identitas',
         ]);
     }
-
+    //form ubah umum
+    public function UUpdateForm($identitas_id)
+    {
+        return view('klien.form-umum.identitas.update', [
+            'page' => 'Ubah Identitas',
+            'data' => Identitas::find($identitas_id),
+            'rowsPangkat' => Pangkat::latest()->get(),
+            'rowsJabatan' => jabatan::latest()->get(),
+            'rowsUnitKerja' => UnitKerja::latest()->get(),
+            'rowsKelurahan' => Kelurahan::latest()->get(),
+            'rowsKecamatan' => Kecamatan::latest()->get(),
+            'rowsRole' => Role::latest()->get(),
+            'golongan_darah' => ['A', 'B', 'AB', 'O'],
+            'rowsAgama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lain-lain'],
+            'rowsStatusKawin' => ['Belum Kawin', 'Kawin', 'Janda', 'Duda'],
+            'rowsBBP' => ['BUM', 'PUM', 'BM', 'PT'],
+            'rowsStatusPegawai' => ['Calon PNS', 'PNS', 'Pensiunan', 'TNI'],
+            'rowsJenisPegawai' => ['PNS Pusat DEPDAGRI', 'PNS Pusat DEPDAGRI DPK', 'PNS Pusat DEPDAGRI DPB', 'PNS Daerah Otonom', 'PNS Pusat DEP lain DPK', 'PNS Pusat DEP lain DPB', 'TNI yang ditugas karyakan'],
+            'rowsKedudukanPegawai' => ['Aktif', 'CLTN', 'Perpanjangan CLTN', 'Tugas Belajar', 'Pemberhentian Sementara', 'Penerima Uang Tunggu', 'Wajib Militer', 'PNS yang dinyatakan hilang', 'Pejabat Negara', 'Kepala Desa', 'Keberatan Atas Hukuman Disiplin', 'Tidak Aktif', 'MPP'],
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
