@@ -1,5 +1,6 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
   @if(session()->has('success'))
@@ -61,8 +62,7 @@
                 <td scope="row">{{ $row["no_sk"] }}</td>
                 <td scope="row">{{ $row["tgl_sk"] }}</td>
                 <td scope="row">{{ $row["tmt_pangkat"] }}</td>
-                <td class="text-center" scope="row"><a download=".{{ $row[" tgl_sk"] }}.{{ $row["no_sk"] }}"
-                    href="{{ $row->sk_pangkat }}" class="btn btn-primary shadow"><i
+                <td class="text-center" scope="row"><a href="{{ $row->sk_pangkat }}" class="btn btn-primary shadow"><i
                       class="bi bi-file-earmark-pdf"></i></a></td>
 
               </tr>

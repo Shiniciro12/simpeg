@@ -54,7 +54,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/riwayat-pangkat">
+                        <a class="nav-link" href="/riwayatpangkat">
                             <span data-feather="file"></span>
                             Riwayat Pangkat
                         </a>
@@ -72,7 +72,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/tanda-jasa">
+                        <a class="nav-link" href="/tandajasa">
                             <span data-feather="file"></span>
                             Tanda Jasa
                         </a>

@@ -1,7 +1,9 @@
-@extends('home.layouts.main')
-@include('home.layouts.navbar')
+@extends('admin.layouts.main')
+@include('admin.layouts.navbar')
+@include('admin.layouts.sidebar')
 @section('content')
 <div class="container">
+    {{-- {{dd($errors)}} --}}
     <div class="mt-2 mb-4"><span class="text-danger">*</span> Wajib diisi</div>
     <h3>Data Tanda Jasa</h3><br>
     <div class="row">
