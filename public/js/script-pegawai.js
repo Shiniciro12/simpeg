@@ -57,3 +57,7 @@ const prevKeluarga = () => {
     const dataalamat = document.getElementById("data-alamat");
     dataalamat.style.display = "block";
 }
+
+const browseFile = () => {
+    document.getElementById('foto').click();
+}

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Identitas;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +43,6 @@ class AuthController extends Controller
                 return redirect('/admin/dashboard');
             }
         }
-
         return redirect('/login')->withErrors($validator)->withInput()->with('loginError', 'Login Gagal!');
     }
 

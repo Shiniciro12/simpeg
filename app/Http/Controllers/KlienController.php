@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
+//use Clockwork\Request\Request;
 use App\Models\Diklat;
 use Illuminate\Http\Request;
-//use Clockwork\Request\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Dokumen;
-use App\Models\Jabatan;
 use App\Models\JenisLayanan;
 use App\Models\Pendidikan;
 use App\Models\RiwayatJabatan;
-use App\Models\Jabatan;
-use App\Models\Pangkat;
 use App\Models\RiwayatPangkat;
 use App\Models\Keluarga;
 use App\Models\TandaJasa;
+use App\Models\Identitas;
 
 class KlienController extends Controller
 {
@@ -65,6 +63,7 @@ class KlienController extends Controller
             'page' => 'Klien | Layanan2'
         ]);
     }
+
     // SATYA LENCANA
     public function satyaLencanaForm()
     {
@@ -73,6 +72,7 @@ class KlienController extends Controller
             'jenis_layanan' => JenisLayanan::where('nama_layanan', 'Satya Lencana')->first(),
         ]);
     }
+
     public function satyaLencanaAdd(Request $request)
     {
         $rules = [
@@ -105,7 +105,7 @@ class KlienController extends Controller
             'drh' => $request->file('drh')->getPathName(),
             'fcskp' => $request->file('fcskp')->getPathName(),
         ];
-        //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
+
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
@@ -123,6 +123,7 @@ class KlienController extends Controller
         Dokumen::create($data);
         return redirect('/klien/layanan/layanankhusus')->with('success', 'Ajuan layanan berhasil dikirim!');
     }
+
     // IBEL
     public function ibelForm()
     {
@@ -131,6 +132,7 @@ class KlienController extends Controller
             'jenis_layanan' => JenisLayanan::where('nama_layanan', 'IBEL/TUBEL')->first(),
         ]);
     }
+
     public function ibelAdd(Request $request)
     {
         $rules = [
@@ -172,7 +174,7 @@ class KlienController extends Controller
             'spspkt' => $request->file('spspkt')->getPathname(),
             'pr' => $request->file('pr')->getPathname(),
         ];
-    
+
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
@@ -201,6 +203,7 @@ class KlienController extends Controller
             'jenis_layanan' => JenisLayanan::where('nama_layanan', 'Mutasi kenaikan pangkat penyesuaian ijazah')->first(),
         ]);
     }
+
     public function mkppiAdd(Request $request)
     {
         $rules = [
@@ -245,7 +248,7 @@ class KlienController extends Controller
             'fctlupi' => $request->file('fctlupi')->getPathname(),
             'askuty' => $request->file('askuty')->getPathname(),
         ];
-        //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
+
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
@@ -272,6 +275,7 @@ class KlienController extends Controller
             'jenis_layanan' => JenisLayanan::where('nama_layanan', 'Mutasi pelayanan kenaikan pangkat jabatan fungsional tertentu')->first(),
         ]);
     }
+
     public function mpkpjftAdd(Request $request)
     {
         $rules = [
@@ -316,7 +320,7 @@ class KlienController extends Controller
             'fcstlud' => $request->file('fcstlud')->getPathname(),
             'fcskps' => $request->file('fcskps')->getPathname(),
         ];
-        //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
+
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
@@ -335,7 +339,6 @@ class KlienController extends Controller
         return redirect('/klien/layanan/layanankhusus')->with('success', 'Ajuan layanan berhasil dikirim!');
     }
 
-
     // Kenaikan Pangkat Reguler
     public function pkprForm()
     {
@@ -344,6 +347,7 @@ class KlienController extends Controller
             'jenis_layanan' => JenisLayanan::where('nama_layanan', 'Pelayanan Kenaikan pangkat reguler')->first(),
         ]);
     }
+
     public function pkprAdd(Request $request)
     {
         $rules = [
@@ -379,7 +383,7 @@ class KlienController extends Controller
             'fcskmwk' => $request->file('fcskmwk')->getPathname(),
             'fcstlud' => $request->file('fcstlud')->getPathname(),
         ];
-        //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
+
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
@@ -397,6 +401,7 @@ class KlienController extends Controller
         Dokumen::create($data);
         return redirect('/klien/layanan/layanankhusus')->with('success', 'Ajuan layanan berhasil dikirim!');
     }
+
     // Mutasi Pelayanan Kenaikan Pangkat Jabatan Fungsional Tertentu
     public function kpjsForm()
     {
@@ -405,6 +410,7 @@ class KlienController extends Controller
             'jenis_layanan' => JenisLayanan::where('nama_layanan', 'Kenaikan pangkat jabatan struktural')->first(),
         ]);
     }
+
     public function kpjsAdd(Request $request)
     {
         $rules = [
@@ -449,7 +455,7 @@ class KlienController extends Controller
             'fcstlud' => $request->file('fcstlud')->getPathname(),
             'fcskpps' => $request->file('fcskpps')->getPathname(),
         ];
-        //Looping buat upload itu barang (skrg tengah malem, ngantuk anjer, harus up form per form le, hadeh)
+
         $num_file = 0;
         foreach ($data as $r => $val) {
             //$temp = $request->file('sk_jabatan')->getPathName();
@@ -473,5 +479,46 @@ class KlienController extends Controller
         return view('klien.layanan.list-surat', [
             'page' => 'Layanan | Template Surat'
         ]);
+    }
+
+    public function updateFoto(Request $request)
+    {
+        ($request);
+        $data = Identitas::where('identitas_id', auth()->user()->identitas_id)->first();
+
+        $rules = [
+            'foto' => 'file|mimes:png,jpg,jpeg|max:500',
+        ];
+
+        $input = [
+            'foto' => $request->file('foto'),
+        ];
+
+        $messages = [
+            'max' => '*Kolom :attribute maksimal :max.',
+            'file' => '*File :attribute wajib dipilih.',
+            'mimes' => '*Format file :attribute tidak didukung.',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('/klien/dashboard')->withErrors($validator)->withInput();
+        }
+
+        File::delete(public_path($data['foto']));
+        $extFoto = $request->file('foto')->getClientOriginalExtension();
+        $newFileFoto = auth()->user()->nip . "." . $extFoto;
+        $tempFoto = $request->file('foto')->getPathName();
+        $folderFoto = "unggah/identitas/foto/" . $newFileFoto;
+        move_uploaded_file($tempFoto, $folderFoto);
+        $pathFoto = "/unggah/identitas/foto/" . $newFileFoto;
+
+        $data = [
+            'foto' => $pathFoto,
+        ];
+
+        Identitas::where('identitas_id', auth()->user()->identitas_id)->update($data);
+
+        return redirect('/klien/dashboard')->with('success', 'Foto berhasil diubah');
     }
 }

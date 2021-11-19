@@ -214,7 +214,8 @@ class UnitKerjaController extends Controller
         return redirect('/admin/unit-kerja/pengajuan')->with('success', 'Pengajuan berhasil ditambahkan');
     }
 
-    public function receiveDokumen(){
+    public function receiveDokumen()
+    {
         return view('admin.unit-kerja.dokumen-sk', [
             'page' => 'Dokumen SK',
             "rows" => Dokumen::join("identitas", "identitas.identitas_id", "=", "dokumen.identitas_id")->join("layanan", "layanan.dokumen_id", "=", "dokumen.dokumen_id")->join("jenis_layanan", "jenis_layanan.jenis_layanan_id", "=", "dokumen.jenis_layanan_id")->where("identitas.unit_kerja_id", "=", auth()->user()->unit_kerja_id)->where("dokumen.status", "=", '2')->filter(request(['search']))->paginate(10)->withQueryString(),

@@ -131,8 +131,10 @@ Route::group(['prefix' => 'admin'], function () {
 
 //Access by role client
 Route::group(['prefix' => 'klien'], function () {
-  Route::get('/dashboard', [KlienController::class, 'dashboard']);
   
+  Route::get('/dashboard', [KlienController::class, 'dashboard']);
+  Route::post('/update/foto', [KlienController::class, 'updateFoto']);
+
   Route::get('/dataumum', [KlienController::class, 'dataUmum']);
   Route::group(['prefix' => 'dataumum'], function () {
 
@@ -144,30 +146,26 @@ Route::group(['prefix' => 'klien'], function () {
         //data umum riwayat pendidikan
         Route::get('/riwayat-pendidikan', [PendidikanController::class, 'UmumView']);
         Route::get('/riwayat-pendidikan/add', [PendidikanController::class, 'UAddForm']);
-
         Route::post('/riwayat-pendidikan/store', [PendidikanController::class, 'UStore']);
 
         //data umum riwayat jabatan
         Route::get('/riwayat-jabatan', [RiwayatJabatanController::class, 'UmumView']);
         Route::get('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'UaddForm']);
-
         Route::post('/riwayat-jabatan/store', [RiwayatJabatanController::class, 'UStrore']);
+
         //data umum riwayat diklat
         Route::get('/diklat', [DiklatController::class, 'UmumView']);
         Route::get('/diklat/add', [DiklatController::class, 'UaddForm']);
-
         Route::post('/diklat/store', [DiklatController::class, 'UStore']);
 
         //data umum riwayat keluarga
         Route::get('/keluarga', [KeluargaController::class, 'UmumView']);
         Route::get('/keluarga/add', [KeluargaController::class, 'UaddForm']);
-
         Route::post('/keluarga/store', [KeluargaController::class, 'UStore']);
 
         //data umum tanda jasa
         Route::get('/tandajasa', [TandaJasaController::class, 'UmumView']);
         Route::get('/tandajasa/add', [TandaJasaController::class, 'UaddForm']);
-
         Route::post('/tandajasa/store', [TandaJasaController::class, 'UStore']);
     });
   

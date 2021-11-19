@@ -71,7 +71,7 @@ class PangkatController extends Controller
 
         $pangkat = $data['pangkat'] != $request->input('pangkat') ? '|unique:pangkat' : '';
         $golongan = $data['golongan'] != $request->input('golongan') ? '|unique:pangkat' : '';
-        
+
 
         $rules = [
             'pangkat' => 'required' . $pangkat,
@@ -105,6 +105,7 @@ class PangkatController extends Controller
             'data' => Pangkat::find($pangkat_id),
         ]);
     }
+
     public function delete(Request $request)
     {
         Pangkat::destroy($request->input('pangkat_id'));

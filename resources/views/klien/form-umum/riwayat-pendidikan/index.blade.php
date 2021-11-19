@@ -1,8 +1,6 @@
 @extends('admin.layouts.main')
 @include('admin.layouts.header-klien')
 @section('content')
-
-<body>
     <div class="container-fluid">
         <div class="row">
             @include('admin.layouts.sidenav')
@@ -29,7 +27,6 @@
                             <table class="table table-hover table-striped shadow">
                                 <thead class="table-primary">
                                     <tr>
-
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Lengkap</th>
                                         <th scope="col">Tingkat Pendidikan</th>
@@ -40,13 +37,13 @@
                                         <th scope="col">No STTB</th>
                                         <th scope="col">Tanggal STTB</th>
                                         <th scope="col">STTB</th>
+                                        <th scope="col">Transkrip</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
                                     @foreach ($rows as $row)
                                     <tr>
-
                                         <th scope="row">{{ $i++}}</th>
                                         <td scope="row">{{ $row["nama_peg"] }}</td>
                                         <td scope="row">{{ $row["tingkat_pendidikan"] }}</td>
@@ -56,8 +53,8 @@
                                         <td scope="row">{{ $row["nama_kepsek_rektor"] }}</td>
                                         <td scope="row">{{ $row["no_sttb"] }}</td>
                                         <td scope="row">{{ $row["tgl_sttb"] }}</td>
-                                        <td scope="row"><a href="upload/sttb/{{ $row["sttb"] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
-
+                                        <td scope="row"><a href="{{ $row["sttb"] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
+                                        <td scope="row"><a href="{{ $row["transkrip"] }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i></a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -74,6 +71,5 @@
     </div>
     </div>
 </body>
-
 
 @endsection
