@@ -103,6 +103,32 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-3">
+                        <a href="">
+                            <div class="card">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <h4 class="text-c-black">Riwayat</h4>
+                                            <h6 class="text-muted m-b-0">Keluarga</h6>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <i class="fa fa-id-badge f-38"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                        </a>
+                        <div class="card-footer bg-c-yellow">
+                            <div class="row align-items-center">
+                                <div class="col-9">
+                                    <p class="text-black m-b-0">Belum Selesai</p>
+                                </div>
+                                <div class="col-3 text-right">
+                                    <i class="fa fa-check-circle-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- task, page, download counter  end -->
                 <!-- Page-body end -->
