@@ -175,7 +175,7 @@
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="/images/defaultpp.jpg" class="img-radius" alt="User-Profile-Image">
-                                    <span>Fajar Magsyar</span>
+                                    <span>{{ auth()->user()->nama }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">

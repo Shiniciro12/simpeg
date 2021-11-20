@@ -33,12 +33,12 @@ class KlienController extends Controller
     {
         return view('klien.data-umum', [
             'page' => 'Klien | Data Umum',
-            'riwayatPangkat' => RiwayatPangkat::where('identitas_id', auth()->user()->identitas_id)->count(),
-            'riwayatPendidikan' => Pendidikan::where('identitas_id', auth()->user()->identitas_id)->count(),
-            'jabatan' => RiwayatJabatan::where('identitas_id', auth()->user()->identitas_id)->count(),
-            'diklat' => Diklat::where('identitas_id', auth()->user()->identitas_id)->count(),
-            'keluarga' => Keluarga::where('identitas_id', auth()->user()->identitas_id)->count(),
-            'tandaJasa' => TandaJasa::where('identitas_id', auth()->user()->identitas_id)->count(),
+            'riwayatPangkat' => RiwayatPangkat::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'riwayatPendidikan' => Pendidikan::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'jabatan' => RiwayatJabatan::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'diklat' => Diklat::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'keluarga' => Keluarga::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'tandaJasa' => TandaJasa::where('identitas_id', auth()->user()->identitas_id)->exists(),
         ]);
     }
 
