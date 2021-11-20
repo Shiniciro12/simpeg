@@ -138,7 +138,7 @@ Route::group(['prefix' => 'klien'], function () {
   Route::get('/dataumum', [KlienController::class, 'dataUmum']);
   Route::group(['prefix' => 'dataumum'], function () {
 
-        //data umum riwayat jabatan
+        //data umum riwayat pangkat
         Route::get('/riwayat-pangkat', [RiwayatPangkatController::class, 'UmumView']);
         Route::get('/riwayat-pangkat/add', [RiwayatPangkatController::class, 'UaddFormRPangkat']);
         Route::post('/riwayat-pangkat/store', [RiwayatPangkatController::class, 'UAddStoreRPangkat']);

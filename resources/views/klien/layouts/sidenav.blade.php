@@ -27,41 +27,54 @@
                     Home
                 </div>
                 <ul class="pcoded-item pcoded-left-item">
-                    <li class="active">
-                        <a href="index.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon">
-                                <i class="ti-home"></i>
-                                <b>D</b>
-                            </span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">
-                                Dashboard
-                            </span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
+                    @if ($page == 'Klien | Dashboard')
+                        <li class="active">
+                        @else
+                        <li class="">
+                    @endif
+
+                    <a href="/klien/dashboard" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="ti-home"></i>
+                            <b>D</b>
+                        </span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">
+                            Dashboard
+                        </span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
                     </li>
-                    <li class="">
-                        <a href="index.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon">
-                                <i class="fa fa-table"></i>
-                                <b>D</b>
-                            </span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">
-                                Data Umum
-                            </span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
+                    @if ($page == 'Klien | Data Umum')
+                        <li class="active">
+                        @else
+                        <li class="">
+                    @endif
+                    <a href="/klien/dataumum" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-table"></i>
+                            <b>D</b>
+                        </span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">
+                            Data Umum
+                        </span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
                     </li>
-                    <li class="">
-                        <a href="index.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon">
-                                <i class="fa fa-th-large"></i>
-                                <b>D</b>
-                            </span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">
-                                Data Khusus
-                            </span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
+                    @if ($page == 'Klien | Data Khusus')
+                        <li class="active">
+                        @else
+                        <li class="">
+                    @endif
+                    <a href="/klien/datakhusus" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-th-large"></i>
+                            <b>D</b>
+                        </span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">
+                            Data Khusus
+                        </span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
                     </li>
 
                 </ul>

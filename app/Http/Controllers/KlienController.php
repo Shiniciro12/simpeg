@@ -39,7 +39,6 @@ class KlienController extends Controller
             'diklat' => Diklat::where('identitas_id', auth()->user()->identitas_id)->count(),
             'keluarga' => Keluarga::where('identitas_id', auth()->user()->identitas_id)->count(),
             'tandaJasa' => TandaJasa::where('identitas_id', auth()->user()->identitas_id)->count(),
-
         ]);
     }
 
