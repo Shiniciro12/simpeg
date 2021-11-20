@@ -49,7 +49,9 @@
                                                     </div>
                                                     @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">NIK</label>
+                                                <label class="float-label">NIK
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -62,7 +64,9 @@
                                                         </div>
                                                         @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Nama</label>
+                                                <label class="float-label">Nama
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -76,7 +80,9 @@
                                                     </div>
                                                     @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Tempat Lahir</label>
+                                                <label class="float-label">Tempat Lahir
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -90,7 +96,9 @@
                                                     </div>
                                                     @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Tanggal Lahir</label>
+                                                <label class="float-label">Tanggal Lahir
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group row">
@@ -253,7 +261,9 @@
                                                 </div>
                                                 @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Pekerjaan</label>
+                                                <label class="float-label">Pekerjaan
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <!-- bariskedua -->
@@ -283,7 +293,9 @@
                                                 </div>
                                                 @enderror
                                                  <span class="form-bar"></span>
-                                                 <label class="float-label">Alamat</label>
+                                                 <label class="float-label">Alamat
+                                                    <span class="text-danger">*</span>
+                                                 </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -297,7 +309,9 @@
                                                 </div>
                                                 @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Desa/Kelurahan</label>
+                                                <label class="float-label">Desa/Kelurahan
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -311,7 +325,9 @@
                                                 </div>
                                                 @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Kecamatan</label>
+                                                <label class="float-label">Kecamatan
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -325,7 +341,9 @@
                                                 </div>
                                                 @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Kabupaten/Kota</label>
+                                                <label class="float-label">Kabupaten/Kota
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -339,7 +357,9 @@
                                                 </div>
                                                 @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Provinsi</label>
+                                                <label class="float-label">Provinsi
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -353,7 +373,9 @@
                                                 </div>
                                                 @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">No.HP</label>
+                                                <label class="float-label">No.HP
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group form-default">
@@ -381,7 +403,9 @@
                                                 </div>
                                                 @enderror
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Kode Pos</label>
+                                                <label class="float-label">Kode Pos
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                             </div>
                                             <br>
                                             <div class="form-group row">
