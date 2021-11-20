@@ -1,23 +1,45 @@
-@extends('admin.layouts.main')
-@include('admin.layouts.header-klien')
+@extends('klien.layouts.main')
 @section('content')
-
-<body>
-    <div class="container-fluid">
-
-        <div class="row">
-            @include('admin.layouts.sidenav')
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-                <form action="/klien/dataumum/riwayat-pendidikan/store" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <h3>Data Riwayat Pendidikan</h3>
-                    <div class="mb-3">
-                        <input type="hidden" value="{{auth()->user()->identitas_id}}" name="identitas_id">
+<div class="pcoded-content">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="page-header-title">
+                            <h1 class="m-b-10" style="color:white">Riwayat Pendidikan</h1>
+                            <!-- <p class="m-b-0" style="font-size: 20px">Selamat datang di Sistem Informasi Pegawai</p> -->
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="tingkat_pendidikan" class="form-label">Tingkat Pendidikan <span class="text-danger">*</span></label>
-                        <select class="form-select @error('tingkat_pendidikan') is-invalid @enderror" required value="{{old('tingkat_pendidikan')}}" name="tingkat_pendidikan" aria-label="tingkat_pendidikan" id="tingkat_pendidikan">
+                </div>
+            </div>
+        </div>
+        <!-- Page-header end -->
+        <div class="pcoded-inner-content">
+            <!-- Main-body start -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- Page-body start -->
+                    <div class="page-body">
+                        {{-- Table taro sini --}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Form Riwayat Pendidikan</h5>
+                                        <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+                                    </div>
+                                    {{-- ISIAN FORM --}}
+
+                                    <div class="card-block">
+                                        <form action="/klien/dataumum/riwayat-pendidikan/store" method="post"
+                                            enctype="multipart/form-data" class="form-material">
+                                            @csrf
+                                            <input type="hidden" value="{{auth()->user()->identitas_id}}" name="identitas_id">
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                <select class="form-control @error('tingkat_pendidikan') is-invalid @enderror" required value="{{old('tingkat_pendidikan')}}" name="tingkat_pendidikan" aria-label="tingkat_pendidikan" id="tingkat_pendidikan">
                             <option value="">Pilih Tingkat Pendidikan</option>
                             <option {{old('tingkat_pendidikan')=='SD/Sederajat' ? 'selected' : '' }} value="SD/Sederajat">
                                 SD/Sederajat
@@ -45,93 +67,139 @@
                             </option>
                         </select>
                         @error('tingkat_pendidikan')
-                        <div id="tingkat_pendidikan" class="invalid-feedback">
+                        <div id="tingkat_pendidikan" class="text-danger">
                             {{$message}}
                         </div>
                         @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="jurusan" class="form-label">Jurusan <span class="text-danger">*</span></label>
-                        <input type="text" name="jurusan" class="form-control @error('jurusan') is-invalid @enderror" value="{{old('jurusan')}}" id="jurusan" aria-describedby="jurusan" name="jurusan">
-                        @error('jurusan')
-                        <div id="jurusan" class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="nama_lembaga_pendidikan" class="form-label">Nama Lembaga Pendidikan <span class="text-danger">*</span></label>
-                        <input type="nama_lembaga_pendidikan" name="nama_lembaga_pendidikan" class="form-control @error('nama_lembaga_pendidikan') is-invalid @enderror" value="{{old('nama_lembaga_pendidikan')}}" id="nama_lembaga_pendidikan" aria-describedby="nama_lembaga_pendidikan" name="nama_lembaga_pendidikan">
-                        @error('nama_lembaga_pendidikan')
-                        <div id="nama_lembaga_pendidikan" class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="tempat" class="form-label">Tempat <span class="text-danger">*</span></label>
-                        <input type="text" name="tempat" class="form-control @error('tempat') is-invalid @enderror" value="{{old('tempat')}}" id="tempat" aria-describedby="tempat" name="tempat">
-                        @error('tempat')
-                        <div id="tempat" class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                        @enderror
-                    </div>
+                       <span class="form-bar"></span>
 
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="nama_kepsek_rektor" class="form-label">Nama Kepsek/Rektor <span class="text-danger">*</span></label>
-                            <input type="text" name="nama_kepsek_rektor" class="form-control @error('nama_kepsek_rektor') is-invalid @enderror" value="{{old('nama_kepsek_rektor')}}" id="nama_kepsek_rektor" aria-describedby="nama_kepsek_rektor" name="nama_kepsek_rektor">
-                            @error('nama_kepsek_rektor')
-                            <div id="nama_kepsek_rektor" class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
+                                            </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="form-group form-default">
+                                            <input type="text" name="jurusan" class="form-control @error('jurusan') is-invalid @enderror" value="{{old('jurusan')}}" id="jurusan" aria-describedby="jurusan" name="jurusan">
+                                            @error('jurusan')
+                                            <div id="jurusan" class="text-danger">
+                                            {{$message}}
+                                             </div>
+                                         @enderror
+                                                <span class="form-bar"></span>
+                                                <label class="float-label">Jurusan
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                            <br>
+                                            <div class="form-group form-default">
+                                            <input type="nama_lembaga_pendidikan" name="nama_lembaga_pendidikan" class="form-control @error('nama_lembaga_pendidikan') is-invalid @enderror" value="{{old('nama_lembaga_pendidikan')}}" id="nama_lembaga_pendidikan" aria-describedby="nama_lembaga_pendidikan" name="nama_lembaga_pendidikan">
+                        @error('nama_lembaga_pendidikan')
+                        <div id="nama_lembaga_pendidikan" class="text-danger">
+                            {{$message}}
                         </div>
-                        <div class="mb-3">
-                            <label for="no_sttb" class="form-label">No STTB <span class="text-danger">*</span></label>
-                            <input type="text" name="no_sttb" class="form-control @error('no_sttb') is-invalid @enderror" value="{{old('no_sttb')}}" id="no_sttb" aria-describedby="no_sttb" name="no_sttb">
-                            @error('no_sttb')
-                            <div id="no_sttb" class="invalid-feedback">
-                                {{$message}}
+                        @enderror
+                                                <span class="form-bar"></span>
+                                                <label class="float-label">Nama Lembaga Pendidikan
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                            <br>
+                                            <div class="form-group form-default">
+                                            <input type="text" name="tempat" class="form-control @error('tempat') is-invalid @enderror" value="{{old('tempat')}}" id="tempat" aria-describedby="tempat" name="tempat">
+                                            @error('tempat')
+                                            <div id="tempat" class="text-danger">
+                                            {{$message}}
+                                            </div>
+                                            @enderror
+                                                <span class="form-bar"></span>
+                                                <label class="float-label">Tempat
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                            <br>
+                                            <div class="form-group form-default">
+                                            <input type="text" name="nama_kepsek_rektor" class="form-control @error('nama_kepsek_rektor') is-invalid @enderror" value="{{old('nama_kepsek_rektor')}}" id="nama_kepsek_rektor" aria-describedby="nama_kepsek_rektor" name="nama_kepsek_rektor">
+                                                @error('nama_kepsek_rektor')
+                                            <div id="nama_kepsek_rektor" class="text-danger">
+                                            {{$message}}
+                                            </div>
+                                            @enderror
+                                                <span class="form-bar"></span>
+                                                <label class="float-label">Nama Kepsek/Rektor
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                            <br>
+
+                                            <div class="form-group form-default">
+                                             <input type="text" name="no_sttb" class="form-control @error('no_sttb') is-invalid @enderror" value="{{old('no_sttb')}}" id="no_sttb" aria-describedby="no_sttb" name="no_sttb">
+                                            @error('no_sttb')
+                                            <div id="no_sttb" class="text-danger">
+                                            {{$message}}
+                                            </div>
+                                            @enderror
+                                                <span class="form-bar"></span>
+                                                <label class="float-label">No Ijazah
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                            <br>
+
+                                            <div class="form-group form-default">
+                                            <input type="date" name="tgl_sttb" class="form-control @error('tgl_sttb') is-invalid @enderror" value="{{old('tgl_sttb')}}" id="tgl_sttb" aria-describedby="tgl_sttb" name="tgl_sttb">
+                                            @error('tgl_sttb')
+                                            <div id="tgl_sttb" class="text-danger">
+                                            {{$message}}
+                                            </div>
+                                            @enderror
+                                                <span class="form-bar"></span>
+                                                <label class="float-label">Tanggal Ijazah
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                            <br>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-6 col-form-label">File Ijazah (Format Pdf Maksimal 500kb)
+                                                    <span class="text-danger">*</span></label><br>
+                                                <div class="col-sm-12">
+                                                <input type="file" required name="sttb" class="form-control @error('sttb') is-invalid @enderror" value="{{old('sttb')}}" id="sttb" accept=".pdf" name="sttb">
+                                       
+                                                    @error('sttb')
+                                            <div id="sttb" class="text-danger">
+                                            {{$message}}
+                                            </div>
+                                             @enderror
+                                        
+                                                </div>
+                                            </div>
+                                            <br>
+                                            
+                                            <div class="form-group row">
+                                                <label class="col-sm-6 col-form-label">Transkip Ijazah (Format Pdf Maksimal 500kb)
+                                                    <span class="text-danger">*</span></label><br>
+                                                <div class="col-sm-12">
+                                                <input type="file" required name="transkrip" class="form-control @error('transkrip') is-invalid @enderror" value="{{old('transkrip')}}" id="transkrip" accept=".pdf" name="transkrip">
+                                       
+                                                @error('transkrip')
+                                                <div id="transkrip" class="text-danger">
+                                                {{$message}}
+                                                </div>
+                                                @enderror
+                                                <span class="form-bar"></span>
+                                               
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary"
+                                                style="float: right">Kirim</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="tgl_sttb" class="form-label">Tanggal STTB <span class="text-danger">*</span></label>
-                            <input type="date" name="tgl_sttb" class="form-control @error('tgl_sttb') is-invalid @enderror" value="{{old('tgl_sttb')}}" id="tgl_sttb" aria-describedby="tgl_sttb" name="tgl_sttb">
-                            @error('tgl_sttb')
-                            <div id="tgl_sttb" class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        <label for="sttb" class="form-label">STTB (Format: PDF Maksimal 500kb) <span class="text-danger">*</span></label>
-                        <div class="input-group mb-3">
-                            <input type="file" required name="sttb" class="form-control @error('sttb') is-invalid @enderror" value="{{old('sttb')}}" id="sttb" accept=".pdf" name="sttb">
-                            <label class="input-group-text" for="sttb">Upload</label>
-                            @error('sttb')
-                            <div id="sttb" class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        <label for="sttb" class="form-label">TRANSKIP (Format: PDF Maksimal 500kb) <span class="text-danger">*</span></label>
-                        <div class="input-group mb-3">
-                            <input type="file" required name="transkrip" class="form-control @error('transkrip') is-invalid @enderror" value="{{old('transkrip')}}" id="transkrip" accept=".pdf" name="transkrip">
-                            <label class="input-group-text" for="transkrip">Upload</label>
-                            @error('transkrip')
-                            <div id="transkrip" class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Kirim</button>
-                </form>
-            </main>
+
+                        <!-- task, page, download counter  end -->
+                        <!-- Page-body end -->
+                    </div>
+                    <div id="styleSelector"></div>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-
-
+    </div>
+    </div>
+    </div>
 @endsection

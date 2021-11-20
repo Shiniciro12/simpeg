@@ -1,42 +1,58 @@
-@extends('admin.layouts.main')
-@include('admin.layouts.header-klien')
+@extends('klien.layouts.main')
 @section('content')
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            @include('admin.layouts.sidenav')
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 mt-2">
-                            <div class="text-center my-4">
-                                <h2>Data Tanda jasa</h2>
-                                <a href="/klien/dataumum/tandajasa/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
-                            </div>
-                            <br>
-                            <form action="" method="get">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Cari..." name="search">
-                                    <button class="btn btn-outline-secondary" type="submit" id="search">Cari</button>
+    <div class="pcoded-content">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="page-header-title">
+                            <h1 class="m-b-10" style="color:white">Tanda Jasa</h1>
+                            <!-- <p class="m-b-0" style="font-size: 20px">Selamat datang di Sistem Informasi Pegawai</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page-header end -->
+        <div class="pcoded-inner-content">
+            <!-- Main-body start -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- Page-body start -->
+                    <div class="page-body">
+                        {{-- Table taro sini --}}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Tanda Jasa</h5>
+                                <a href="/klien/dataumum/tandajasa/add" class="btn btn-primary p-2 shadow"><i
+                                        class="fa fa-plus"></i> Tambah</a>
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                    </ul>
                                 </div>
-                            </form>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover shadow">
-                                    <thead class="table-primary">
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
                                         <tr>
 
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nama Pegawai</th>
-                                            <th scope="col">Nama Tanda Jasa</th>
-                                            <th scope="col">Nomor SK</th>
-                                            <th scope="col">Tanggal SK</th>
-                                            <th scope="col">Tahun</th>
-                                            <th scope="col">Asal Perolehan</th>
-                                            <th scope="col" class="text-center">Sertifikat</th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama Pegawai</th>
+                                        <th scope="col">Nama Tanda Jasa</th>
+                                        <th scope="col">Nomor SK</th>
+                                        <th scope="col">Tanggal SK</th>
+                                        <th scope="col">Tahun</th>
+                                        <th scope="col">Asal Perolehan</th>
+                                        <th scope="col" class="text-center">Sertifikat</th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
+                                        </thead>
+                                        <tbody>
                                         <?php $m = 1; ?>
                                         @foreach ($rows as $row)
                                         <tr>
@@ -52,16 +68,25 @@
 
                                         </tr>
                                         @endforeach
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="d-flex justify-content-center">
+                                        {{ $rows->links() }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- task, page, download counter  end -->
+                        <!-- Page-body end -->
                     </div>
+                    <div id="styleSelector"></div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
-</body>
-
-
+    </div>
+    </div>
+    </div>
 @endsection
