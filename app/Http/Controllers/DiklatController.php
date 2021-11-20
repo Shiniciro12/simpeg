@@ -76,7 +76,6 @@ class DiklatController extends Controller
         if ($validator->fails()) {
             return redirect('/diklat/add')->withErrors($validator)->withInput();
         }
-
         $temp = $request->file('sertifikat')->getPathName();
         $file = $data['identitas_id'] . "-diklat-" . date('s');
 
@@ -239,13 +238,13 @@ class DiklatController extends Controller
             'nama' => 'required',
             'tempat' => 'required',
             'penyelenggara' => 'required',
-            'angka' => 'required',
+            'angka' => '',
             'tgl_mulai' => 'required|date',
             'tgl_selesai' => 'required|date',
-            'jam' => 'required|numeric',
+            'jam' => 'numeric',
             'no_sttp' => 'required|unique:diklat',
             'tgl_sttp' => 'required|date',
-            'sertifikat' => 'file|mimes:pdf|max:500',
+            'sertifikat' => 'required|file|mimes:pdf|max:500',
         ];
 
         $input = [
@@ -273,7 +272,7 @@ class DiklatController extends Controller
             'after' => '*Kolom :attribute tidak sesuai.',
             'mimes' => '*File format tidak didukung.',
         ];
-
+        
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return redirect('/klien/dataumum/diklat/add')->withErrors($validator)->withInput();
