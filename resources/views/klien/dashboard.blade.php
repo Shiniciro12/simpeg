@@ -48,7 +48,20 @@
                                             <div class="col-sm-4">
                                                 <div class="card">
                                                     <div class="card-body text-center">
+                                                        <?php
+                                                        if(file_exists('images/'.auth()->user()->foto)){
+                                                        ?>
+                                                        <img src="/images/{{ auth()->user()->foto }}"
+                                                            class="rounded" width="100%" alt=""><?php
+                                                        }
+                                                        else{
+                                                            ?>
                                                         <img src="/images/defaultpp.jpg" class="rounded-circle" alt="">
+                                                        <?php
+                                                        }
+                                                        ?>
+
+
                                                     </div>
                                                     <button class="btn btn-warning"><i class="fa fa-camera"></i> Ganti
                                                         Gambar</button>

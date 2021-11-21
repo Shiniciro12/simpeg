@@ -22,6 +22,15 @@
                     <!-- Page-body start -->
                     <div class="page-body">
                         {{-- Table taro sini --}}
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <div class="card">
                             <div class="card-header">
                                 <h5>Tanda Jasa</h5>
@@ -40,33 +49,35 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr>
+                                            <tr>
 
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nama Pegawai</th>
-                                        <th scope="col">Nama Tanda Jasa</th>
-                                        <th scope="col">Nomor SK</th>
-                                        <th scope="col">Tanggal SK</th>
-                                        <th scope="col">Tahun</th>
-                                        <th scope="col">Asal Perolehan</th>
-                                        <th scope="col" class="text-center">Sertifikat</th>
-                                        </tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Nama Pegawai</th>
+                                                <th scope="col">Nama Tanda Jasa</th>
+                                                <th scope="col">Nomor SK</th>
+                                                <th scope="col">Tanggal SK</th>
+                                                <th scope="col">Tahun</th>
+                                                <th scope="col">Asal Perolehan</th>
+                                                <th scope="col" class="text-center">Sertifikat</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $m = 1; ?>
-                                        @foreach ($rows as $row)
-                                        <tr>
-                                            <th scope="row">{{ $m++}}</th>
-                                            <td scope="row">{{ $row["nama_identitas"] }}</td>
-                                            <td scope="row">{{ $row["nama"] }}</td>
-                                            <td scope="row">{{ $row["no_sk"] }}</td>
-                                            <td scope="row">{{ $row["tgl_sk"] }}</td>
-                                            <td scope="row">{{ $row["tahun"] }}</td>
-                                            <td scope="row">{{ $row["asal_perolehan"] }}</td>
-                                            <td scope="row" class="text-center"><a href="{{ $row['sertifikat'] }}" ><i class="fa fa-file-pdf-o"></i></a></td>
+                                            <?php $m = 1; ?>
+                                            @foreach ($rows as $row)
+                                                <tr>
+                                                    <th scope="row">{{ $m++ }}</th>
+                                                    <td scope="row">{{ $row['nama_identitas'] }}</td>
+                                                    <td scope="row">{{ $row['nama'] }}</td>
+                                                    <td scope="row">{{ $row['no_sk'] }}</td>
+                                                    <td scope="row">{{ $row['tgl_sk'] }}</td>
+                                                    <td scope="row">{{ $row['tahun'] }}</td>
+                                                    <td scope="row">{{ $row['asal_perolehan'] }}</td>
+                                                    <td scope="row" class="text-center"><a
+                                                            href="{{ $row['sertifikat'] }}"><i
+                                                                class="fa fa-file-pdf-o"></i></a></td>
 
-                                        </tr>
-                                        @endforeach
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 

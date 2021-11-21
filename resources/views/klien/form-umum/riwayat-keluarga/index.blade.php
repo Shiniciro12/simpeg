@@ -21,6 +21,15 @@
                 <div class="page-wrapper">
                     <!-- Page-body start -->
                     <div class="page-body">
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         {{-- Table taro sini --}}
 
                         <div class="card">
@@ -72,28 +81,28 @@
                                                 <tr>
 
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td scope="row">{{ $row["nama_identitas"] }}</td>
-                                                    <td scope="row">{{ $row["nik"] }}</td>
-                                                    <td scope="row">{{ $row["nama"] }}</td>
-                                                    <td scope="row">{{ $row["tempat_lahir"] }}</td>
-                                                    <td scope="row">{{ $row["tgl_lahir"] }}</td>
-                                                    <td scope="row">{{ $row["jenis_kelamin"] }}</td>
-                                                    <td scope="row">{{ $row["status_keluarga"] }}</td>
-                                                    <td scope="row">{{ $row["status_kawin"] }}</td>
-                                                    <td scope="row">{{ $row["tgl_kawin"] }}</td>
-                                                    <td scope="row">{{ $row["status_tunjangan"] }}</td>
-                                                    <td scope="row">{{ $row["pendidikan"] }}</td>
-                                                    <td scope="row">{{ $row["pekerjaan"] }}</td>
-                                                    <td scope="row">{{ $row["alamat"] }}</td>
-                                                    <td scope="row">{{ $row["desa_kelurahan"] }}</td>
-                                                    <td scope="row">{{ $row["kecamatan"] }}</td>
-                                                    <td scope="row">{{ $row["kabupaten_kota"] }}</td>
-                                                    <td scope="row">{{ $row["provinsi"] }}</td>
-                                                    <td scope="row">{{ $row["hp"] }}</td>
-                                                    <td scope="row">{{ $row["telepon"] }}</td>
-                                                    <td scope="row">{{ $row["kode_pos"] }}</td>
+                                                    <td scope="row">{{ $row['nama_identitas'] }}</td>
+                                                    <td scope="row">{{ $row['nik'] }}</td>
+                                                    <td scope="row">{{ $row['nama'] }}</td>
+                                                    <td scope="row">{{ $row['tempat_lahir'] }}</td>
+                                                    <td scope="row">{{ $row['tgl_lahir'] }}</td>
+                                                    <td scope="row">{{ $row['jenis_kelamin'] }}</td>
+                                                    <td scope="row">{{ $row['status_keluarga'] }}</td>
+                                                    <td scope="row">{{ $row['status_kawin'] }}</td>
+                                                    <td scope="row">{{ $row['tgl_kawin'] }}</td>
+                                                    <td scope="row">{{ $row['status_tunjangan'] }}</td>
+                                                    <td scope="row">{{ $row['pendidikan'] }}</td>
+                                                    <td scope="row">{{ $row['pekerjaan'] }}</td>
+                                                    <td scope="row">{{ $row['alamat'] }}</td>
+                                                    <td scope="row">{{ $row['desa_kelurahan'] }}</td>
+                                                    <td scope="row">{{ $row['kecamatan'] }}</td>
+                                                    <td scope="row">{{ $row['kabupaten_kota'] }}</td>
+                                                    <td scope="row">{{ $row['provinsi'] }}</td>
+                                                    <td scope="row">{{ $row['hp'] }}</td>
+                                                    <td scope="row">{{ $row['telepon'] }}</td>
+                                                    <td scope="row">{{ $row['kode_pos'] }}</td>
                                                     <td class="text-center" scope="row">
-                                                        <a href="{{ $row ['dokumen'] }}"><i
+                                                        <a href="{{ $row['dokumen'] }}"><i
                                                                 class="fa fa-file-pdf-o"></i></a>
                                                     </td>
                                                 </tr>

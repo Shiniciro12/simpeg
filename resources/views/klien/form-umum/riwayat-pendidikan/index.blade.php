@@ -21,6 +21,15 @@
                 <div class="page-wrapper">
                     <!-- Page-body start -->
                     <div class="page-body">
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         {{-- Table taro sini --}}
                         <div class="card">
                             <div class="card-header">
@@ -40,38 +49,40 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nama Lengkap</th>
-                                        <th scope="col">Tingkat Pendidikan</th>
-                                        <th scope="col">Jurusan</th>
-                                        <th scope="col">Nama Lembaga Pendidikan</th>
-                                        <th scope="col">Tempat</th>
-                                        <th scope="col">Nama Kepsek/Rektor</th>
-                                        <th scope="col">No Ijazah</th>
-                                        <th scope="col">Tanggal Ijazah</th>
-                                        <th scope="col">File Ijasah</th>
-                                        <th scope="col">Transkrip Ijazah</th>
-                                    </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Nama Lengkap</th>
+                                                <th scope="col">Tingkat Pendidikan</th>
+                                                <th scope="col">Jurusan</th>
+                                                <th scope="col">Nama Lembaga Pendidikan</th>
+                                                <th scope="col">Tempat</th>
+                                                <th scope="col">Nama Kepsek/Rektor</th>
+                                                <th scope="col">No Ijazah</th>
+                                                <th scope="col">Tanggal Ijazah</th>
+                                                <th scope="col">File Ijasah</th>
+                                                <th scope="col">Transkrip Ijazah</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $i = 1; ?>
-                                    @foreach ($rows as $row)
-                                    <tr>
-                                        <th scope="row">{{ $i++}}</th>
-                                        <td scope="row">{{ $row["nama_peg"] }}</td>
-                                        <td scope="row">{{ $row["tingkat_pendidikan"] }}</td>
-                                        <td scope="row">{{ $row["jurusan"] }}</td>
-                                        <td scope="row">{{ $row["nama_lembaga_pendidikan"] }}</td>
-                                        <td scope="row">{{ $row["tempat"] }}</td>
-                                        <td scope="row">{{ $row["nama_kepsek_rektor"] }}</td>
-                                        <td scope="row">{{ $row["no_sttb"] }}</td>
-                                        <td scope="row">{{ $row["tgl_sttb"] }}</td>
-                                        <td scope="row"><a href="/unggah/sttb/{{ $row["sttb"] }}" ><i class="fa fa-file-pdf-o"></i></a></td>
-                                        <td scope="row"><a href="/unggah/transkrip/{{ $row["transkrip"] }}" ><i
-                                            class="fa fa-file-pdf-o"></i></a></td>
-                                    </tr>
-                                    @endforeach
+                                            <?php $i = 1; ?>
+                                            @foreach ($rows as $row)
+                                                <tr>
+                                                    <th scope="row">{{ $i++ }}</th>
+                                                    <td scope="row">{{ $row['nama_peg'] }}</td>
+                                                    <td scope="row">{{ $row['tingkat_pendidikan'] }}</td>
+                                                    <td scope="row">{{ $row['jurusan'] }}</td>
+                                                    <td scope="row">{{ $row['nama_lembaga_pendidikan'] }}</td>
+                                                    <td scope="row">{{ $row['tempat'] }}</td>
+                                                    <td scope="row">{{ $row['nama_kepsek_rektor'] }}</td>
+                                                    <td scope="row">{{ $row['no_sttb'] }}</td>
+                                                    <td scope="row">{{ $row['tgl_sttb'] }}</td>
+                                                    <td scope="row"><a href="/unggah/sttb/{{ $row['sttb'] }}"><i
+                                                                class="fa fa-file-pdf-o"></i></a></td>
+                                                    <td scope="row"><a
+                                                            href="/unggah/transkrip/{{ $row['transkrip'] }}"><i
+                                                                class="fa fa-file-pdf-o"></i></a></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 

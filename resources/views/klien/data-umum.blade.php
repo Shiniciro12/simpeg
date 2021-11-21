@@ -22,6 +22,24 @@
                     <!-- Page-body start -->
                     <div class="page-body">
                         <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <span>
+                                            <h5>Progress Pengisian Data FIP</h5> <br>
+                                        </span>
+                                        <?php
+                                        $persen = ($jumlah * 100) / 6;
+                                        ?>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar"
+                                                style="width: {{ round($persen) }}%;"
+                                                aria-valuenow="{{ round($persen) }}" aria-valuemin="0"
+                                                aria-valuemax="100">{{ round($persen) }}%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- task, page, download counter  start -->
                             <div class="col-sm-3">
                                 <a href="/klien/dataumum/identitas/edit">

@@ -19,6 +19,8 @@ class RiwayatPangkat extends Migration
             $table->uuid('riwayat_pangkat_id')->primary();
             $table->uuid('pangkat_id');
             $table->uuid('identitas_id');
+            $table->string('masa_kerja_gol_bln');
+            $table->string('masa_kerja_gol_thn');
             $table->string('pejabat');
             $table->string('no_sk')->unique();
             $table->date('tgl_sk');

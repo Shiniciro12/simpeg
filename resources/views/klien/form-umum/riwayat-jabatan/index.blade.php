@@ -21,6 +21,15 @@
                 <div class="page-wrapper">
                     <!-- Page-body start -->
                     <div class="page-body">
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         {{-- Table taro sini --}}
                         <div class="card">
                             <div class="card-header">
@@ -42,32 +51,33 @@
                                         <thead>
                                             <tr>
 
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nama Jabatan</th>
-                                        <th scope="col">Pegawai</th>
-                                        <th scope="col">Pejabat</th>
-                                        <th scope="col">No SK</th>
-                                        <th scope="col">Tanggal SK</th>
-                                        <th scope="col">TMT</th>
-                                        <th scope="col" class="text-center">SK Jabatan</th>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Nama Jabatan</th>
+                                                <th scope="col">Pegawai</th>
+                                                <th scope="col">Pejabat</th>
+                                                <th scope="col">No SK</th>
+                                                <th scope="col">Tanggal SK</th>
+                                                <th scope="col">TMT</th>
+                                                <th scope="col" class="text-center">SK Jabatan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $i = 1; ?>
-                                        @foreach ($rows as $row)
-                                        <tr>
+                                            <?php $i = 1; ?>
+                                            @foreach ($rows as $row)
+                                                <tr>
 
-                                            <th scope="row">{{ $i++}}</th>
-                                            <td scope="row">{{ $row["nama_jabatan"] }}</td>
-                                            <td scope="row">{{ $row["nama"] }}</td>
-                                            <td scope="row">{{ $row["pejabat"] }}</td>
-                                            <td scope="row" style="text-align: center">{{ $row["no_sk"] }}</td>
-                                            <td scope="row" style="text-align: center">{{ $row["tgl_sk"] }}</td>
-                                            <td scope="row">{{ $row["tmt_jabatan"] }}</td>
-                                            <td scope="row" class="text-center"><a href="{{ $row["sk_jabatan"] }}" ><i
-                                            class="fa fa-file-pdf-o"></i></a></td>
-                                        </tr>
-                                        @endforeach
+                                                    <th scope="row">{{ $i++ }}</th>
+                                                    <td scope="row">{{ $row['nama_jabatan'] }}</td>
+                                                    <td scope="row">{{ $row['nama'] }}</td>
+                                                    <td scope="row">{{ $row['pejabat'] }}</td>
+                                                    <td scope="row" style="text-align: center">{{ $row['no_sk'] }}</td>
+                                                    <td scope="row" style="text-align: center">{{ $row['tgl_sk'] }}</td>
+                                                    <td scope="row">{{ $row['tmt_jabatan'] }}</td>
+                                                    <td scope="row" class="text-center"><a
+                                                            href="{{ $row['sk_jabatan'] }}"><i
+                                                                class="fa fa-file-pdf-o"></i></a></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 

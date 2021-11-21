@@ -23,6 +23,7 @@ class KeluargaSeeder extends Seeder
             'tgl_lahir' => '1999-09-10',
             'jenis_kelamin' => 'L',
             'status_keluarga' => 'Saudara',
+            'ket' => '1',
             'status_kawin' => 'Kawin',
             'tgl_kawin' => '2019-10-20',
             'status_tunjangan' => 'Tidak',
