@@ -19,7 +19,7 @@ class Verifikasi extends Model
      *
      * @var string[]
      */
-    protected $guarded = ['unit_kerja_id'];
+    protected $guarded = ['verifikasi_id'];
 
     public function scopeFilter($query, array $filters)
     {
