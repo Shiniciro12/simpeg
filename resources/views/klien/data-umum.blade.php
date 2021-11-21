@@ -1,191 +1,299 @@
-@extends('admin.layouts.main')
-@include('admin.layouts.header-klien')
+@extends('klien.layouts.main')
 @section('content')
-<div class="container-fluid">
-  <div class="row">
-    @include('admin.layouts.sidenav')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Data Umum</h1>
-      </div>
-      <!-- <div class="card shadow p-3 mb-5 bg-body rounded"> -->
-      <div class="card-body">
-        <div class="alert alert-success" role="alert">
-          Silahkan pilih menu berikut untuk mengisi data FIP.
+    <div class="pcoded-content">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="page-header-title">
+                            <h1 class="m-b-10" style="color:white">Data Umum (FIP)</h1>
+                            <!-- <p class="m-b-0" style="font-size: 20px">Selamat datang di Sistem Informasi Pegawai</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Row Pertama -->
-        <div class="row">
-          <div class="col-3">
-            <div class="card text-center">
-              <a href="/klien/dataumum/identitas" class="link-light">
-                <div class="card-body">
-                  <i class="bi bi-person-check link-primary" style="font-size: 36px;"></i><br><br>
-                  <small class="card-text" style="color: black;"><b>Riwayat Ubah Identitas</b></small>
+        <!-- Page-header end -->
+        <div class="pcoded-inner-content">
+            <!-- Main-body start -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- Page-body start -->
+                    <div class="page-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <span>
+                                            <h5>Progress Pengisian Data FIP</h5> <br>
+                                        </span>
+                                        <?php
+                                        $persen = ($jumlah * 100) / 6;
+                                        ?>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar"
+                                                style="width: {{ round($persen) }}%;"
+                                                aria-valuenow="{{ round($persen) }}" aria-valuemin="0"
+                                                aria-valuemax="100">{{ round($persen) }}%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- task, page, download counter  start -->
+                            <div class="col-sm-3">
+                                <a href="/klien/dataumum/identitas/edit">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center">
+                                                <div class="col-8">
+                                                    <h4 class="text-c-black">Data</h4>
+                                                    <h6 class="text-muted m-b-0">Identitas</h6>
+                                                </div>
+                                                <div class="col-4 text-right">
+                                                    <i class="fa fa-id-badge f-38"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </a>
+                                <div class="card-footer bg-c-green">
+                                    <div class="row align-items-center">
+                                        <div class="col-9">
+                                            <p class="text-white m-b-0">Selesai</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <a href="/klien/dataumum/riwayat-pangkat">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col-8">
+                                                <h4 class="text-c-black">Riwayat</h4>
+                                                <h6 class="text-muted m-b-0">Pangkat/Golongan</h6>
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <i class="fa fa-id-badge f-38"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </a>
+
+                            @if ($riwayatPangkat == true)
+                                <div class="card-footer bg-c-green">
+                                    <div class="row align-items-center">
+                                        <div class="col-9">
+                                            <p class="text-white m-b-0">Selesai</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="card-footer bg-c-yellow">
+                                    <div class="row align-items-center">
+                                        <div class="col-9">
+                                            <p class="text-black m-b-0">Belum Selesai</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-3">
+                        <a href="/klien/dataumum/riwayat-pendidikan">
+                            <div class="card">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <h4 class="text-c-black">Riwayat</h4>
+                                            <h6 class="text-muted m-b-0">Pendidikan</h6>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <i class="fa fa-id-badge f-38"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                        </a>
+
+                        @if ($riwayatPendidikan == true)
+                            <div class="card-footer bg-c-green">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">Selesai</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div class="card-footer bg-c-yellow">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-black m-b-0">Belum Selesai</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
-              </a>
-              <div class="card-footer bg-danger text-light">
-                <small><b>Belum Selesai</b></small>
-              </div>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="card text-center">
-              <a href="/klien/dataumum/riwayat-pangkat" class="link-light">
-                <div class="card-body">
-                  <i class="bi bi-clipboard-check link-primary" style="font-size: 36px;"></i><br><br>
-                  <small class="card-text" style="color: black;"><b>Riwayat Pangkat/Golongan</b></small>
+
+
+                <div class="col-sm-3">
+                    <a href="/klien/dataumum/riwayat-jabatan">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="text-c-black">Riwayat</h4>
+                                        <h6 class="text-muted m-b-0">Jabatan</h6>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <i class="fa fa-id-badge f-38"></i>
+                                    </div>
+                                </div>
+                            </div>
+                    </a>
+                    @if ($jabatan == true)
+                        <div class="card-footer bg-c-green">
+                            <div class="row align-items-center">
+                                <div class="col-9">
+                                    <p class="text-white m-b-0">Selesai</p>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="card-footer bg-c-yellow">
+                            <div class="row align-items-center">
+                                <div class="col-9">
+                                    <p class="text-black m-b-0">Belum Selesai</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
-              </a>
-              @if($riwayatPangkat > 0)
-
-              <div class="card-footer bg-success text-light">
-                <small><b>Selesai</b></small>
-              </div>
-
-              @else
-              <div class="card-footer bg-danger text-light">
-                <small><b>Belum Selesai</b></small>
-              </div>
-
-              @endif
-
-
-
-
-
-
             </div>
-          </div>
-          <div class="col-3">
-            <div class="card text-center">
-              <a href="/klien/dataumum/riwayat-pendidikan" class="link-light">
-                <div class="card-body">
-                  <i class="bi bi-files link-primary" style="font-size: 36px;"></i><br><br>
-                  <small class="card-text" style="color: black;"><b>Riwayat Pendidikan</b></small>
-                </div>
-              </a>
-              @if($riwayatPendidikan > 0)
 
-              <div class="card-footer bg-success text-light">
-                <small><b>Selesai</b></small>
-              </div>
-
-              @else
-              <div class="card-footer bg-danger text-light">
-                <small><b>Belum Selesai</b></small>
-              </div>
-
-              @endif
-
+            <div class="col-sm-4">
+                <a href="/klien/dataumum/diklat">
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h4 class="text-c-black">Riwayat</h4>
+                                    <h6 class="text-muted m-b-0">Diklat</h6>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <i class="fa fa-id-badge f-38"></i>
+                                </div>
+                            </div>
+                        </div>
+                </a>
+                @if ($diklat == true)
+                    <div class="card-footer bg-c-green">
+                        <div class="row align-items-center">
+                            <div class="col-9">
+                                <p class="text-white m-b-0">Selesai</p>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="card-footer bg-c-yellow">
+                        <div class="row align-items-center">
+                            <div class="col-9">
+                                <p class="text-black m-b-0">Belum Selesai</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
-          </div>
-          <div class="col-3">
-            <div class="card text-center">
-              <a href="/klien/dataumum/riwayat-jabatan" class="link-light">
-                <div class="card-body">
-                  <i class="bi bi-bookmarks link-primary" style="font-size: 36px;"></i><br><br>
-                  <small class="card-text" style="color: black;"><b>Riwayat Jabatan</b></small>
-                </div>
-              </a>
-              @if($jabatan > 0)
-
-              <div class="card-footer bg-success text-light">
-                <small><b>Selesai</b></small>
-              </div>
-
-              @else
-              <div class="card-footer bg-danger text-light">
-                <small><b>Belum Selesai</b></small>
-              </div>
-
-              @endif
-
-            </div>
-          </div>
         </div>
-        <!-- End Row Pertama -->
-        <br>
-        <!-- Row Kedua -->
-        <div class="row">
-          <div class="col-3">
-            <div class="card text-center">
-              <a href="/klien/dataumum/diklat" class="link-light">
-                <div class="card-body">
-                  <i class="bi bi-easel link-primary" style="font-size: 36px;"></i><br><br>
-                  <small class="card-text" style="color: black;"><b>Riwayat Diklat</b></small>
+
+        <div class="col-sm-4">
+            <a href="/klien/dataumum/keluarga">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h4 class="text-c-black">Riwayat</h4>
+                                <h6 class="text-muted m-b-0">Keluarga</h6>
+                            </div>
+                            <div class="col-4 text-right">
+                                <i class="fa fa-id-badge f-38"></i>
+                            </div>
+                        </div>
+                    </div>
+            </a>
+            @if ($keluarga == true)
+                <div class="card-footer bg-c-green">
+                    <div class="row align-items-center">
+                        <div class="col-9">
+                            <p class="text-white m-b-0">Selesai</p>
+                        </div>
+                    </div>
                 </div>
-              </a>
-              @if($diklat > 0)
-
-              <div class="card-footer bg-success text-light">
-                <small><b>Selesai</b></small>
-              </div>
-
-              @else
-              <div class="card-footer bg-danger text-light">
-                <small><b>Belum Selesai</b></small>
-              </div>
-
-              @endif
-
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="card text-center">
-              <a href="/klien/dataumum/keluarga" class="link-light">
-                <div class="card-body">
-                  <i class="bi bi-people link-primary" style="font-size: 36px;"></i><br><br>
-                  <small class="card-text" style="color: black;"><b>Riwayat Keluarga</b></small>
+            @else
+                <div class="card-footer bg-c-yellow">
+                    <div class="row align-items-center">
+                        <div class="col-9">
+                            <p class="text-black m-b-0">Belum Selesai</p>
+                        </div>
+                    </div>
                 </div>
-              </a>
-              @if($keluarga > 0)
-
-              <div class="card-footer bg-success text-light">
-                <small><b>Selesai</b></small>
-              </div>
-
-              @else
-              <div class="card-footer bg-danger text-light">
-                <small><b>Belum Selesai</b></small>
-              </div>
-
-              @endif
-
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="card text-center">
-              <a href="/klien/dataumum/tandajasa" class="link-light">
-                <div class="card-body">
-                  <i class="bi bi-award link-primary" style="font-size: 36px;"></i><br><br>
-                  <small class="card-text" style="color: black;"><b>Riwayat Tanda Jasa</b></small>
-                </div>
-              </a>
-              @if($tandaJasa > 0)
-
-              <div class="card-footer bg-success text-light">
-                <small><b>Selesai</b></small>
-              </div>
-
-              @else
-              <div class="card-footer bg-danger text-light">
-                <small><b>Belum Selesai</b></small>
-              </div>
-
-              @endif
-
-            </div>
-          </div>
-          <div class="col-3">
-
-          </div>
+            @endif
         </div>
-        <!-- End Row Kedua -->
-        <br>
-      </div>
-      <!-- </div> -->
-    </main>
-  </div>
-</div>
+    </div>
+
+
+    <div class="col-sm-4">
+        <a href="/klien/dataumum/tandajasa">
+            <div class="card">
+                <div class="card-block">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h4 class="text-c-black">Riwayat</h4>
+                            <h6 class="text-muted m-b-0">Tanda Jasa</h6>
+                        </div>
+                        <div class="col-4 text-right">
+                            <i class="fa fa-id-badge f-38"></i>
+                        </div>
+                    </div>
+                </div>
+        </a>
+        @if ($tandaJasa == true)
+            <div class="card-footer bg-c-green">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <p class="text-white m-b-0">Selesai</p>
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="card-footer bg-c-yellow">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <p class="text-black m-b-0">Belum Selesai</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+    </div>
+
+
+    </div>
+    <!-- task, page, download counter  end -->
+    <!-- Page-body end -->
+    </div>
+    <div id="styleSelector"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 @endsection

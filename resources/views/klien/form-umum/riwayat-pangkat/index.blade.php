@@ -1,42 +1,54 @@
-@extends('admin.layouts.main')
-@include('admin.layouts.header-klien')
+@extends('klien.layouts.main')
 @section('content')
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            @include('admin.layouts.sidenav')
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-
-
-
-
-
-                <div class="container">
-                    @if(session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{session('success')}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="pcoded-content">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="page-header-title">
+                            <h1 class="m-b-10" style="color:white">Riwayat Pangkat</h1>
+                            <!-- <p class="m-b-0" style="font-size: 20px">Selamat datang di Sistem Informasi Pegawai</p> -->
+                        </div>
                     </div>
-                    @endif
-                    <div class="row">
-                        <div class="col-md-11 mt-2 mx-auto">
-                            <div class="text-center my-4">
-                                <h2>Data Riwayat Pangkat</h2>
-                                <a href="/klien/dataumum/riwayat-pangkat/add" class="btn btn-success p-2 shadow"><i class="bi bi-plus"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Page-header end -->
+        <div class="pcoded-inner-content">
+            <!-- Main-body start -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- Page-body start -->
+                    <div class="page-body">
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <br>
-                            <div class="col-md-12 mt-2">
-                                <form action="" method="get">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Cari..." name="search">
-                                        <button class="btn btn-outline-secondary" type="submit" id="search">Cari</button>
-                                    </div>
-                                </form>
+                        @endif
+                        {{-- Table taro sini --}}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Riwayat Pangkat</h5>
+                                <a href="/klien/dataumum/riwayat-pangkat/add" class="btn btn-primary p-2 shadow"><i
+                                        class="fa fa-plus"></i> Tambah</a>
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-block table-border-style">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover shadow">
-                                        <thead class="table-primary">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
                                                 <th scope="col">No</th>
                                                 <th scope="col">Pangkat</th>
@@ -51,41 +63,41 @@
                                         <tbody>
                                             <?php $i = 1; ?>
                                             @foreach ($rows as $row)
-                                            <tr>
+                                                <tr>
 
-                                                <th scope="row">{{ $i++}}</th>
-                                                <td scope="row">{{ $row["pangkat"] }}</td>
-                                                <td scope="row">{{ $row["nama"] }}</td>
-                                                <td scope="row">{{ $row["pejabat"] }}</td>
-
-                                                <td scope="row">{{ $row["no_sk"] }}</td>
-                                                <td scope="row">{{ $row["tgl_sk"] }}</td>
-                                                <td scope="row">{{ $row["tmt_pangkat"] }}</td>
-                                                <td class="text-center" scope="row"><a download=".{{ $row[" tgl_sk"] }}.{{ $row["no_sk"] }}" href="{{ $row->sk_pangkat }}" class="btn btn-primary shadow"><i class="bi bi-file-earmark-pdf"></i></a></td>
-
-                                            </tr>
+                                                    <th scope="row">{{ $i++ }}</th>
+                                                    <td scope="row">{{ $row['pangkat'] }}</td>
+                                                    <td scope="row">{{ $row['nama'] }}</td>
+                                                    <td scope="row">{{ $row['pejabat'] }}</td>
+                                                    <td scope="row">{{ $row['no_sk'] }}</td>
+                                                    <td scope="row">{{ $row['tgl_sk'] }}</td>
+                                                    <td scope="row">{{ $row['tmt_pangkat'] }}</td>
+                                                    <td class="text-center" scope="row">
+                                                        <a download=".{{ $row[' tgl_sk'] }}.{{ $row['no_sk'] }}"
+                                                            href="{{ $row->sk_pangkat }}"><i
+                                                                class="fa fa-file-pdf-o"></i></a>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
+
+                                    <div class="d-flex justify-content-center">
+                                        {{ $rows->links() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- task, page, download counter  end -->
+                        <!-- Page-body end -->
                     </div>
+                    <div id="styleSelector"></div>
                 </div>
-                <br>
-                <div class="d-flex justify-content-center">
-                    {{$rows->links()}}
-                </div>
-
-
-
-
-                <br>
-
-            </main>
+            </div>
         </div>
     </div>
-</body>
-
-
+    </div>
+    </div>
+    </div>
 @endsection

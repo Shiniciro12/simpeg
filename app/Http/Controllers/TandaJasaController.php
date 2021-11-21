@@ -36,7 +36,7 @@ class TandaJasaController extends Controller
             'tgl_sk' => 'required|date',
             'tahun' => 'required|numeric|digits:4',
             'asal_perolehan' => 'required',
-            'sertifikat' => 'file|mimes:pdf|max:500',
+            'sertifikat' => 'required|file|mimes:pdf|max:500',
         ];
 
         $input = [

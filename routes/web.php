@@ -30,7 +30,6 @@ use App\Http\Controllers\KlienController;
 */
 
 Route::resource('/identitas', IdentitasController::class);
-
 Route::resource('/unit-kerja', UnitKerjaController::class);
 
 Route::resource('/kelurahan', KelurahanController::class);
@@ -120,7 +119,7 @@ Route::post('/login', [AuthController::class, 'signIn']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [RootController::class, 'index']);
     Route::group(['prefix' => 'unit-kerja'], function () {
-        
+
         Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuan']);
         Route::get('/dokumen-sk', [UnitKerjaController::class, 'receiveDokumen']);
 
@@ -131,18 +130,24 @@ Route::group(['prefix' => 'admin'], function () {
 
 //Access by role client
 Route::group(['prefix' => 'klien'], function () {
-  
-  Route::get('/dashboard', [KlienController::class, 'dashboard']);
-  Route::post('/update/foto', [KlienController::class, 'updateFoto']);
 
-  Route::get('/dataumum', [KlienController::class, 'dataUmum']);
-  Route::group(['prefix' => 'dataumum'], function () {
+    Route::get('/dashboard', [KlienController::class, 'dashboard']);
+    Route::post('/update/foto', [KlienController::class, 'updateFoto']);
 
-        //data umum riwayat jabatan
+    Route::get('/dataumum', [KlienController::class, 'dataUmum']);
+    Route::group(['prefix' => 'dataumum'], function () {
+
+        //data umum ubah identitas
+
+        Route::get('/identitas/edit', [IdentitasController::class, 'UEditform']);
+        Route::post('/identitas/update', [IdentitasController::class, 'UUpdate']);
+
+        // Route::post('/identitas/update', [DiklatKlienControllerController::class, 'UUpdateIdentitas']);
+        //data umum riwayat pangkat
         Route::get('/riwayat-pangkat', [RiwayatPangkatController::class, 'UmumView']);
         Route::get('/riwayat-pangkat/add', [RiwayatPangkatController::class, 'UaddFormRPangkat']);
         Route::post('/riwayat-pangkat/store', [RiwayatPangkatController::class, 'UAddStoreRPangkat']);
-      
+
         //data umum riwayat pendidikan
         Route::get('/riwayat-pendidikan', [PendidikanController::class, 'UmumView']);
         Route::get('/riwayat-pendidikan/add', [PendidikanController::class, 'UAddForm']);
@@ -168,7 +173,7 @@ Route::group(['prefix' => 'klien'], function () {
         Route::get('/tandajasa/add', [TandaJasaController::class, 'UaddForm']);
         Route::post('/tandajasa/store', [TandaJasaController::class, 'UStore']);
     });
-  
+
     Route::get('/datakhusus', [KlienController::class, 'dataKhusus']);
     Route::group(['prefix' => 'layanan'], function () {
         Route::get('/layanankhusus', [KlienController::class, 'dataKhususLayanan']);
@@ -186,5 +191,4 @@ Route::group(['prefix' => 'klien'], function () {
         Route::get('/kpjs', [KlienController::class, 'kpjsForm']);
         Route::post('/kpjsadd', [KlienController::class, 'kpjsAdd']);
     });
-   
 });
