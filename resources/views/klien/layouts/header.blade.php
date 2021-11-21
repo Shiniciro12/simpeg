@@ -174,13 +174,27 @@
                                 </li> -->
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="/images/defaultpp.jpg" class="img-radius" alt="User-Profile-Image">
+                                    <?php
+                                        if(file_exists('unggah/identitas/foto/'.auth()->user()->foto)){
+                                    ?>
+                                    <div style="width: 40px; height: 40px; margin-top: 5px; margin-right: 10px;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%; background-image: url('/unggah/identitas/foto/{{ auth()->user()->foto }}'); float: left"
+                                        class="rounded-circle">
+
+                                    </div>
+                                    <?php
+                                    }
+                                    else{
+                                    ?>
+                                    <img src="/images/defaultpp.jpg" class="rounded-circle" alt="">
+                                    <?php
+                                                        }
+                                                        ?>
                                     <span>{{ auth()->user()->nama }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
                                     <li class="waves-effect waves-light">
-                                        <a href="user-profile.html">
+                                        <a href="/klien/dataumum/identitas/edit">
                                             <i class="ti-user"></i> Profil
                                         </a>
                                     </li>

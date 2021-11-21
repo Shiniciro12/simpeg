@@ -29,7 +29,7 @@
                                             <h5>Progress Pengisian Data FIP</h5> <br>
                                         </span>
                                         <?php
-                                        $persen = ($jumlah * 100) / 6;
+                                        $persen = ($jumlah * 100) / 7;
                                         ?>
                                         <div class="progress">
                                             <div class="progress-bar" role="progressbar"
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <!-- task, page, download counter  start -->
-                            <div class="col-sm-3">
+                            <div class="col-sm-4 mx-auto">
                                 <a href="/klien/dataumum/identitas/edit">
                                     <div class="card">
                                         <div class="card-block">
@@ -51,7 +51,7 @@
                                                     <h6 class="text-muted m-b-0">Identitas</h6>
                                                 </div>
                                                 <div class="col-4 text-right">
-                                                    <i class="fa fa-id-badge f-38"></i>
+                                                    <i class="fa fa-id-badge f-38 d-inline"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-4 mx-auto">
                             <a href="/klien/dataumum/riwayat-pangkat">
                                 <div class="card">
                                     <div class="card-block">
@@ -76,7 +76,7 @@
                                                 <h6 class="text-muted m-b-0">Pangkat/Golongan</h6>
                                             </div>
                                             <div class="col-4 text-right">
-                                                <i class="fa fa-id-badge f-38"></i>
+                                                <i class="fa fa-reorder f-38"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                     </div>
 
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-4 mx-auto">
                         <a href="/klien/dataumum/riwayat-pendidikan">
                             <div class="card">
                                 <div class="card-block">
@@ -115,7 +115,7 @@
                                             <h6 class="text-muted m-b-0">Pendidikan</h6>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <i class="fa fa-id-badge f-38"></i>
+                                            <i class="fa fa-graduation-cap f-38"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                 </div>
 
 
-                <div class="col-sm-3">
+                <div class="col-sm-4 mx-auto">
                     <a href="/klien/dataumum/riwayat-jabatan">
                         <div class="card">
                             <div class="card-block">
@@ -152,7 +152,7 @@
                                         <h6 class="text-muted m-b-0">Jabatan</h6>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <i class="fa fa-id-badge f-38"></i>
+                                        <i class="fa fa-braille f-38"></i>
                                     </div>
                                 </div>
                             </div>
@@ -177,17 +177,17 @@
                 </div>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-4 mx-auto">
                 <a href="/klien/dataumum/diklat">
                     <div class="card">
                         <div class="card-block">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h4 class="text-c-black">Riwayat</h4>
+                                    <h4 class="text-c-black">Data</h4>
                                     <h6 class="text-muted m-b-0">Diklat</h6>
                                 </div>
                                 <div class="col-4 text-right">
-                                    <i class="fa fa-id-badge f-38"></i>
+                                    <i class="fa fa-toggle-up f-38"></i>
                                 </div>
                             </div>
                         </div>
@@ -212,17 +212,17 @@
             </div>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-4 mx-auto">
             <a href="/klien/dataumum/keluarga">
                 <div class="card">
                     <div class="card-block">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h4 class="text-c-black">Riwayat</h4>
+                                <h4 class="text-c-black">Data</h4>
                                 <h6 class="text-muted m-b-0">Keluarga</h6>
                             </div>
                             <div class="col-4 text-right">
-                                <i class="fa fa-id-badge f-38"></i>
+                                <i class="fa fa-users f-38"></i>
                             </div>
                         </div>
                     </div>
@@ -248,7 +248,7 @@
     </div>
 
 
-    <div class="col-sm-4">
+    <div class="col-sm-4 mx-auto">
         <a href="/klien/dataumum/tandajasa">
             <div class="card">
                 <div class="card-block">
@@ -258,7 +258,7 @@
                             <h6 class="text-muted m-b-0">Tanda Jasa</h6>
                         </div>
                         <div class="col-4 text-right">
-                            <i class="fa fa-id-badge f-38"></i>
+                            <i class="fa fa-tags f-38"></i>
                         </div>
                     </div>
                 </div>
