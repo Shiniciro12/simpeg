@@ -21,10 +21,7 @@ class KlienController extends Controller
     {
         return view('klien.dashboard', [
             'page' => 'Klien | Dashboard',
-            'layanan_khusus' => Dokumen::where('identitas_id', auth()->user()->identitas_id)->join('jenis_layanan', 'jenis_layanan.jenis_layanan_id', '=', 'dokumen.jenis_layanan_id')->get(),
-            'pangkat' => RiwayatPangkat::where('identitas_id', auth()->user()->identitas_id)->join('pangkat', 'pangkat.pangkat_id', '=', 'riwayat_pangkat.pangkat_id')->get(),
-            'jabatan' => RiwayatJabatan::where('identitas_id', auth()->user()->identitas_id)->join('jabatan', 'jabatan.jabatan_id', '=', 'riwayat_jabatan.jabatan_id')->get(),
-            'pendidikan' => Pendidikan::where('identitas_id', auth()->user()->identitas_id)->get(),
+           
         ]);
     }
 
