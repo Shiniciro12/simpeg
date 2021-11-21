@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class Layanan extends Migration
+class Berkas extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,13 @@ class Layanan extends Migration
     public function up()
     {
         DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
-        Schema::create('layanan', function (Blueprint $table) {
-            $table->uuid('layanan_id')->primary();
-            $table->string('nama_layanan')->nullable();
-            $table->string('penyedia_layanan')->nullable();
+        Schema::create('berkas', function (Blueprint $table) {
+            $table->uuid('berkas_id')->primary();
+            $table->uuid('data_khusus_id')->nullable();
+            $table->uuid('layanan_id')->nullable();
             $table->timestamps();
         });
-        DB::statement('ALTER TABLE layanan ALTER COLUMN layanan_id SET DEFAULT uuid_generate_v4();');
+        DB::statement('ALTER TABLE berkas ALTER COLUMN berkas_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**
@@ -31,6 +31,6 @@ class Layanan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('layanan');
+        Schema::dropIfExists('berkas');
     }
 }

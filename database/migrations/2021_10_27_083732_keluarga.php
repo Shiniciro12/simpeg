@@ -24,6 +24,7 @@ class Keluarga extends Migration
             $table->date('tgl_lahir');
             $table->char('jenis_kelamin', 1);
             $table->string('status_keluarga');
+            $table->string('ket');
             $table->string('status_kawin');
             $table->date('tgl_kawin');
             $table->string('status_tunjangan');

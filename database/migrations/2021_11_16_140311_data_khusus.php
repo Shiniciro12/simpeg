@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class JenisLayanan extends Migration
+class DataKhusus extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,12 @@ class JenisLayanan extends Migration
     public function up()
     {
         DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
-        Schema::create('jenis_layanan', function (Blueprint $table) {
-            $table->uuid('jenis_layanan_id')->primary();
-            $table->string('nama_layanan')->nullable();
-            $table->string('penyedia_layanan')->nullable();
+        Schema::create('data_khusus', function (Blueprint $table) {
+            $table->uuid('data_khusus_id')->primary();
+            $table->string('nama_data_khusus')->nullable();
             $table->timestamps();
         });
-        DB::statement('ALTER TABLE jenis_layanan ALTER COLUMN jenis_layanan_id SET DEFAULT uuid_generate_v4();');
+        DB::statement('ALTER TABLE data_khusus ALTER COLUMN data_khusus_id SET DEFAULT uuid_generate_v4();');
     }
 
     /**
@@ -31,6 +30,6 @@ class JenisLayanan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_layanan');
+        Schema::dropIfExists('data_khusus');
     }
 }

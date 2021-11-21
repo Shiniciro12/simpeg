@@ -24,7 +24,7 @@ class Dokumen extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('nip', 'like', '%' . $search . '%');
+            return $query->where('identitas_id', 'like', '%' . $search . '%');
         });
     }
 }
