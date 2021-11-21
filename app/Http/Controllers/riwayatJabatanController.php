@@ -119,7 +119,7 @@ class RiwayatJabatanController extends Controller
             'pejabat' => 'required',
             'no_sk' => 'required' . $no_sk,
             'tgl_sk' => 'required|date',
-            'sk_jabatan' => '' .$sk_jabatan,
+            'sk_jabatan' => '' . $sk_jabatan,
             'tmt' => 'required|date',
         ];
 
@@ -148,12 +148,12 @@ class RiwayatJabatanController extends Controller
         }
 
         $pathriwayat_jabatan = $riwayat_jabatan['sk_jabatan'];
-       
+
         if ($request->file('sk_jabatan')) {
-            
+
             File::delete(public_path($pathriwayat_jabatan));
             $extriwayat_jabatan = $request->file('sk_jabatan')->getClientOriginalExtension();
-            $cum = explode("/",$pathriwayat_jabatan);
+            $cum = explode("/", $pathriwayat_jabatan);
             $newFileriwayat_jabatan = end($cum);
             $tempriwayat_jabatan = $request->file('sk_jabatan')->getPathName();
             $folderriwayat_jabatan = "unggah/sk-jabatan/" . $newFileriwayat_jabatan;
@@ -198,7 +198,8 @@ class RiwayatJabatanController extends Controller
     {
         return view('klien.form-umum.riwayat-jabatan.add', [
             'rowsIdentitas' => Identitas::latest()->get(),
-            'rowsJabatan' => Jabatan::latest()->get(),
+            'rowsUnitKerja' => UnitKerja::latest()->get(),
+            // 'rowsJabatan' => Jabatan::latest()->get(),
             'page' => 'Tambah Riwayat Jabatan',
         ]);
     }
@@ -265,4 +266,10 @@ class RiwayatJabatanController extends Controller
         return redirect('/klien/dataumum/riwayat-jabatan')->with('success', 'Data berhasil ditambahkan');
     }
 
+    public function getJabatan(Request $request)
+    {
+
+        $data = Jabatan::where('unit_kerja_id', $request->input('unitKerja'))->get();
+        echo json_encode($data);
+    }
 }
