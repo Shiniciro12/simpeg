@@ -24,7 +24,7 @@
                         {{-- Table taro sini --}}
                         <div class="card">
                             <div class="card-header">
-                                <h5>Riwayat Pangkat</h5>
+                                <h5>Tanda Jasa</h5>
                                 <a href="/klien/dataumum/tandajasa/add" class="btn btn-primary p-2 shadow"><i
                                         class="fa fa-plus"></i> Tambah</a>
                                 <div class="card-header-right">
@@ -40,16 +40,17 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                            <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nama Pegawai</th>
-                                            <th scope="col">Nama Tanda Jasa</th>
-                                            <th scope="col">Nomor SK</th>
-                                            <th scope="col">Tanggal SK</th>
-                                            <th scope="col">Tahun</th>
-                                            <th scope="col">Asal Perolehan</th>
-                                            <th scope="col" class="text-center">Sertifikat</th>
-                                            </tr>
+                                        <tr>
+
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama Pegawai</th>
+                                        <th scope="col">Nama Tanda Jasa</th>
+                                        <th scope="col">Nomor SK</th>
+                                        <th scope="col">Tanggal SK</th>
+                                        <th scope="col">Tahun</th>
+                                        <th scope="col">Asal Perolehan</th>
+                                        <th scope="col" class="text-center">Sertifikat</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
                                         <?php $m = 1; ?>
