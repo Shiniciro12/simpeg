@@ -22,10 +22,10 @@ class Diklat extends Migration
             $table->string('nama');
             $table->string('tempat');
             $table->string('penyelenggara');
-            $table->float('angka');
+            $table->float('angka')->nullable();
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
-            $table->integer('jam');
+            $table->integer('jam')->nullable();
             $table->string('no_sttp')->unique();
             $table->date('tgl_sttp');
             $table->string('sertifikat');

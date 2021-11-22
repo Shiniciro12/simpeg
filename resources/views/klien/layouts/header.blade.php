@@ -184,10 +184,11 @@
                                             <i class="ti-user"></i> Profil
                                         </a>
                                     </li>
-                                    <li class="waves-effect waves-light">
-                                        <a href="auth-normal-sign-in.html">
-                                            <i class="ti-layout-sidebar-left"></i> Logout
-                                        </a>
+                                    <li class="waves-effect waves-light li-btn-logout">
+                                        <form action="/logout" method="post">
+                                            <button type="submit" class="btn-logout li-btn-logout"><i
+                                                    class="ti-layout-sidebar-left"></i> Logout</button>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>

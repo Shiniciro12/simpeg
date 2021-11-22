@@ -1,8 +1,8 @@
 @extends('umum.layouts.main')
 @section('content')
+
 <body>
   <div class="container"><br>
-    
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
       <div class="card text-center">
         <div class="card-header">
@@ -24,7 +24,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </body>
 @endsection

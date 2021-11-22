@@ -60,8 +60,6 @@
                                                         <?php
                                                         }
                                                         ?>
-
-
                                                     </div>
                                                     <button class="btn btn-warning"><i class="fa fa-camera"></i> Ganti
                                                         Gambar</button>

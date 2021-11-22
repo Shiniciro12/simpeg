@@ -15,10 +15,13 @@
                                     <i class="ti-user"></i>
                                     Profil
                                 </a>
-                                <a href="#">
-                                    <i class="ti-layout-sidebar-left"></i>
-                                    Logout
-                                </a>
+                            </li>
+                            <li class="waves-effect waves-light li-btn-logout">
+                                <form action="/logout" method="post">
+                                    <button type="submit" class="btn-logout li-btn-logout"><i
+                                            class="ti-layout-sidebar-left"></i> Logout</button>
+                                </form>
+                            </li>
                             </li>
                         </ul>
                     </div>
@@ -28,53 +31,53 @@
                 </div>
                 <ul class="pcoded-item pcoded-left-item">
                     @if ($page == 'Klien | Dashboard')
-                        <li class="active">
+                    <li class="active">
                         @else
-                        <li class="">
-                    @endif
+                    <li class="">
+                        @endif
 
-                    <a href="/klien/dashboard" class="waves-effect waves-dark">
-                        <span class="pcoded-micon">
-                            <i class="ti-home"></i>
-                            <b>D</b>
-                        </span>
-                        <span class="pcoded-mtext" data-i18n="nav.dash.main">
-                            Dashboard
-                        </span>
-                        <span class="pcoded-mcaret"></span>
-                    </a>
+                        <a href="/klien/dashboard" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="ti-home"></i>
+                                <b>D</b>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">
+                                Dashboard
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
                     </li>
                     @if ($page == 'Klien | Data Umum')
-                        <li class="active">
+                    <li class="active">
                         @else
-                        <li class="">
-                    @endif
-                    <a href="/klien/dataumum" class="waves-effect waves-dark">
-                        <span class="pcoded-micon">
-                            <i class="fa fa-table"></i>
-                            <b>D</b>
-                        </span>
-                        <span class="pcoded-mtext" data-i18n="nav.dash.main">
-                            Data Umum
-                        </span>
-                        <span class="pcoded-mcaret"></span>
-                    </a>
+                    <li class="">
+                        @endif
+                        <a href="/klien/dataumum" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="fa fa-table"></i>
+                                <b>D</b>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">
+                                Data Umum
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
                     </li>
                     @if ($page == 'Klien | Data Khusus')
-                        <li class="active">
+                    <li class="active">
                         @else
-                        <li class="">
-                    @endif
-                    <a href="/klien/datakhusus" class="waves-effect waves-dark">
-                        <span class="pcoded-micon">
-                            <i class="fa fa-th-large"></i>
-                            <b>D</b>
-                        </span>
-                        <span class="pcoded-mtext" data-i18n="nav.dash.main">
-                            Data Khusus
-                        </span>
-                        <span class="pcoded-mcaret"></span>
-                    </a>
+                    <li class="">
+                        @endif
+                        <a href="/klien/datakhusus" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="fa fa-th-large"></i>
+                                <b>D</b>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">
+                                Data Khusus
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
                     </li>
 
                 </ul>
@@ -207,9 +210,5 @@
                 </ul>
             </div>
         </nav>
-
-
         @yield('content')
-
-
         @include('klien.layouts.footer')
