@@ -263,3 +263,28 @@ $window.scroll(function () {
     nav.removeClass("active");
   }
 });
+
+$(".unitKerja").on("change", function () { 
+  $("#jabatan_id").find('option').remove().end();
+ const unitKerja = $(this).val();
+
+ let _token   = $('[name="_token"]').val();
+ $.ajax({
+  url: "/klien/dataumum/jabatan/get",
+  type: "post",
+  data: {
+    unitKerja: unitKerja,
+    _token: _token
+  } ,
+  dataType:'json',
+  success: function (response) {
+    response.map((item)=>{
+      $("#jabatan_id").append('<option value="'+item.jabatan_id+'">'+item.nama_jabatan+'</option>')
+    })
+   
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+     console.log(textStatus, errorThrown);
+  }
+});
+});

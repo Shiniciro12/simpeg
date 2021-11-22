@@ -49,9 +49,9 @@
                                                 <div class="card">
                                                     <div class="card-body text-center">
                                                         <?php
-                                                        if(file_exists('images/'.auth()->user()->foto)){
+                                                        if(file_exists('unggah/identitas/foto/'.auth()->user()->foto)){
                                                         ?>
-                                                        <img src="/images/{{ auth()->user()->foto }}"
+                                                        <img src="/unggah/identitas/foto/{{ auth()->user()->foto }}"
                                                             class="rounded" width="100%" alt=""><?php
                                                         }
                                                         else{
@@ -61,8 +61,62 @@
                                                         }
                                                         ?>
                                                     </div>
-                                                    <button class="btn btn-warning"><i class="fa fa-camera"></i> Ganti
+                                                    <button class="btn btn-warning" data-toggle="modal"
+                                                        data-target="#ganti_foto"><i class="fa fa-camera"></i> Ganti
                                                         Gambar</button>
+                                                </div>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="ganti_foto" tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Ganti
+                                                                    Gambar</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="/klien/dataumum/identitas/ganti-gambar"
+                                                                    class="form-material" method="POST"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-12 col-form-label">Upload
+                                                                            File </label>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="file"
+                                                                                class="form-control @error('foto_profil') is-invalid @enderror"
+                                                                                value="{{ old('foto_profil') }}"
+                                                                                id="foto_profil"
+                                                                                aria-describedby="foto_profil" accept=".jpg"
+                                                                                name="foto_profil">
+                                                                            @error('foto_profil')
+                                                                                <div id="foto_profil" class="text-danger">
+                                                                                    {{ $message }}
+                                                                                </div>
+                                                                            @enderror
+                                                                            <small style="color: royalblue">Foto Menggunakan
+                                                                                Baju
+                                                                                Dinas Dengan Latar
+                                                                                Belakang Merah Ukuran 3x4</small> <br>
+                                                                            <small>*Format: .jpg dibawah
+                                                                                1MB</small>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Tutup</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Simpan</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-8">
