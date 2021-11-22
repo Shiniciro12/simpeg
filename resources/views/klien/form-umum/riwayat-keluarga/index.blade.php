@@ -59,6 +59,7 @@
                                                 <th scope="col">Tanggal Lahir</th>
                                                 <th scope="col">Jenis Kelamin</th>
                                                 <th scope="col">Status Keluarga</th>
+                                                <th scope="col">Ket</th>
                                                 <th scope="col">Status Kawin</th>
                                                 <th scope="col">Tanggal Kawin</th>
                                                 <th scope="col">Status Tunjangan</th>
@@ -88,6 +89,7 @@
                                                     <td scope="row">{{ $row['tgl_lahir'] }}</td>
                                                     <td scope="row">{{ $row['jenis_kelamin'] }}</td>
                                                     <td scope="row">{{ $row['status_keluarga'] }}</td>
+                                                    <td scope="row">{{ $row['ket'] }}</td>
                                                     <td scope="row">{{ $row['status_kawin'] }}</td>
                                                     <td scope="row">{{ $row['tgl_kawin'] }}</td>
                                                     <td scope="row">{{ $row['status_tunjangan'] }}</td>

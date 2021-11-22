@@ -99,11 +99,11 @@ class KlienController extends Controller
             'max' => '*Kolom :attribute maksimal :max.',
             'file' => '*File :attribute wajib dipilih.',
         ];
+
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return redirect('/klien/dashboard')->with('success', 'Data berhasil diubah');
         }
-
 
         $extension = $request->file('foto_profil')->getClientOriginalExtension();
 
