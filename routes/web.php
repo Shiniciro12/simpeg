@@ -141,6 +141,7 @@ Route::group(['prefix' => 'klien'], function () {
 
         Route::get('/identitas/edit', [IdentitasController::class, 'UEditform']);
         Route::post('/identitas/update', [IdentitasController::class, 'UUpdate']);
+        Route::post('/identitas/ganti-gambar', [KlienController::class, 'gantiGambarIdentitas']);
 
         // Route::post('/identitas/update', [DiklatKlienControllerController::class, 'UUpdateIdentitas']);
         //data umum riwayat pangkat
@@ -157,6 +158,10 @@ Route::group(['prefix' => 'klien'], function () {
         Route::get('/riwayat-jabatan', [RiwayatJabatanController::class, 'UmumView']);
         Route::get('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'UaddForm']);
         Route::post('/riwayat-jabatan/store', [RiwayatJabatanController::class, 'UStrore']);
+
+        //Get Jabatan berdasarkan Unit Kerja dengan Ajax
+        Route::post('/jabatan/get', [RiwayatJabatanController::class, 'getJabatan']);
+
 
         //data umum riwayat diklat
         Route::get('/diklat', [DiklatController::class, 'UmumView']);

@@ -60,6 +60,42 @@
                                                 </div>
                                             </div>
                                             <br>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group form-default">
+                                                        <input type="number" placeholder="Bulan" max="4"
+                                                            class="form-control @error('ms_bulan') is-invalid @enderror"
+                                                            value="{{ old('ms_bulan') }}" id="ms_bulan"
+                                                            aria-describedby="ms_bulan" name="ms_bulan">
+                                                        @error('ms_bulan')
+                                                            <div id="ms_bulan" class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                        <span class="form-bar"></span>
+                                                        <label class="float-label">Masa Kerja Golongan</label>
+                                                        <small>* Contoh: 3 Bulan 2 Tahun</small>
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group form-default">
+                                                        <input type="number" placeholder="Tahun" max="4"
+                                                            class="form-control @error('ms_tahun') is-invalid @enderror"
+                                                            value="{{ old('ms_tahun') }}" id="ms_tahun"
+                                                            aria-describedby="ms_tahun" name="ms_tahun">
+                                                        @error('ms_tahun')
+                                                            <div id="ms_tahun" class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                        <span class="form-bar"></span>
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                                <br>
+                                            </div>
+                                            <br>
                                             <div class="form-group form-default">
                                                 <input type="text"
                                                     class="form-control @error('pejabat') is-invalid @enderror"
