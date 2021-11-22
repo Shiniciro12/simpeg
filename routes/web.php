@@ -159,6 +159,10 @@ Route::group(['prefix' => 'klien'], function () {
         Route::get('/riwayat-jabatan/add', [RiwayatJabatanController::class, 'UaddForm']);
         Route::post('/riwayat-jabatan/store', [RiwayatJabatanController::class, 'UStrore']);
 
+        //Get Jabatan berdasarkan Unit Kerja dengan Ajax
+        Route::post('/jabatan/get', [RiwayatJabatanController::class, 'getJabatan']);
+
+
         //data umum riwayat diklat
         Route::get('/diklat', [DiklatController::class, 'UmumView']);
         Route::get('/diklat/add', [DiklatController::class, 'UaddForm']);

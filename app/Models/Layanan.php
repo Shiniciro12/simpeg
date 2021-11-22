@@ -21,10 +21,10 @@ class Layanan extends Model
      */
     protected $guarded = ['layanan_id'];
 
-    public function scopeFilter($query, array $filters){
-        $query->when($filters['search'] ?? false, function($query, $search){
-            return $query->where('sk', 'like', '%'.$search.'%');
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('nama_layanan', 'like', '%' . $search . '%')->orWhere('penyedia_layanan', 'like', '%' . $search . '%');
         });
     }
-
 }

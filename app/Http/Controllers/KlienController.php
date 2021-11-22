@@ -34,10 +34,11 @@ class KlienController extends Controller
             'riwayatPangkat' => RiwayatPangkat::where('identitas_id', auth()->user()->identitas_id)->exists(),
             'riwayatPendidikan' => Pendidikan::where('identitas_id', auth()->user()->identitas_id)->exists(),
             'jabatan' => RiwayatJabatan::where('identitas_id', auth()->user()->identitas_id)->exists(),
-            'diklat' =>Diklat::where('identitas_id', auth()->user()->identitas_id)->exists(),
-            'keluarga' =>Keluarga::where('identitas_id', auth()->user()->identitas_id)->exists(),
-            'tandaJasa' =>TandaJasa::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'diklat' => Diklat::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'keluarga' => Keluarga::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'tandaJasa' => TandaJasa::where('identitas_id', auth()->user()->identitas_id)->exists(),
         ]);
+      
         $no = 1;
         foreach($data as $d => $key){
             if($key == '1'){
