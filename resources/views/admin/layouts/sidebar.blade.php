@@ -91,9 +91,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/unit-kerja/dokumen-sk">
+                        <a class="nav-link" href="/admin/unit-kerja/pegawai">
                             <span data-feather="file"></span>
-                            Dokumen
+                            Verifikasi
                         </a>
                     </li>
                     @endcan

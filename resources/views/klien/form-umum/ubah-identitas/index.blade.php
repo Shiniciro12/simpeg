@@ -40,7 +40,7 @@
                                     @foreach ($rows as $row)
                                     <tr>
                                         <th scope="row">{{ $m++}}</th>
-                                        <td scope="row">{{ $row["nama_identitas"] }}</td>
+                                        <td scope="row">{{ $row["nama_peg"] }}</td>
                                         <td scope="row">{{ $row["nama"] }}</td>
                                         <td scope="row">{{ $row["no_sk"] }}</td>
                                         <td scope="row">{{ $row["tgl_sk"] }}</td>

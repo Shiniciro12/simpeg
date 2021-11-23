@@ -32,6 +32,6 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="/tpl_assets/css/style.css">
 </head>
-
+<body>
 @include('klien.layouts.header')
 @include('klien.layouts.sidenav')

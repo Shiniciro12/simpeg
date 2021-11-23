@@ -14,7 +14,7 @@ class KeluargaController extends Controller
     {
         return view('keluarga.index', [
             'page' => 'Data Keluarga',
-            "rows" => Keluarga::select('keluarga.*', 'identitas.nama AS nama_identitas')->join('identitas', 'identitas.identitas_id', '=', 'keluarga.identitas_id')->latest()->filter(request(['search']))->paginate(10)->withQueryString(),
+            "rows" => Keluarga::select('keluarga.*', 'identitas.nama AS nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'keluarga.identitas_id')->latest()->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
     //umum view
@@ -22,11 +22,11 @@ class KeluargaController extends Controller
     {
         return view('klien.form-umum.riwayat-keluarga.index', [
             'page' => 'Data Keluarga',
-            "rows" => Keluarga::select('keluarga.*', 'identitas.nama AS nama_identitas')->join('identitas', 'identitas.identitas_id', '=', 'keluarga.identitas_id')->latest()->where('keluarga.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+            "rows" => Keluarga::select('keluarga.*', 'identitas.nama AS nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'keluarga.identitas_id')->latest()->where('keluarga.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
-    //Umum add
 
+    //umum add
     public function UaddForm()
     {
         return view('klien.form-umum.riwayat-keluarga.add', [

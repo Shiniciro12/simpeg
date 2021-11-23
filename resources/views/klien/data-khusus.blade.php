@@ -3,7 +3,6 @@
     <?php
     use App\Http\Controllers\KlienController;
     ?>
-
     <div class="pcoded-content">
         <!-- Page-header start -->
         <div class="page-header">

@@ -7,7 +7,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <div class="page-header-title">
-                            <h1 class="m-b-10" style="color:white">Riwayat Keluarga</h1>
+                            <h1 class="m-b-10" style="color:white">{{ $page }}</h1>
                             <!-- <p class="m-b-0" style="font-size: 20px">Selamat datang di Sistem Informasi Pegawai</p> -->
                         </div>
                     </div>
@@ -51,8 +51,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">No</th>
-                                                <th scope="col">Nama Pegawai</th>
+                                                <th scope="col">#</th>
+                                                {{-- <th scope="col">Nama Pegawai</th> --}}
                                                 <th scope="col">NIK</th>
                                                 <th scope="col">Nama</th>
                                                 <th scope="col">Tempat Lahir</th>
@@ -80,9 +80,8 @@
                                             <?php $i = 1; ?>
                                             @foreach ($rows as $row)
                                                 <tr>
-
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td scope="row">{{ $row['nama_identitas'] }}</td>
+                                                    <td scope="row">{{ $row['nama_peg'] }}</td>
                                                     <td scope="row">{{ $row['nik'] }}</td>
                                                     <td scope="row">{{ $row['nama'] }}</td>
                                                     <td scope="row">{{ $row['tempat_lahir'] }}</td>
@@ -111,7 +110,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-
                                     <div class="d-flex justify-content-center">
                                         {{ $rows->links() }}
                                     </div>

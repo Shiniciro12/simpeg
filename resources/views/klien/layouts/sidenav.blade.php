@@ -16,8 +16,9 @@
                                     Profil
                                 </a>
                             </li>
-                            <li class="waves-effect waves-light li-btn-logout">
+                            <li class="more-details">
                                 <form action="/logout" method="post">
+                                    @csrf
                                     <button type="submit" class="btn-logout li-btn-logout"><i
                                             class="ti-layout-sidebar-left"></i> Logout</button>
                                 </form>

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Dokumen;
 use App\Models\Identitas;
 use App\Models\JenisLayanan;
+use App\Models\RiwayatJabatan;
+use App\Models\RiwayatPangkat;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\UnitKerja;
+use App\Models\Verifikasi;
 
 class UnitKerjaController extends Controller
 {
@@ -157,22 +160,8 @@ class UnitKerjaController extends Controller
     public function pengajuan()
     {
         return view('admin.unit-kerja.pengajuan', [
-            'page' => 'Data Pengajuan',
-            'rowsIdentitas' => Identitas::latest()->get(),
-            'rowsJenisLayanan' => JenisLayanan::latest()->get(),
-            "rows" => Dokumen::join("identitas", "identitas.identitas_id", "=", "dokumen.identitas_id")->join("riwayat_pangkat", "riwayat_pangkat.identitas_id", "=", "dokumen.identitas_id")->join("riwayat_jabatan", "riwayat_jabatan.identitas_id", "=", "dokumen.identitas_id")->join("jenis_layanan", "jenis_layanan.jenis_layanan_id", "=", "dokumen.jenis_layanan_id")->where("identitas.unit_kerja_id", "=", auth()->user()->unit_kerja_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+            'page' => 'Pengajuan',
         ]);
-    }
-
-    public function verifikasi(Request $request)
-    {
-        $data = [
-            'status' => '3',
-            'unit_verif_at' => time(),
-            'unit_verif_by' => auth()->user()->identitas_id,
-        ];
-        Dokumen::where('dokumen_id', $request->input('dokumen_id'))->update($data);
-        return redirect('/admin/unit-kerja/pengajuan')->with('success', 'Data berhasil diverifikasi');
     }
 
     public function requestLayanan(Request $request)
@@ -214,11 +203,47 @@ class UnitKerjaController extends Controller
         return redirect('/admin/unit-kerja/pengajuan')->with('success', 'Pengajuan berhasil ditambahkan');
     }
 
-    public function receiveDokumen()
+    public function pegawai()
     {
-        return view('admin.unit-kerja.dokumen-sk', [
-            'page' => 'Dokumen SK',
-            "rows" => Dokumen::join("identitas", "identitas.identitas_id", "=", "dokumen.identitas_id")->join("layanan", "layanan.dokumen_id", "=", "dokumen.dokumen_id")->join("jenis_layanan", "jenis_layanan.jenis_layanan_id", "=", "dokumen.jenis_layanan_id")->where("identitas.unit_kerja_id", "=", auth()->user()->unit_kerja_id)->where("dokumen.status", "=", '2')->filter(request(['search']))->paginate(10)->withQueryString(),
+        return view('admin.unit-kerja.pegawai', [
+            'page' => 'Daftar Pegawai',
+            'rowsPegawai' => Verifikasi::join("identitas", "identitas.identitas_id", "=", "verifikasi.identitas_id")->where("identitas.unit_kerja_id", "=", auth()->user()->unit_kerja_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+            'opd' => UnitKerja::find(auth()->user()->unit_kerja_id),
+        ]);
+    }
+
+    public function verifikasi(Request $request)
+    {
+        $data = [
+            'status' => '3',
+            'unit_verif_at' => time(),
+            'unit_verif_by' => auth()->user()->identitas_id,
+        ];
+        Verifikasi::where('verifikasi_id', $request->input('verifikasi_id'))->update($data);
+        return redirect('/admin/unit-kerja/pegawai')->with('success', 'Data berhasil diverifikasi');
+    }
+
+    public function berkasUmum($param1, $param2, $param3)
+    {
+        $page = '';
+        $query = [];
+
+        if ($param3 == 'pangkat') {
+            $page = 'Data Riwayat Pangkat';
+            $query = RiwayatPangkat::join("identitas", "identitas.identitas_id", "=", "riwayat_pangkat.identitas_id")->join("verifikasi", "verifikasi.identitas_id", "=", "riwayat_pangkat.identitas_id")->where("riwayat_pangkat.riwayat_pangkat_id", "=", "$param2")->paginate(10);
+        }
+
+        return view('admin.unit-kerja.umum.data-' . $param3, [
+            'page' => $page,
+            'verifikasi_id' => $param1,
+            'rows' => $query,
+        ]);
+    }
+
+    public function berkasKhusus()
+    {
+        return view('admin.unit-kerja.data-drh', [
+            'page' => 'Data Khusus',
         ]);
     }
 }

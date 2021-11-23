@@ -119,12 +119,11 @@ Route::post('/login', [AuthController::class, 'signIn']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [RootController::class, 'index']);
     Route::group(['prefix' => 'unit-kerja'], function () {
-
+        Route::get('/pegawai', [UnitKerjaController::class, 'pegawai']);
+        Route::get('/berkas/umum/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasUmum']);
+        Route::get('/berkas/khusus/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasKhusus']);
+        Route::post('/berkas/verifikasi', [UnitKerjaController::class, 'verifikasi']);
         Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuan']);
-        Route::get('/dokumen-sk', [UnitKerjaController::class, 'receiveDokumen']);
-
-        Route::post('/pengajuan', [UnitKerjaController::class, 'verifikasi']);
-        Route::post('/buat/layanan', [UnitKerjaController::class, 'requestLayanan']);
     });
 });
 
@@ -138,7 +137,6 @@ Route::group(['prefix' => 'klien'], function () {
     Route::group(['prefix' => 'dataumum'], function () {
 
         //data umum ubah identitas
-
         Route::get('/identitas/edit', [IdentitasController::class, 'UEditform']);
         Route::post('/identitas/update', [IdentitasController::class, 'UUpdate']);
         Route::post('/identitas/ganti-gambar', [KlienController::class, 'gantiGambarIdentitas']);
@@ -161,7 +159,6 @@ Route::group(['prefix' => 'klien'], function () {
 
         //Get Jabatan berdasarkan Unit Kerja dengan Ajax
         Route::post('/jabatan/get', [RiwayatJabatanController::class, 'getJabatan']);
-
 
         //data umum riwayat diklat
         Route::get('/diklat', [DiklatController::class, 'UmumView']);

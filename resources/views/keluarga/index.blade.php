@@ -68,7 +68,7 @@
                 </form>
               </td>
               <th scope="row">{{ $k++}}</th>
-              <td scope="row">{{ $row["nama_identitas"] }}</td>
+              <td scope="row">{{ $row["nama_peg"] }}</td>
               <td scope="row">{{ $row["nik"] }}</td>
               <td scope="row">{{ $row["nama"] }}</td>
               <td scope="row">{{ $row["tempat_lahir"] }}</td>

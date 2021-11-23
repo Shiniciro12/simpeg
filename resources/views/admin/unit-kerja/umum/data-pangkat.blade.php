@@ -12,18 +12,10 @@
     <div class="row">
         <div class="col-md-12 mx-auto">
             <div class="text-center my-3">
-                <h3>Data Dokumen SK</h3>
-                <button class="btn btn-success shadow" data-bs-toggle="modal" data-bs-target="#layananModal"><i
-                        class="bi bi-plus"></i></button>
+                <h3>Data dokumen pangkat</h3>
             </div>
             <br>
             <div class="col-md-12">
-                <form action="" method="get">
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control" placeholder="Cari..." name="search">
-                        <button class="btn btn-outline-secondary" type="submit" id="search">Cari</button>
-                    </div>
-                </form>
                 <div class="table-responsive shadow px-2">
                     <table class="table table-hover">
                         <thead>
@@ -31,9 +23,8 @@
                                 <th scope="col">#</th>
                                 <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">SK</th>
-                                <th scope="col">Waktu Verifikasi</th>
-                                <th scope="col">Jenis Layanan</th>
+                                <th scope="col">SK Pangkat</th>
+                                <th scope="col">Verifikasi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,9 +34,21 @@
                                 <th scope="row">{{ $i++ }}</th>
                                 <td>{{ $row['nip'] }}</td>
                                 <td>{{ $row['nama'] }}</td>
-                                <td><a href="">SK</a></td>
-                                <td>{{ $row['bkppd_verif_at'] ? date('Y-m-d H:m:s', $row['unit_verif_at']) : '' }}</td>
-                                <td>{{ $row['nama_layanan'] }}</td>
+                                <td><a href="{{ $row['sk_pangkat'] }}">Lihat Dokumen</a></td>
+                                <td>
+                                    @if ($row['status'] == '2')
+                                    <button class="btn btn-info btn-sm" type="submit">BKPPD</button>
+                                    @elseif ($row['status'] == '3')
+                                    <button class="btn btn-info btn-sm" type="submit">Unit
+                                        Kerja</button>
+                                    @else
+                                    <form action="/admin/unit-kerja/berkas/verifikasi" method="post">
+                                        @csrf
+                                        <input type="hidden" name="verifikasi_id" value="{{ $verifikasi_id }}">
+                                        <button class="btn btn-success btn-sm" type="submit">Verifikasi</button>
+                                    </form>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

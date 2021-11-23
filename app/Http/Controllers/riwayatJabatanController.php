@@ -209,6 +209,11 @@ class RiwayatJabatanController extends Controller
     {
         $id = Identitas::where('identitas_id', $request->input('identitas_id'))->first();
 
+        $pak = '';
+        if ($request->input('input_pak') == 'Fungsional') {
+            $pak = 'file|mimes:pdf|max:500';
+        }
+
         $rules = [
             'jabatan_id' => 'required',
             'identitas_id' => 'required',
@@ -217,6 +222,7 @@ class RiwayatJabatanController extends Controller
             'tgl_sk' => 'required|date',
             'tmt' => 'required|date',
             'sk_jabatan' => 'file|mimes:pdf|max:500',
+            'file_pak' => $pak,
         ];
 
         $input = [
@@ -227,6 +233,7 @@ class RiwayatJabatanController extends Controller
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt' => $request->input('tmt'),
             'sk_jabatan' => $request->file('sk_jabatan'),
+            'file_pak' => $request->file('file_pak'),
         ];
 
         $messages = [
@@ -245,11 +252,18 @@ class RiwayatJabatanController extends Controller
 
         $temp = $request->file('sk_jabatan')->getPathName();
         $file = $request->input('identitas_id') . "-jabatan-" . date('s');
-
         $folder = "unggah/sk-jabatan/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
+        $newNameSK = '/unggah/sk-jabatan/' . $request->input('identitas_id') . "-jabatan-" . date('s') . '.pdf';
 
-        $name = '/unggah/sk-jabatan/' . $request->input('identitas_id') . "-jabatan-" . date('s') . '.pdf';
+        $newNamePAK = '';
+        if ($request->input('input_pak') == 'Fungsional') {
+            $file = $request->input('identitas_id') . "-pak-" . date('s') . '.pdf';
+            $temp = $request->file('file_pak')->getPathName();
+            $folder = "unggah/pak/" . $file;
+            move_uploaded_file($temp, $folder);
+            $newNamePAK = '/unggah/pak/' . $file;
+        }
 
         $data = [
             'jabatan_id' => $request->input('jabatan_id'),
@@ -258,7 +272,8 @@ class RiwayatJabatanController extends Controller
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt_jabatan' => $request->input('tmt'),
-            'sk_jabatan' => $name,
+            'sk_jabatan' => $newNameSK,
+            'pak' => $newNamePAK,
         ];
 
         RiwayatJabatan::create($data);

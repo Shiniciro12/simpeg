@@ -38,10 +38,10 @@ class KlienController extends Controller
             'keluarga' => Keluarga::where('identitas_id', auth()->user()->identitas_id)->exists(),
             'tandaJasa' => TandaJasa::where('identitas_id', auth()->user()->identitas_id)->exists(),
         ]);
-      
+
         $no = 1;
-        foreach($data as $d => $key){
-            if($key == '1'){
+        foreach ($data as $d => $key) {
+            if ($key == '1') {
                 $no++;
             }
         }
@@ -49,13 +49,13 @@ class KlienController extends Controller
         return view('klien.data-umum', $data);
     }
 
-    public function checkStatusKhusus($str){
+    public function checkStatusKhusus($str)
+    {
         $data = Dokumen::join('data_khusus', 'dokumen.data_khusus_id', '=', 'data_khusus.data_khusus_id')->where('dokumen.identitas_id', auth()->user()->identitas_id)->where('dokumen.data_khusus_id', '=', $str)->exists();
 
-        if($data == true){
+        if ($data == true) {
             echo "<a class='text-success'><i class='fa fa-check-square f-30'></i></a>";
-        }
-        else{
+        } else {
             echo "<a class='text-danger'><i class='fa fa-window-close f-28'></i></a>";
         }
     }
@@ -82,11 +82,10 @@ class KlienController extends Controller
         ]);
     }
 
-    // SATYA LENCANA
     public function gantiGambarIdentitas(Request $request)
     {
         $rules = [
-            'foto_profil' => 'file|required|mimes:jpg|max:1000',
+            'foto_profil' => 'file|mimes:png,jpg,jpeg|max:500',
         ];
 
         $input = [
@@ -94,7 +93,6 @@ class KlienController extends Controller
         ];
 
         $messages = [
-            'required' => '*Kolom :attribute wajib diisi.',
             'mimes' => '*Format file :attribute tidak didukung.',
             'max' => '*Kolom :attribute maksimal :max.',
             'file' => '*File :attribute wajib dipilih.',
@@ -107,18 +105,18 @@ class KlienController extends Controller
 
         $extension = $request->file('foto_profil')->getClientOriginalExtension();
 
-        $newFile =  auth()->user()->identitas_id .".". $extension;
+        $pathFile =  "/unggah/identitas/foto/" . auth()->user()->nip . "." . $extension;
 
         $temp = $request->file('foto_profil')->getPathName();
-        $folder = "unggah/identitas/foto/" . $newFile;
+        $folder = "unggah/identitas/foto/" . auth()->user()->nip . "." . $extension;
         move_uploaded_file($temp, $folder);
 
         $data = [
-            'identitas_id' => auth()->user()->identitas_id,
-            'foto' => $newFile,
+            'foto' => $pathFile,
         ];
 
         Identitas::where('identitas_id', auth()->user()->identitas_id)->update($data);
+        
         return redirect('/klien/dashboard')->with('success', 'Data berhasil diubah');
     }
 }

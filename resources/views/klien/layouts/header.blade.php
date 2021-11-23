@@ -1,118 +1,117 @@
-<body>
-    <!-- Pre-loader start -->
-    <div class="theme-loader">
-        <div class="loader-track">
-            <div class="preloader-wrapper">
-                <div class="spinner-layer spinner-blue">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
+<!-- Pre-loader start -->
+<div class="theme-loader">
+    <div class="loader-track">
+        <div class="preloader-wrapper">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
                 </div>
-                <div class="spinner-layer spinner-red">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
                 </div>
-                <div class="spinner-layer spinner-yellow">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
                 </div>
-                <div class="spinner-layer spinner-green">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
+            </div>
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Pre-loader end -->
-    <div id="pcoded" class="pcoded">
-        <div class="pcoded-overlay-box"></div>
-        <div class="pcoded-container navbar-wrapper">
-            <nav class="navbar header-navbar pcoded-header">
-                <div class="navbar-wrapper">
-                    <div class="navbar-logo">
-                        <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
-                            <i class="ti-menu"></i>
-                        </a>
-                        <div class="mobile-search waves-effect waves-light">
-                            <div class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close">
-                                            <i class="ti-close"></i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-addon search-btn">
-                                            <i class="ti-search"></i>
-                                        </span>
-                                    </div>
+</div>
+<!-- Pre-loader end -->
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close">
+                                        <i class="ti-close"></i>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn">
+                                        <i class="ti-search"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
-                            <img class="img-fluid" src="/images/logo-header.png" alt="Theme-Logo">
-                        </a>
-                        <a class="mobile-options waves-effect waves-light">
-                            <i class="ti-more"></i>
-                        </a>
                     </div>
-                    <div class="navbar-container container-fluid">
-                        <ul class="nav-left">
-                            <li>
-                                <div class="sidebar_toggle">
-                                    <a href="javascript:void(0)">
-                                        <i class="ti-menu"></i>
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close">
-                                            <i class="ti-close"></i>
-                                        </span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn">
-                                            <i class="ti-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
-                                    <i class="ti-fullscreen"></i>
+                    <a href="index.html">
+                        <img class="img-fluid" src="/images/logo-header.png" alt="Theme-Logo">
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle">
+                                <a href="javascript:void(0)">
+                                    <i class="ti-menu"></i>
                                 </a>
-                            </li>
-                        </ul>
-                        <ul class="nav-right">
-                            <!-- Notifikasi -->
-                            <!-- <li class="header-notification">
+                            </div>
+                        </li>
+                        <li class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close">
+                                        <i class="ti-close"></i>
+                                    </span>
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-addon search-btn">
+                                        <i class="ti-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                                <i class="ti-fullscreen"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav-right">
+                        <!-- Notifikasi -->
+                        <!-- <li class="header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <i class="ti-bell"></i>
                                     <span class="badge bg-c-red"></span>
@@ -172,41 +171,34 @@
                                     </li>
                                 </ul>
                                 </li> -->
-                            <li class="user-profile header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <?php
-                                        if(file_exists('unggah/identitas/foto/'.auth()->user()->foto)){
-                                    ?>
-                                    <div style="width: 40px; height: 40px; margin-top: 5px; margin-right: 10px;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%; background-image: url('/unggah/identitas/foto/{{ auth()->user()->foto }}'); float: left"
-                                        class="rounded-circle">
-
-                                    </div>
-                                    <?php
-                                    }
-                                    else{
-                                    ?>
-                                    <img src="/images/defaultpp.jpg" class="rounded-circle" alt="">
-                                    <?php
-                                                        }
-                                                        ?>
-                                    <span>{{ auth()->user()->nama }}</span>
-                                    <i class="ti-angle-down"></i>
-                                </a>
-                                <ul class="show-notification profile-notification">
-                                    <li class="waves-effect waves-light">
-                                        <a href="/klien/dataumum/identitas/edit">
-                                            <i class="ti-user"></i> Profil
-                                        </a>
-                                    </li>
-                                    <li class="waves-effect waves-light li-btn-logout">
-                                        <form action="/logout" method="post">
-                                            <button type="submit" class="btn-logout li-btn-logout"><i
-                                                    class="ti-layout-sidebar-left"></i> Logout</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                        <li class="user-profile header-notification">
+                            <a href="#" class="waves-effect waves-light">
+                                @if(auth()->user()->foto != '/images/default.jpg')
+                                <div style="width: 40px; height: 40px; margin-top: 5px; margin-right: 10px;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%; background-image: url('{{ auth()->user()->foto }}'); float: left"
+                                    class="rounded-circle">
+                                </div>
+                                @else
+                                <img src="/images/defaultpp.jpg" class="rounded-circle" alt="">
+                                @endif
+                                <span>{{ auth()->user()->nama }}</span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+                                <li class="waves-effect waves-light">
+                                    <a href="/klien/dataumum/identitas/edit">
+                                        <i class="ti-user"></i> Profil
+                                    </a>
+                                </li>
+                                <li class="waves-effect waves-light li-btn-logout">
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn-logout li-btn-logout"><i
+                                                class="ti-layout-sidebar-left"></i> Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
+            </div>
+        </nav>

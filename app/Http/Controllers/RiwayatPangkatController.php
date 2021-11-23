@@ -12,6 +12,7 @@ use App\Models\Kecamatan;
 use App\Models\Pangkat;
 use App\Models\Jabatan;
 use App\Models\RiwayatPangkat;
+use App\Models\Verifikasi;
 use File;
 
 class RiwayatPangkatController extends Controller
@@ -108,6 +109,7 @@ class RiwayatPangkatController extends Controller
 
         $rules_pangkat_id = $riwayat_pangkat['no_sk'] != $request->input('no_sk') ? '|unique:riwayat_pangkat' : '';
         $sk_pangkat = $request->file('sk_pangkat') ? 'required|file|mimes:pdf|max:500' : '';
+
         $rules = [
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
@@ -154,6 +156,7 @@ class RiwayatPangkatController extends Controller
             move_uploaded_file($tempriwayat_pangkat, $folderriwayat_pangkat);
             $pathriwayat_pangkat = "/unggah/riwayat-pangkat/" . $newFileriwayat_pangkat;
         }
+
         $data = [
             'pangkat_id' => $request->input('pangkat_id'),
             'identitas_id' => $riwayat_pangkat['identitas_id'],
@@ -200,7 +203,7 @@ class RiwayatPangkatController extends Controller
             'page' => 'Tambah Pangkat',
         ]);
     }
-    
+
     //Umum View Controller
     public function UmumView()
     {
@@ -219,8 +222,8 @@ class RiwayatPangkatController extends Controller
             'pangkat_id' => 'required',
             'identitas_id' => 'required',
             'pejabat' => 'required',
-            'ms_bulan' => 'required|max:2',
-            'ms_tahun' => 'required|max:4',
+            'ms_bulan' => 'required|numeric',
+            'ms_tahun' => 'required|numeric',
             'no_sk' => 'required|unique:riwayat_pangkat',
             'tgl_sk' => 'required|date',
             'tmt_pangkat' => 'required|date',
@@ -246,6 +249,7 @@ class RiwayatPangkatController extends Controller
             'file' => '*File :attribute wajib dipilih.',
             'max' => '*Kolom :attribute maksimal :max.',
             'mimes' => '*Format file :attribute tidak didukung.',
+            'numeric' => '*Kolom :attribute harus berupa karakter angka.',
         ];
 
         $validator = Validator::make($input, $rules, $messages);
@@ -263,7 +267,6 @@ class RiwayatPangkatController extends Controller
         move_uploaded_file($temp, $folder);
 
         $path = "/unggah/riwayat-pangkat/" . $newFile;
-
         $data = [
             'pangkat_id' => $request->input('pangkat_id'),
             'identitas_id' => $request->input('identitas_id'),
@@ -277,7 +280,20 @@ class RiwayatPangkatController extends Controller
             'sk_pangkat' => $path,
         ];
 
-        RiwayatPangkat::create($data);
+        $resultCreateIdentitas = RiwayatPangkat::create($data)->getAttributes();
+
+        $dataVerifikasi = [
+            'docx_id' => $resultCreateIdentitas['riwayat_pangkat_id'],
+            'identitas_id' => $request->input('identitas_id'),
+            'status' => '4',
+            'unit_verif_at' => '',
+            'bkkpd_verif_at' => '',
+            'unit_verif_by' => '',
+            'bkkpd_verif_by' => '',
+            'jenis_data' => 'pangkat',
+        ];
+
+        Verifikasi::create($dataVerifikasi);
 
         return redirect('/klien/dataumum/riwayat-pangkat')->with('success', 'Data berhasil ditambahkan');
     }

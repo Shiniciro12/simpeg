@@ -278,13 +278,23 @@ $(".unitKerja").on("change", function () {
   } ,
   dataType:'json',
   success: function (response) {
+    $("#jabatan_id").append('<option value="" disabled selected>Pilih Jabatan</option>')
     response.map((item)=>{
-      $("#jabatan_id").append('<option value="'+item.jabatan_id+'">'+item.nama_jabatan+'</option>')
+      $("#jabatan_id").append('<option value="'+item.jabatan_id+'" jenisJabatan="'+item.jenis_jabatan+'">'+item.nama_jabatan+'</option>')
     })
-   
   },
   error: function(jqXHR, textStatus, errorThrown) {
      console.log(textStatus, errorThrown);
   }
 });
 });
+
+$("#jabatan_id").on("change", function (params) {
+  const jenisjabatan = $('option:selected', this).attr('jenisJabatan');
+  if(jenisjabatan == 'Fungsional'){
+    $(".file_pak").css("display", "block");  
+  } else {
+    $(".file_pak").val("display", "none");  
+  }
+  $(".input_pak").val(jenisjabatan);  
+})

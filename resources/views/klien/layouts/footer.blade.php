@@ -25,7 +25,7 @@
 <script src="/tpl_assets/js/pcoded.min.js"></script>
 <script src="/tpl_assets/js/vertical-layout.min.js "></script>
 <!-- custom js -->
-<script type="text/javascript" src="/tpl_assets/pages/dashboard/custom-dashboard.js"></script>
+{{-- <script type="text/javascript" src="/tpl_assets/pages/dashboard/custom-dashboard.js"></script> --}}
 <script type="text/javascript" src="/tpl_assets/js/script.js "></script>
 </body>
 

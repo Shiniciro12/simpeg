@@ -10,7 +10,6 @@ class RiwayatPangkat extends Model
     use HasFactory;
 
     protected $keyType = 'string';
-    public $incrementing = false;
     protected $primaryKey = 'riwayat_pangkat_id';
     protected $table = 'riwayat_pangkat';
 
