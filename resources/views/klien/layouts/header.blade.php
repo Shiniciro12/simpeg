@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="index.html">
+                    <a href="/klien/dashboard">
                         <img class="img-fluid" src="/images/logo-header.png" alt="Theme-Logo">
                     </a>
                     <a class="mobile-options waves-effect waves-light">
@@ -180,7 +180,7 @@
                                 @else
                                 <img src="/images/defaultpp.jpg" class="rounded-circle" alt="">
                                 @endif
-                                <span>{{ auth()->user()->nama }}</span>
+                                <span>{{ explode(' ', trim(auth()->user()->nama))[0]; }}</span>
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">

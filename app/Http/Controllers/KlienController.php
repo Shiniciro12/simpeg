@@ -7,7 +7,6 @@ use App\Models\Diklat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Dokumen;
-use App\Models\JenisLayanan;
 use App\Models\Pendidikan;
 use App\Models\RiwayatJabatan;
 use App\Models\RiwayatPangkat;
@@ -28,11 +27,11 @@ class KlienController extends Controller
     }
     public function dataUmum()
     {
-        // dd(Verifikasi::where('verifikasi.identitas_id', auth()->user()->identitas_id)->join('identitas', 'identitas.identitas_id', '=', 'verifikasi.identitas_id')->get());
         $data = ([
             'page' => 'Klien | Data Umum',
             'riwayatPangkat' => RiwayatPangkat::where('identitas_id', auth()->user()->identitas_id)->exists(),
             'riwayatPendidikan' => Pendidikan::where('identitas_id', auth()->user()->identitas_id)->exists(),
+            'identitas' => Verifikasi::where('identitas_id', auth()->user()->identitas_id)->where('jenis_data', 'identitas/umum')->first(),
             'jabatan' => RiwayatJabatan::where('identitas_id', auth()->user()->identitas_id)->exists(),
             'diklat' => Diklat::where('identitas_id', auth()->user()->identitas_id)->exists(),
             'keluarga' => Keluarga::where('identitas_id', auth()->user()->identitas_id)->exists(),

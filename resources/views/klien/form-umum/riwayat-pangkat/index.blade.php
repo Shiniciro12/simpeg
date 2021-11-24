@@ -56,13 +56,13 @@
                                             <th scope="col">Tanggal SK</th>
                                             <th scope="col">TMT Pangkat</th>
                                             <th scope="col" class="text-center">SK Pangkat</th>
+                                            <th scope="col" class="text-center">Status Verifikasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
                                         @foreach ($rows as $row)
                                         <tr>
-
                                             <th scope="row">{{ $i++ }}</th>
                                             <td scope="row">{{ $row['pangkat'] }}</td>
                                             <td scope="row">{{ $row['pejabat'] }}</td>
@@ -70,8 +70,17 @@
                                             <td scope="row">{{ $row['tgl_sk'] }}</td>
                                             <td scope="row">{{ $row['tmt_pangkat'] }}</td>
                                             <td class="text-center" scope="row">
-                                                <a download=".{{ $row[' tgl_sk'] }}.{{ $row['no_sk'] }}"
-                                                    href="{{ $row->sk_pangkat }}"><i class="fa fa-file-pdf-o"></i></a>
+                                                <a download=".{{ $row['tgl_sk'] }}.{{ $row['no_sk'] }}"
+                                                    href="{{ $row['sk_pangkat'] }}"><i class="fa fa-file-pdf-o"></i></a>
+                                            </td>
+                                            <td class="text-center" scope="row">
+                                                @if($row['status'] == '2')
+                                                <div class="badge bg-success p-2">BKPPD</div>
+                                                @elseif($row['status'] == '3')
+                                                <div class="badge bg-warning p-2">Unit Kerja</div>
+                                                @else
+                                                <div class="badge bg-danger p-2">Belum Verifikasi</div>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

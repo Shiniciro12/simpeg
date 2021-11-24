@@ -10,7 +10,6 @@ class Diklat extends Model
     use HasFactory;
 
     protected $keyType = 'string';
-    public $incrementing = false;
     protected $table = 'diklat';
     protected $primaryKey = 'diklat_id';
 

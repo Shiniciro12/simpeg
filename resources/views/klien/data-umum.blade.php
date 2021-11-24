@@ -55,13 +55,39 @@
                                         </div>
                                     </div>
                             </a>
-                            <div class="card-footer bg-c-green">
+                            @if($identitas['status'] == '4')
+                            <div class="card-footer bg-c-red">
                                 <div class="row align-items-center">
                                     <div class="col-9">
-                                        <p class="text-white m-b-0">Selesai</p>
+                                        <p class="text-white m-b-0">Terverifkasi : Belum Terverifkasi</p>
                                     </div>
                                 </div>
                             </div>
+                            @elseif($identitas['status'] == '3')
+                            <div class="card-footer bg-c-yellow">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">Terverifkasi : Unit Kerja</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @elseif($identitas['status'] == '2')
+                            <div class="card-footer bg-c-green">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">Terverifkasi : BKPPD</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @else
+                            <div class="card-footer bg-c-blue">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <p class="text-white m-b-0">Terverifkasi : Proses</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-sm-4 mx-auto">

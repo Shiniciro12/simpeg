@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 @include('admin.layouts.navbar')
-@include('admin.layouts.sidebar')
+@include('admin.layouts.sidenav')
 @section('content')
 <script src="/high-chart-lib/highcharts.js"></script>
 <script src="/high-chart-lib/highcharts-3d.js"></script>
@@ -8,43 +8,43 @@
 <script src="/high-chart-lib/modules/export-data.js"></script>
 <script src="/high-chart-lib/modules/accessibility.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<!-- Data Jenis Kelamin -->
-<div id="male" data-male="{{ $dataGenderMale }}"></div>
-<div id="female" data-female="{{ $dataGenderFemale }}"></div>
-<!-- Data Usia -->
-<div id="age1" data-lesser="{{ $dataLesserThan30 }}"></div>
-<div id="age2" data-more="{{ $dataMoreThan50 }}"></div>
-<div id="age3" data-three-four="{{ $dataAge3040 }}"></div>
-<div id="age4" data-four-five="{{ $dataAge4050 }}"></div>
-<!-- Data Eselon -->
-<div id="eselon1" data-eselona="{{ $eselon1 }}"></div>
-<div id="eselon2" data-eselonb="{{ $eselon2 }}"></div>
-<div id="eselon3" data-eselonc="{{ $eselon3 }}"></div>
-<div id="eselon4" data-eselond="{{ $eselon4 }}"></div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <figure class="highcharts-figure">
-                <div id="container1"></div>
-                <p class="highcharts-description text-center">
-                    Data umur
-                </p>
-            </figure>
-        </div>
-        <div class="col-md-6">
-            <figure class="highcharts-figure">
-                <div id="container2"></div>
-                <p class="highcharts-description text-center">
-                    Data Gender
-                </p>
-            </figure>
-        </div>
-        <div class="col-md">
-            <figure class="highcharts-figure">
-                <div id="container"></div>
-            </figure>
-
+<div class="pcoded-content">
+    <!-- Data Jenis Kelamin -->
+    <div id="male" data-male="{{ $dataGenderMale }}"></div>
+    <div id="female" data-female="{{ $dataGenderFemale }}"></div>
+    <!-- Data Usia -->
+    <div id="age1" data-lesser="{{ $dataLesserThan30 }}"></div>
+    <div id="age2" data-more="{{ $dataMoreThan50 }}"></div>
+    <div id="age3" data-three-four="{{ $dataAge3040 }}"></div>
+    <div id="age4" data-four-five="{{ $dataAge4050 }}"></div>
+    <!-- Data Eselon -->
+    <div id="eselon1" data-eselona="{{ $eselon1 }}"></div>
+    <div id="eselon2" data-eselonb="{{ $eselon2 }}"></div>
+    <div id="eselon3" data-eselonc="{{ $eselon3 }}"></div>
+    <div id="eselon4" data-eselond="{{ $eselon4 }}"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <figure class="highcharts-figure">
+                    <div id="container1"></div>
+                    <p class="highcharts-description text-center">
+                        Data umur
+                    </p>
+                </figure>
+            </div>
+            <div class="col-md-6">
+                <figure class="highcharts-figure">
+                    <div id="container2"></div>
+                    <p class="highcharts-description text-center">
+                        Data Gender
+                    </p>
+                </figure>
+            </div>
+            <div class="col-md">
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                </figure>
+            </div>
         </div>
     </div>
 </div>

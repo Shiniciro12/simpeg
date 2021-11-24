@@ -119,11 +119,20 @@ Route::post('/login', [AuthController::class, 'signIn']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [RootController::class, 'index']);
     Route::group(['prefix' => 'unit-kerja'], function () {
-        Route::get('/pegawai', [UnitKerjaController::class, 'pegawai']);
-        Route::get('/berkas/umum/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasUmum']);
-        Route::get('/berkas/khusus/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasKhusus']);
-        Route::post('/berkas/verifikasi', [UnitKerjaController::class, 'verifikasi']);
-        Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuan']);
+        // Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuanUnitKerja']);
+        Route::get('/pegawai/{data}/{dokumen}', [UnitKerjaController::class, 'pegawaiUnitKerja']);
+        
+        Route::get('/berkas/umum/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasUmumUnitKerja']);
+        Route::get('/berkas/khusus/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasKhususUnitKerja']);
+        Route::post('/berkas/verifikasi', [UnitKerjaController::class, 'verifikasiUnitKerja']);
+    });
+    Route::group(['prefix' => 'bkppd'], function () {
+        // Route::get('/pengajuan', [UnitKerjaController::class, 'pengajuanBKPPD']);
+        Route::get('/pegawai/{data}/{dokumen}', [UnitKerjaController::class, 'pegawaiBKPPD']);
+        
+        Route::get('/berkas/umum/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasUmumBKPPD']);
+        Route::get('/berkas/khusus/{param1}/{param2}/{param3}', [UnitKerjaController::class, 'berkasKhususBKPPD']);
+        Route::post('/berkas/verifikasi', [UnitKerjaController::class, 'verifikasiBKPPD']);
     });
 });
 
@@ -137,7 +146,7 @@ Route::group(['prefix' => 'klien'], function () {
     Route::group(['prefix' => 'dataumum'], function () {
 
         //data umum ubah identitas
-        Route::get('/identitas/edit', [IdentitasController::class, 'UEditform']);
+        Route::get('/identitas/edit', [IdentitasController::class, 'UEditForm']);
         Route::post('/identitas/update', [IdentitasController::class, 'UUpdate']);
         Route::post('/identitas/ganti-gambar', [KlienController::class, 'gantiGambarIdentitas']);
 

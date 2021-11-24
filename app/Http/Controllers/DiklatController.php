@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Identitas;
 use App\Models\diklat;
+use App\Models\Verifikasi;
 use File;
 
 
@@ -214,7 +215,7 @@ class DiklatController extends Controller
     {
         return view('klien.form-umum.riwayat-diklat.index', [
             'page' => 'Data Diklat',
-            "rows" => diklat::select('diklat.*', 'identitas.nama as nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'diklat.identitas_id')->latest()->where('diklat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(7)->withQueryString(),
+            "rows" => Diklat::select(['diklat.nama', 'diklat.status', 'diklat.tempat', 'diklat.penyelenggara', 'diklat.angka', 'diklat.tgl_mulai', 'diklat.tgl_selesai', 'diklat.jam', 'diklat.no_sttp', 'diklat.tgl_sttp', 'diklat.sertifikat', 'diklat.created_at', 'identitas.nama as nama_peg', 'verifikasi.status'])->join('identitas', 'identitas.identitas_id', '=', 'diklat.identitas_id')->join("verifikasi", "verifikasi.docx_id", "=", "diklat.diklat_id")->latest()->where('diklat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(7)->withQueryString(),
         ]);
     }
 
@@ -301,7 +302,20 @@ class DiklatController extends Controller
             'sertifikat' => $name,
         ];
 
-        diklat::create($data);
+        $resultCreateDiklat = Diklat::create($data)->getAttributes();
+
+        $dataVerifikasi = [
+            'docx_id' => $resultCreateDiklat['diklat_id'],
+            'identitas_id' => $request->input('identitas_id'),
+            'status' => '4',
+            'unit_verif_at' => '', 
+            'bkkpd_verif_at' => '',
+            'unit_verif_by' => '',
+            'bkkpd_verif_by' => '',
+            'jenis_data' => 'diklat/umum',
+        ];
+
+        Verifikasi::create($dataVerifikasi);
 
         return redirect('/klien/dataumum/diklat')->with('success', 'Data berhasil ditambahkan');
     }

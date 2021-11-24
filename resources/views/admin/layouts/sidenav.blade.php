@@ -1,44 +1,239 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-  <div class="position-sticky pt-3">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <div class="btn-md btn-outline-warning rounded-pill">
-          <a class="nav-link link-dark" aria-current="page" href="/klien/dashboard">
-            <i class="bi bi-house-door-fill"></i>
-            Dashboard
-          </a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div class="btn-md btn-outline-warning rounded-pill">
-          <a class="nav-link link-dark" href="/klien/dataumum">
-            <i class="bi bi-grid-fill"></i>
-            Data Umum
-          </a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div class="btn-md btn-outline-warning rounded-pill">
-          <a class="nav-link link-dark" href="/klien/datakhusus">
-            <i class="bi bi-grid-fill"></i>
-            Data Khusus
-          </a>
-        </div>
-      </li>
-    </ul>
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>Halo {{ explode(' ', trim(auth()->user()->nama))[0]; }}!</span>
-      </a>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item text-nowrap">
-        <form action="/logout" method="post">
-          @csrf
-          <button class="nav-link px-3 link-dark border-0" style="background-color: #F8F9FA" type="submit"><i
-              class="bi bi-box-arrow-left"></i>
-            Keluar</button>
-        </form>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <nav class="pcoded-navbar">
+            <div class="sidebar_toggle">
+                <a href="#">
+                    <i class="icon-close icons"></i>
+                </a>
+            </div>
+            <div class="pcoded-inner-navbar main-menu">
+                <div class="">
+                    <div class="main-menu-content">
+                        <ul>
+                            <li class="more-details">
+                                <a href="user-profile.html">
+                                    <i class="ti-user"></i>
+                                    Profil
+                                </a>
+                            </li>
+                            <li class="more-details">
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn-logout li-btn-logout"><i
+                                            class="ti-layout-sidebar-left"></i> Logout</button>
+                                </form>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">
+                    Beranda
+                </div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li class="{{ $page == 'Dashboard' ? 'active' : ''}}">
+                        <a href="/admin/dashboard" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="ti-home"></i>
+                                <b>D</b>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">
+                                Dashboard
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                @can('unit-kerja')
+                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">
+                    Data Umum
+                </div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li class="pcoded-hasmenu">
+                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="ti-layout-grid2-alt"></i>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">
+                                Verifikasi Data
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li class="">
+                                <a href="/admin/unit-kerja/pegawai/umum/identitas" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext"
+                                        data-i18n="nav.basic-components.breadcrumbs">Identitas</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/admin/unit-kerja/pegawai/umum/pangkat" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">
+                                        Pangkat
+                                    </span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/admin/unit-kerja/pegawai/umum/pendidikan" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext"
+                                        data-i18n="nav.basic-components.breadcrumbs">Pendidikan</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/admin/unit-kerja/pegawai/umum/jabatan" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext"
+                                        data-i18n="nav.basic-components.breadcrumbs">Jabatan</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/admin/unit-kerja/pegawai/umum/diklat" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext"
+                                        data-i18n="nav.basic-components.breadcrumbs">Diklat</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">
+                    Data Khusus
+                </div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li class="pcoded-hasmenu">
+                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="ti-layout-grid2-alt"></i>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">
+                                Verifikasi Data
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li class="">
+                                <a href="/admin/unit-kerja/pegawai/khusus/ibel+tubel" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">
+                                        IBEL/TUBEL
+                                    </span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/admin/unit-kerja/pegawai/khusus/drh" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">DRH</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                @endcan
+
+                @can('bkppd')
+                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">
+                    Menu Data Umum
+                </div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li class="pcoded-hasmenu">
+                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="ti-layout-grid2-alt"></i>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">
+                                Verifikasi Data
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li class="">
+                                <a href="accordion.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">
+                                        Pangkat
+                                    </span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="breadcrumb.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext"
+                                        data-i18n="nav.basic-components.breadcrumbs">Jabatan</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">
+                    Menu Data Khusus
+                </div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li class="pcoded-hasmenu">
+                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                            <span class="pcoded-micon">
+                                <i class="ti-layout-grid2-alt"></i>
+                            </span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">
+                                Verifikasi Data
+                            </span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                        <ul class="pcoded-submenu">
+                            <li class="">
+                                <a href="accordion.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">
+                                        IBEL/TUBEL
+                                    </span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="breadcrumb.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">DRH</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                @endcan
+
+            </div>
+        </nav>

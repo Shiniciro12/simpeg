@@ -8,6 +8,7 @@ use App\Models\Identitas;
 use App\Models\UnitKerja;
 use App\Models\RiwayatJabatan;
 use App\Models\Jabatan;
+use App\Models\Verifikasi;
 use File;
 
 class RiwayatJabatanController extends Controller
@@ -161,7 +162,6 @@ class RiwayatJabatanController extends Controller
             $pathriwayat_jabatan = "/unggah/sk-jabatan/" . $newFileriwayat_jabatan;
         }
 
-
         $data = [
             'jabatan_id' => $request->input('jabatan_id'),
             'identitas_id' => $id['identitas_id'],
@@ -189,7 +189,7 @@ class RiwayatJabatanController extends Controller
     {
         return view('klien.form-umum.riwayat-jabatan.index', [
             'page' => 'Data Jabatan',
-            "rows" => RiwayatJabatan::select(['identitas.nama', 'riwayat_jabatan.*', 'jabatan.nama_jabatan', 'jabatan.jabatan_id', 'identitas.identitas_id'])->join("identitas", "identitas.identitas_id", "=", "riwayat_jabatan.identitas_id")->join("jabatan", "jabatan.jabatan_id", "=", "riwayat_jabatan.jabatan_id")->latest()->where('riwayat_jabatan.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)
+            "rows" => RiwayatJabatan::select(['identitas.nama', 'riwayat_jabatan.*', 'jabatan.nama_jabatan', 'jabatan.jabatan_id', 'identitas.identitas_id', 'verifikasi.status'])->join("identitas", "identitas.identitas_id", "=", "riwayat_jabatan.identitas_id")->join("jabatan", "jabatan.jabatan_id", "=", "riwayat_jabatan.jabatan_id")->join("verifikasi", "verifikasi.docx_id", "=", "riwayat_jabatan.riwayat_jabatan_id")->latest()->where('riwayat_jabatan.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)
         ]);
     }
 
@@ -199,7 +199,6 @@ class RiwayatJabatanController extends Controller
         return view('klien.form-umum.riwayat-jabatan.add', [
             'rowsIdentitas' => Identitas::latest()->get(),
             'rowsUnitKerja' => UnitKerja::latest()->get(),
-            // 'rowsJabatan' => Jabatan::latest()->get(),
             'page' => 'Tambah Riwayat Jabatan',
         ]);
     }
@@ -276,14 +275,26 @@ class RiwayatJabatanController extends Controller
             'pak' => $newNamePAK,
         ];
 
-        RiwayatJabatan::create($data);
+        $resultCreateJabatan = RiwayatJabatan::create($data)->getAttributes();
+
+        $dataVerifikasi = [
+            'docx_id' => $resultCreateJabatan['riwayat_jabatan_id'],
+            'identitas_id' => $request->input('identitas_id'),
+            'status' => '4',
+            'unit_verif_at' => '',
+            'bkkpd_verif_at' => '',
+            'unit_verif_by' => '',
+            'bkkpd_verif_by' => '',
+            'jenis_data' => 'jabatan/umum',
+        ];
+
+        Verifikasi::create($dataVerifikasi);
 
         return redirect('/klien/dataumum/riwayat-jabatan')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function getJabatan(Request $request)
     {
-
         $data = Jabatan::where('unit_kerja_id', $request->input('unitKerja'))->get();
         echo json_encode($data);
     }

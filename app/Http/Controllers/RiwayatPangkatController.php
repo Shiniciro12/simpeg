@@ -209,7 +209,7 @@ class RiwayatPangkatController extends Controller
     {
         return view('klien.form-umum.riwayat-pangkat.index', [
             'page' => 'Data Pangkat',
-            "rows" => RiwayatPangkat::select(['pangkat.*', 'riwayat_pangkat.*', 'identitas.*'])->join("pangkat", "pangkat.pangkat_id", "=", "riwayat_pangkat.pangkat_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_pangkat.identitas_id")->where('riwayat_pangkat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)
+            "rows" => RiwayatPangkat::select(['pangkat.pangkat', 'riwayat_pangkat.pejabat', 'riwayat_pangkat.no_sk', 'riwayat_pangkat.tgl_sk', 'riwayat_pangkat.tmt_pangkat', 'riwayat_pangkat.sk_pangkat', 'verifikasi.status'])->join("pangkat", "pangkat.pangkat_id", "=", "riwayat_pangkat.pangkat_id")->join("identitas", "identitas.identitas_id", "=", "riwayat_pangkat.identitas_id")->join("verifikasi", "verifikasi.docx_id", "=", "riwayat_pangkat.riwayat_pangkat_id")->where('riwayat_pangkat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)
         ]);
     }
 
@@ -280,17 +280,17 @@ class RiwayatPangkatController extends Controller
             'sk_pangkat' => $path,
         ];
 
-        $resultCreateIdentitas = RiwayatPangkat::create($data)->getAttributes();
+        $resultCreateRiwayatPangkat = RiwayatPangkat::create($data)->getAttributes();
 
         $dataVerifikasi = [
-            'docx_id' => $resultCreateIdentitas['riwayat_pangkat_id'],
+            'docx_id' => $resultCreateRiwayatPangkat['riwayat_pangkat_id'],
             'identitas_id' => $request->input('identitas_id'),
             'status' => '4',
             'unit_verif_at' => '',
             'bkkpd_verif_at' => '',
             'unit_verif_by' => '',
             'bkkpd_verif_by' => '',
-            'jenis_data' => 'pangkat',
+            'jenis_data' => 'pangkat/umum',
         ];
 
         Verifikasi::create($dataVerifikasi);

@@ -17,6 +17,7 @@ class KeluargaController extends Controller
             "rows" => Keluarga::select('keluarga.*', 'identitas.nama AS nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'keluarga.identitas_id')->latest()->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
+    
     //umum view
     public function UmumView()
     {

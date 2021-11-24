@@ -63,6 +63,7 @@
                                             <th scope="col">No. Sertifikat</th>
                                             <th scope="col">Tanggal Sertifikat</th>
                                             <th scope="col" class="text-center">Sertifikat</th>
+                                            <th scope="col" class="text-center">Status Verifikasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,6 +84,15 @@
                                             <td scope="row">{{ $row['tgl_sttp'] }}</td>
                                             <td scope="row" class="text-center"><a href="{{ $row['sertifikat'] }}"><i
                                                         class="fa fa-file-pdf-o"></i></a></td>
+                                            <td class="text-center" scope="row">
+                                                @if($row['status'] == '2')
+                                                <div class="badge bg-success p-2">BKPPD</div>
+                                                @elseif($row['status'] == '3')
+                                                <div class="badge bg-warning p-2">Unit Kerja</div>
+                                                @else
+                                                <div class="badge bg-danger p-2">Belum Verifikasi</div>
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

@@ -1,22 +1,207 @@
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 m-0 px-3" href="#"> <img src="/images/logo.svg" width="15" height="15"
-      alt="logo pemkot kupang">
-    SIMPEG</a>
-  <form action="" method="get" class="my-2 w-100 mx-2">
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-      data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <input class="form-control form-control-dark w-100" type="text" name="search" placeholder="Cari..."
-      aria-label="Search">
-  </form>
-  <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
-      <form action="/logout" method="post" class="my-0">
-        @csrf
-        <button class="nav-link px-3 bg-dark border-0" type="submit">Keluar <span
-            data-feather="log-out"></span></button>
-      </form>
+<!-- Pre-loader start -->
+<div class="theme-loader">
+    <div class="loader-track">
+        <div class="preloader-wrapper">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</header>
+</div>
+<!-- Pre-loader end -->
+
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close">
+                                        <i class="ti-close"></i>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn">
+                                        <i class="ti-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/admin/dashboard">
+                        <img class="img-fluid" src="/images/logo-header.png" alt="Theme-Logo">
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle">
+                                <a href="javascript:void(0)">
+                                    <i class="ti-menu"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close">
+                                        <i class="ti-close"></i>
+                                    </span>
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-addon search-btn">
+                                        <i class="ti-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>
+                                <a href="#" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                                    <i class="ti-fullscreen"></i>
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                    <ul class="nav-right">
+                        <!-- Notifikasi -->
+                        <!-- <li class="header-notification">
+                              <a href="#!" class="waves-effect waves-light">
+                                  <i class="ti-bell"></i>
+                                  <span class="badge bg-c-red"></span>
+                              </a>
+                              <ul class="show-notification">
+                                  <li>
+                                  <h6>Notifications</h6>
+                                  <label class="label label-danger">New</label>
+                                  </li>
+                                  <li class="waves-effect waves-light">
+                                  <div class="media">
+                                      <img
+                                      class="d-flex align-self-center img-radius"
+                                      src="/tpl_assets/images/avatar-2.jpg"
+                                      alt="Generic placeholder image"
+                                      />
+                                      <div class="media-body">
+                                      <h5 class="notification-user">John Doe</h5>
+                                      <p class="notification-msg">
+                                          Lorem ipsum dolor sit amet, consectetuer elit.
+                                      </p>
+                                      <span class="notification-time">30 minutes ago</span>
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li class="waves-effect waves-light">
+                                  <div class="media">
+                                      <img
+                                      class="d-flex align-self-center img-radius"
+                                      src="/tpl_assets/images/avatar-4.jpg"
+                                      alt="Generic placeholder image"
+                                      />
+                                      <div class="media-body">
+                                      <h5 class="notification-user">Joseph William</h5>
+                                      <p class="notification-msg">
+                                          Lorem ipsum dolor sit amet, consectetuer elit.
+                                      </p>
+                                      <span class="notification-time">30 minutes ago</span>
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li class="waves-effect waves-light">
+                                  <div class="media">
+                                      <img
+                                      class="d-flex align-self-center img-radius"
+                                      src="/tpl_assets/images/avatar-3.jpg"
+                                      alt="Generic placeholder image"
+                                      />
+                                      <div class="media-body">
+                                      <h5 class="notification-user">Sara Soudein</h5>
+                                      <p class="notification-msg">
+                                          Lorem ipsum dolor sit amet, consectetuer elit.
+                                      </p>
+                                      <span class="notification-time">30 minutes ago</span>
+                                      </div>
+                                  </div>
+                                  </li>
+                              </ul>
+                              </li> -->
+                        <li class="user-profile header-notification">
+                            <a href="#" class="waves-effect waves-light">
+                                @if(auth()->user()->foto != '/images/default.jpg')
+                                <div style="width: 40px; height: 40px; margin-top: 5px; margin-right: 10px;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%; background-image: url('{{ auth()->user()->foto }}'); float: left"
+                                    class="rounded-circle">
+                                </div>
+                                @else
+                                <img src="/images/defaultpp.jpg" class="rounded-circle" alt="">
+                                @endif
+                                <span>{{ explode(' ', trim(auth()->user()->nama))[0]; }}</span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+                                <li class="waves-effect waves-light">
+                                    <a href="/klien/dataumum/identitas/edit">
+                                        <i class="ti-user"></i> Profil
+                                    </a>
+                                </li>
+                                <li class="waves-effect waves-light li-btn-logout">
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn-logout li-btn-logout"><i
+                                                class="ti-layout-sidebar-left"></i> Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>

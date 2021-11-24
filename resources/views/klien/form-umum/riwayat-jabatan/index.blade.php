@@ -57,7 +57,8 @@
                                             <th scope="col">Tanggal SK</th>
                                             <th scope="col">TMT Jabatan</th>
                                             <th scope="col" class="text-center">SK Jabatan</th>
-                                            <th scope="col">PAK</th>
+                                            <th scope="col" class="text-center">PAK</th>
+                                            <th scope="col" class="text-center">Status Verifikasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,6 +76,15 @@
                                             <td scope="row">
                                                 @if($row['pak'] != '')
                                                 <a href="{{ $row['pak'] }}"><i class="fa fa-file-pdf-o"></i></a>
+                                                @endif
+                                            </td>
+                                            <td class="text-center" scope="row">
+                                                @if($row['status'] == '2')
+                                                <div class="badge bg-success p-2">BKPPD</div>
+                                                @elseif($row['status'] == '3')
+                                                <div class="badge bg-warning p-2">Unit Kerja</div>
+                                                @else
+                                                <div class="badge bg-danger p-2">Belum Verifikasi</div>
                                                 @endif
                                             </td>
                                         </tr>

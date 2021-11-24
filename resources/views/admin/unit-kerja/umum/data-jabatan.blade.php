@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-12 mx-auto">
                 <div class="text-center my-3">
-                    <h3>Data dokumen pangkat</h3>
+                    <h3>Data dokumen jabatan</h3>
                 </div>
                 <br>
                 <div class="col-md-12">
@@ -24,7 +24,8 @@
                                     <th scope="col">#</th>
                                     <th scope="col">NIP</th>
                                     <th scope="col">Nama</th>
-                                    <th scope="col">SK Pangkat</th>
+                                    <th scope="col">SK Jabatan</th>
+                                    <th scope="col">PAK</th>
                                     <th scope="col">Verifikasi</th>
                                 </tr>
                             </thead>
@@ -35,14 +36,24 @@
                                     <th scope="row">{{ $i++ }}</th>
                                     <td>{{ $row['nip'] }}</td>
                                     <td>{{ $row['nama'] }}</td>
-                                    <td><a class="btn btn-primary btn-sm" href="{{ $row['sk_pangkat'] }}">Lihat Dokumen</a></td>
+                                    <td><a class="btn btn-primary btn-sm" href="{{ $row['sk_jabatan'] }}">Lihat
+                                            Dokumen</a>
+                                    </td>
+                                    <td>
+                                        @if ($row['pak'])
+                                        <a class="btn btn-primary btn-sm" href="{{ $row['pak'] }}">Lihat
+                                            Dokumen</a>
+                                        @else
+                                        <div>Kosong</div>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if (auth()->user()->role_id == '3' && $row['unit_verif_by'] == '')
                                         <form action="/admin/unit-kerja/berkas/verifikasi" method="post">
                                             @csrf
                                             <input type="hidden" name="verifikasi_id" value="{{ $verifikasi_id }}">
                                             <input type="hidden" name="data" value="umum">
-                                            <input type="hidden" name="dokumen" value="pangkat">
+                                            <input type="hidden" name="dokumen" value="jabatan">
                                             <button class="btn btn-primary btn-sm" type="submit">Verifikasi</button>
                                         </form>
                                         @else

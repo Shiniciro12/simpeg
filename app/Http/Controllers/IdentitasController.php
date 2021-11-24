@@ -11,6 +11,7 @@ use App\Models\Kecamatan;
 use App\Models\Pangkat;
 use App\Models\Jabatan;
 use App\Models\Role;
+use App\Models\Verifikasi;
 use File;
 
 
@@ -559,15 +560,16 @@ class IdentitasController extends Controller
             'date' => '*Kolom :attribute tidak valid.',
         ];
 
-        $identitas_id = $request->identitas_id;
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
-            return redirect('/klien/dataumum/identitas/edit' . $identitas_id . '/edit')->withErrors($validator)->withInput();
+            return redirect('/klien/dataumum/identitas/edit')->withErrors($validator)->withInput();
         }
 
         $pathFoto = $identitas['foto'];
         if ($request->file('foto')) {
-            File::delete(public_path($pathFoto));
+            if ($pathFoto != 'default.jpg') {
+                File::delete(public_path($pathFoto));
+            }
             $extFoto = $request->file('foto')->getClientOriginalExtension();
             $newFileFoto = $request->input('nip') . "." . $extFoto;
             $tempFoto = $request->file('foto')->getPathName();
@@ -634,7 +636,20 @@ class IdentitasController extends Controller
             'role_id' => 4,
         ];
 
-        Identitas::where('identitas_id', $identitas_id)->update($data);
+        Identitas::where('identitas_id', $request->input('identitas_id'))->update($data);
+
+        $dataVerifikasi = [
+            'docx_id' => $request->input('identitas_id'),
+            'identitas_id' => $request->input('identitas_id'),
+            'status' => '4',
+            'unit_verif_at' => '',
+            'bkkpd_verif_at' => '',
+            'unit_verif_by' => '',
+            'bkkpd_verif_by' => '',
+            'jenis_data' => 'identitas/umum',
+        ];
+
+        Verifikasi::create($dataVerifikasi);
 
         return redirect('/klien/dashboard')->with('success', 'Data berhasil diubah');
     }
