@@ -34,9 +34,6 @@
                                     <form action="/klien/dataumum/riwayat-pangkat/store" method="post"
                                         enctype="multipart/form-data" class="form-material">
                                         @csrf
-                                        <input type="hidden" value="{{ auth()->user()->identitas_id }}"
-                                            name="identitas_id">
-
                                         <div class="form-group row">
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('pangkat_id') is-invalid @enderror"

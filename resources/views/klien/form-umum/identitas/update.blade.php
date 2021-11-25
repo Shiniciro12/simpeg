@@ -34,14 +34,10 @@
                                     </div>
                                     {{-- ISIAN FORM --}}
                                     <div class="card-block">
-
                                         @csrf
-                                        <input type="hidden" value="{{ auth()->user()->identitas_id }}"
-                                            name="identitas_id">
-
                                         <div class="form-group form-default">
                                             <input type="number" class="form-control @error('nik') is-invalid @enderror"
-                                                value="{{old('nik', $data['nik'])}}" id="nik" aria-describedby="nik"
+                                                value="{{old('nik', $rowIdentitas['nik'])}}" id="nik" aria-describedby="nik"
                                                 name="nik">
                                             @error('nik')
                                             <div id="nik" class="text-danger">
@@ -55,7 +51,7 @@
                                         <br>
                                         <div class="form-group form-default">
                                             <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                                value="{{old('nama', $data['nama'])}}" id="nama" aria-describedby="nama"
+                                                value="{{old('nama', $rowIdentitas['nama'])}}" id="nama" aria-describedby="nama"
                                                 name="nama">
                                             @error('nama')
                                             <div id="nama" class="text-danger">
@@ -70,7 +66,7 @@
                                         <div class="form-group form-default">
                                             <input type="text"
                                                 class="form-control @error('tempat_lahir') is-invalid @enderror"
-                                                value="{{old('tempat_lahir', $data['tempat_lahir'])}}" id="tempat_lahir"
+                                                value="{{old('tempat_lahir', $rowIdentitas['tempat_lahir'])}}" id="tempat_lahir"
                                                 aria-describedby="tempat_lahir" name="tempat_lahir">
                                             @error('tempat_lahir')
                                             <div id="tempat_lahir" class="text-danger">
@@ -85,7 +81,7 @@
                                         <div class="form-group form-default">
                                             <input type="date"
                                                 class="form-control @error('tgl_lahir') is-invalid @enderror"
-                                                value="{{old('tgl_lahir', $data['tgl_lahir'])}}" id="tgl_lahir"
+                                                value="{{old('tgl_lahir', $rowIdentitas['tgl_lahir'])}}" id="tgl_lahir"
                                                 aria-describedby="tgl_lahir" name="tgl_lahir">
                                             @error('tgl_lahir')
                                             <div id="tgl_lahir" class="text-danger">
@@ -103,13 +99,13 @@
                                             <div class="col-sm-12">
                                                 <select
                                                     class="form-control @error('jenis_kelamin') is-invalid @enderror"
-                                                    value="{{old('jenis_kelamin', $data['jenis_kelamin'])}}"
+                                                    value="{{old('jenis_kelamin', $rowIdentitas['jenis_kelamin'])}}"
                                                     aria-label="jenis kelamin" name="jenis_kelamin" id="jenis_kelamin">
                                                     <option selected value=""></option>
-                                                    <option {{$data['jenis_kelamin']=='L' ? 'selected' : '' }}
+                                                    <option {{$rowIdentitas['jenis_kelamin']=='L' ? 'selected' : '' }}
                                                         value="L">Laki-laki
                                                     </option>
-                                                    <option {{$data['jenis_kelamin']=='P' ? 'selected' : '' }}
+                                                    <option {{$rowIdentitas['jenis_kelamin']=='P' ? 'selected' : '' }}
                                                         value="P">Perempuan
                                                     </option>
                                                 </select>
@@ -126,11 +122,11 @@
                                                     class="text-danger">*</span></label></label>
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('agama') is-invalid @enderror"
-                                                    value="{{old('agama', $data['agama'])}}" aria-label="agama"
+                                                    value="{{old('agama', $rowIdentitas['agama'])}}" aria-label="agama"
                                                     name="agama" id="agama">
                                                     <option value="">Pilih Agama</option>
                                                     @foreach ($rowsAgama as $rowAgama)
-                                                    <option {{old('agama', $data['agama'])==$rowAgama ? 'selected' : ''
+                                                    <option {{old('agama', $rowIdentitas['agama'])==$rowAgama ? 'selected' : ''
                                                         }} value="{{ $rowAgama }}">{{
                                                         $rowAgama }}</option>
                                                     @endforeach
@@ -149,12 +145,12 @@
                                             <div class="col-sm-12">
                                                 <select
                                                     class="form-control @error('golongan_darah') is-invalid @enderror"
-                                                    value="{{old('golongan_darah', $data['golongan_darah'])}}"
+                                                    value="{{old('golongan_darah', $rowIdentitas['golongan_darah'])}}"
                                                     aria-label="golongan darah" name="golongan_darah"
                                                     id="golongan_darah">
                                                     <option value="">Pilih Golongan Darah</option>
                                                     @foreach ($golonganDarah as $gd)
-                                                    <option {{old('golongan_darah', $data['golongan_darah'])==$gd
+                                                    <option {{old('golongan_darah', $rowIdentitas['golongan_darah'])==$gd
                                                         ? 'selected' : '' }} value="{{ $gd }}">{{ $gd
                                                         }}</option>
                                                     @endforeach
@@ -172,12 +168,12 @@
                                                     class="text-danger">*</span></label></label>
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('status_kawin') is-invalid @enderror"
-                                                    value="{{old('status_kawin', $data['status_kawin'])}}"
+                                                    value="{{old('status_kawin', $rowIdentitas['status_kawin'])}}"
                                                     aria-label="status_kawin" name="status_kawin" id="status_kawin">
                                                     <option value="">Pilih Status Perkawinan</option>
                                                     @foreach ($rowsStatusKawin as $rowStatusKawin)
                                                     <option {{old('status_kawin',
-                                                        $data['status_kawin'])==$rowStatusKawin ? 'selected' : '' }}
+                                                        $rowIdentitas['status_kawin'])==$rowStatusKawin ? 'selected' : '' }}
                                                         value="{{ $rowStatusKawin }}">{{ $rowStatusKawin }}</option>
                                                     @endforeach
                                                 </select>
@@ -193,7 +189,7 @@
                                         <div class="form-group form-default">
                                             <input type="text"
                                                 class="form-control @error('gelar_depan') is-invalid @enderror"
-                                                value="{{old('gelar_depan', $data['gelar_depan'])}}" id="gelar_depan"
+                                                value="{{old('gelar_depan', $rowIdentitas['gelar_depan'])}}" id="gelar_depan"
                                                 aria-describedby="gelar_depan" name="gelar_depan">
                                             @error('gelar_depan')
                                             <div id="gelar_depan" class="text-danger">
@@ -207,7 +203,7 @@
                                         <div class="form-group form-default">
                                             <input type="text"
                                                 class="form-control @error('gelar_belakang') is-invalid @enderror"
-                                                value="{{old('gelar_belakang', $data['gelar_belakang'])}}"
+                                                value="{{old('gelar_belakang', $rowIdentitas['gelar_belakang'])}}"
                                                 id="gelar_belakang" aria-describedby="gelar_belakang"
                                                 name="gelar_belakang">
                                             @error('gelar_belakang')
@@ -221,7 +217,7 @@
                                         <br>
                                         <div class="form-group form-default">
                                             <input type="number" class="form-control @error('hp') is-invalid @enderror"
-                                                value="{{old('hp', $data['hp'])}}" id="hp" aria-describedby="hp"
+                                                value="{{old('hp', $rowIdentitas['hp'])}}" id="hp" aria-describedby="hp"
                                                 name="hp">
                                             @error('hp')
                                             <div id="hp" class="text-danger">
@@ -236,7 +232,7 @@
                                         <div class="form-group form-default">
                                             <input type="number"
                                                 class="form-control @error('telepon') is-invalid @enderror"
-                                                value="{{old('telepon', $data['telepon'])}}" id="telepon"
+                                                value="{{old('telepon', $rowIdentitas['telepon'])}}" id="telepon"
                                                 aria-describedby="telepon" name="telepon">
                                             @error('telepon')
                                             <div id="telepon" class="text-danger">
@@ -252,12 +248,12 @@
                                                     class="text-danger">*</span></label></label>
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('kelurahan_id') is-invalid @enderror"
-                                                    value="{{old('kelurahan_id', $data['kelurahan_id'])}}"
+                                                    value="{{old('kelurahan_id', $rowIdentitas['kelurahan_id'])}}"
                                                     aria-label="kelurahan" name="kelurahan_id" id="kelurahan_id">
                                                     <option value="">Pilih Kelurahan</option>
                                                     @foreach ($rowsKelurahan as $rowKelurahan)
                                                     <option {{old('kelurahan_id',
-                                                        $data['kelurahan_id'])==$rowKelurahan['kelurahan_id']
+                                                        $rowIdentitas['kelurahan_id'])==$rowKelurahan['kelurahan_id']
                                                         ? 'selected' : '' }}
                                                         value="{{ $rowKelurahan['kelurahan_id'] }}">
                                                         {{$rowKelurahan['nama_kelurahan']}}
@@ -277,12 +273,12 @@
                                                     class="text-danger">*</span></label></label>
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('kecamatan_id') is-invalid @enderror"
-                                                    value="{{old('kecamatan_id', $data['kecamatan_id'])}}"
+                                                    value="{{old('kecamatan_id', $rowIdentitas['kecamatan_id'])}}"
                                                     aria-label="kecamatan" name="kecamatan_id" id="kecamatan_id">
                                                     <option value="">Pilih Kecamatan</option>
                                                     @foreach ($rowsKecamatan as $rowKecamatan)
                                                     <option {{old('kecamatan_id',
-                                                        $data['kecamatan_id'])==$rowKecamatan['kecamatan_id']
+                                                        $rowIdentitas['kecamatan_id'])==$rowKecamatan['kecamatan_id']
                                                         ? 'selected' : '' }}
                                                         value="{{ $rowKecamatan['kecamatan_id'] }}">{{
                                                         $rowKecamatan['nama_kecamatan']
@@ -299,7 +295,7 @@
                                         <br>
                                         <div class="form-group form-default">
                                             <input type="text" class="form-control @error('rt_rw') is-invalid @enderror"
-                                                value="{{old('rt_rw', $data['rt_rw'])}}" id="rt_rw"
+                                                value="{{old('rt_rw', $rowIdentitas['rt_rw'])}}" id="rt_rw"
                                                 aria-describedby="rt_rw" name="rt_rw">
                                             @error('rt_rw')
                                             <div id="rt_rw" class="text-danger">
@@ -314,7 +310,7 @@
                                         <div class="form-group form-default">
                                             <input type="number"
                                                 class="form-control @error('npwp') is-invalid @enderror"
-                                                value="{{old('npwp', $data['npwp'])}}" id="npwp" aria-describedby="npwp"
+                                                value="{{old('npwp', $rowIdentitas['npwp'])}}" id="npwp" aria-describedby="npwp"
                                                 name="npwp">
                                             @error('npwp')
                                             <div id="npwp" class="text-danger">
@@ -329,7 +325,7 @@
                                         <div class="form-group form-default">
                                             <input type="number"
                                                 class="form-control @error('no_bpjs') is-invalid @enderror"
-                                                value="{{old('no_bpjs', $data['no_bpjs'])}}" id="no_bpjs"
+                                                value="{{old('no_bpjs', $rowIdentitas['no_bpjs'])}}" id="no_bpjs"
                                                 aria-describedby="nomor bpjs" name="no_bpjs">
                                             @error('no_bpjs')
                                             <div id="no_bpjs" class="text-danger">
@@ -374,7 +370,7 @@
                                     <div class="card-block">
                                         <div class="form-group form-default">
                                             <input type="number" class="form-control @error('nip') is-invalid @enderror"
-                                                value="{{old('nip', $data['nip'])}}" id="nip" aria-describedby="nip"
+                                                value="{{old('nip', $rowIdentitas['nip'])}}" id="nip" aria-describedby="nip"
                                                 name="nip">
                                             @error('nip')
                                             <div id="nip" class="text-danger">
@@ -390,7 +386,7 @@
                                         <div class="form-group form-default">
                                             <input type="text"
                                                 class="form-control @error('no_karpeg') is-invalid @enderror"
-                                                value="{{old('no_karpeg', $data['no_karpeg'])}}" id="no_karpeg"
+                                                value="{{old('no_karpeg', $rowIdentitas['no_karpeg'])}}" id="no_karpeg"
                                                 aria-describedby="nomor kartu pegawai" name="no_karpeg">
                                             @error('no_karpeg')
                                             <div id="no_karpeg" class="text-danger">
@@ -405,7 +401,7 @@
                                         <div class="form-group form-default">
                                             <input type="text"
                                                 class="form-control @error('no_taspen') is-invalid @enderror"
-                                                value="{{old('no_taspen', $data['no_taspen'])}}" id="no_taspen"
+                                                value="{{old('no_taspen', $rowIdentitas['no_taspen'])}}" id="no_taspen"
                                                 aria-describedby="nomor taspen" name="no_taspen">
                                             @error('no_taspen')
                                             <div id="no_taspen" class="text-danger">
@@ -420,7 +416,7 @@
                                         <div class="form-group form-default">
                                             <input type="text"
                                                 class="form-control @error('no_kariskarsu') is-invalid @enderror"
-                                                value="{{old('no_kariskarsu', $data['no_kariskarsu'])}}"
+                                                value="{{old('no_kariskarsu', $rowIdentitas['no_kariskarsu'])}}"
                                                 id="no_kariskarsu" aria-describedby="nomor karis atau karsu"
                                                 name="no_kariskarsu">
                                             @error('no_kariskarsu')
@@ -439,14 +435,14 @@
                                             <div class="col-sm-12">
                                                 <select
                                                     class="form-control @error('bantuan_bepetarum_pns') is-invalid @enderror"
-                                                    value="{{old('bantuan_bepetarum_pns', $data['bantuan_bepetarum_pns'])}}"
+                                                    value="{{old('bantuan_bepetarum_pns', $rowIdentitas['bantuan_bepetarum_pns'])}}"
                                                     aria-label="bantuan bepetarum pns" id="bantuan_bepetarum_pns"
                                                     name="bantuan_bepetarum_pns">
                                                     <option value="">Pilih Bantuan Bepetarum PNS</option>
 
                                                     @foreach ($rowsBBP as $rowBBP)
                                                     <option {{old('bantuan_bepetarum_pns',
-                                                        $data['bantuan_bepetarum_pns'])==$rowBBP ? 'selected' : '' }}
+                                                        $rowIdentitas['bantuan_bepetarum_pns'])==$rowBBP ? 'selected' : '' }}
                                                         value="{{ $rowBBP }}">{{ $rowBBP }}</option>
                                                     @endforeach
                                                 </select>
@@ -461,7 +457,7 @@
                                         <div class="form-group form-default">
                                             <input type="number"
                                                 class="form-control @error('tahun_bantuan_bepetarum_pns') is-invalid @enderror"
-                                                value="{{old('tahun_bantuan_bepetarum_pns', $data['tahun_bantuan_bepetarum_pns'])}}"
+                                                value="{{old('tahun_bantuan_bepetarum_pns', $rowIdentitas['tahun_bantuan_bepetarum_pns'])}}"
                                                 id="tahun_bantuan_bepetarum_pns"
                                                 aria-describedby="tahun bantuan bepetarum PNS "
                                                 name="tahun_bantuan_bepetarum_pns">
@@ -481,13 +477,13 @@
                                             <div class="col-sm-12">
                                                 <select
                                                     class="form-control @error('status_kepegawaian') is-invalid @enderror"
-                                                    value="{{old('status_kepegawaian', $data['status_kepegawaian'])}}"
+                                                    value="{{old('status_kepegawaian', $rowIdentitas['status_kepegawaian'])}}"
                                                     aria-label="status kepegawaian" id="status_kepegawaian"
                                                     name="status_kepegawaian">
                                                     <option value="">Pilih Status Kepegawaian</option>
                                                     @foreach ($rowsStatusPegawai as $rowStatusPegawai)
                                                     <option {{old('status_kepegawaian',
-                                                        $data['status_kepegawaian'])==$rowStatusPegawai ? 'selected'
+                                                        $rowIdentitas['status_kepegawaian'])==$rowStatusPegawai ? 'selected'
                                                         : '' }} value="{{ $rowStatusPegawai}}">{{ $rowStatusPegawai }}
                                                     </option>
                                                     @endforeach
@@ -506,13 +502,13 @@
                                             <div class="col-sm-12">
                                                 <select
                                                     class="form-control @error('jenis_kepegawaian') is-invalid @enderror"
-                                                    value="{{old('jenis_kepegawaian', $data['jenis_kepegawaian'])}}"
+                                                    value="{{old('jenis_kepegawaian', $rowIdentitas['jenis_kepegawaian'])}}"
                                                     aria-label="jenis kepegawaian" id="jenis_kepegawaian"
                                                     name="jenis_kepegawaian">
                                                     <option value="">Pilih Jenis Kepegawaian</option>
                                                     @foreach ($rowsJenisPegawai as $rowJenisPegawai)
                                                     <option {{old('jenis_kepegawaian',
-                                                        $data['jenis_kepegawaian'])==$rowJenisPegawai ? 'selected' : ''
+                                                        $rowIdentitas['jenis_kepegawaian'])==$rowJenisPegawai ? 'selected' : ''
                                                         }} value="{{ $rowJenisPegawai }}">{{ $rowJenisPegawai }}
                                                     </option>
                                                     @endforeach
@@ -531,13 +527,13 @@
                                             <div class="col-sm-12">
                                                 <select
                                                     class="form-control @error('kedudukan_kepegawaian') is-invalid @enderror"
-                                                    value="{{old('kedudukan_kepegawaian', $data['kedudukan_kepegawaian'])}}"
+                                                    value="{{old('kedudukan_kepegawaian', $rowIdentitas['kedudukan_kepegawaian'])}}"
                                                     aria-label="kedudukan kepegawaian" id="kedudukan_kepegawaian"
                                                     name="kedudukan_kepegawaian">
                                                     <option value="">Pilih Kedudukan Kepegawaian</option>
                                                     @foreach ($rowsKedudukanPegawai as $rowKedudukanPegawai)
                                                     <option {{old('kedudukan_kepegawaian',
-                                                        $data['kedudukan_kepegawaian'])==$rowKedudukanPegawai
+                                                        $rowIdentitas['kedudukan_kepegawaian'])==$rowKedudukanPegawai
                                                         ? 'selected' : '' }} value="{{ $rowKedudukanPegawai }}">{{
                                                         $rowKedudukanPegawai }}
                                                     </option>
@@ -556,12 +552,12 @@
                                                     class="text-danger">*</span></label></label>
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('pangkat_id') is-invalid @enderror"
-                                                    value="{{old('pangkat_id', $data['pangkat_id'])}}"
+                                                    value="{{old('pangkat_id', $rowIdentitas['pangkat_id'])}}"
                                                     aria-label="pangkat" id="pangkat_id" name="pangkat_id">
                                                     <option value="">Pilih Pangkat</option>
                                                     @foreach ($rowsPangkat as $rowPangkat)
                                                     <option {{old('pangkat_id',
-                                                        $data['pangkat_id'])==$rowPangkat['pangkat_id'] ? 'selected'
+                                                        $rowIdentitas['pangkat_id'])==$rowPangkat['pangkat_id'] ? 'selected'
                                                         : '' }} value="{{ $rowPangkat['pangkat_id'] }}">{{
                                                         $rowPangkat['pangkat'] }}</option>
                                                     @endforeach
@@ -580,12 +576,12 @@
                                                     class="text-danger">*</span></label></label>
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('jabatan_id') is-invalid @enderror"
-                                                    value="{{old('jabatan_id', $data['jabatan_id'])}}"
+                                                    value="{{old('jabatan_id', $rowIdentitas['jabatan_id'])}}"
                                                     aria-label="jabatan" id="jabatan_id" name="jabatan_id">
                                                     <option value="">Pilih Jabatan</option>
                                                     @foreach ($rowsJabatan as $rowJabatan)
                                                     <option {{old('jabatan_id',
-                                                        $data['jabatan_id'])==$rowJabatan['jabatan_id'] ? 'selected'
+                                                        $rowIdentitas['jabatan_id'])==$rowJabatan['jabatan_id'] ? 'selected'
                                                         : '' }} value="{{ $rowJabatan['jabatan_id'] }}">{{
                                                         $rowJabatan['nama_jabatan'] }}
                                                     </option>
@@ -605,12 +601,12 @@
                                             <div class="col-sm-12">
                                                 <select
                                                     class="form-control @error('unit_kerja_id') is-invalid @enderror"
-                                                    value="{{old('unit_kerja_id', $data['unit_kerja_id'])}}"
+                                                    value="{{old('unit_kerja_id', $rowIdentitas['unit_kerja_id'])}}"
                                                     aria-label="unit kerja" name="unit_kerja_id" id="unit_kerja_id">
                                                     <option value="">Pilih Unit Kerja</option>
                                                     @foreach ($rowsUnitKerja as $rowUnitKerja)
                                                     <option {{old('unit_kerja_id',
-                                                        $data['unit_kerja_id'])==$rowUnitKerja['unit_kerja_id']
+                                                        $rowIdentitas['unit_kerja_id'])==$rowUnitKerja['unit_kerja_id']
                                                         ? 'selected' : '' }}
                                                         value="{{ $rowUnitKerja['unit_kerja_id'] }}">{{
                                                         $rowUnitKerja['nama_unit'] }}

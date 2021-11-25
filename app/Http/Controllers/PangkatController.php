@@ -17,7 +17,7 @@ class PangkatController extends Controller
     {
         return view('pangkat.index', [
             'page' => 'Data Pangkat',
-            "rows" => Pangkat::latest()->filter(request(['search']))->paginate(7)->withQueryString(),
+            "rows" => Pangkat::latest()->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
 

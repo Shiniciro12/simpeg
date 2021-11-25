@@ -68,10 +68,11 @@ class TandaJasaController extends Controller
         $extension = $request->file('sertifikat')->getClientOriginalExtension();
 
         $temp = $request->file('sertifikat')->getPathName();
-        $folder = "unggah/sertifikat-tandajasa/" . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $newFile = $data['identitas_id'] . "-TandaJasa-" . time() .  "." . $extension;
+        $folder = "unggah/sertifikat-tandajasa/" . $newFile;
         move_uploaded_file($temp, $folder);
 
-        $newFile = '/unggah/sertifikat-tandajasa/' . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $newFile = '/unggah/sertifikat-tandajasa/' . $newFile;
 
         $data = [
             'identitas_id' => $data['identitas_id'],
@@ -150,7 +151,6 @@ class TandaJasaController extends Controller
         if ($request->file('sertifikat')) {
 
             File::delete(public_path($pathtandajasa));
-            $exttandajasa = $request->file('sertifikat')->getClientOriginalExtension();
             $cum = explode("/", $pathtandajasa);
             $newFiletandajasa = end($cum);
             $temptandajasa = $request->file('sertifikat')->getPathName();
@@ -185,7 +185,7 @@ class TandaJasaController extends Controller
     {
         return view('klien.form-umum.tanda-jasa.index', [
             'page' => 'Data Tanda Jasa',
-            "rows" => TandaJasa::select('tanda_jasa.*', 'identitas.nama AS nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'tanda_jasa.identitas_id')->latest()->where('tanda_jasa.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)->withQueryString(),
+            "rows" => TandaJasa::select('tanda_jasa.*')->join('identitas', 'identitas.identitas_id', '=', 'tanda_jasa.identitas_id')->latest()->where('tanda_jasa.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
 
@@ -193,7 +193,6 @@ class TandaJasaController extends Controller
     public function UaddForm()
     {
         return view('klien.form-umum.tanda-jasa.add', [
-            'rowsIdentitas' => Identitas::latest()->get(),
             'page' => 'Tambah Tanda Jasa',
         ]);
     }
@@ -201,7 +200,8 @@ class TandaJasaController extends Controller
     //Store umum
     public function UStore(Request $request)
     {
-        $data = Identitas::where('identitas_id', $request->input('identitas_id'))->first();
+        $data = Identitas::find(auth()->user()->identitas_id)->first();
+
         $rules = [
             'identitas_id' => 'required',
             'nama' => 'required',
@@ -213,7 +213,7 @@ class TandaJasaController extends Controller
         ];
 
         $input = [
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => auth()->user()->identitas_id,
             'nama' => $request->input('nama'),
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
@@ -241,10 +241,10 @@ class TandaJasaController extends Controller
         $extension = $request->file('sertifikat')->getClientOriginalExtension();
 
         $temp = $request->file('sertifikat')->getPathName();
-        $folder = "unggah/sertifikat-tandajasa/" . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $newFile = $data['identitas_id'] . "-TandaJasa-" . time() .  "." . $extension;
+        $folder = "unggah/sertifikat-tandajasa/" . $newFile;
         move_uploaded_file($temp, $folder);
-
-        $newFile = '/unggah/sertifikat-tandajasa/' . $data['identitas_id'] . "-TandaJasa-" . date('s') .  "." . $extension;
+        $newFile = '/unggah/sertifikat-tandajasa/' . $newFile;
 
         $data = [
             'identitas_id' => $data['identitas_id'],

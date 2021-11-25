@@ -51,7 +51,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            {{-- <th scope="col">Nama Lengkap</th> --}}
                                             <th scope="col">Nama Diklat</th>
                                             <th scope="col">Jenis Diklat</th>
                                             <th scope="col">Tempat Diklat</th>
@@ -71,7 +70,6 @@
                                         @foreach ($rows as $row)
                                         <tr>
                                             <th scope="row">{{ $i++ }}</th>
-                                            {{-- <th scope="row">{{ $row['nama_peg'] }}</th> --}}
                                             <td scope="row">{{ $row['nama'] }}</td>
                                             <td scope="row">{{ $row['status'] }}</td>
                                             <td scope="row">{{ $row['tempat'] }}</td>

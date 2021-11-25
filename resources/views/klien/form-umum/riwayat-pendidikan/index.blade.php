@@ -50,7 +50,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nama</th>
+                                            {{-- <th scope="col">Nama</th> --}}
                                             <th scope="col">Tingkat Pendidikan</th>
                                             <th scope="col">Jurusan</th>
                                             <th scope="col">Nama Lembaga Pendidikan</th>
@@ -60,6 +60,7 @@
                                             <th scope="col">Tanggal Ijazah</th>
                                             <th scope="col">Ijazah</th>
                                             <th scope="col">Transkrip</th>
+                                            <th scope="col" class="text-center">Status Verifikasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,7 +68,6 @@
                                         @foreach ($rows as $row)
                                         <tr>
                                             <th scope="row">{{ $i++ }}</th>
-                                            <td scope="row">{{ $row['nama_peg'] }}</td>
                                             <td scope="row">{{ $row['tingkat_pendidikan'] }}</td>
                                             <td scope="row">{{ $row['jurusan'] }}</td>
                                             <td scope="row">{{ $row['nama_lembaga_pendidikan'] }}</td>
@@ -75,10 +75,19 @@
                                             <td scope="row">{{ $row['nama_kepsek_rektor'] }}</td>
                                             <td scope="row">{{ $row['no_sttb'] }}</td>
                                             <td scope="row">{{ $row['tgl_sttb'] }}</td>
-                                            <td scope="row"><a href="/unggah/sttb/{{ $row['sttb'] }}"><i
+                                            <td scope="row"><a href="{{ $row['sttb'] }}"><i
                                                         class="fa fa-file-pdf-o"></i></a></td>
-                                            <td scope="row"><a href="/unggah/transkrip/{{ $row['transkrip'] }}"><i
+                                            <td scope="row"><a href="{{ $row['transkrip'] }}"><i
                                                         class="fa fa-file-pdf-o"></i></a></td>
+                                            <td class="text-center" scope="row">
+                                                @if($row['status'] == '2')
+                                                <div class="badge bg-success p-2">BKPPD</div>
+                                                @elseif($row['status'] == '3')
+                                                <div class="badge bg-warning p-2">Unit Kerja</div>
+                                                @else
+                                                <div class="badge bg-danger p-2">Belum Verifikasi</div>
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

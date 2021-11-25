@@ -78,8 +78,7 @@ class RiwayatPangkatController extends Controller
         }
 
         $extension = $request->file('sk_pangkat')->getClientOriginalExtension();
-
-        $newFile =  $request->input('pangkat_id') . "-pangkat-" . date('s') .  "." . $extension;
+        $newFile =  $request->input('identitas_id') . "-pangkat-" . time() .  "." . $extension;
 
         $temp = $request->file('sk_pangkat')->getPathName();
         $folder = "unggah/riwayat-pangkat/" . $newFile;
@@ -148,7 +147,6 @@ class RiwayatPangkatController extends Controller
         if ($request->file('sk_pangkat')) {
 
             File::delete(public_path($pathriwayat_pangkat));
-            $extriwayat_pangkat = $request->file('sk_pangkat')->getClientOriginalExtension();
             $cum = explode("/", $pathriwayat_pangkat);
             $newFileriwayat_pangkat = end($cum);
             $tempriwayat_pangkat = $request->file('sk_pangkat')->getPathName();
@@ -194,13 +192,8 @@ class RiwayatPangkatController extends Controller
     public function UaddFormRPangkat()
     {
         return view('klien.form-umum.riwayat-pangkat.add', [
-            'rowsPangkat' => Pangkat::latest()->get(),
-            'rowsJabatan' => jabatan::latest()->get(),
-            'rowsUnitKerja' => UnitKerja::latest()->get(),
-            'rowsKelurahan' => Kelurahan::latest()->get(),
-            'rowsKecamatan' => Kecamatan::latest()->get(),
-            'rowsIdentitas' => Identitas::latest()->limit(10)->get(),
             'page' => 'Tambah Pangkat',
+            'rowsPangkat' => Pangkat::latest()->get(),
         ]);
     }
 
@@ -216,7 +209,7 @@ class RiwayatPangkatController extends Controller
     //Umum Store add Riwayat Pangkat
     public function UAddStoreRPangkat(Request $request)
     {
-        $id = Identitas::where('identitas_id', $request->input('identitas_id'))->first();
+        $data = Identitas::find(auth()->user()->identitas_id)->first();
 
         $rules = [
             'pangkat_id' => 'required',
@@ -232,7 +225,7 @@ class RiwayatPangkatController extends Controller
 
         $input = [
             'pangkat_id' => $request->input('pangkat_id'),
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => auth()->user()->identitas_id,
             'ms_bulan' => $request->input('ms_bulan'),
             'ms_tahun' => $request->input('ms_tahun'),
             'pejabat' => $request->input('pejabat'),
@@ -260,7 +253,7 @@ class RiwayatPangkatController extends Controller
 
         $extension = $request->file('sk_pangkat')->getClientOriginalExtension();
 
-        $newFile =  $request->input('pangkat_id') . "-pangkat-" . date('s') .  "." . $extension;
+        $newFile =  auth()->user()->identitas_id . "-pangkat-" . time() .  "." . $extension;
 
         $temp = $request->file('sk_pangkat')->getPathName();
         $folder = "unggah/riwayat-pangkat/" . $newFile;
@@ -269,12 +262,12 @@ class RiwayatPangkatController extends Controller
         $path = "/unggah/riwayat-pangkat/" . $newFile;
         $data = [
             'pangkat_id' => $request->input('pangkat_id'),
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => auth()->user()->identitas_id,
             'pejabat' => $request->input('pejabat'),
             'masa_kerja_gol_bln' => $request->input('ms_bulan'),
             'masa_kerja_gol_thn' => $request->input('ms_tahun'),
             'no_sk' => $request->input('no_sk'),
-            'identitas_id' => $id['identitas_id'],
+            'identitas_id' => $data['identitas_id'],
             'tgl_sk' => $request->input('tgl_sk'),
             'tmt_pangkat' => $request->input('tmt_pangkat'),
             'sk_pangkat' => $path,
@@ -284,7 +277,7 @@ class RiwayatPangkatController extends Controller
 
         $dataVerifikasi = [
             'docx_id' => $resultCreateRiwayatPangkat['riwayat_pangkat_id'],
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => auth()->user()->identitas_id,
             'status' => '4',
             'unit_verif_at' => '',
             'bkkpd_verif_at' => '',

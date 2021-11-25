@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Identitas;
-use App\Models\diklat;
+use App\Models\Diklat;
 use App\Models\Verifikasi;
 use File;
 
@@ -16,7 +16,7 @@ class DiklatController extends Controller
     {
         return view('diklat.index', [
             'page' => 'Data Diklat',
-            "rows" => diklat::select('diklat.*', 'identitas.nama as nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'diklat.identitas_id')->latest()->filter(request(['search']))->paginate(7)->withQueryString(),
+            "rows" => Diklat::select('diklat.*', 'identitas.nama AS nama_peg')->join('identitas', 'identitas.identitas_id', '=', 'diklat.identitas_id')->latest()->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
 
@@ -78,7 +78,7 @@ class DiklatController extends Controller
             return redirect('/diklat/add')->withErrors($validator)->withInput();
         }
         $temp = $request->file('sertifikat')->getPathName();
-        $file = $data['identitas_id'] . "-diklat-" . date('s');
+        $file = $data['identitas_id'] . "-diklat-" . time();
 
         $folder = "unggah/sertifikat-diklat/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
@@ -100,7 +100,7 @@ class DiklatController extends Controller
             'sertifikat' => $name,
         ];
 
-        diklat::create($data);
+        Diklat::create($data);
 
         return redirect('/diklat')->with('success', 'Data berhasil ditambahkan');
     }
@@ -215,7 +215,7 @@ class DiklatController extends Controller
     {
         return view('klien.form-umum.riwayat-diklat.index', [
             'page' => 'Data Diklat',
-            "rows" => Diklat::select(['diklat.nama', 'diklat.status', 'diklat.tempat', 'diklat.penyelenggara', 'diklat.angka', 'diklat.tgl_mulai', 'diklat.tgl_selesai', 'diklat.jam', 'diklat.no_sttp', 'diklat.tgl_sttp', 'diklat.sertifikat', 'diklat.created_at', 'identitas.nama as nama_peg', 'verifikasi.status'])->join('identitas', 'identitas.identitas_id', '=', 'diklat.identitas_id')->join("verifikasi", "verifikasi.docx_id", "=", "diklat.diklat_id")->latest()->where('diklat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(7)->withQueryString(),
+            "rows" => Diklat::select(['diklat.nama', 'diklat.status', 'diklat.tempat', 'diklat.penyelenggara', 'diklat.angka', 'diklat.tgl_mulai', 'diklat.tgl_selesai', 'diklat.jam', 'diklat.no_sttp', 'diklat.tgl_sttp', 'diklat.sertifikat', 'diklat.created_at', 'verifikasi.status'])->join('identitas', 'identitas.identitas_id', '=', 'diklat.identitas_id')->join("verifikasi", "verifikasi.docx_id", "=", "diklat.diklat_id")->latest()->where('diklat.identitas_id', '=', auth()->user()->identitas_id)->filter(request(['search']))->paginate(10)->withQueryString(),
         ]);
     }
 
@@ -223,7 +223,6 @@ class DiklatController extends Controller
     public function UaddForm()
     {
         return view('klien.form-umum.riwayat-diklat.add', [
-            'rowsIdentitas' => Identitas::latest()->get(),
             'page' => 'Tambah Diklat',
         ]);
     }
@@ -231,7 +230,7 @@ class DiklatController extends Controller
     // umum store
     public function UStore(Request $request)
     {
-        $data = Identitas::where('identitas_id', $request->input('identitas_id'))->first();
+        $data = Identitas::where('identitas_id', auth()->user()->identitas_id)->first();
 
         $rules = [
             'identitas_id' => 'required',
@@ -280,7 +279,7 @@ class DiklatController extends Controller
         }
 
         $temp = $request->file('sertifikat')->getPathName();
-        $file = $data['identitas_id'] . "-diklat-" . date('s');
+        $file = $data['identitas_id'] . "-diklat-" . time();
 
         $folder = "unggah/sertifikat-diklat/" . $file . ".pdf";
         move_uploaded_file($temp, $folder);
@@ -306,7 +305,7 @@ class DiklatController extends Controller
 
         $dataVerifikasi = [
             'docx_id' => $resultCreateDiklat['diklat_id'],
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => auth()->user()->identitas_id,
             'status' => '4',
             'unit_verif_at' => '', 
             'bkkpd_verif_at' => '',

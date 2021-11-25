@@ -52,7 +52,6 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                {{-- <th scope="col">Nama Pegawai</th> --}}
                                                 <th scope="col">NIK</th>
                                                 <th scope="col">Nama</th>
                                                 <th scope="col">Tempat Lahir</th>
@@ -81,7 +80,6 @@
                                             @foreach ($rows as $row)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td scope="row">{{ $row['nama_peg'] }}</td>
                                                     <td scope="row">{{ $row['nik'] }}</td>
                                                     <td scope="row">{{ $row['nama'] }}</td>
                                                     <td scope="row">{{ $row['tempat_lahir'] }}</td>

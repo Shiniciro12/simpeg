@@ -19,7 +19,7 @@ class Pendidikan extends Migration
             $table->uuid('pendidikan_id')->primary();
             $table->uuid('identitas_id');
             $table->string('tingkat_pendidikan');
-            $table->string('jurusan');
+            $table->string('jurusan')->nullable();
             $table->string('nama_lembaga_pendidikan');
             $table->string('tempat');
             $table->string('nama_kepsek_rektor');

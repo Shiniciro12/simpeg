@@ -30,13 +30,10 @@
                                     <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
                                 </div>
                                 {{-- ISIAN FORM --}}
-
                                 <div class="card-block">
                                     <form action="/klien/dataumum/riwayat-jabatan/store" method="post"
                                         enctype="multipart/form-data" class="form-material">
                                         @csrf
-                                        <input type="hidden" value="{{auth()->user()->identitas_id}}"
-                                            name="identitas_id">
                                         <input type="hidden" value="" class="input_pak" name="input_pak">
                                         <div class="form-group row">
                                             <div class="col-sm-12">

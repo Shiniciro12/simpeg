@@ -104,7 +104,7 @@ class KlienController extends Controller
 
         $extension = $request->file('foto_profil')->getClientOriginalExtension();
 
-        $pathFile =  "/unggah/identitas/foto/" . auth()->user()->nip . "." . $extension;
+        $pathFile =  "/unggah/identitas/foto/" . auth()->user()->nip . "-foto+profil" .  "." . $extension;
 
         $temp = $request->file('foto_profil')->getPathName();
         $folder = "unggah/identitas/foto/" . auth()->user()->nip . "." . $extension;
@@ -115,7 +115,7 @@ class KlienController extends Controller
         ];
 
         Identitas::where('identitas_id', auth()->user()->identitas_id)->update($data);
-        
+
         return redirect('/klien/dashboard')->with('success', 'Data berhasil diubah');
     }
 }

@@ -10,7 +10,6 @@ class Pendidikan extends Model
     use HasFactory;
 
     protected $keyType = 'string';
-    public $incrementing = false;
     protected $table = 'pendidikan';
     protected $primaryKey = 'pendidikan_id';
 

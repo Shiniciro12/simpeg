@@ -26,7 +26,6 @@
                                     <tr>
 
                                         <th scope="col">#</th>
-                                        <th scope="col">Nama Pegawai</th>
                                         <th scope="col">Nama Tanda Jasa</th>
                                         <th scope="col">Nomor SK</th>
                                         <th scope="col">Tanggal SK</th>
@@ -40,7 +39,6 @@
                                     @foreach ($rows as $row)
                                     <tr>
                                         <th scope="row">{{ $m++}}</th>
-                                        <td scope="row">{{ $row["nama_peg"] }}</td>
                                         <td scope="row">{{ $row["nama"] }}</td>
                                         <td scope="row">{{ $row["no_sk"] }}</td>
                                         <td scope="row">{{ $row["tgl_sk"] }}</td>

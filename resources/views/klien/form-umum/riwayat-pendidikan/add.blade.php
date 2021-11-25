@@ -34,8 +34,6 @@
                                     <form action="/klien/dataumum/riwayat-pendidikan/store" method="post"
                                         enctype="multipart/form-data" class="form-material">
                                         @csrf
-                                        <input type="hidden" value="{{auth()->user()->identitas_id}}"
-                                            name="identitas_id">
                                         <div class="form-group row">
                                             <div class="col-sm-12">
                                                 <select
@@ -129,7 +127,7 @@
                                             </div>
                                             @enderror
                                             <span class="form-bar"></span>
-                                            <label class="float-label">Tempat
+                                            <label class="float-label">Alamat
                                                 <span class="text-danger">*</span></label>
                                         </div>
                                         <br>

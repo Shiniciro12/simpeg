@@ -35,9 +35,6 @@
                                     <form action="/klien/dataumum/diklat/store" method="post" class="form-material"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" value="{{ auth()->user()->identitas_id }}"
-                                            name="identitas_id">
-
                                         <div class="form-group row">
                                             <div class="col-sm-12">
                                                 <select class="form-control @error('status') is-invalid @enderror"

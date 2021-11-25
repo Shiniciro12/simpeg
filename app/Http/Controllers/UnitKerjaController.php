@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Diklat;
 use App\Models\Identitas;
+use App\Models\Pendidikan;
 use App\Models\RiwayatJabatan;
 use App\Models\RiwayatPangkat;
 use Illuminate\Support\Facades\Validator;
@@ -211,19 +212,24 @@ class UnitKerjaController extends Controller
         $page = '';
         $query = [];
 
+        if ($dokumen == 'identitas') {
+            $page = 'Data Identitas';
+            $query = Identitas::select(['identitas.nip', 'identitas.nama', 'identitas.foto', 'identitas.karpeg', 'identitas.berkala_terakhir', 'verifikasi.unit_verif_by'])->join("verifikasi", "verifikasi.identitas_id", "=", "identitas.identitas_id")->where("identitas.identitas_id", "=", "$docx_id")->where("verifikasi.jenis_data", "=", "$dokumen/umum")->paginate(10);
+        }
+
         if ($dokumen == 'pangkat') {
             $page = 'Data Riwayat Pangkat';
             $query = RiwayatPangkat::select(['identitas.nip', 'identitas.nama', 'riwayat_pangkat.sk_pangkat', 'verifikasi.unit_verif_by'])->join("identitas", "identitas.identitas_id", "=", "riwayat_pangkat.identitas_id")->join("verifikasi", "verifikasi.identitas_id", "=", "riwayat_pangkat.identitas_id")->where("riwayat_pangkat.riwayat_pangkat_id", "=", "$docx_id")->where("verifikasi.jenis_data", "=", "$dokumen/umum")->paginate(10);
         }
 
+        if ($dokumen == 'pendidikan') {
+            $page = 'Data Pendidikan';
+            $query = Pendidikan::select(['identitas.nip', 'identitas.nama', 'pendidikan.sttb', 'pendidikan.transkrip', 'verifikasi.unit_verif_by'])->join("identitas", "identitas.identitas_id", "=", "pendidikan.identitas_id")->join("verifikasi", "verifikasi.identitas_id", "=", "pendidikan.identitas_id")->where("pendidikan.pendidikan_id", "=", "$docx_id")->where("verifikasi.jenis_data", "=", "$dokumen/umum")->paginate(10);
+        }
+
         if ($dokumen == 'jabatan') {
             $page = 'Data Riwayat Jabatan';
             $query = RiwayatJabatan::select(['identitas.nip', 'identitas.nama', 'riwayat_jabatan.sk_jabatan', 'riwayat_jabatan.pak', 'verifikasi.unit_verif_by'])->join("identitas", "identitas.identitas_id", "=", "riwayat_jabatan.identitas_id")->join("verifikasi", "verifikasi.identitas_id", "=", "riwayat_jabatan.identitas_id")->where("riwayat_jabatan.riwayat_jabatan_id", "=", "$docx_id")->where("verifikasi.jenis_data", "=", "$dokumen/umum")->paginate(10);
-        }
-
-        if ($dokumen == 'identitas') {
-            $page = 'Data Identitas';
-            $query = Identitas::select(['identitas.nip', 'identitas.nama', 'identitas.foto', 'identitas.karpeg', 'identitas.berkala_terakhir', 'verifikasi.unit_verif_by'])->join("verifikasi", "verifikasi.identitas_id", "=", "identitas.identitas_id")->where("identitas.identitas_id", "=", "$docx_id")->where("verifikasi.jenis_data", "=", "$dokumen/umum")->paginate(10);
         }
 
         if ($dokumen == 'diklat') {

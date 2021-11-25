@@ -69,12 +69,12 @@ class RiwayatJabatanController extends Controller
         }
 
         $temp = $request->file('sk_jabatan')->getPathName();
-        $file = $request->input('identitas_id') . "-jabatan-" . date('s');
+        $file = $request->input('identitas_id') . "-jabatan-" . time() . '.pdf';
 
-        $folder = "unggah/sk-jabatan/" . $file . ".pdf";
+        $folder = "unggah/sk-jabatan/" . $file;
         move_uploaded_file($temp, $folder);
 
-        $name = '/unggah/sk-jabatan/' . $request->input('identitas_id') . "-jabatan-" . date('s') . '.pdf';
+        $name = '/unggah/sk-jabatan/' . $file;
 
         $data = [
             'jabatan_id' => $request->input('jabatan_id'),
@@ -153,7 +153,6 @@ class RiwayatJabatanController extends Controller
         if ($request->file('sk_jabatan')) {
 
             File::delete(public_path($pathriwayat_jabatan));
-            $extriwayat_jabatan = $request->file('sk_jabatan')->getClientOriginalExtension();
             $cum = explode("/", $pathriwayat_jabatan);
             $newFileriwayat_jabatan = end($cum);
             $tempriwayat_jabatan = $request->file('sk_jabatan')->getPathName();
@@ -197,7 +196,6 @@ class RiwayatJabatanController extends Controller
     public function UaddForm()
     {
         return view('klien.form-umum.riwayat-jabatan.add', [
-            'rowsIdentitas' => Identitas::latest()->get(),
             'rowsUnitKerja' => UnitKerja::latest()->get(),
             'page' => 'Tambah Riwayat Jabatan',
         ]);
@@ -206,7 +204,7 @@ class RiwayatJabatanController extends Controller
     //Store umum
     public function UStrore(Request $request)
     {
-        $id = Identitas::where('identitas_id', $request->input('identitas_id'))->first();
+        $id = Identitas::where('identitas_id', auth()->user()->identitas_id)->first();
 
         $pak = '';
         if ($request->input('input_pak') == 'Fungsional') {
@@ -226,7 +224,7 @@ class RiwayatJabatanController extends Controller
 
         $input = [
             'jabatan_id' => $request->input('jabatan_id'),
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => auth()->user()->identitas_id,
             'pejabat' => $request->input('pejabat'),
             'no_sk' => $request->input('no_sk'),
             'tgl_sk' => $request->input('tgl_sk'),
@@ -250,14 +248,14 @@ class RiwayatJabatanController extends Controller
         }
 
         $temp = $request->file('sk_jabatan')->getPathName();
-        $file = $request->input('identitas_id') . "-jabatan-" . date('s');
-        $folder = "unggah/sk-jabatan/" . $file . ".pdf";
+        $file = auth()->user()->identitas_id . "-jabatan-" . time() . ".pdf";
+        $folder = "unggah/sk-jabatan/" . $file;
         move_uploaded_file($temp, $folder);
-        $newNameSK = '/unggah/sk-jabatan/' . $request->input('identitas_id') . "-jabatan-" . date('s') . '.pdf';
+        $newNameSK = '/unggah/sk-jabatan/' . $file;
 
         $newNamePAK = '';
         if ($request->input('input_pak') == 'Fungsional') {
-            $file = $request->input('identitas_id') . "-pak-" . date('s') . '.pdf';
+            $file = auth()->user()->identitas_id . "-pak-" . time() . '.pdf';
             $temp = $request->file('file_pak')->getPathName();
             $folder = "unggah/pak/" . $file;
             move_uploaded_file($temp, $folder);
@@ -279,7 +277,7 @@ class RiwayatJabatanController extends Controller
 
         $dataVerifikasi = [
             'docx_id' => $resultCreateJabatan['riwayat_jabatan_id'],
-            'identitas_id' => $request->input('identitas_id'),
+            'identitas_id' => auth()->user()->identitas_id,
             'status' => '4',
             'unit_verif_at' => '',
             'bkkpd_verif_at' => '',
